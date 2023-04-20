@@ -1,0 +1,71 @@
+<div class="form__wrap">
+  <form [formGroup]="flightSearchForm" (submit)="search()">
+    <div class="radio">
+      <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
+        <mat-radio-button class="example-radio-button" *ngFor="let type of flightTypes" [value]="type.value" [checked]="type.checked">
+          <span class="radio__title">{{type.value}}</span>
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div class="select">
+      <mat-form-field appearance="fill">
+        <mat-label>From</mat-label>
+        <mat-select [formControlName]="'from'">
+          <mat-option disabled>Select the role</mat-option>
+          <mat-option *ngFor="let item of test" [value]="item.value">
+            {{item.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Destination</mat-label>
+        <mat-select [formControlName]="'destination'">
+          <mat-option *ngFor="let item of test" [value]="item.value">
+            {{item.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="date-passengers">
+      <div class="date">
+        <mat-form-field appearance="fill">
+          <mat-label>Dates</mat-label>
+          <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate [formControlName]="'startDate'" placeholder="Start date">
+            <input matEndDate [formControlName]="'endDate'" placeholder="End date">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+      </div>
+      <div class="passengers">
+        <mat-form-field appearance="fill">
+          <mat-label>Passengers</mat-label>
+          <mat-select multiple disableRipple>
+            <mat-option>
+              <div class="option">
+                <span>Adults</span>
+                <input matInput type="number">
+              </div>
+            </mat-option>
+            <mat-option>
+              <div class="option">
+                <span>Child</span>
+                <input matInput type="number">
+              </div>
+            </mat-option>
+            <mat-option>
+              <div class="option">
+                <span>Infant</span>
+                <input matInput type="number">
+              </div>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="search__btn">
+      <button mat-button type="submit">Search</button>
+    </div>
+  </form>
+</div>
