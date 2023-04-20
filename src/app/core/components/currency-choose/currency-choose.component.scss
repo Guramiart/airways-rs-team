@@ -1,0 +1,21 @@
+:host {
+  display: flex;
+  width: 62px;
+  height: 38px;
+  justify-content: center;
+  align-items: center;
+  border: 0.5px solid #CECECE;
+  border-radius: 4px;
+
+  .mat-mdc-select {
+    .mat-mdc-select-trigger {
+      .mat-mdc-select-value {
+        .mat-mdc-select-value-text {
+          .mat-mdc-select-min-line {
+            color: red !important;
+          }
+        }
+      }
+    }
+  }
+}
