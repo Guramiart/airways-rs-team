@@ -22,6 +22,7 @@
       "rules": {
         "import/prefer-default-export": "off",
         "import/no-extraneous-dependencies": "off",
+        "@typescript-eslint/no-inferrable-types": "off",
         "class-methods-use-this": "off",
         "padded-blocks": ["error", { "classes": "always" }],
         "linebreak-style": 0,

@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --app-root-blue: #11397E;
+}
+
 .mat-mdc-button.mat-unthemed {
   --mdc-text-button-label-text-color: white;
 }
@@ -47,4 +51,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .mdc-line-ripple::before {
   border-top-width: 1px;
+}
+
+.mat-pseudo-checkbox {
+  display: none;
 }

@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import {
+  Component, ElementRef, OnInit, ViewChild,
+} from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+import { Passengers } from '../../models/passengers';
 
 @Component({
   selector: 'app-flight-search',
@@ -9,9 +12,6 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 export class FlightSearchComponent implements OnInit {
 
   public flightSearchForm: FormGroup = new FormGroup({});
-
-  constructor(public _formBuilder: FormBuilder) {
-  }
 
   public flightTypes = [
     { value: 'Round Trip', checked: true },
@@ -24,20 +24,103 @@ export class FlightSearchComponent implements OnInit {
     { value: 'country-3', viewValue: 'Country-3' },
   ];
 
+  public isFocused: boolean = false;
+
+  @ViewChild('passengersInput', { read: ElementRef }) input: ElementRef | undefined;
+
+  public adultCounter: number = 0;
+
+  public childCounter: number = 0;
+
+  public infantCounter: number = 0;
+
+  private passengers: Passengers = {
+    adult: '',
+    child: '',
+    infant: '',
+  };
+
   ngOnInit(): void {
     this.flightSearchForm = new FormGroup({
-      from: new FormControl('Default'),
-      destination: new FormControl(''),
+      from: new FormControl('Choose your from'),
+      destination: new FormControl('Choose your destination'),
       startDate: new FormControl<Date | null>(null),
       endDate: new FormControl<Date | null>(null),
+      passengers: new FormControl(this.getPassengers()),
     });
   }
 
-  search() {
-    console.log(`From: ${this.flightSearchForm.get('from')?.value}`);
-    console.log(`To: ${this.flightSearchForm.get('destination')?.value}`);
-    console.log(`Start: ${this.flightSearchForm.get('startDate')?.value}`);
-    console.log(`End: ${this.flightSearchForm.get('endDate')?.value}`);
+  private getPassengers(): string {
+    return Object.values(this.passengers)
+      .filter((el) => el !== '')
+      .join(', ');
   }
+
+  private setPassengers(): void {
+    this.flightSearchForm.get('passengers')?.setValue(this.getPassengers());
+  }
+
+  focus(): void {
+    this.isFocused = true;
+  }
+
+  foo() {
+    if (!this.isFocused) {
+      this.input?.nativeElement.focus();
+    } else {
+      this.input?.nativeElement.blur();
+    }
+    this.isFocused = !this.isFocused;
+  }
+
+  adultDecrement() {
+    this.adultCounter -= 1;
+    if (this.adultCounter !== 0) {
+      this.passengers.adult = `${this.adultCounter} Adult`;
+    } else {
+      this.passengers.adult = '';
+    }
+    this.setPassengers();
+  }
+
+  adultIncrement() {
+    this.adultCounter += 1;
+    this.passengers.adult = `${this.adultCounter} Adult`;
+    this.setPassengers();
+  }
+
+  childDecrement() {
+    this.childCounter -= 1;
+    if (this.childCounter !== 0) {
+      this.passengers.child = `${this.childCounter} Child`;
+    } else {
+      this.passengers.child = '';
+    }
+    this.setPassengers();
+  }
+
+  childIncrement() {
+    this.childCounter += 1;
+    this.passengers.child = `${this.childCounter} Child`;
+    this.setPassengers();
+  }
+
+  infantDecrement() {
+    this.infantCounter -= 1;
+    if (this.infantCounter !== 0) {
+      this.passengers.infant = `${this.infantCounter} Infant`;
+    } else {
+      this.passengers.infant = '';
+    }
+    this.setPassengers();
+  }
+
+  infantIncrement() {
+    this.infantCounter += 1;
+    this.passengers.infant = `${this.infantCounter} Infant`;
+    this.setPassengers();
+  }
+
+  search() {}
 
 }

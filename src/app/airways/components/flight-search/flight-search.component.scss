@@ -28,8 +28,29 @@
     }
 
     .passengers {
-      max-width: 211px;
+      position: relative;
       flex: 0 0 auto;
+      max-width: 211px;
+      width: 100%;
+
+      .passengers-options {
+        position: absolute;
+        max-width: 211px;
+        padding: 8px;
+        width: 100%;
+        z-index: 100;
+        background-color: white;
+        border-radius: 4px;
+        box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+
+        .option-title{
+          color: var(--app-root-blue);
+          font-size: 16px;
+          line-height: 24px;
+        }
+
+      }
+
     }
   }
 
@@ -42,7 +63,35 @@
 .option {
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 6px;
+}
+
+.option__control {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 5px;
+}
+
+.option__btn {
+  width: 24px;
+  height: 24px;
+  border: none;
+  font-size: 20px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.option__count {
+  color: var(--app-root-blue);
+  font-size: 14px;
 }
 
 .radio__title {
@@ -61,7 +110,7 @@
   width: 126px;
   height: 60px;
   color: white;
-  background-color: #11397E;
+  background-color: var(--app-root-blue);
   font-size: 16px;
   font-weight: 500;
 }
