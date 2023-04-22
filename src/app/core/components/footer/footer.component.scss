@@ -1,1 +1,62 @@
+:host {
+  display: flex;
+  height: 92px;
+  flex: 0 0 auto;
+  justify-content: center;
+  align-items: center;
+  background-color: #D0D9DF;
+  border-top: 1px solid #D0D9DF;
+}
 
+.footer{
+  display: flex;
+  width: 100%;
+  max-width: 1040px;
+  height: 20px;
+  margin: 0 auto;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.footer-info {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+  color: #11397E;
+}
+
+.footer__payment-info {
+  display: flex;
+  max-width: 407px;
+  width: 40%;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.footer__payment-text {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+  color: #000000;
+}
+
+.footer__payment-cards {
+  display: flex;
+  width: 152px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer__card-image {
+  width: 32px;
+  height: 22px;
+}
