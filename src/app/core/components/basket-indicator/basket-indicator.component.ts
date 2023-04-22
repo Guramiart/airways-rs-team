@@ -17,7 +17,7 @@ export class BasketIndicatorComponent implements OnInit {
 
   public basketCounter = '0';
 
-  public basketIcon = IconLinks.white;
+  public basketIcon: IconLinks = IconLinks.white;
 
   constructor(private mainObserver: HeaderChangerService) { }
 

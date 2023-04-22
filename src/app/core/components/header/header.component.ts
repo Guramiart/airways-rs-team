@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
 
   public isSteps = false;
 
-  public backgroundColor = BgColor.grey;
+  public backgroundColor: BgColor = BgColor.grey;
 
   constructor(private mainObserver: HeaderChangerService) {
   }
