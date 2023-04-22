@@ -9,6 +9,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { MaterialModule } from '../material/material.module';
 import { DateChooseComponent } from './components/date-choose/date-choose.component';
 import { CurrencyChooseComponent } from './components/currency-choose/currency-choose.component';
+import { AccountButtonComponent } from './components/account-button/account-button.component';
+import { BasketIndicatorComponent } from './components/basket-indicator/basket-indicator.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { CurrencyChooseComponent } from './components/currency-choose/currency-c
     FooterComponent,
     DateChooseComponent,
     CurrencyChooseComponent,
+    AccountButtonComponent,
+    BasketIndicatorComponent,
   ],
   imports: [
     CommonModule,

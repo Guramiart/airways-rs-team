@@ -6,16 +6,31 @@
   align-items: center;
   border: 0.5px solid #CECECE;
   border-radius: 4px;
+}
 
-  .mat-mdc-select {
-    .mat-mdc-select-trigger {
-      .mat-mdc-select-value {
-        .mat-mdc-select-value-text {
-          .mat-mdc-select-min-line {
-            color: red !important;
-          }
-        }
-      }
-    }
-  }
+.mat-mdc-select-value-text {
+  margin-left: 16px;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+  color: #FFFFFF;
+}
+
+.mat-mdc-select-trigger {
+  height: 40px;
+}
+
+.mat-mdc-select-arrow {
+  display: none;
+}
+
+.cdk-overlay-pane:not(.mat-mdc-select-panel-above).mdc-menu-surface.mat-mdc-select-panel {
+  border-radius: 4px;
+}
+
+.cdk-overlay-container {
+  margin-top: 66px;
 }

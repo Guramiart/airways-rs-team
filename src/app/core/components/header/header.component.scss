@@ -37,4 +37,9 @@
   color: aliceblue;
 }
 
-
+.header__account-block {
+  display: flex;
+  min-width: 192px;
+  flex-direction: row;
+  justify-content: space-between;
+}

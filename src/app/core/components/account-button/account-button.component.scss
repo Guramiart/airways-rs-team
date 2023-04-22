@@ -1,0 +1,32 @@
+:host {
+  min-width: 114px;
+}
+
+.header__account-button {
+  display: flex;
+  box-sizing: border-box;
+  height: 40px;
+  padding: 0 16px 0 16px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  background: rgba(241, 243, 246, 0.15);
+  border: 0.5px solid #CECECE;
+  border-radius: 4px;
+}
+
+.header__account-logo {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.header__account-text {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+  color: #FFFFFF;
+}
