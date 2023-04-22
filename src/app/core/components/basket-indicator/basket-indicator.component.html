@@ -1,6 +1,6 @@
 <div class="header__basket-indicator">
-  <img class="header__basket-logo" src="assets/basket.svg" alt="Basket">
-  <div class="header__basket-counter">
-    <span class="header__basket-count">20</span>
+  <img class="header__basket-logo" src="assets/basketWhite.svg" alt="Basket">
+  <div *ngIf="isBasketCounter" class="header__basket-counter">
+    <span class="header__basket-count">{{basketCounter}}</span>
   </div>
 </div>

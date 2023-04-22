@@ -1,4 +1,4 @@
-<mat-select [value]="currency">
+<mat-select [value]="currency" [style.color]="textColor">
   <mat-option *ngFor="let currency of currencyArray" [value]="currency"
               disableRipple>{{currency}}</mat-option>
 </mat-select>

@@ -1,0 +1,37 @@
+:host {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.header__step {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.header__step-icon {
+  display: flex;
+  width: 16px;
+  height: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
+.header__step-text {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+  color: #74767A;
+}
+
+.header__step-separator {
+  align-self: center;
+  width: 80px;
+  height: 1px;
+  background: #74767a;
+  transform: matrix(1, 0, 0, -1, 0, 0);
+}

@@ -11,6 +11,7 @@ import { DateChooseComponent } from './components/date-choose/date-choose.compon
 import { CurrencyChooseComponent } from './components/currency-choose/currency-choose.component';
 import { AccountButtonComponent } from './components/account-button/account-button.component';
 import { BasketIndicatorComponent } from './components/basket-indicator/basket-indicator.component';
+import { StepsIndicatorComponent } from './components/steps-indicator/steps-indicator.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { BasketIndicatorComponent } from './components/basket-indicator/basket-i
     CurrencyChooseComponent,
     AccountButtonComponent,
     BasketIndicatorComponent,
+    StepsIndicatorComponent,
   ],
   imports: [
     CommonModule,

@@ -1,4 +1,4 @@
 <button class="header__account-button">
-  <img class="header__account-logo" src="assets/login.svg" alt="Account button">
-  <span class="header__account-text">Sign In</span>
+  <img class="header__account-logo" [src]="accountLogo" alt="Account button">
+  <span class="header__account-text" [style.color]="textColor">{{btnText}}</span>
 </button>

@@ -2,8 +2,6 @@
   display: block;
   width: 162px;
   height: 40px;
-
-
 }
 
 .mat-mdc-select {
@@ -42,11 +40,9 @@
   font-size: 16px;
   line-height: 16px;
   letter-spacing: 0.5px;
-  color: #FFFFFF;
 }
 
-.mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal {
-  color: #11397E;
+.mat-pseudo-checkbox.mat-mdc-option-pseudo-checkbox.mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal {
+  width: 12px;
+  height: 9px;
 }
-
-
