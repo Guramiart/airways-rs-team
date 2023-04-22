@@ -1,15 +1,19 @@
 <div class="header" [style.background-color]="backgroundColor">
   <div class="header__wrapper">
-    <div class="header__logo">
-      <img class="header__logo-image" src="./assets/logo.svg" alt="Logo">
-    </div>
-    <div class="header__steps-container" [ngSwitch]="isSteps">
-      <span *ngSwitchCase="false" class="header__steps-info">Book flights</span>
-      <app-steps-indicator *ngSwitchCase="true"></app-steps-indicator>
+    <div class="header__info-wrapper">
+      <div class="header__logo">
+        <img class="header__logo-image" src="./assets/logo.svg" alt="Logo">
+      </div>
+      <div class="header__steps-container" [ngSwitch]="isSteps">
+        <span *ngSwitchCase="false" class="header__steps-info">Book flights</span>
+        <app-steps-indicator *ngSwitchCase="true"></app-steps-indicator>
+      </div>
     </div>
     <div class="header__menu-wrapper">
-      <app-date-choose></app-date-choose>
-      <app-currency-choose></app-currency-choose>
+      <div class="header__menu-service">
+        <app-date-choose></app-date-choose>
+        <app-currency-choose></app-currency-choose>
+      </div>
       <div class="header__account-block">
         <app-account-button></app-account-button>
         <app-basket-indicator></app-basket-indicator>

@@ -21,7 +21,32 @@
   margin: 0 auto;
   flex-direction: row;
   justify-content: space-between;
+  gap: 17px;
+
+  @media screen and (max-width: 1188px) {
+    box-sizing: border-box;
+    padding: 0 15px 0 15px;
+
+    @media screen and (max-width: 709px) {
+      flex-direction: column;
+      height: 80px;
+      gap: unset;
+      align-items: center;
+    }
+  }
+}
+
+.header__info-wrapper {
+  display: flex;
+  width: 60%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   gap: 14px;
+
+  @media screen and (max-width: 459px) {
+    display: none;
+  }
 }
 
 .header__logo {
@@ -36,7 +61,8 @@
 
 .header__steps-container {
   display: flex;
-  width: 532px;
+  max-width: 532px;
+  width: 82%;
   height: 40px;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -46,17 +72,32 @@
 
 .header__menu-wrapper {
   display: flex;
-  width: 43.617%;
-  margin-left: 3px;
+  min-width: 450px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  color: aliceblue;
+  gap: 16px;
+
+  @media screen and (max-width: 459px) {
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+  }
+}
+
+.header__menu-service {
+  display: flex;
+  min-width: 242px;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 16px;
 }
 
 .header__account-block {
   display: flex;
-  min-width: 192px;
+  box-sizing: border-box;
+  min-width: 174px;
+  padding-right: 16px;
   flex-direction: row;
   justify-content: space-between;
 }
