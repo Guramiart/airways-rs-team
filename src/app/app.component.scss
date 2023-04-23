@@ -1,9 +1,16 @@
+.content {
+  box-sizing: border-box;
+  min-height: 100%;
+  padding-bottom: 91px;
+}
+
 .page-wrap {
   display: flex;
   flex-direction: column;
-  height: calc(100%);
 }
 
-.content {
-  flex: 1 0 auto;
+.footer {
+  background-color: #D0D9DF;
+  height: 92px;
+  margin-top: -92px;
 }
