@@ -4,6 +4,11 @@
   padding-bottom: 91px;
 }
 
+.page-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
 .footer {
   background-color: #D0D9DF;
   height: 92px;
