@@ -1,1 +1,79 @@
+:host {
+  display: flex;
+  height: 92px;
+  flex: 0 0 auto;
+  justify-content: center;
+  align-items: center;
+  background-color: #D0D9DF;
+  border-top: 1px solid #D0D9DF;
+}
 
+.footer{
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1120px;
+  height: 20px;
+  margin: 0 auto;
+  padding: 0 40px 0 40px;
+  flex-direction: row;
+  justify-content: space-between;
+  @media  screen and (max-width: 710px) {
+    height: 40px;
+    flex-direction: column;
+    align-items: center;
+    @media screen and (max-width: 399px) {
+      height: 60px;
+      padding: 0 10px 0 10px;
+    }
+  }
+}
+
+.footer-info {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+  color: #11397E;
+}
+
+.footer__payment-info {
+  display: flex;
+  width: 40%;
+  min-width: 387px;
+  flex-direction: row;
+  justify-content: space-between;
+  @media screen and (max-width: 399px) {
+    width: 100%;
+    min-width: unset;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.footer__payment-text {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+  color: #000000;
+}
+
+.footer__payment-cards {
+  display: flex;
+  width: 152px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer__card-image {
+  width: 32px;
+  height: 22px;
+}
