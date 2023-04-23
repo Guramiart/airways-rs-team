@@ -13,7 +13,7 @@ enum BgColor {
 })
 export class HeaderComponent implements OnInit {
 
-  public isSteps = true;
+  public isSteps = false;
 
   public backgroundColor: BgColor = BgColor.grey;
 
