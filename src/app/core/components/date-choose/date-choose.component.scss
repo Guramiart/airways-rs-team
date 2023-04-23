@@ -1,0 +1,48 @@
+:host {
+  display: block;
+  width: 162px;
+  height: 40px;
+}
+
+.mat-mdc-select {
+  display: flex;
+  box-sizing: border-box;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto', serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+  background: rgba(241, 243, 246, 0.15);
+  border: 0.5px solid #CECECE;
+  border-radius: 4px;
+}
+
+.mat-mdc-select-trigger {
+  height: 40px;
+}
+
+.mat-mdc-select-value {
+  margin-left: 16px;
+}
+
+.mat-mdc-select-arrow-wrapper {
+  margin-right: 17.33px;
+}
+
+.mat-mdc-select-value-text {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+}
+
+.mat-pseudo-checkbox.mat-mdc-option-pseudo-checkbox.mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal {
+  width: 12px;
+  height: 9px;
+}
