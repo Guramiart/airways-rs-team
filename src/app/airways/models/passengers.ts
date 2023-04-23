@@ -1,5 +1,14 @@
 export interface Passengers {
-  adult: string,
-  child: string,
-  infant: string,
+  adult: {
+    name: string,
+    count: number,
+  },
+  child: {
+    name: string,
+    count: number,
+  },
+  infant: {
+    name: string,
+    count: number,
+  },
 }

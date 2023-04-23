@@ -13,7 +13,32 @@
   }
 
   .select {
+    position: relative;
     margin-top: 14px;
+
+    .switch-btn {
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      z-index: 100;
+      right: 20px;
+      top: 0;
+      bottom: 0;
+      margin: auto 0;
+      background-color: white;
+      border: 0.5px solid rgba(116, 118, 122, 0.6);
+      border-radius: 100px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      .mat-icon {
+        margin: 0 auto;
+        vertical-align: middle;
+      }
+
+    }
+
   }
 
   .date-passengers {
@@ -32,6 +57,16 @@
       flex: 0 0 auto;
       max-width: 211px;
       width: 100%;
+
+      .focus-btn {
+        position: absolute;
+        padding: 10px;
+        background-color: transparent;
+        border: none;
+        z-index: 100;
+        right: 0;
+        top: 10%;
+      }
 
       .passengers-options {
         position: absolute;
@@ -113,6 +148,13 @@
   background-color: var(--app-root-blue);
   font-size: 16px;
   font-weight: 500;
+
+  &:disabled {
+    color: gray;
+    background-color: #E5E5E5;
+    filter: drop-shadow(2px 0px 4px #E5E5E5);
+  }
+
 }
 
 

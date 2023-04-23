@@ -1,7 +1,9 @@
 import {
   Component, ElementRef, OnInit, ViewChild,
 } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { DataService } from 'src/app/services/data.service';
+import { ICity } from 'src/app/services/cities.model';
 import { Passengers } from '../../models/passengers';
 
 @Component({
@@ -11,6 +13,23 @@ import { Passengers } from '../../models/passengers';
 })
 export class FlightSearchComponent implements OnInit {
 
+  @ViewChild('passengersInput', { read: ElementRef }) input: ElementRef | undefined;
+
+  public passengers: Passengers = {
+    adult: {
+      name: 'Adult',
+      count: 0,
+    },
+    child: {
+      name: 'Child',
+      count: 0,
+    },
+    infant: {
+      name: 'Infant',
+      count: 0,
+    },
+  };
+
   public flightSearchForm: FormGroup = new FormGroup({});
 
   public flightTypes = [
@@ -18,53 +37,51 @@ export class FlightSearchComponent implements OnInit {
     { value: 'One Way', checked: false },
   ];
 
-  public test = [
-    { value: 'country-1', viewValue: 'Country-1' },
-    { value: 'country-2', viewValue: 'Country-2' },
-    { value: 'country-3', viewValue: 'Country-3' },
-  ];
+  public countries: ICity[] = [];
 
   public isFocused: boolean = false;
 
-  @ViewChild('passengersInput', { read: ElementRef }) input: ElementRef | undefined;
-
-  public adultCounter: number = 0;
-
-  public childCounter: number = 0;
-
-  public infantCounter: number = 0;
-
-  private passengers: Passengers = {
-    adult: '',
-    child: '',
-    infant: '',
-  };
+  constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
     this.flightSearchForm = new FormGroup({
-      from: new FormControl('Choose your from'),
-      destination: new FormControl('Choose your destination'),
-      startDate: new FormControl<Date | null>(null),
-      endDate: new FormControl<Date | null>(null),
-      passengers: new FormControl(this.getPassengers()),
+      from: new FormControl('', Validators.required),
+      destination: new FormControl('', Validators.required),
+      startDate: new FormControl<Date | null>(null, Validators.required),
+      endDate: new FormControl<Date | null>(null, Validators.required),
+      passengers: new FormControl(this.getPassengers(), Validators.required),
+    });
+    this.dataService.getAllCities().subscribe((data) => {
+      this.countries = data;
+      return this.countries;
     });
   }
 
   private getPassengers(): string {
-    return Object.values(this.passengers)
-      .filter((el) => el !== '')
-      .join(', ');
+    const title: string[] = [];
+    if (this.passengers.adult.count !== 0) {
+      title.push(`${this.passengers.adult.count} ${this.passengers.adult.name}`);
+    }
+    if (this.passengers.child.count !== 0) {
+      title.push(`${this.passengers.child.count} ${this.passengers.child.name}`);
+    }
+    if (this.passengers.infant.count !== 0) {
+      title.push(`${this.passengers.infant.count} ${this.passengers.infant.name}`);
+    }
+    return title.join(', ');
   }
 
   private setPassengers(): void {
     this.flightSearchForm.get('passengers')?.setValue(this.getPassengers());
   }
 
-  focus(): void {
-    this.isFocused = true;
+  public switch(): void {
+    const tmp = this.flightSearchForm.get('from')?.value;
+    this.flightSearchForm.get('from')?.setValue(this.flightSearchForm.get('destination')?.value);
+    this.flightSearchForm.get('destination')?.setValue(tmp);
   }
 
-  foo() {
+  public toggleFocus(): void {
     if (!this.isFocused) {
       this.input?.nativeElement.focus();
     } else {
@@ -73,54 +90,20 @@ export class FlightSearchComponent implements OnInit {
     this.isFocused = !this.isFocused;
   }
 
-  adultDecrement() {
-    this.adultCounter -= 1;
-    if (this.adultCounter !== 0) {
-      this.passengers.adult = `${this.adultCounter} Adult`;
-    } else {
-      this.passengers.adult = '';
-    }
+  public decrement(value: 'adult' | 'child' | 'infant'): void {
+    this.input?.nativeElement.focus();
+    this.passengers[value].count -= 1;
     this.setPassengers();
   }
 
-  adultIncrement() {
-    this.adultCounter += 1;
-    this.passengers.adult = `${this.adultCounter} Adult`;
+  increment(value: 'adult' | 'child' | 'infant'): void {
+    this.input?.nativeElement.focus();
+    this.passengers[value].count += 1;
     this.setPassengers();
   }
 
-  childDecrement() {
-    this.childCounter -= 1;
-    if (this.childCounter !== 0) {
-      this.passengers.child = `${this.childCounter} Child`;
-    } else {
-      this.passengers.child = '';
-    }
-    this.setPassengers();
+  search() {
+    // TODO: route to next page
   }
-
-  childIncrement() {
-    this.childCounter += 1;
-    this.passengers.child = `${this.childCounter} Child`;
-    this.setPassengers();
-  }
-
-  infantDecrement() {
-    this.infantCounter -= 1;
-    if (this.infantCounter !== 0) {
-      this.passengers.infant = `${this.infantCounter} Infant`;
-    } else {
-      this.passengers.infant = '';
-    }
-    this.setPassengers();
-  }
-
-  infantIncrement() {
-    this.infantCounter += 1;
-    this.passengers.infant = `${this.infantCounter} Infant`;
-    this.setPassengers();
-  }
-
-  search() {}
 
 }

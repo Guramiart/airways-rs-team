@@ -8,21 +8,20 @@
       </mat-radio-group>
     </div>
     <div class="select">
+      <div class="switch-btn" (click)="switch()"><mat-icon>compare_arrows</mat-icon></div>
       <mat-form-field appearance="fill">
         <mat-label>From</mat-label>
-        <mat-select [formControlName]="'from'" required>
-          <mat-option value="Choose your from" disabled [ngStyle]="{ display: 'none' }">Choose your from</mat-option>
-          <mat-option *ngFor="let item of test" [value]="item.value">
-            {{item.viewValue}}
+        <mat-select [formControlName]="'from'" placeholder="Choose your from">
+          <mat-option *ngFor="let item of countries" [value]="item">
+            {{item.nameEn}} ({{ item.abbreviation }})
           </mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Destination</mat-label>
-        <mat-select [formControlName]="'destination'" required>
-          <mat-option value="Choose your destination" disabled [ngStyle]="{ display: 'none' }">Choose your destination</mat-option>
-          <mat-option *ngFor="let item of test" [value]="item.value">
-            {{item.viewValue}}
+        <mat-select [formControlName]="'destination'" placeholder="Choose your destination">
+          <mat-option *ngFor="let item of countries" [value]="item">
+            {{item.nameEn}} ({{ item.abbreviation }})
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -39,11 +38,11 @@
           <mat-date-range-picker #picker></mat-date-range-picker>
         </mat-form-field>
       </div>
-      <button class="focus-btn" (click)="foo()">focus</button>
       <div class="passengers">
+        <div class="focus-btn"><mat-icon (click)="toggleFocus()">arrow_drop_down</mat-icon></div>
         <mat-form-field appearance="fill">
           <mat-label>Passengers</mat-label>
-          <input matInput #passengersInput="matInput" (focus)="focus()" type="text" readonly [formControlName]="'passengers'">
+          <input matInput #passengersInput="matInput" (click)="toggleFocus()" type="text" readonly [formControlName]="'passengers'">
         </mat-form-field>
         <div class="passengers-options" *ngIf="isFocused || passengersInput.focused">
           <div class="option">
@@ -52,9 +51,9 @@
               <span class="option-span">14+ years</span>
             </div>
             <div class="option__control">
-              <button class="option__btn" [disabled]="adultCounter <= 0" (click)="adultDecrement()">-</button>
-              <span class="option__count">{{ adultCounter }}</span>
-              <button class="option__btn" (click)="adultIncrement()">+</button>
+              <button class="option__btn" [disabled]="passengers.adult.count <= 0" (click)="decrement('adult')">-</button>
+              <span class="option__count">{{ passengers.adult.count }}</span>
+              <button class="option__btn" (click)="increment('adult')">+</button>
             </div>
           </div>
           <div class="option">
@@ -63,9 +62,9 @@
               <span class="option-span">2-14 years</span>
             </div>
             <div class="option__control">
-              <button class="option__btn" [disabled]="childCounter <= 0" (click)="childDecrement()">-</button>
-              <span class="option__count">{{ childCounter }}</span>
-              <button class="option__btn" (click)="childIncrement()">+</button>
+              <button class="option__btn" [disabled]="passengers.child.count <= 0" (click)="decrement('child')">-</button>
+              <span class="option__count">{{ passengers.child.count }}</span>
+              <button class="option__btn" (click)="increment('child')">+</button>
             </div>
           </div>
           <div class="option">
@@ -74,16 +73,16 @@
               <span class="option-span">0-2 years</span>
             </div>
             <div class="option__control">
-              <button class="option__btn" [disabled]="infantCounter <= 0" (click)="infantDecrement()">-</button>
-              <span class="option__count">{{ infantCounter }}</span>
-              <button class="option__btn" (click)="infantIncrement()">+</button>
+              <button class="option__btn" [disabled]="passengers.infant.count <= 0" (click)="decrement('infant')">-</button>
+              <span class="option__count">{{ passengers.infant.count }}</span>
+              <button class="option__btn" (click)="increment('infant')">+</button>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="search__btn">
-      <button mat-button type="submit">Search</button>
+      <button mat-button [disabled]="!flightSearchForm.valid" type="submit">Search</button>
     </div>
   </form>
 </div>
