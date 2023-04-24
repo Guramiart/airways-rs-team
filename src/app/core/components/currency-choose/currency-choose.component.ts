@@ -1,5 +1,12 @@
+import { Store } from '@ngrx/store';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Currency } from 'src/app/shared/enums/currency';
+import { Observable } from 'rxjs';
+import { MatSelectChange } from '@angular/material/select';
 import { HeaderChangerService } from '../../services/header-changer.service';
+
+import * as SettingsSelector from '../../../redux/selectors/settings.selector';
+import * as SettingsAction from '../../../redux/actions/settings.actions';
 
 enum Color {
   white = '#FFFFFF',
@@ -14,20 +21,30 @@ enum Color {
 })
 export class CurrencyChooseComponent implements OnInit {
 
-  public currency = 'EUR';
+  public currency$: Observable<Currency> | undefined;
 
-  public currencyArray = ['EUR', 'USA', 'RUB', 'PLN'];
+  public currencyArray = Object.values(Currency);
 
   public textColor: Color = Color.white;
 
-  constructor(private mainObserver: HeaderChangerService) { }
+  constructor(
+    private mainObserver: HeaderChangerService,
+    private store: Store,
+  ) { }
 
   ngOnInit(): void {
+    this.currency$ = this.store.select(SettingsSelector.selectCurrency);
     this.mainObserver.onChangePage().subscribe(() => this.onChange());
   }
 
   private onChange(): void {
     this.textColor = this.textColor === Color.white ? Color.black : Color.white;
+  }
+
+  public updateStore(value: MatSelectChange) {
+    this.store.dispatch(SettingsAction.changeCurrency({
+      currency: Object.values(Currency).filter((el) => el === value.value)[0],
+    }));
   }
 
 }

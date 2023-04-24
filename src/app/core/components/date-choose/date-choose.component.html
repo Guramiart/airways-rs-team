@@ -1,3 +1,3 @@
-  <mat-select [value]="date" [style.color]="textColor">
+  <mat-select [value]="date$ | async" [style.color]="textColor" (selectionChange)="updateStore($event)">
     <mat-option *ngFor="let date of dates" [value]="date">{{date}}</mat-option>
   </mat-select>
