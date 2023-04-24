@@ -1,10 +1,15 @@
 import {
   Component, ElementRef, OnInit, ViewChild,
 } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { DATE_FORMATS } from 'src/app/shared/enums/date-format';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
 import { ICity } from 'src/app/services/cities.model';
+import { FlightTypes } from 'src/app/shared/enums/flight-types';
 import { Passengers } from '../../models/passengers';
+import * as SettingSelect from '../../../redux/selectors/settings.selector';
 
 @Component({
   selector: 'app-flight-search',
@@ -14,6 +19,8 @@ import { Passengers } from '../../models/passengers';
 export class FlightSearchComponent implements OnInit {
 
   @ViewChild('passengersInput', { read: ElementRef }) input: ElementRef | undefined;
+
+  private format$: Observable<string> | undefined;
 
   public passengers: Passengers = {
     adult: {
@@ -33,28 +40,47 @@ export class FlightSearchComponent implements OnInit {
   public flightSearchForm: FormGroup = new FormGroup({});
 
   public flightTypes = [
-    { value: 'Round Trip', checked: true },
-    { value: 'One Way', checked: false },
+    { value: FlightTypes.ROUND, checked: true },
+    { value: FlightTypes.ONE_WAY, checked: false },
   ];
 
   public countries: ICity[] = [];
 
   public isFocused: boolean = false;
 
-  constructor(private dataService: DataService) {}
+  constructor(
+    private store: Store,
+    private dataService: DataService,
+  ) {}
 
   ngOnInit(): void {
     this.flightSearchForm = new FormGroup({
       from: new FormControl('', Validators.required),
       destination: new FormControl('', Validators.required),
-      startDate: new FormControl<Date | null>(null, Validators.required),
-      endDate: new FormControl<Date | null>(null, Validators.required),
+      startDate: new FormControl(null, Validators.required),
+      endDate: new FormControl(null, Validators.required),
       passengers: new FormControl(this.getPassengers(), Validators.required),
     });
     this.dataService.getAllCities().subscribe((data) => {
       this.countries = data;
       return this.countries;
     });
+    this.format$ = this.store.select(SettingSelect.selectDateFormat);
+    this.format$.subscribe((value) => {
+      DATE_FORMATS.display.dateInput = value;
+      this.updateDate();
+    });
+  }
+
+  private updateDate() {
+    const start = this.flightSearchForm.get('startDate')?.value;
+    const end = this.flightSearchForm.get('endDate')?.value;
+    if (start !== null) {
+      this.flightSearchForm.get('startDate')?.setValue(new Date(start));
+    }
+    if (end !== null) {
+      this.flightSearchForm.get('endDate')?.setValue(new Date(end));
+    }
   }
 
   private getPassengers(): string {

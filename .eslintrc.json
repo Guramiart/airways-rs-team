@@ -24,7 +24,12 @@
         "import/no-extraneous-dependencies": "off",
         "@typescript-eslint/no-inferrable-types": "off",
         "class-methods-use-this": "off",
-        "padded-blocks": ["error", { "classes": "always" }],
+        "padded-blocks": [
+          "error",
+          {
+            "classes": "always"
+          }
+        ],
         "linebreak-style": 0,
         "@angular-eslint/directive-selector": [
           "error",
@@ -52,6 +57,14 @@
         "plugin:@angular-eslint/template/recommended"
       ],
       "rules": {}
+    },
+    {
+      "files": [
+        "*.ts"
+      ],
+      "extends": [
+        "plugin:@ngrx/recommended-requiring-type-checking"
+      ]
     }
   ]
 }

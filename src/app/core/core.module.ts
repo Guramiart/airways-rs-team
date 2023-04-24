@@ -1,7 +1,10 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatSelectModule } from '@angular/material/select';
+
+import { StoreModule } from '@ngrx/store';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { HeaderComponent } from './components/header/header.component';
@@ -12,6 +15,8 @@ import { CurrencyChooseComponent } from './components/currency-choose/currency-c
 import { AccountButtonComponent } from './components/account-button/account-button.component';
 import { BasketIndicatorComponent } from './components/basket-indicator/basket-indicator.component';
 import { StepsIndicatorComponent } from './components/steps-indicator/steps-indicator.component';
+
+import { settingReducer } from '../redux/reducers/settings.reducer';
 
 @NgModule({
   declarations: [
@@ -26,11 +31,12 @@ import { StepsIndicatorComponent } from './components/steps-indicator/steps-indi
   imports: [
     CommonModule,
     MaterialModule,
-    MatExpansionModule,
-    MatSelectModule,
     CdkAccordionModule,
     CdkConnectedOverlay,
     CdkOverlayOrigin,
+    StoreRouterConnectingModule.forRoot(),
+    StoreModule.forRoot({ settings: settingReducer }, {}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   exports: [
     HeaderComponent,

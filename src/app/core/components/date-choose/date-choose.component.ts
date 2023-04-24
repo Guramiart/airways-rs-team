@@ -1,4 +1,12 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { DateFormat } from 'src/app/shared/enums/date-format';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { MatSelectChange } from '@angular/material/select';
+
+import * as SettingsSelector from '../../../redux/selectors/settings.selector';
+import * as SettingsAction from '../../../redux/actions/settings.actions';
+
 import { HeaderChangerService } from '../../services/header-changer.service';
 
 enum Color {
@@ -14,20 +22,30 @@ enum Color {
 })
 export class DateChooseComponent implements OnInit {
 
-  public dates = ['MM/DD/YYYY', 'DD/MM/YYYY', 'YYYY/DD/MM', 'YYYY/MM/DD'];
+  public dates = Object.values(DateFormat);
 
-  public date = 'MM/DD/YYYY';
+  public date$: Observable<DateFormat> | undefined;
 
   public textColor: Color = Color.white;
 
-  constructor(private mainObserver: HeaderChangerService) { }
+  constructor(
+    private mainObserver: HeaderChangerService,
+    private store: Store,
+  ) { }
 
   ngOnInit(): void {
+    this.date$ = this.store.select(SettingsSelector.selectDateFormat);
     this.mainObserver.onChangePage().subscribe(() => this.onChange());
   }
 
   private onChange(): void {
     this.textColor = this.textColor === Color.white ? Color.black : Color.white;
+  }
+
+  public updateStore(value: MatSelectChange) {
+    this.store.dispatch(SettingsAction.changeDate({
+      dateFormat: Object.values(DateFormat).filter((el) => el === value.value)[0],
+    }));
   }
 
 }
