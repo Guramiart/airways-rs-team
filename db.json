@@ -39,9 +39,10 @@
     ],
     "users":[
         {
-            "id":1,
-            "name":"Max",
-            "password":"123"
+          "id":1,
+          "firstName":"Max",
+          "email":"max@mail.ru",
+          "password":"123"
         },
         {
             "id":2,

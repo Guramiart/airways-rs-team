@@ -5,6 +5,9 @@ import { BookingPageComponent } from './pages/booking-page/booking-page.componen
 import { ShoppingCartPageComponent } from './pages/shopping-cart-page/shopping-cart-page.component';
 import { FlightSearchComponent } from './components/flight-search/flight-search.component';
 import { MaterialModule } from '../material/material.module';
+import { ModalWindowComponent } from './components/modal-window/modal-window.component';
+import { LogInComponent } from './components/modal-window/log-in/log-in.component';
+import { SignInComponent } from './components/modal-window/sign-in/sign-in.component';
 
 @NgModule({
   declarations: [
@@ -12,6 +15,9 @@ import { MaterialModule } from '../material/material.module';
     BookingPageComponent,
     ShoppingCartPageComponent,
     FlightSearchComponent,
+    ModalWindowComponent,
+    LogInComponent,
+    SignInComponent,
   ],
   imports: [
     CommonModule,
@@ -21,6 +27,7 @@ import { MaterialModule } from '../material/material.module';
     MainPageComponent,
     BookingPageComponent,
     ShoppingCartPageComponent,
+    ModalWindowComponent,
   ],
 })
 export class AirwaysModule { }
