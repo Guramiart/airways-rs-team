@@ -2,15 +2,15 @@
   <div class="main__input-wrapper">
     <label class="main__input-label" for="from">From</label>
     <div class="main__input-container">
-      <input id="from" class="main__editor-input" type="text">
-      <span class="main__input-code">dub</span>
+      <input id="from" class="main__editor-input" type="text" [value]="inputs.from" [style.width]="widthInput.from">
+      <span class="main__input-code">{{codes.from}}</span>
     </div>
   </div>
   <div class="main__input-wrapper">
-    <label class="main__input-label" for="to">From</label>
+    <label class="main__input-label" for="to">Destination</label>
     <div class="main__input-container">
-      <input id="to" class="main__editor-input" type="text">
-      <span class="main__input-code">dub</span>
+      <input id="to" class="main__editor-input" type="text" [value]="inputs.to" [style.width]="widthInput.to">
+      <span class="main__input-code">{{codes.to}}</span>
     </div>
   </div>
   <div class="main__daypicker-wrapper">
