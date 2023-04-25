@@ -12,9 +12,11 @@ export class FooterComponent implements OnInit {
 
   ngOnInit(): void {
     this.data.getAllCities().subscribe((data) => {
+      // eslint-disable-next-line no-console
       console.log(data);
     });
     this.data.getUser(1).subscribe((data) => {
+      // eslint-disable-next-line no-console
       console.log(data);
     });
   }
