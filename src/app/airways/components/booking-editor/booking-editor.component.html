@@ -1,0 +1,78 @@
+<form class="main__booking-editor">
+  <div class="main__input-wrapper">
+    <label class="main__input-label" for="from">From</label>
+    <div class="main__input-container">
+      <input id="from" class="main__editor-input" type="text">
+      <span class="main__input-code">dub</span>
+    </div>
+  </div>
+  <div class="main__input-wrapper">
+    <label class="main__input-label" for="to">From</label>
+    <div class="main__input-container">
+      <input id="to" class="main__editor-input" type="text">
+      <span class="main__input-code">dub</span>
+    </div>
+  </div>
+  <div class="main__daypicker-wrapper">
+    <mat-form-field appearance="fill">
+    <mat-label>Dates</mat-label>
+    <mat-date-range-input [rangePicker]="picker">
+      <input matStartDate placeholder="Start date">
+      <input matEndDate placeholder="End date">
+    </mat-date-range-input>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+  </div>
+  <mat-accordion class="main__passenger-editor">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Passenger
+        </mat-panel-title>
+        <mat-panel-description>
+          Adult {{adult}}, Child {{child}}, Infant {{infant}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="main__passenger-edit">
+        <div class="main__passenger-option">
+          <div class="main__passenger-label">
+            <span class="main__passenger-kind">Adult</span>
+            <span class="main__passenger-clue">+14 years</span>
+          </div>
+          <div class="main__passenger-counter">
+            <span class="main__passenger-minus">-</span>
+            <span class="main__passenger-count">{{adult}}</span>
+            <span class="main__passenger-plus">+</span>
+          </div>
+        </div>
+      </div>
+      <div class="main__passenger-edit">
+        <div class="main__passenger-option">
+          <div class="main__passenger-label">
+            <span class="main__passenger-kind">Child</span>
+            <span class="main__passenger-clue">2-14 years</span>
+          </div>
+          <div class="main__passenger-counter">
+            <span class="main__passenger-minus">-</span>
+            <span class="main__passenger-count">{{child}}</span>
+            <span class="main__passenger-plus">+</span>
+          </div>
+        </div>
+      </div>
+      <div class="main__passenger-edit">
+        <div class="main__passenger-option">
+          <div class="main__passenger-label">
+            <span class="main__passenger-kind">Infant</span>
+            <span class="main__passenger-clue">0-2 years</span>
+          </div>
+          <div class="main__passenger-counter">
+            <span class="main__passenger-minus">-</span>
+            <span class="main__passenger-count">{{infant}}</span>
+            <span class="main__passenger-plus">+</span>
+          </div>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</form>

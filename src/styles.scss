@@ -56,3 +56,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-pseudo-checkbox-minimal.mat-pseudo-checkbox-checked::after {
   color: #11397E;
 }
+
+.mdc-line-ripple {
+  display: none;
+}
+
+.mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
