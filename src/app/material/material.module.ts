@@ -14,7 +14,6 @@ import {
 } from '@angular/material/core';
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { DATE_FORMATS } from '../shared/enums/date-format';
-import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
