@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
+import { DateValidator } from './validator';
 
 @Component({
   selector: 'app-sign-in',
@@ -22,12 +23,17 @@ export class SignInComponent implements OnInit{
       password: new FormControl('', [
         Validators.required,
         Validators.pattern(/(?=.*\d)(?=.*[@!$#?&-])(?=.*[a-z])(?=.*[A-Z]).{8,}/)]),
-      firstName: new FormControl('', [Validators.required]),
-      lastName:new FormControl('', [Validators.required]),
-      birthDate:new FormControl('', [Validators.required]),
+      firstName: new FormControl('', [
+         Validators.required ,
+         Validators.pattern(/[a-zA-Z]/)]),
+      lastName:new FormControl('', [
+        Validators.required,
+        Validators.pattern(/[a-zA-Z]/)]),
+      birthDate:new FormControl('', [Validators.required, DateValidator()]),
       male:new FormControl('', [Validators.required]),
       mobile:new FormControl('', [Validators.required]),
-      citizen:new FormControl('', [Validators.required])
+      citizen:new FormControl('', [Validators.required]),
+      agreement:new FormControl(false, [Validators.requiredTrue]),
     });
   }
 

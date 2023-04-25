@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { SettingsState, initialSettingState } from '../state.model';
+import { SettingsState, initialSettingState } from '../state.model'; 
 import * as SettingActions from '../actions/settings.actions';
 
 export const settingReducer = createReducer(
@@ -19,4 +19,10 @@ export const settingReducer = createReducer(
       currency,
     }),
   ),
+  on(SettingActions.openModal,
+    (state: SettingsState):SettingsState => ({
+      ...state,
+      isModalOpen:!state.isModalOpen
+    })
+    )
 );

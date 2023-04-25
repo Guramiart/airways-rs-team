@@ -14,5 +14,11 @@
     width: 60%;
     background-color: white;
     padding: 20px;
+    position: relative;
+}
+.close_btn{
+    position: absolute;
+    right: -35px;
+    top: -35px;
 }
 
