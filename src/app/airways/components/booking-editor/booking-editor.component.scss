@@ -218,10 +218,18 @@ mat-date-range-input {
 .main__passenger-minus,
 .main__passenger-count,
 .main__passenger-plus {
+  user-select: none;
   font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
   color: #11397E;
+  cursor: pointer;
+}
+
+.main__passenger-minus:active,
+.main__passenger-plus:active {
+  color: #2d86a8;
+  font-size: 12px;
 }
