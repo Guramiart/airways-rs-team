@@ -1,0 +1,36 @@
+.form-group{
+    display: flex;
+    flex-direction: column;
+    &__forgot{
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    .error{
+        color: red;
+        margin-top: -20px;
+    }
+}
+.sign-in{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+    &_text{
+        display: flex;
+        text-align: center;
+        align-items: center;
+        justify-content: space-between;
+        span{
+            width:max-content;
+        }
+        &:before,
+        &:after{
+            content: '';
+            width: 30%;
+            height: 1px;
+            background-color: rgba(0, 0, 0, 0.151);
+        }
+    }
+}

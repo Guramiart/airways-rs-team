@@ -1,1 +1,37 @@
-<p>sign-in works!</p>
+<div class="sign-in">
+<button mat-raised-button >Continue with Google</button>
+<button mat-raised-button >Continue with Facebook</button>
+<div class="sign-in_text">
+    <span>or sign in with your email</span>
+</div>
+<form [formGroup]="signInForm" novalidate (ngSubmit)="submit()" >
+    <div class="form-group">
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input type="email" matInput  formControlName="email" [ngClass]="{'is-invalid': isSubmitted && signInForm.controls['email'].errors}"
+          placeholder="Your name...">
+          <mat-icon matSuffix >account_circle</mat-icon>
+          <mat-error *ngIf="signInForm.controls['email'].errors?.['required'] ">
+            Please enter email
+          </mat-error>
+            <mat-error *ngIf="signInForm.controls['email'].errors?.['email']">
+            Email is invalid
+          </mat-error>
+        </mat-form-field>
+          <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input [type]="hide ? 'password' : 'text'" matInput  formControlName="password" 
+          [ngClass]="{'is-invalid': isSubmitted && signInForm.controls['password'].errors}"
+          placeholder="Your password...">
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          <mat-error *ngIf="signInForm.controls['password'].errors?.['required']">
+            Please enter a password
+          </mat-error>
+          <mat-error *ngIf="signInForm.controls['password'].errors?.['pattern']">
+            Your password isn,to strong enoogh
+          </mat-error>
+        </mat-form-field>
+      <button mat-raised-button color="primary" type="submit" >Sign In</button>
+     </div>
+</form>
+</div>
