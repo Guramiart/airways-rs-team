@@ -31,33 +31,34 @@ export class SignInComponent implements OnInit {
 
   ngOnInit(): void {
     this.signInForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [
+      email: new FormControl<string>('', [Validators.required, Validators.email]),
+      password: new FormControl<string>('', [
         Validators.required,
         Validators.pattern(/(?=.*\d)(?=.*[@!$#?&-])(?=.*[a-z])(?=.*[A-Z]).{8,}/)]),
-      firstName: new FormControl('', [
+      firstName: new FormControl<string>('', [
         Validators.required,
         Validators.pattern(/^[A-Za-z\s]*$/)]),
-      lastName: new FormControl('', [
+      lastName: new FormControl<string>('', [
         Validators.required,
         Validators.pattern(/^[A-Za-z\s]*$/)]),
-      birthDate: new FormControl('', [Validators.required, DateValidator()]),
-      countryCode: new FormControl(''),
-      mobile: new FormControl('', [Validators.required]),
-      citizen: new FormControl(''),
-      agreement: new FormControl(false, [Validators.requiredTrue]),
+      birthDate: new FormControl<string>('', [Validators.required, DateValidator()]),
+      countryCode: new FormControl<string>(''),
+      mobile: new FormControl<string>('', [Validators.required]),
+      citizen: new FormControl<string>(''),
+      agreement: new FormControl<boolean>(false, [Validators.requiredTrue]),
     });
   }
 
   public submit() {
     this.isSubmitted = true;
     if (!this.signInForm.invalid) {
+
       const newUser = {
         id: Date.now(),
-        firstName: this.signInForm.controls['firstName'].value,
+        firstName: this.replaceFirstLetterToUpperCase(this.signInForm.controls['firstName'].value as string),
+        lastName: this.replaceFirstLetterToUpperCase(this.signInForm.controls['lastName'].value as string),
         email: this.signInForm.controls['email'].value,
         password: this.signInForm.controls['password'].value,
-        lastName: this.signInForm.controls['lastName'].value,
         birthDate: new Date(this.signInForm.controls['birthDate'].value).toLocaleDateString(),
         gender: this.gender,
         mobile: this.signInForm.controls['countryCode'].value + this.signInForm.controls['mobile'].value,
@@ -76,6 +77,11 @@ export class SignInComponent implements OnInit {
 
   private closeModal():void {
     this.store.dispatch(SettingsAction.openModal());
+  }
+
+  private replaceFirstLetterToUpperCase(str:string):string {
+    const result = str[0].toUpperCase() + str.slice(1);
+    return result;
   }
 
 }
