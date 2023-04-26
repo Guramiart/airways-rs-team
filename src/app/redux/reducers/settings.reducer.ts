@@ -26,4 +26,11 @@ export const settingReducer = createReducer(
       isModalOpen: !state.isModalOpen,
     }),
   ),
+  on(
+    SettingActions.setAuthUser,
+    (state: SettingsState, { authUser }): SettingsState => ({
+      ...state,
+      authUser,
+    }),
+  ),
 );

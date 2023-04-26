@@ -16,8 +16,8 @@ export class ModalWindowComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.store.select(SettingsSelector.getModal)
-      .subscribe((data) => {this.isModalOpen = data});
+    this.store.select(SettingsSelector.selectModal)
+      .subscribe((data) => { this.isModalOpen = data; });
   }
 
   public closeModal():void {

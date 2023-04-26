@@ -23,4 +23,8 @@ export class DataService {
     return this.http.get<IUser[]>(`users?email=${email}`);
   }
 
+  public setNewUser(newUser:IUser) {
+    this.http.post<IUser[]>('users', newUser).subscribe();
+  }
+
 }

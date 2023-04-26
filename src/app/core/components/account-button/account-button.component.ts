@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { IUser } from 'src/app/services/user.model';
 import { HeaderChangerService } from '../../services/header-changer.service';
 
 import * as SettingsAction from '../../../redux/actions/settings.actions';
+import * as SettingsSelector from '../../../redux/selectors/settings.selector';
 
 enum Color {
   white = '#FFFFFF',
@@ -21,6 +23,8 @@ enum Icon {
 })
 export class AccountButtonComponent implements OnInit {
 
+  public authUser:IUser | undefined;
+
   public btnText = 'Sign In';
 
   public accountLogo = Icon.white;
@@ -34,10 +38,20 @@ export class AccountButtonComponent implements OnInit {
 
   ngOnInit(): void {
     this.mainObserver.onChangePage().subscribe(() => this.onChange());
+    this.store.select(SettingsSelector.selectUser)
+      .subscribe((data) => {
+        this.authUser = data;
+        this.authUser ? this.btnText = 'Sign Out' : this.btnText = 'Sign In';
+      });
+
   }
 
   public openModal():void {
-    this.store.dispatch(SettingsAction.openModal());
+    if (this.authUser) {
+      this.store.dispatch(SettingsAction.setAuthUser({ authUser: undefined }));
+    } else {
+      this.store.dispatch(SettingsAction.openModal());
+    }
   }
 
   private onChange(): void {

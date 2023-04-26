@@ -13,7 +13,12 @@ export const selectCurrency = createSelector(
   (state: SettingsState) => state.currency,
 );
 
-export const getModal = createSelector(
+export const selectModal = createSelector(
   selectSetting,
   (state:SettingsState) => state.isModalOpen,
+);
+
+export const selectUser = createSelector(
+  selectSetting,
+  (state:SettingsState) => state.authUser,
 );

@@ -43,6 +43,7 @@ export class LogInComponent implements OnInit {
             this.isCorrectEmail = false;
             if (user[0].password === this.logInForm.controls['password'].value) {
               this.isCorrectPassword = false;
+              this.store.dispatch(SettingsAction.setAuthUser({ authUser: user[0] }));
               this.closeModal();
             } else {
               this.isCorrectPassword = true;

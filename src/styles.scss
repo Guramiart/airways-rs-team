@@ -61,9 +61,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   display: none;
 }
 
-.mat-mdc-form-field-subscript-wrapper {
-  display: none;
-}
+// .mat-mdc-form-field-subscript-wrapper {
+//   display: none;
+// }
+// Все формы рушаться если отключить это
 
 .mat-calendar-period-button.mdc-button.mat-mdc-button.mat-unthemed.mat-mdc-button-base {
   color: #1C1B1F;
