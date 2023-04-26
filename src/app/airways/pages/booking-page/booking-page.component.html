@@ -1,1 +1,8 @@
-<p>booking-page works!</p>
+<div class="header__steps-block">
+  <app-booking-edit></app-booking-edit>
+  <div class="main__booking-editor">
+    <app-booking-editor *ngIf="isEditor" @showEditor></app-booking-editor>
+  </div>
+  <router-outlet name="booking"></router-outlet>
+</div>
+
