@@ -54,6 +54,17 @@
       "gender": "Male",
       "mobile": "+37543333",
       "citizen": "Belarus"
+    },
+    {
+      "id": 1682540081544,
+      "firstName": "Wewew",
+      "email": "ex@mail.ru",
+      "password": "12Qwerty!",
+      "lastName": "wewewew",
+      "birthDate": "19.04.2023",
+      "gender": "Female",
+      "mobile": "+37533333",
+      "citizen": "Belarus"
     }
   ]
 }

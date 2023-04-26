@@ -5,6 +5,7 @@ import { HeaderChangerService } from '../../services/header-changer.service';
 
 import * as SettingsAction from '../../../redux/actions/settings.actions';
 import * as SettingsSelector from '../../../redux/selectors/settings.selector';
+import { DataService } from 'src/app/services/data.service';
 
 enum Color {
   white = '#FFFFFF',
@@ -34,6 +35,7 @@ export class AccountButtonComponent implements OnInit {
   constructor(
     private mainObserver: HeaderChangerService,
     private store: Store,
+    private data:DataService
   ) { }
 
   ngOnInit(): void {
@@ -49,6 +51,7 @@ export class AccountButtonComponent implements OnInit {
   public openModal():void {
     if (this.authUser) {
       this.store.dispatch(SettingsAction.setAuthUser({ authUser: undefined }));
+      this.data.changeLS(0,true)
     } else {
       this.store.dispatch(SettingsAction.openModal());
     }

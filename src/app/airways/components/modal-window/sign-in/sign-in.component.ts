@@ -65,7 +65,11 @@ export class SignInComponent implements OnInit {
       };
 
       this.store.dispatch(SettingsAction.setAuthUser({ authUser: newUser }));
+
       this.data.setNewUser(newUser);
+
+      this.data.changeLS(newUser.id);
+
       this.closeModal();
     }
   }

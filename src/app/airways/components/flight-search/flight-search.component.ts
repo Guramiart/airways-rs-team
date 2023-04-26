@@ -70,6 +70,7 @@ export class FlightSearchComponent implements OnInit {
       DATE_FORMATS.display.dateInput = value;
       this.updateDate();
     });
+    this.dataService.setAuthUserFromLS();
   }
 
   private updateDate() {
