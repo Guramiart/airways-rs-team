@@ -8,14 +8,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
-import {MAT_CHECKBOX_DEFAULT_OPTIONS, MatCheckboxDefaultOptions, MatCheckboxModule} from '@angular/material/checkbox';
+import { MAT_CHECKBOX_DEFAULT_OPTIONS, MatCheckboxDefaultOptions, MatCheckboxModule } from '@angular/material/checkbox';
 import { MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule } from '@angular/material/radio';
 import {
   DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule,
 } from '@angular/material/core';
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
-import { DATE_FORMATS } from '../shared/enums/date-format';
 import { MatTabsModule } from '@angular/material/tabs';
+import { DATE_FORMATS } from '../shared/enums/date-format';
 
 @NgModule({
   declarations: [],
@@ -31,7 +31,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatSelectModule,
     MatRadioModule,
     MatTabsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
   ],
   exports: [
     FormsModule,
@@ -47,7 +47,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatExpansionModule,
     MatRadioModule,
     MatTabsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
   ],
   providers: [
     {
@@ -60,7 +60,7 @@ import { MatTabsModule } from '@angular/material/tabs';
       provide: MAT_RADIO_DEFAULT_OPTIONS,
       useValue: { color: 'primary' },
     },
-    {provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'check-indeterminate' } as MatCheckboxDefaultOptions}
+    { provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'check-indeterminate' } as MatCheckboxDefaultOptions },
   ],
 })
 export class MaterialModule { }

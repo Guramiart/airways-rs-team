@@ -10,5 +10,5 @@ export interface SettingsState {
 export const initialSettingState: SettingsState = {
   dateFormat: DateFormat.MM_DD_YYYY,
   currency: Currency.EUR,
-  isModalOpen:false
+  isModalOpen: false,
 };

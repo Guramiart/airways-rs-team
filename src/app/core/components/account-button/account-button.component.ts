@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HeaderChangerService } from '../../services/header-changer.service';
 import { Store } from '@ngrx/store';
+import { HeaderChangerService } from '../../services/header-changer.service';
 
 import * as SettingsAction from '../../../redux/actions/settings.actions';
 
@@ -27,22 +27,22 @@ export class AccountButtonComponent implements OnInit {
 
   public textColor = Color.white;
 
-  constructor(private mainObserver: HeaderChangerService,
-              private store: Store,) { }
+  constructor(
+    private mainObserver: HeaderChangerService,
+    private store: Store,
+  ) { }
 
   ngOnInit(): void {
     this.mainObserver.onChangePage().subscribe(() => this.onChange());
   }
 
-  public openModal():void{
-    this.store.dispatch(SettingsAction.openModal())
+  public openModal():void {
+    this.store.dispatch(SettingsAction.openModal());
   }
 
   private onChange(): void {
     this.accountLogo = this.accountLogo === Icon.white ? Icon.black : Icon.white;
     this.textColor = this.textColor === Color.white ? Color.black : Color.white;
   }
-
-
 
 }

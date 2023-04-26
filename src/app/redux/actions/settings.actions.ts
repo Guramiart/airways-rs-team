@@ -1,11 +1,11 @@
-import { createAction, props } from '@ngrx/store'; 
+import { createAction, props } from '@ngrx/store';
 import { Currency } from 'src/app/shared/enums/currency';
 import { DateFormat } from 'src/app/shared/enums/date-format';
 
 const GET_SETTINGS = '[Settings] Get settings';
 const CHANGE_DATE = '[Settings] Change date format';
 const CHANGE_CURRENCY = '[Settings] Change currency';
-const OPEN_MODAL = '[Modal] Open modal'
+const OPEN_MODAL = '[Modal] Open modal';
 
 export const getSettings = createAction(GET_SETTINGS);
 
@@ -19,4 +19,4 @@ export const changeCurrency = createAction(
   props<{ currency: Currency }>(),
 );
 
-export const openModal = createAction(OPEN_MODAL)
+export const openModal = createAction(OPEN_MODAL);

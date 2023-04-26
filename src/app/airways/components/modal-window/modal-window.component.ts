@@ -9,17 +9,19 @@ import * as SettingsAction from '../../../redux/actions/settings.actions';
   templateUrl: './modal-window.component.html',
   styleUrls: ['./modal-window.component.scss'],
 })
-export class ModalWindowComponent implements OnInit{
-public isModalOpen:boolean
+export class ModalWindowComponent implements OnInit {
 
-constructor( private store: Store){}
+  public isModalOpen:boolean;
 
-ngOnInit(): void {
-  this.store.select(SettingsSelector.getModal)
-  .subscribe(data=>this.isModalOpen = data) 
-}
+  constructor(private store: Store) {}
 
-public closeModal():void{
-  this.store.dispatch(SettingsAction.openModal())
-}
+  ngOnInit(): void {
+    this.store.select(SettingsSelector.getModal)
+      .subscribe((data) => {this.isModalOpen = data});
+  }
+
+  public closeModal():void {
+    this.store.dispatch(SettingsAction.openModal());
+  }
+
 }

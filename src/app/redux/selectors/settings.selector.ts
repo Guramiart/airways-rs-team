@@ -15,5 +15,5 @@ export const selectCurrency = createSelector(
 
 export const getModal = createSelector(
   selectSetting,
-  (state:SettingsState) => state.isModalOpen
-)
+  (state:SettingsState) => state.isModalOpen,
+);

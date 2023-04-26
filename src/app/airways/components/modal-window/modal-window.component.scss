@@ -6,15 +6,15 @@
     left: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
     background-color: rgba(0, 0, 0, 0.226);
     z-index: 100;
 }
 .content{
-    width: 60%;
+    width: 50%;
     background-color: white;
     padding: 20px;
     position: relative;
+    margin-top: 80px;
 }
 .close_btn{
     position: absolute;
