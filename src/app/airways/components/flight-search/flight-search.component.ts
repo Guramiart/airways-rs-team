@@ -2,6 +2,7 @@ import {
   Component, ElementRef, OnInit, ViewChild,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { DATE_FORMATS } from 'src/app/shared/enums/date-format';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -10,6 +11,7 @@ import { ICity } from 'src/app/services/cities.model';
 import { FlightTypes } from 'src/app/shared/enums/flight-types';
 import { Passengers } from '../../models/passengers';
 import * as SettingSelect from '../../../redux/selectors/settings.selector';
+import * as FlightActions from '../../../redux/actions/flight.actions';
 
 @Component({
   selector: 'app-flight-search',
@@ -50,6 +52,7 @@ export class FlightSearchComponent implements OnInit {
 
   constructor(
     private store: Store,
+    private router: Router,
     private dataService: DataService,
   ) {}
 
@@ -101,10 +104,12 @@ export class FlightSearchComponent implements OnInit {
     this.flightSearchForm.get('passengers')?.setValue(this.getPassengers());
   }
 
-  public switch(): void {
+  public switchFlights(): void {
     const tmp = this.flightSearchForm.get('from')?.value;
-    this.flightSearchForm.get('from')?.setValue(this.flightSearchForm.get('destination')?.value);
-    this.flightSearchForm.get('destination')?.setValue(tmp);
+    this.flightSearchForm.get('from')?.setValue(this.flightSearchForm.get('destination')?.value, { emitEvent: true });
+    this.flightSearchForm.get('destination')?.setValue(tmp, { emitEvent: true });
+    this.setFromFlight(this.flightSearchForm.get('from')?.value);
+    this.setDestinationFlight(this.flightSearchForm.get('destination')?.value);
   }
 
   public toggleFocus(): void {
@@ -117,19 +122,25 @@ export class FlightSearchComponent implements OnInit {
   }
 
   public decrement(value: 'adult' | 'child' | 'infant'): void {
-    this.input?.nativeElement.focus();
     this.passengers[value].count -= 1;
     this.setPassengers();
   }
 
   increment(value: 'adult' | 'child' | 'infant'): void {
-    this.input?.nativeElement.focus();
     this.passengers[value].count += 1;
     this.setPassengers();
   }
 
+  setFromFlight(e: ICity): void {
+    this.store.dispatch(FlightActions.changeFromFlight({ from: e }));
+  }
+
+  setDestinationFlight(e: ICity): void {
+    this.store.dispatch(FlightActions.changeDestinationFlight({ destination: e }));
+  }
+
   search() {
-    // TODO: route to next page
+    this.router.navigateByUrl('step/1');
   }
 
 }
