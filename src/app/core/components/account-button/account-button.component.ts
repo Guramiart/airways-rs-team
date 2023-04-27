@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { IUser } from 'src/app/services/user.model';
+import { DataService } from 'src/app/services/data.service';
 import { HeaderChangerService } from '../../services/header-changer.service';
+
+import * as SettingsAction from '../../../redux/actions/settings.actions';
+import * as SettingsSelector from '../../../redux/selectors/settings.selector';
 
 enum Color {
   white = '#FFFFFF',
@@ -18,16 +24,42 @@ enum Icon {
 })
 export class AccountButtonComponent implements OnInit {
 
+  public authUser:IUser | undefined;
+
   public btnText = 'Sign In';
 
   public accountLogo = Icon.white;
 
   public textColor = Color.white;
 
-  constructor(private mainObserver: HeaderChangerService) { }
+  constructor(
+    private mainObserver: HeaderChangerService,
+    private store: Store,
+    private data:DataService,
+  ) { }
 
   ngOnInit(): void {
     this.mainObserver.onChangePage().subscribe(() => this.onChange());
+    this.store.select(SettingsSelector.selectUser)
+      .subscribe((data) => {
+        this.authUser = data;
+        this.authUser ? this.btnText = `${this.authUser.firstName}  ${this.authUser.lastName} `
+          : this.btnText = 'Sign In';
+      });
+
+  }
+
+  public openModal():void {
+    if (this.authUser) {
+      // TODO go to userPage
+    } else {
+      this.store.dispatch(SettingsAction.openModal());
+    }
+  }
+
+  public signOut():void {
+    this.store.dispatch(SettingsAction.setAuthUser({ authUser: undefined }));
+    this.data.changeLS(0, true);
   }
 
   private onChange(): void {

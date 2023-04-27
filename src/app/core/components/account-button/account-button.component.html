@@ -1,4 +1,10 @@
-<button class="header__account-button">
-  <img class="header__account-logo" [src]="accountLogo" alt="Account button">
-  <span class="header__account-text" [style.color]="textColor">{{btnText}}</span>
-</button>
+<div class="conteiner">
+  <button  class="header__account-button" (click)="openModal()">
+    <img class="header__account-logo" [src]="accountLogo" alt="Account button">
+    <span class="header__account-text" [style.color]="textColor">{{btnText}}</span>
+  </button>
+  <button *ngIf="authUser" class="header__account-button" (click)="signOut()">
+    <mat-icon class="header__mat-icon">logout</mat-icon>
+  </button>
+</div>
+

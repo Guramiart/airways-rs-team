@@ -1,0 +1,145 @@
+<div class="sign-in">
+  <button mat-raised-button >
+    <div class="sign-in__btn">
+      <img src="assets/google_24.png" alt="google">
+      <p>Continue with Google</p>
+    </div>
+  </button>
+  <button mat-raised-button >
+    <div class="sign-in__btn">
+      <img src="assets/facebbok_24px.png" alt="fb">
+      <p>Continue with Facebook</p>
+    </div>
+   </button>
+<div class="sign-in_text">
+    <span>or sign in with your email</span>
+</div>
+<form [formGroup]="signInForm" novalidate (ngSubmit)="submit()" >
+    <div class="form-group">
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input type="email" matInput  formControlName="email"
+          placeholder="example@gmail.com">
+          <mat-error *ngIf="signInForm.controls['email'].errors?.['required'] ">
+            Please enter email
+          </mat-error>
+            <mat-error *ngIf="signInForm.controls['email'].errors?.['email']">
+            Email is invalid
+          </mat-error>
+        </mat-form-field>
+          <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input [type]="hide ? 'password' : 'text'" matInput  formControlName="password" 
+          placeholder="Your password...">
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          <mat-error *ngIf="signInForm.controls['password'].errors?.['required']">
+            Please enter a password
+          </mat-error>
+          <mat-error *ngIf="signInForm.controls['password'].errors?.['pattern']">
+            Your password isn,to strong enoogh
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>First Name*</mat-label>
+          <input type="email" matInput  formControlName="firstName"
+          placeholder="Enter first name">
+          <mat-icon *ngIf="!(isSubmitted && signInForm.controls['firstName'].errors?.['required'])" matSuffix >info</mat-icon>
+          <mat-icon *ngIf="signInForm.controls['firstName'].errors?.['required']  && isSubmitted" matSuffix color="warn">error</mat-icon>
+          <mat-error *ngIf="signInForm.controls['firstName'].errors?.['required'] ">
+            Please enter first name
+          </mat-error>
+            <mat-error *ngIf="signInForm.controls['firstName'].errors?.['pattern']">
+            Enter correct name
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Last Name*</mat-label>
+          <input type="email" matInput  formControlName="lastName"
+          placeholder="Enter first name">
+          <mat-icon *ngIf="!(isSubmitted && signInForm.controls['lastName'].errors?.['required'])" matSuffix >info</mat-icon>
+          <mat-icon *ngIf="signInForm.controls['lastName'].errors?.['required']  && isSubmitted" matSuffix color="warn">error</mat-icon>
+          <mat-error *ngIf="signInForm.controls['lastName'].errors?.['required'] ">
+            Please enter last name
+          </mat-error>
+            <mat-error *ngIf="signInForm.controls['lastName'].errors?.['pattern']">
+            Enter correct last name
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="birthDate" 
+          placeholder="Date of birth*">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="signInForm.controls['birthDate'].errors?.['required']">
+            Please enter date
+          </mat-error>
+          <mat-error *ngIf="signInForm.controls['birthDate'].errors?.['dateValid']">
+            Date is from future
+          </mat-error>
+        </mat-form-field>
+
+        <div class="form-group__gender">
+          <div class="form-group__gender_cont">
+            <button mat-raised-button type="button" (click)="gender='Male'">
+              <div  class="sign-in__btn">
+                <mat-icon  *ngIf="gender==='Male'">done</mat-icon>
+                <p>Male</p>
+              </div>
+            </button>
+          </div>
+         <div class="form-group__gender_cont">
+          <button mat-raised-button type="button"  (click)="gender='Female'">
+            <div  class="sign-in__btn">
+              <mat-icon *ngIf="gender!=='Male'">done</mat-icon>
+              <p>Female</p>
+            </div>
+          </button>
+         </div>
+        </div>
+
+        <div class="form-group__mobile">
+          <div class="form-group__mobile_cont">
+            <mat-form-field appearance="fill">
+              <mat-label>Country code</mat-label>
+              <mat-select  placeholder="Code" formControlName="countryCode">
+                <mat-option *ngFor="let country of countries" [value]="country.code">
+                  {{country.name}}({{country.code}})
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="form-group__mobile_cont">
+            <mat-form-field>
+              <mat-label>Mobile phone number*</mat-label>
+              <input matInput type="number" formControlName="mobile"
+              placeholder="e.g 1234567">
+              <mat-error *ngIf="signInForm.controls['mobile'].errors?.['required']">
+                Please enter phone
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Citizenship</mat-label>
+          <mat-select formControlName="citizen" placeholder="Choose your country">
+            <mat-option *ngFor="let country of countries" [value]="country.name">
+              {{country.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        
+        <mat-checkbox color="primary" formControlName="agreement">I agree to Airway's Privacy Policy and Terms of Use</mat-checkbox>
+        <mat-error *ngIf="isSubmitted && signInForm.controls['agreement'].errors?.['required']">
+          We need your agreement
+        </mat-error>
+     
+      <button mat-raised-button color="primary" type="submit" >Sign up</button>
+     </div>
+</form>
+</div>

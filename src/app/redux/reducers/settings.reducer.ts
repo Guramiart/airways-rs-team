@@ -19,4 +19,18 @@ export const settingReducer = createReducer(
       currency,
     }),
   ),
+  on(
+    SettingActions.openModal,
+    (state: SettingsState):SettingsState => ({
+      ...state,
+      isModalOpen: !state.isModalOpen,
+    }),
+  ),
+  on(
+    SettingActions.setAuthUser,
+    (state: SettingsState, { authUser }): SettingsState => ({
+      ...state,
+      authUser,
+    }),
+  ),
 );

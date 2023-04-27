@@ -11,6 +11,9 @@ import { FirstStepComponent } from './components/first-step/first-step.component
 import { SecondStepComponent } from './components/second-step/second-step.component';
 import { BookingEditComponent } from './components/booking-edit/booking-edit.component';
 import { BookingEditorComponent } from './components/booking-editor/booking-editor.component';
+import { ModalWindowComponent } from './components/modal-window/modal-window.component';
+import { LogInComponent } from './components/modal-window/log-in/log-in.component';
+import { SignInComponent } from './components/modal-window/sign-in/sign-in.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,9 @@ import { BookingEditorComponent } from './components/booking-editor/booking-edit
     SecondStepComponent,
     BookingEditComponent,
     BookingEditorComponent,
+    ModalWindowComponent,
+    LogInComponent,
+    SignInComponent,
   ],
   imports: [
     CommonModule,
@@ -32,6 +38,7 @@ import { BookingEditorComponent } from './components/booking-editor/booking-edit
     MainPageComponent,
     BookingPageComponent,
     ShoppingCartPageComponent,
+    ModalWindowComponent,
   ],
 })
 export class AirwaysModule { }
