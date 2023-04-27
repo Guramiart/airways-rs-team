@@ -25,18 +25,21 @@ export class FlightSearchComponent implements OnInit {
   private format$: Observable<string> | undefined;
 
   public passengers: Passengers = {
-    adult: {
-      name: 'Adult',
-      count: 0,
+    passengers: {
+      adult: {
+        name: 'Adult',
+        count: 0,
+      },
+      child: {
+        name: 'Child',
+        count: 0,
+      },
+      infant: {
+        name: 'Infant',
+        count: 0,
+      },
     },
-    child: {
-      name: 'Child',
-      count: 0,
-    },
-    infant: {
-      name: 'Infant',
-      count: 0,
-    },
+    total: 0,
   };
 
   public flightSearchForm: FormGroup = new FormGroup({});
@@ -75,7 +78,7 @@ export class FlightSearchComponent implements OnInit {
     });
   }
 
-  private updateDate() {
+  private updateDate(): void {
     const start = this.flightSearchForm.get('startDate')?.value;
     const end = this.flightSearchForm.get('endDate')?.value;
     if (start !== null) {
@@ -88,14 +91,14 @@ export class FlightSearchComponent implements OnInit {
 
   private getPassengers(): string {
     const title: string[] = [];
-    if (this.passengers.adult.count !== 0) {
-      title.push(`${this.passengers.adult.count} ${this.passengers.adult.name}`);
+    if (this.passengers.passengers.adult.count !== 0) {
+      title.push(`${this.passengers.passengers.adult.count} ${this.passengers.passengers.adult.name}`);
     }
-    if (this.passengers.child.count !== 0) {
-      title.push(`${this.passengers.child.count} ${this.passengers.child.name}`);
+    if (this.passengers.passengers.child.count !== 0) {
+      title.push(`${this.passengers.passengers.child.count} ${this.passengers.passengers.child.name}`);
     }
-    if (this.passengers.infant.count !== 0) {
-      title.push(`${this.passengers.infant.count} ${this.passengers.infant.name}`);
+    if (this.passengers.passengers.infant.count !== 0) {
+      title.push(`${this.passengers.passengers.infant.count} ${this.passengers.passengers.infant.name}`);
     }
     return title.join(', ');
   }
@@ -108,8 +111,6 @@ export class FlightSearchComponent implements OnInit {
     const tmp = this.flightSearchForm.get('from')?.value;
     this.flightSearchForm.get('from')?.setValue(this.flightSearchForm.get('destination')?.value, { emitEvent: true });
     this.flightSearchForm.get('destination')?.setValue(tmp, { emitEvent: true });
-    this.setFromFlight(this.flightSearchForm.get('from')?.value);
-    this.setDestinationFlight(this.flightSearchForm.get('destination')?.value);
   }
 
   public toggleFocus(): void {
@@ -122,24 +123,30 @@ export class FlightSearchComponent implements OnInit {
   }
 
   public decrement(value: 'adult' | 'child' | 'infant'): void {
-    this.passengers[value].count -= 1;
+    this.passengers.passengers[value].count -= 1;
     this.setPassengers();
   }
 
   increment(value: 'adult' | 'child' | 'infant'): void {
-    this.passengers[value].count += 1;
+    this.passengers.passengers[value].count += 1;
     this.setPassengers();
   }
 
-  setFromFlight(e: ICity): void {
-    this.store.dispatch(FlightActions.changeFromFlight({ from: e }));
-  }
-
-  setDestinationFlight(e: ICity): void {
-    this.store.dispatch(FlightActions.changeDestinationFlight({ destination: e }));
-  }
-
-  search() {
+  search(): void {
+    const from: ICity = this.flightSearchForm.get('from')?.value;
+    const destination: ICity = this.flightSearchForm.get('destination')?.value;
+    const startDate = this.flightSearchForm.get('startDate')?.value;
+    const endDate = this.flightSearchForm.get('endDate')?.value;
+    const total: number = Object
+      .values(this.passengers.passengers).reduce((acc, curr) => acc + curr.count, 0);
+    this.passengers.total = total;
+    this.store.dispatch(FlightActions.updateFlights({
+      from,
+      destination,
+      startDate,
+      endDate,
+      passengers: this.passengers,
+    }));
     this.router.navigateByUrl('step/1');
   }
 

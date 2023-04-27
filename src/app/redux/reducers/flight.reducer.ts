@@ -7,6 +7,19 @@ export const flightReducer = createReducer(
   initialFlightState,
   on(FlightActions.getFlights, (state: FlightState): FlightState => ({ ...state })),
   on(
+    FlightActions.updateFlights,
+    (state: FlightState, {
+      from, destination, startDate, endDate, passengers,
+    }): FlightState => ({
+      ...state,
+      from,
+      destination,
+      startDate,
+      endDate,
+      passengers,
+    }),
+  ),
+  on(
     FlightActions.changeFromFlight,
     (state: FlightState, { from }): FlightState => ({
       ...state,
@@ -18,6 +31,14 @@ export const flightReducer = createReducer(
     (state: FlightState, { destination }): FlightState => ({
       ...state,
       destination,
+    }),
+  ),
+  on(
+    FlightActions.changeDateFlight,
+    (state: FlightState, { startDate, endDate }): FlightState => ({
+      ...state,
+      startDate,
+      endDate,
     }),
   ),
 );

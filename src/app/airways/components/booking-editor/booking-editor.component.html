@@ -1,24 +1,24 @@
-<form class="main__booking-editor">
+<form class="main__booking-editor" *ngIf="flights$ | async as flight">
   <div class="main__input-wrapper">
     <label class="main__input-label" for="from">From</label>
     <div class="main__input-container">
-      <input id="from" class="main__editor-input" type="text" [value]="inputs.from" [style.width]="widthInput.from">
-      <span class="main__input-code">{{codes.from}}</span>
+      <input id="from" class="main__editor-input" type="text" [value]="flight.from!.nameEn">
+      <span class="main__input-code">{{ flight.from!.abbreviation }}</span>
     </div>
   </div>
   <div class="main__input-wrapper">
     <label class="main__input-label" for="to">Destination</label>
     <div class="main__input-container">
-      <input id="to" class="main__editor-input" type="text" [value]="inputs.to" [style.width]="widthInput.to">
-      <span class="main__input-code">{{codes.to}}</span>
+      <input id="to" class="main__editor-input" type="text" [value]="flight.destination!.nameEn">
+      <span class="main__input-code">{{ flight.destination!.abbreviation }}</span>
     </div>
   </div>
   <div class="main__daypicker-wrapper">
     <mat-form-field appearance="fill">
     <mat-label>Dates</mat-label>
     <mat-date-range-input [formGroup]="formDate" [rangePicker]="picker">
-      <input matStartDate formControlName="start" placeholder="Start date">
-      <input matEndDate formControlName="end" placeholder="End date">
+      <input matStartDate formControlName="start" placeholder="Start date" [value]="flight.startDate">
+      <input matEndDate formControlName="end" placeholder="End date" [value]="flight.endDate">
     </mat-date-range-input>
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-date-range-picker #picker></mat-date-range-picker>
@@ -31,7 +31,7 @@
           Passenger
         </mat-panel-title>
         <mat-panel-description>
-          {{passengerList}}
+          {{ passengerList }}
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="main__passenger-edit">

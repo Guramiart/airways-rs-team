@@ -1,5 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { FlightState } from 'src/app/redux/state.model';
+import * as FlightSelect from '../../../redux/selectors/flight.selector';
+import { Passengers } from '../../models/passengers';
 
 @Component({
   selector: 'app-booking-editor',
@@ -9,43 +14,39 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class BookingEditorComponent implements OnInit {
 
-  public adult = 0;
+  public flights$: Observable<FlightState> | undefined;
 
-  public child = 0;
+  public passengers: Passengers | null = null;
 
-  public infant = 0;
+  public adult: number | undefined;
 
-  public inputs = {
-    from: 'Dublin',
-    to: 'Warsaw Modlin',
-  };
+  public child: number | undefined;
 
-  public codes = {
-    from: 'DUB',
-    to: 'WAW',
-  };
-
-  public widthInput = {
-    from: '0px',
-    to: '0px',
-  };
+  public infant: number | undefined;
 
   public passengerList: string | undefined;
 
   public formDate!: FormGroup;
 
+  constructor(private store: Store) {}
+
   ngOnInit(): void {
-    this.widthInput.from = this.calcWidthInput(this.inputs.from);
-    this.widthInput.to = this.calcWidthInput(this.inputs.to);
-    this.generatePassengerList();
-    this.formDate = new FormGroup({
-      start: new FormControl<Date | null>(null),
-      end: new FormControl<Date | null>(null),
+    this.flights$ = this.store.select(FlightSelect.selectFlight);
+    this.flights$.subscribe((flight) => {
+      this.formDate = new FormGroup({
+        start: new FormControl<Date | null>(flight.startDate),
+        end: new FormControl<Date | null>(flight.endDate),
+      });
+      this.passengers = flight.passengers;
+      this.adult = flight.passengers?.passengers.adult.count;
+      this.child = flight.passengers?.passengers.child.count;
+      this.infant = flight.passengers?.passengers.infant.count;
     });
+    this.generatePassengerList();
   }
 
   public adultCounter(marker: boolean): void {
-    if (marker) {
+    if (marker && this.adult !== undefined) {
       this.adult += 1;
     } else {
       this.adult = this.adult ? this.adult - 1 : this.adult;
@@ -55,7 +56,7 @@ export class BookingEditorComponent implements OnInit {
   }
 
   public childCounter(marker: boolean): void {
-    if (marker) {
+    if (marker && this.child !== undefined) {
       this.child += 1;
     } else {
       this.child = this.child ? this.child - 1 : this.child;
@@ -65,17 +66,13 @@ export class BookingEditorComponent implements OnInit {
   }
 
   public infantsCounter(marker: boolean): void {
-    if (marker) {
+    if (marker && this.infant !== undefined) {
       this.infant += 1;
     } else {
       this.infant = this.infant ? this.infant - 1 : this.infant;
     }
 
     this.generatePassengerList();
-  }
-
-  private calcWidthInput(input: string): string {
-    return `${String(input.length * 10)}px`;
   }
 
   private generatePassengerList(): void {

@@ -11,7 +11,7 @@
       <div class="switch-btn" (click)="switchFlights()"><mat-icon>compare_arrows</mat-icon></div>
       <mat-form-field appearance="fill">
         <mat-label>From</mat-label>
-        <mat-select [formControlName]="'from'" placeholder="Choose your from" (selectionChange)="setFromFlight($event.value)">
+        <mat-select [formControlName]="'from'" placeholder="Choose your from">
           <mat-option *ngFor="let item of countries" [value]="item">
             {{item.nameEn}} ({{ item.abbreviation }})
           </mat-option>
@@ -19,7 +19,7 @@
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Destination</mat-label>
-        <mat-select [formControlName]="'destination'" placeholder="Choose your destination" (selectionChange)="setDestinationFlight($event.value)">
+        <mat-select [formControlName]="'destination'" placeholder="Choose your destination">
           <mat-option *ngFor="let item of countries" [value]="item">
             {{item.nameEn}} ({{ item.abbreviation }})
           </mat-option>
@@ -51,8 +51,8 @@
               <span class="option-span">14+ years</span>
             </div>
             <div class="option__control">
-              <button class="option__btn" type="button" [disabled]="passengers.adult.count <= 0" (click)="decrement('adult')">-</button>
-              <span class="option__count">{{ passengers.adult.count }}</span>
+              <button class="option__btn" type="button" [disabled]="passengers.passengers.adult.count <= 0" (click)="decrement('adult')">-</button>
+              <span class="option__count">{{ passengers.passengers.adult.count }}</span>
               <button class="option__btn" type="button" (click)="increment('adult')">+</button>
             </div>
           </div>
@@ -62,8 +62,8 @@
               <span class="option-span">2-14 years</span>
             </div>
             <div class="option__control">
-              <button class="option__btn" type="button" [disabled]="passengers.child.count <= 0" (click)="decrement('child')">-</button>
-              <span class="option__count">{{ passengers.child.count }}</span>
+              <button class="option__btn" type="button" [disabled]="passengers.passengers.child.count <= 0" (click)="decrement('child')">-</button>
+              <span class="option__count">{{ passengers.passengers.child.count }}</span>
               <button class="option__btn" type="button" (click)="increment('child')">+</button>
             </div>
           </div>
@@ -73,8 +73,8 @@
               <span class="option-span">0-2 years</span>
             </div>
             <div class="option__control">
-              <button class="option__btn" type="button" [disabled]="passengers.infant.count <= 0" (click)="decrement('infant')">-</button>
-              <span class="option__count">{{ passengers.infant.count }}</span>
+              <button class="option__btn" type="button" [disabled]="passengers.passengers.infant.count <= 0" (click)="decrement('infant')">-</button>
+              <span class="option__count">{{ passengers.passengers.infant.count }}</span>
               <button class="option__btn" type="button" (click)="increment('infant')">+</button>
             </div>
           </div>

@@ -1,7 +1,7 @@
 :host {
   display: flex;
   width: 100%;
-  height: 888px;
+  height: calc(100vh - 92px);
   box-sizing: border-box;
   padding-top: 88px;
   flex-direction: column;
@@ -11,7 +11,9 @@
 
 .header__steps-block {
   width: 100%;
-  max-width: 1440px;
+  height: 100%;
+  background-color: #D0D9DF;
+  border-bottom: 2px solid #E3E4E4;
 }
 
 .main__booking-editor {
