@@ -1,0 +1,43 @@
+:host {
+  display: flex;
+  width: 100%;
+  height: 1160px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.main__summary-wrapper {
+  display: flex;
+  width: 100%;
+  max-width: 1128px;
+  flex-direction: column;
+}
+
+.main__summary-title {
+  display: flex;
+  align-self: flex-start;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
+}
+
+.main__summary-image {
+  width: 24px;
+  height: 24px;
+}
+
+.main__summary-icon {
+  width: 100%;
+  height: 100%;
+}
+
+.main__summary-text {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  color: #11397E;
+}
+
