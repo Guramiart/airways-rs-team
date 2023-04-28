@@ -27,9 +27,9 @@
             Email is invalid
           </mat-error>
         </mat-form-field>
-          <mat-form-field>
+        <mat-form-field>
           <mat-label>Password</mat-label>
-          <input [type]="hide ? 'password' : 'text'" matInput  formControlName="password" 
+          <input [type]="hide ? 'password' : 'text'" matInput  formControlName="password"
           placeholder="Your password...">
           <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           <mat-error *ngIf="signInForm.controls['password'].errors?.['required']">
@@ -70,7 +70,7 @@
 
         <mat-form-field>
           <mat-label>Date</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="birthDate" 
+          <input matInput [matDatepicker]="picker" formControlName="birthDate"
           placeholder="Date of birth*">
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
@@ -133,12 +133,12 @@
           </mat-select>
         </mat-form-field>
 
-        
+
         <mat-checkbox color="primary" formControlName="agreement">I agree to Airway's Privacy Policy and Terms of Use</mat-checkbox>
         <mat-error *ngIf="isSubmitted && signInForm.controls['agreement'].errors?.['required']">
           We need your agreement
         </mat-error>
-     
+
       <button mat-raised-button color="primary" type="submit" >Sign up</button>
      </div>
 </form>
