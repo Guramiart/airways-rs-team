@@ -14,6 +14,7 @@ import { BookingEditorComponent } from './components/booking-editor/booking-edit
 import { ModalWindowComponent } from './components/modal-window/modal-window.component';
 import { LogInComponent } from './components/modal-window/log-in/log-in.component';
 import { SignInComponent } from './components/modal-window/sign-in/sign-in.component';
+import { TicketComponent } from './components/ticket/ticket.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { SignInComponent } from './components/modal-window/sign-in/sign-in.compo
     ModalWindowComponent,
     LogInComponent,
     SignInComponent,
+    TicketComponent,
   ],
   imports: [
     CommonModule,

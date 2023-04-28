@@ -1,16 +1,12 @@
-<div class="container">
-  <div class="wrap">
-    <div *ngIf="flights$ | async as flight">
-      <div class="title">
-        <mat-icon class="forward">airplanemode_active</mat-icon>
-        {{ flight.from!.nameEn }} to {{ flight.destination!.nameEn }}
-      </div>
-      <div class="tmp">TODO ticket component</div>
-      <div class="title">
-        <mat-icon class="return">airplanemode_active</mat-icon>
-        {{ flight.destination!.nameEn }} to {{ flight.from!.nameEn }}
-      </div>
-      <div class="tmp">TODO ticket component</div>
-    </div>
+<div *ngIf="flights$ | async as flight">
+  <div class="title">
+    <mat-icon class="forward">airplanemode_active</mat-icon>
+    {{ flight.from!.nameEn }} to {{ flight.destination!.nameEn }}
   </div>
+  <div class="ticket-block"><app-ticket></app-ticket></div>
+  <div class="title">
+    <mat-icon class="return">airplanemode_active</mat-icon>
+    {{ flight.destination!.nameEn }} to {{ flight.from!.nameEn }}
+  </div>
+  <div class="ticket-block"><app-ticket></app-ticket></div>
 </div>

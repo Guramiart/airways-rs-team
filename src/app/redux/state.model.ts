@@ -26,9 +26,31 @@ export interface SettingsState {
   authUser:IUser | undefined
 }
 
-export const initialFlightState: FlightState = {
-  from: null,
-  destination: null,
+export const initialFlightState: FlightState = { // test state TODO: remove
+  from: {
+    id: 1,
+    nameEn: 'Karaganda',
+    nameRu: 'Караганда',
+    airportEn: 'Sary-Arka International Airport',
+    airportRu: 'Аэропорт Сары-Арка',
+    abbreviation: 'KGF',
+    GMT: '+6',
+    location: 'Central Asia',
+    isOpen: true,
+    priceTarif: 1.4,
+  },
+  destination: {
+    id: 1,
+    nameEn: 'Karaganda',
+    nameRu: 'Караганда',
+    airportEn: 'Sary-Arka International Airport',
+    airportRu: 'Аэропорт Сары-Арка',
+    abbreviation: 'KGF',
+    GMT: '+6',
+    location: 'Central Asia',
+    isOpen: true,
+    priceTarif: 1.4,
+  },
   startDate: null,
   endDate: null,
   passengers: null,

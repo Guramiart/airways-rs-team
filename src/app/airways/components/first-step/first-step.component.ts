@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 import { FlightState } from 'src/app/redux/state.model';
 import * as FlightSelect from '../../../redux/selectors/flight.selector';
 
@@ -13,7 +14,10 @@ export class FirstStepComponent implements OnInit {
 
   public flights$: Observable<FlightState> | undefined;
 
-  constructor(private store: Store) {}
+  constructor(
+    private store: Store,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.flights$ = this.store.select(FlightSelect.selectFlight);

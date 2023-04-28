@@ -22,6 +22,7 @@ p {
   margin: 0 auto;
   max-width: 1440px;
   width: 100%;
+  height: auto;
 }
 
 .wrapper {
@@ -60,11 +61,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mdc-line-ripple {
   display: none;
 }
-
-// .mat-mdc-form-field-subscript-wrapper {
-//   display: none;
-// }
-// Все формы рушаться если отключить это
 
 .mat-calendar-period-button.mdc-button.mat-mdc-button.mat-unthemed.mat-mdc-button-base {
   color: #1C1B1F;
