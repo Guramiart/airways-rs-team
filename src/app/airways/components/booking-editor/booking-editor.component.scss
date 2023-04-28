@@ -5,19 +5,27 @@
   justify-content: center;
 }
 
+.editor {
+  position: absolute;
+  max-width: 1128px;
+  width: 100%;
+  margin-top: 5px;
+  background-color: white;
+}
+
 .main__booking-editor {
   display: flex;
-  width: 100%;
-  max-width: 1128px;
   box-sizing: content-box;
   padding: 20px;
   flex-direction: row;
   justify-content: space-between;
+  border-radius: 2px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 }
 
 .main__input-wrapper {
   display: flex;
-  min-width: 255px;
+  max-width: 255px;
   height: 56px;
   box-sizing: border-box;
   padding: 8px 16px 8px 16px;
@@ -25,6 +33,7 @@
   justify-content: flex-start;
   background: #F4F6F9;
   border-radius: 4px;
+  border: 1px solid gainsboro
 }
 
 .main__input-label {
@@ -80,6 +89,7 @@
   justify-content: center;
   background: #F4F6F9;
   border-radius: 4px;
+  border: 1px solid gainsboro
 }
 
 .mat-mdc-form-field {
@@ -126,6 +136,7 @@ mat-date-range-input {
   padding: 8px 0 8px 0;
   background: #F4F6F9;
   border-radius: 4px;
+  border: 1px solid gainsboro;
 
   .mat-content {
     display: flex;
@@ -166,7 +177,7 @@ mat-date-range-input {
 }
 
 .main__passenger-edit {
-  width: 160px;
+  width: 201px;
   height: 56px;
   background: #FFFFFF;
   border-radius: 4px;

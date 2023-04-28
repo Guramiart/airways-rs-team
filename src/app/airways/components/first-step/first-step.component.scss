@@ -1,0 +1,28 @@
+.wrap {
+  padding: 0 135px;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+  align-items: center;
+  color: var(--app-root-blue);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 28px;
+  margin-bottom: 8px;
+}
+
+.tmp { // TODO: remove after component implementation
+  height: 236px;
+  margin-bottom: 24px;
+}
+
+.forward {
+  rotate: 90deg;
+}
+
+.return {
+  rotate: -90deg;
+}

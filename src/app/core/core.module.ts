@@ -17,6 +17,7 @@ import { BasketIndicatorComponent } from './components/basket-indicator/basket-i
 import { StepsIndicatorComponent } from './components/steps-indicator/steps-indicator.component';
 
 import { settingReducer } from '../redux/reducers/settings.reducer';
+import { flightReducer } from '../redux/reducers/flight.reducer';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { settingReducer } from '../redux/reducers/settings.reducer';
     CdkConnectedOverlay,
     CdkOverlayOrigin,
     StoreRouterConnectingModule.forRoot(),
-    StoreModule.forRoot({ settings: settingReducer }, {}),
+    StoreModule.forRoot({ flights: flightReducer, settings: settingReducer }, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   exports: [

@@ -1,20 +1,22 @@
-<div class="main__booking-edit">
-  <div class="main__booking-information">
-    <div class="main__direction-wrapper">
-      <span class="main__from-direction">Dublin</span>
-      <img class="main__direction-icon" src="./assets/airplanes.svg" alt="">
-      <span class="main__to-direction">Warsaw Modlin</span>
+<div class="booking-wrap">
+  <div class="main__booking-edit">
+    <div class="main__booking-information" *ngIf="(flights$ | async) as flight">
+      <div class="main__direction-wrapper">
+        <span class="main__from-direction">{{ flight.from!.nameEn }}</span>
+        <img class="main__direction-icon" src="./assets/airplanes.svg" alt="">
+        <span class="main__to-direction">{{ flight.destination!.nameEn }}</span>
+      </div>
+      <div class="main__info-wrapper">
+        <span class="main__info-text">Return</span>
+        <div class="main__point-separator"></div>
+        <span class="main__dates-flight">{{ flight.startDate | date: 'd LLL' }} - {{ flight.endDate | date: 'd LLL' }}</span>
+        <div class="main__point-separator"></div>
+        <span class="main__passenger-count">{{ flight.passengers!.total }}</span>
+        <img class="main__passenger-icon" src="./assets/people.svg" alt="">
+      </div>
     </div>
-    <div class="main__info-wrapper">
-      <span class="main__info-text">Return</span>
-      <div class="main__point-separator"></div>
-      <span class="main__dates-flight">1Mar - 18 Mar</span>
-      <div class="main__point-separator"></div>
-      <span class="main__passenger-count">3</span>
-      <img class="main__passenger-icon" src="./assets/people.svg" alt="">
-    </div>
+    <button class="main__open-edit" (click)="showBookingEditor()">
+      <span class="main__open-text">Edit</span>
+    </button>
   </div>
-  <button class="main__open-edit" (click)="showBookingEditor()">
-    <span class="main__open-text">Edit</span>
-  </button>
 </div>

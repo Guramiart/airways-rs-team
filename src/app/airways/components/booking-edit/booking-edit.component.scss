@@ -9,10 +9,14 @@
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 }
 
+.booking-wrap {
+  max-width: 1128px;
+  width: 100%;
+}
+
 .main__booking-edit {
   display: flex;
   width: 100%;
-  max-width: 1128px;
   flex-direction: row;
   gap: 63px;
 }

@@ -1,8 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { FlightState } from 'src/app/redux/state.model';
+import * as FlightSelect from '../../../redux/selectors/flight.selector';
 
 @Component({
   selector: 'app-first-step',
   templateUrl: './first-step.component.html',
   styleUrls: ['./first-step.component.scss'],
 })
-export class FirstStepComponent { }
+export class FirstStepComponent implements OnInit {
+
+  public flights$: Observable<FlightState> | undefined;
+
+  constructor(private store: Store) {}
+
+  ngOnInit(): void {
+    this.flights$ = this.store.select(FlightSelect.selectFlight);
+  }
+
+}

@@ -2,6 +2,7 @@ import {
   Component, ElementRef, OnInit, ViewChild,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { DATE_FORMATS } from 'src/app/shared/enums/date-format';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -10,6 +11,7 @@ import { ICity } from 'src/app/services/cities.model';
 import { FlightTypes } from 'src/app/shared/enums/flight-types';
 import { Passengers } from '../../models/passengers';
 import * as SettingSelect from '../../../redux/selectors/settings.selector';
+import * as FlightActions from '../../../redux/actions/flight.actions';
 
 @Component({
   selector: 'app-flight-search',
@@ -23,18 +25,21 @@ export class FlightSearchComponent implements OnInit {
   private format$: Observable<string> | undefined;
 
   public passengers: Passengers = {
-    adult: {
-      name: 'Adult',
-      count: 0,
+    passengers: {
+      adult: {
+        name: 'Adult',
+        count: 0,
+      },
+      child: {
+        name: 'Child',
+        count: 0,
+      },
+      infant: {
+        name: 'Infant',
+        count: 0,
+      },
     },
-    child: {
-      name: 'Child',
-      count: 0,
-    },
-    infant: {
-      name: 'Infant',
-      count: 0,
-    },
+    total: 0,
   };
 
   public flightSearchForm: FormGroup = new FormGroup({});
@@ -50,6 +55,7 @@ export class FlightSearchComponent implements OnInit {
 
   constructor(
     private store: Store,
+    private router: Router,
     private dataService: DataService,
   ) {}
 
@@ -73,7 +79,7 @@ export class FlightSearchComponent implements OnInit {
     this.dataService.setAuthUserFromLS();
   }
 
-  private updateDate() {
+  private updateDate(): void {
     const start = this.flightSearchForm.get('startDate')?.value;
     const end = this.flightSearchForm.get('endDate')?.value;
     if (start !== null) {
@@ -86,14 +92,14 @@ export class FlightSearchComponent implements OnInit {
 
   private getPassengers(): string {
     const title: string[] = [];
-    if (this.passengers.adult.count !== 0) {
-      title.push(`${this.passengers.adult.count} ${this.passengers.adult.name}`);
+    if (this.passengers.passengers.adult.count !== 0) {
+      title.push(`${this.passengers.passengers.adult.count} ${this.passengers.passengers.adult.name}`);
     }
-    if (this.passengers.child.count !== 0) {
-      title.push(`${this.passengers.child.count} ${this.passengers.child.name}`);
+    if (this.passengers.passengers.child.count !== 0) {
+      title.push(`${this.passengers.passengers.child.count} ${this.passengers.passengers.child.name}`);
     }
-    if (this.passengers.infant.count !== 0) {
-      title.push(`${this.passengers.infant.count} ${this.passengers.infant.name}`);
+    if (this.passengers.passengers.infant.count !== 0) {
+      title.push(`${this.passengers.passengers.infant.count} ${this.passengers.passengers.infant.name}`);
     }
     return title.join(', ');
   }
@@ -102,10 +108,10 @@ export class FlightSearchComponent implements OnInit {
     this.flightSearchForm.get('passengers')?.setValue(this.getPassengers());
   }
 
-  public switch(): void {
+  public switchFlights(): void {
     const tmp = this.flightSearchForm.get('from')?.value;
-    this.flightSearchForm.get('from')?.setValue(this.flightSearchForm.get('destination')?.value);
-    this.flightSearchForm.get('destination')?.setValue(tmp);
+    this.flightSearchForm.get('from')?.setValue(this.flightSearchForm.get('destination')?.value, { emitEvent: true });
+    this.flightSearchForm.get('destination')?.setValue(tmp, { emitEvent: true });
   }
 
   public toggleFocus(): void {
@@ -118,19 +124,31 @@ export class FlightSearchComponent implements OnInit {
   }
 
   public decrement(value: 'adult' | 'child' | 'infant'): void {
-    this.input?.nativeElement.focus();
-    this.passengers[value].count -= 1;
+    this.passengers.passengers[value].count -= 1;
     this.setPassengers();
   }
 
   increment(value: 'adult' | 'child' | 'infant'): void {
-    this.input?.nativeElement.focus();
-    this.passengers[value].count += 1;
+    this.passengers.passengers[value].count += 1;
     this.setPassengers();
   }
 
-  search() {
-    // TODO: route to next page
+  search(): void {
+    const from: ICity = this.flightSearchForm.get('from')?.value;
+    const destination: ICity = this.flightSearchForm.get('destination')?.value;
+    const startDate = this.flightSearchForm.get('startDate')?.value;
+    const endDate = this.flightSearchForm.get('endDate')?.value;
+    const total: number = Object
+      .values(this.passengers.passengers).reduce((acc, curr) => acc + curr.count, 0);
+    this.passengers.total = total;
+    this.store.dispatch(FlightActions.updateFlights({
+      from,
+      destination,
+      startDate,
+      endDate,
+      passengers: this.passengers,
+    }));
+    this.router.navigateByUrl('step/1');
   }
 
 }
