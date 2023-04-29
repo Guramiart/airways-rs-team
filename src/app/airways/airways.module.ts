@@ -15,7 +15,6 @@ import { ModalWindowComponent } from './components/modal-window/modal-window.com
 import { LogInComponent } from './components/modal-window/log-in/log-in.component';
 import { SignInComponent } from './components/modal-window/sign-in/sign-in.component';
 import { SummaryPageComponent } from './components/summary-page/summary-page.component';
-import { TicketInfoComponent } from '../shared/components/ticket-info/ticket-info.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +30,6 @@ import { TicketInfoComponent } from '../shared/components/ticket-info/ticket-inf
     LogInComponent,
     SignInComponent,
     SummaryPageComponent,
-    TicketInfoComponent,
   ],
   imports: [
     CommonModule,

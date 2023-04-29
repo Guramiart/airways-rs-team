@@ -1,6 +1,6 @@
-<span class="main__passenger-name"></span>
+<span class="main__passenger-name">{{passengerName}}</span>
 <div class="main__passenger-summary">
-  <span class="main__baggage">1checked bag (total 23 kg) included</span>
+  <span class="main__baggage">1 checked bag (total 23 kg) included</span>
   <span class="main__baggage">1 cabin bag + 1 personal item (max. 8 kg) included</span>
-  <span class="main__seat-place"></span>
+  <span class="main__seat-place" *ngIf="isSeat">{{seatPlace}}</span>
 </div>

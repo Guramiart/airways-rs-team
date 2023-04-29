@@ -40,4 +40,21 @@
   line-height: 28px;
   color: #11397E;
 }
+.main__summary-tickets {
+  display: flex;
+  width: 100%;
+  margin-top: 20px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 24px;
+}
+
+.main__summary-amount {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 30px;
+}
 
