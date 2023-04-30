@@ -1,7 +1,7 @@
 :host {
   display: flex;
   width: 100%;
-  height: calc(100vh - 92px);
+  min-height: calc(100vh - 92px);
   box-sizing: border-box;
   padding-top: 88px;
   flex-direction: column;
