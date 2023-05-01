@@ -2,62 +2,87 @@
   <div class="main__cart-title">
     <span class="main__cart-text">Cart</span>
   </div>
+  <div class="main__cart-table">
+    <table mat-table [dataSource]="ticketsData" class="ticket-table">
+      <ng-container matColumnDef="number-flight">
+        <th mat-header-cell *matHeaderCellDef>No.</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-checkbox>
+          </mat-checkbox>
+          {{element.numberFlight}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="flight">
+        <th mat-header-cell *matHeaderCellDef>Flight</th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngFor="let flight of element.flight">{{flight}}</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef>Type trip</th>
+        <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef>Data & Time</th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngFor="let date of element.date">{{date}}</span>
+        </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="passengers">
+        <th mat-header-cell *matHeaderCellDef>Passengers</th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngFor="let passenger of element.passengers">{{passenger}}</span>
+        </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef>Price</th>
+        <td mat-cell *matCellDef="let element">
+          {{element.price}}
+          <button mat-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>Delete</button>
+            <button mat-menu-item>Edit</button>
+          </mat-menu>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnsNames" class="main__table-header"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnsNames;" class="main__table-row"></tr>
+    </table>
+  </div>
+  <div class="main__cart-control">
+    <button class="main__new-trip">
+      <span class="main__new-text">+ Add new trip</span>
+    </button>
+    <div class="main__amount-wrapper">
+      <span class="main__amount-text">Total</span>
+      <span class="main__amount-count">€572.34</span>
+    </div>
+  </div>
+  <div class="main__cart-payment">
+    <mat-form-field class="main__promo-wrapper">
+      <mat-label>Promo Code</mat-label>
+      <input type="text" matInput>
+      <button matSuffix class="main__promo-button">
+        <span class="main__button-text">Apply</span>
+      </button>
+    </mat-form-field>
+    <div class="main__payment-control">
+      <span class="main__payment-text">2 selected</span>
+      <button class="main__payment-button">
+        <span class="main__payment-btn">Payment</span>
+      </button>
+    </div>
+  </div>
 </div>
-<div class="main__cart-table">
-  <table mat-table [dataSource]="ticketsData" class="ticket-table">
-    <ng-container matColumnDef="number-flight">
-      <th mat-header-cell *matHeaderCellDef>No.</th>
-      <td mat-cell *matCellDef="let element">
-        <mat-checkbox>
-        </mat-checkbox>
-        {{element.numberFlight}} </td>
-    </ng-container>
 
-    <ng-container matColumnDef="flight">
-      <th mat-header-cell *matHeaderCellDef>Flight</th>
-      <td mat-cell *matCellDef="let element">
-        <span *ngFor="let flight of element.flight">{{flight}}</span>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="type">
-      <th mat-header-cell *matHeaderCellDef>Type trip</th>
-      <td mat-cell *matCellDef="let element"> {{element.type}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="date">
-      <th mat-header-cell *matHeaderCellDef>Data & Time</th>
-      <td mat-cell *matCellDef="let element">
-        <span *ngFor="let date of element.date">{{date}}</span>
-      </td>
-    </ng-container>
-
-
-    <ng-container matColumnDef="passengers">
-      <th mat-header-cell *matHeaderCellDef>Passengers</th>
-      <td mat-cell *matCellDef="let element">
-        <span *ngFor="let passenger of element.passengers">{{passenger}}</span>
-      </td>
-    </ng-container>
-
-
-    <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef>Price</th>
-      <td mat-cell *matCellDef="let element">
-        {{element.price}}
-        <button mat-button [matMenuTriggerFor]="menu">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item>Delete</button>
-          <button mat-menu-item>Edit</button>
-        </mat-menu>
-         </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="columnsNames" class="main__table-header"></tr>
-    <tr mat-row *matRowDef="let row; columns: columnsNames;" class="main__table-row"></tr>
-  </table>
-</div>
 
 
