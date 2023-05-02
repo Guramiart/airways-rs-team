@@ -3,10 +3,10 @@
     <mat-icon class="forward">airplanemode_active</mat-icon>
     {{ flight.from!.nameEn }} to {{ flight.destination!.nameEn }}
   </div>
-  <div class="ticket-block"><app-ticket></app-ticket></div>
+  <div class="ticket-block"><app-ticket [isForward]="true"></app-ticket></div>
   <div class="title">
     <mat-icon class="return">airplanemode_active</mat-icon>
     {{ flight.destination!.nameEn }} to {{ flight.from!.nameEn }}
   </div>
-  <div class="ticket-block"><app-ticket></app-ticket></div>
+  <div class="ticket-block"><app-ticket [isForward]="false"></app-ticket></div>
 </div>
