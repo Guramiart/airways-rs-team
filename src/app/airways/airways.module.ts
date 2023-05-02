@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 
 import { MainPageComponent } from './pages/main-page/main-page.component';
@@ -15,6 +15,7 @@ import { ModalWindowComponent } from './components/modal-window/modal-window.com
 import { LogInComponent } from './components/modal-window/log-in/log-in.component';
 import { SignInComponent } from './components/modal-window/sign-in/sign-in.component';
 import { TicketComponent } from './components/ticket/ticket.component';
+import { SummaryPageComponent } from './components/summary-page/summary-page.component';
 
 @NgModule({
   declarations: [
@@ -30,11 +31,13 @@ import { TicketComponent } from './components/ticket/ticket.component';
     LogInComponent,
     SignInComponent,
     TicketComponent,
+    SummaryPageComponent,
   ],
   imports: [
     CommonModule,
     MaterialModule,
     RouterOutlet,
+    NgOptimizedImage,
   ],
   exports: [
     MainPageComponent,
