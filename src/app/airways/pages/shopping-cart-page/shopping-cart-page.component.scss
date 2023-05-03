@@ -41,45 +41,62 @@
 }
 
 .main__cart-table {
+  display: flex;
   width: 100%;
   max-width: 1128px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.mat-mdc-header-cell.mdc-data-table__header-cell.cdk-header-cell.cdk-column-number-flight.mat-column-number-flight {
-  text-align: center;
-}
-
-.mat-mdc-row.mdc-data-table__row.cdk-row {
-  height: 157px;
-}
-
-.mat-mdc-cell.mdc-data-table__cell.cdk-cell.cdk-column-flight.mat-column-flight>span,
-.mat-mdc-cell.mdc-data-table__cell.cdk-cell.cdk-column-date.mat-column-date>span,
-.mat-mdc-cell.mdc-data-table__cell.cdk-cell.cdk-column-passengers.mat-column-passengers>span {
-  display: block;
-}
-
-.main__table-header {
+.main__table-wrapper {
+  display: flex;
+  width: 100%;
+  height: 67px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background: #F5F5F5;
   border: 0.5px solid #E9EDF1;
 }
 
-.mat-mdc-cell.mdc-data-table__cell {
-  font-family: 'Roboto', sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 32px;
-  letter-spacing: 0.5px;
-  color: #000000;
+.main__table-header {
+  display: flex;
+  width: 75%;
+  margin-left: 4%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.mat-mdc-cell.mdc-data-table__cell.cdk-cell.cdk-column-number-flight.mat-column-number-flight {
-  color: #11397E;
+mat-icon {
+  display: block;
+  font-family: 'Material Icons';
+  cursor: pointer;
 }
 
-.mat-mdc-cell.mdc-data-table__cell.cdk-cell.cdk-column-price.mat-column-price {
-  color: #7F8906;
+.main__table-naming {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+}
+
+.main__table-arrows {
+  display: flex;
+  width: 16px;
+  height: 27px;
+  margin-top: -8px;
+  align-self: baseline;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.main__arrow-up,
+.main__arrow-down {
+  font-size: 12px;
+  margin-top: 1px;
 }
 
 .main__cart-control {
@@ -163,6 +180,7 @@
   height: 48px;
   border: 1px solid #74767A;
   border-radius: 4px;
+
   .mat-mdc-form-field-flex {
     margin-top: 15px;
     font-family: 'Roboto', sans-serif;
@@ -207,7 +225,7 @@
 }
 
 .mdc-line-ripple::after,
-.mdc-line-ripple::before{
+.mdc-line-ripple::before {
   display: none;
 }
 

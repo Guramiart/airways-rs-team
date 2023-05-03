@@ -1,0 +1,50 @@
+:host {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.main__table-block {
+  display: flex;
+  width: 100%;
+  max-width: 1096px;
+  justify-content: center;
+  align-items: center;
+}
+
+.main__table-record {
+  display: flex;
+  width: 80%;
+  height: 155px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid rgba(116, 118, 122, 0.2);
+}
+
+
+.main__sixth-record {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+}
+
+.main__second-record,
+.main__forth-record,
+.main__fifth-record {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.main__first-record,
+.main__third-record {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+

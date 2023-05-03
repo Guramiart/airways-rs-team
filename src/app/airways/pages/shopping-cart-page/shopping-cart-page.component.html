@@ -3,60 +3,53 @@
     <span class="main__cart-text">Cart</span>
   </div>
   <div class="main__cart-table">
-    <table mat-table [dataSource]="ticketsData" class="ticket-table">
-      <ng-container matColumnDef="number-flight">
-        <th mat-header-cell *matHeaderCellDef>No.</th>
-        <td mat-cell *matCellDef="let element">
-          <mat-checkbox>
-          </mat-checkbox>
-          {{element.numberFlight}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="flight">
-        <th mat-header-cell *matHeaderCellDef>Flight</th>
-        <td mat-cell *matCellDef="let element">
-          <span *ngFor="let flight of element.flight">{{flight}}</span>
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="type">
-        <th mat-header-cell *matHeaderCellDef>Type trip</th>
-        <td mat-cell *matCellDef="let element"> {{element.type}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="date">
-        <th mat-header-cell *matHeaderCellDef>Data & Time</th>
-        <td mat-cell *matCellDef="let element">
-          <span *ngFor="let date of element.date">{{date}}</span>
-        </td>
-      </ng-container>
-
-
-      <ng-container matColumnDef="passengers">
-        <th mat-header-cell *matHeaderCellDef>Passengers</th>
-        <td mat-cell *matCellDef="let element">
-          <span *ngFor="let passenger of element.passengers">{{passenger}}</span>
-        </td>
-      </ng-container>
-
-
-      <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef>Price</th>
-        <td mat-cell *matCellDef="let element">
-          {{element.price}}
-          <button mat-button [matMenuTriggerFor]="menu">
-            <mat-icon>more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item>Delete</button>
-            <button mat-menu-item>Edit</button>
-          </mat-menu>
-        </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="columnsNames" class="main__table-header"></tr>
-      <tr mat-row *matRowDef="let row; columns: columnsNames;" class="main__table-row"></tr>
-    </table>
+    <div class="main__table-wrapper">
+      <div class="main__table-header">
+        <div class="main__table-naming">
+          <span class="main__table-text">No.</span>
+          <div class="main__table-arrows">
+            <mat-icon class="main__arrow-up">arrow_drop_up</mat-icon>
+            <mat-icon class="main__arrow-down">arrow_drop_down</mat-icon>
+          </div>
+        </div>
+        <div class="main__table-naming">
+          <span class="main__table-text">Flight</span>
+          <div class="main__table-arrows">
+            <mat-icon class="main__arrow-up">arrow_drop_up</mat-icon>
+            <mat-icon class="main__arrow-down">arrow_drop_down</mat-icon>
+          </div>
+        </div>
+        <div class="main__table-naming">
+          <span class="main__table-text">Type trip</span>
+          <div class="main__table-arrows">
+            <mat-icon class="main__arrow-up">arrow_drop_up</mat-icon>
+            <mat-icon class="main__arrow-down">arrow_drop_down</mat-icon>
+          </div>
+        </div>
+        <div class="main__table-naming">
+          <span class="main__table-text">Date & Time</span>
+          <div class="main__table-arrows">
+            <mat-icon class="main__arrow-up">arrow_drop_up</mat-icon>
+            <mat-icon class="main__arrow-down">arrow_drop_down</mat-icon>
+          </div>
+        </div>
+        <div class="main__table-naming">
+          <span class="main__table-text">Passenger</span>
+          <div class="main__table-arrows">
+            <mat-icon class="main__arrow-up">arrow_drop_up</mat-icon>
+            <mat-icon class="main__arrow-down">arrow_drop_down</mat-icon>
+          </div>
+        </div>
+        <div class="main__table-naming">
+          <span class="main__table-text">Price</span>
+          <div class="main__table-arrows">
+            <mat-icon class="main__arrow-up">arrow_drop_up</mat-icon>
+            <mat-icon class="main__arrow-down">arrow_drop_down</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-container #tableContainer></ng-container>
   </div>
   <div class="main__cart-control">
     <button class="main__new-trip">

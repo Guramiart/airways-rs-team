@@ -15,6 +15,7 @@ import {
 } from '@angular/material/core';
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatMenuModule } from '@angular/material/menu';
 import { DATE_FORMATS } from '../shared/enums/date-format';
 
 @NgModule({
@@ -32,6 +33,7 @@ import { DATE_FORMATS } from '../shared/enums/date-format';
     MatRadioModule,
     MatTabsModule,
     MatCheckboxModule,
+    MatMenuModule,
   ],
   exports: [
     FormsModule,
@@ -48,6 +50,7 @@ import { DATE_FORMATS } from '../shared/enums/date-format';
     MatRadioModule,
     MatTabsModule,
     MatCheckboxModule,
+    MatMenuModule,
   ],
   providers: [
     {

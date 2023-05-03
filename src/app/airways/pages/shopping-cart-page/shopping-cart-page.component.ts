@@ -1,4 +1,8 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import {
+  AfterViewInit,
+  Component, ViewChild, ViewContainerRef, ViewEncapsulation,
+} from '@angular/core';
+import { OneTiket, TableRecordComponent } from '../../../shared/components/table-record/table-record.component';
 
 @Component({
   selector: 'app-shopping-cart-page',
@@ -6,7 +10,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
   styleUrls: ['./shopping-cart-page.component.scss'],
   encapsulation: ViewEncapsulation.ShadowDom,
 })
-export class ShoppingCartPageComponent {
+export class ShoppingCartPageComponent implements AfterViewInit {
 
   public ticketsData = [
     {
@@ -27,6 +31,13 @@ export class ShoppingCartPageComponent {
     },
   ];
 
-  public columnsNames = ['number-flight', 'flight', 'type', 'date', 'passengers', 'price'];
+  @ViewChild('tableContainer', { read: ViewContainerRef, static: true }) table: ViewContainerRef;
+
+  ngAfterViewInit(): void {
+    this.ticketsData.forEach((ticket: OneTiket) => {
+      const record = this.table.createComponent(TableRecordComponent);
+      record.instance.inputData = ticket;
+    });
+  }
 
 }
