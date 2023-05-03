@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { BookingPageComponent } from './pages/booking-page/booking-page.component';
 import { ShoppingCartPageComponent } from './pages/shopping-cart-page/shopping-cart-page.component';
@@ -38,6 +38,7 @@ import { SummaryPageComponent } from './components/summary-page/summary-page.com
     MaterialModule,
     RouterOutlet,
     NgOptimizedImage,
+    SlickCarouselModule,
   ],
   exports: [
     MainPageComponent,

@@ -13,34 +13,60 @@ import * as FlightSelect from '../../../redux/selectors/flight.selector';
 })
 export class TicketComponent implements OnInit {
 
-  public flights$: Observable<FlightState> | undefined;
+  public dates: Date[];
+
+  public slideConfig = {
+    infinite: false,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+  };
+
+  public flight$: Observable<FlightState> | undefined;
 
   public from: ICity | null;
 
   public destination: ICity | null;
 
-  public curFlight: IFlight | undefined;
+  public curFlight: IFlight[] | undefined;
 
   @Input() isForward: boolean;
 
   constructor(private store: Store) {}
 
+  isCurrentDate(curDate: Date | null, date: Date | null): boolean {
+    if (date !== null) {
+      return new Date(date).getDate() === curDate?.getDate();
+    }
+    return false;
+  }
+
   ngOnInit(): void {
-    this.flights$ = this.store.select(FlightSelect.selectFlight);
-    this.flights$
+    this.dates = this.initDateArray();
+    this.flight$ = this.store.select(FlightSelect.selectFlight);
+    this.flight$
       .subscribe((data) => {
         if (this.isForward) {
           this.from = data.from;
           this.destination = data.destination;
           this.curFlight = data.from?.flights
-            .filter((el) => el.destination === data.destination?.id)[0];
+            .filter((el) => el.destination === data.destination?.id);
         } else {
           this.from = data.destination;
           this.destination = data.from;
           this.curFlight = data.destination?.flights
-            .filter((el) => el.destination === data.from?.id)[0];
+            .filter((el) => el.destination === data.from?.id);
         }
       });
+  }
+
+  private initDateArray(): Date[] {
+    const dates = [];
+    const curDate = new Date();
+    for (let i = 0; i <= 10; i += 1) {
+      dates.push(new Date(curDate));
+      curDate.setDate(curDate.getDate() + 1);
+    }
+    return dates;
   }
 
 }

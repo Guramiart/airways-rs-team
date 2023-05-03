@@ -1,11 +1,19 @@
-<div class="calendar">
-  Calendar
+<div class="calendar" *ngIf="flight$ | async as flight">
+  <ngx-slick-carousel class="carousel"
+                        #slickModal="slick-carousel"
+                        [config]="{ infinite: false, slidesToShow: 5, slidesToScroll: 1 }">
+    <div ngxSlickItem *ngFor="let date of dates" class="slide" [ngClass]="isCurrentDate(date, flight.startDate) ? 'active' : ''">
+        <div class="date">{{ date | date: 'd MMM' }}</div>
+        <div class="">{{ date | date: 'EEEE' }}</div>
+        <div class="price">€123.45</div>
+    </div>
+  </ngx-slick-carousel>
 </div>
-<div class="flight-info" *ngIf="flights$ | async as flight">
+<div class="flight-info">
   <div class="flight-info__time">
     <div class="start-time">
-      <div class="date">{{ flight.startDate | date:'EE, d MMM yyyy' }}</div>
-      <div class="time">{{ curFlight!.start }}</div>
+      <div class="date"><!--{{ flight.startDate | date:'EE, d MMM yyyy' }}--></div>
+      <div class="time">start</div>
       <div class="location">{{ from!.nameEn }}</div>
     </div>
     <div class="direction">
@@ -16,21 +24,21 @@
       <div>Direct</div>
     </div>
     <div class="end-time">
-      <div class="date">{{ flight.endDate | date:'EE, d MMM yyyy' }}</div>
-      <div class="time">{{ curFlight!.end }}</div>
+      <div class="date"><!--{{ flight.endDate | date:'EE, d MMM yyyy' }}--></div>
+      <div class="time">end</div>
       <div class="location">{{ destination!.nameEn }}</div>
     </div>
-    <div class="number">Flight no. {{ curFlight!.number }}</div>
+    <div class="number">Flight no. </div>
   </div>
   <div class="divider"></div>
   <div class="flight-info__price">
     <div class="price-block">
       <div class="seats">
-        <div class="seats-number">{{ curFlight!.seats }} seats</div>
+        <div class="seats-number">seats seats</div>
         <span>available</span>
       </div>
       <div class="price-title">Price</div>
-      <div class="price">{{ curFlight!.price }}</div>
+      <div class="price">price</div>
     </div>
     <div class="submit-block">
       <button class="select-btn">Select</button>
