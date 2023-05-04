@@ -15,7 +15,7 @@
 
 .main__table-record {
   display: flex;
-  width: 80%;
+  width: 95%;
   height: 155px;
   flex-direction: row;
   justify-content: space-between;
@@ -48,3 +48,32 @@
   align-items: center;
 }
 
+.main__record-checkbox {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  color: #0090BD;
+}
+
+.main__record-text {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 32px;
+  letter-spacing: 0.5px;
+  color: #74767A;
+}
+
+.main__record-price {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 32px;
+  letter-spacing: 0.5px;
+  color: #7F8906;
+}

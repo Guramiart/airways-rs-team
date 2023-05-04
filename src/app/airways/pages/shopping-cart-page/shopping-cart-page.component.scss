@@ -62,8 +62,7 @@
 
 .main__table-header {
   display: flex;
-  width: 75%;
-  margin-left: 4%;
+  width: 83%;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -81,6 +80,15 @@ mat-icon {
   justify-content: flex-start;
   align-items: center;
   gap: 8px;
+}
+
+.main__table-text {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 20px;
+  color: #74767A;
 }
 
 .main__table-arrows {
