@@ -1,8 +1,8 @@
 export interface IFlight {
   number: number,
   destination: number,
-  start: string,
-  end: string,
+  startDate: string,
+  endDate: string,
   price: number,
   seats: number,
 }

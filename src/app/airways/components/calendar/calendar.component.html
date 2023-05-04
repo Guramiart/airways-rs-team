@@ -1,0 +1,24 @@
+<div class="calendar" *ngIf="flight$ | async as flight">
+  <ngx-slick-carousel class="carousel"
+                        #slickModal="slick-carousel"
+                        [config]="{ infinite: false, slidesToShow: 5, slidesToScroll: 1 }">
+    <div ngxSlickItem
+      *ngFor="let date of dates"
+      class="slide"
+      [ngClass]="isCurrentDate(date.date, flight.startDate) ? 'active' : ''"
+      (click)="slideClick(date.flight)">
+        <div class="date-slide" *ngIf="date.flight; else flightNotFound">
+          <div class="date">{{ date.date | date: 'd MMM' }}</div>
+          <div class="day">{{ date.date | date: 'EEEE' }}</div>
+          <div class="price">{{ date.flight.price }}</div>
+        </div>
+        <ng-template #flightNotFound>
+          <div class="date-slide">
+            <div class="date-blocked">{{ date.date | date: 'd MMM' }}</div>
+            <div class="day-blocked">{{ date.date | date: 'EEEE' }}</div>
+            <div class="price-blocked"></div>
+          </div>
+        </ng-template>
+    </div>
+  </ngx-slick-carousel>
+</div>

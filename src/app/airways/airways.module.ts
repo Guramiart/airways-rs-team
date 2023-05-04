@@ -14,8 +14,9 @@ import { BookingEditorComponent } from './components/booking-editor/booking-edit
 import { ModalWindowComponent } from './components/modal-window/modal-window.component';
 import { LogInComponent } from './components/modal-window/log-in/log-in.component';
 import { SignInComponent } from './components/modal-window/sign-in/sign-in.component';
-import { TicketComponent } from './components/ticket/ticket.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
 import { SummaryPageComponent } from './components/summary-page/summary-page.component';
+import { FlightInfoComponent } from './components/flight-info/flight-info.component';
 
 @NgModule({
   declarations: [
@@ -30,8 +31,9 @@ import { SummaryPageComponent } from './components/summary-page/summary-page.com
     ModalWindowComponent,
     LogInComponent,
     SignInComponent,
-    TicketComponent,
+    CalendarComponent,
     SummaryPageComponent,
+    FlightInfoComponent,
   ],
   imports: [
     CommonModule,

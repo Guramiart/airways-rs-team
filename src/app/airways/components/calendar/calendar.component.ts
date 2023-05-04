@@ -5,15 +5,16 @@ import { FlightState } from 'src/app/redux/state.model';
 import { IFlight } from 'src/app/services/flight.model';
 import { ICity } from 'src/app/services/cities.model';
 import * as FlightSelect from '../../../redux/selectors/flight.selector';
+import { FlightInfoService } from '../../services/flight-info.service';
 
 @Component({
-  selector: 'app-ticket',
-  templateUrl: './ticket.component.html',
-  styleUrls: ['./ticket.component.scss'],
+  selector: 'app-calendar',
+  templateUrl: './calendar.component.html',
+  styleUrls: ['./calendar.component.scss'],
 })
-export class TicketComponent implements OnInit {
+export class CalendarComponent implements OnInit {
 
-  public dates: Date[];
+  public dates: { date: Date, flight: IFlight | undefined }[];
 
   public slideConfig = {
     infinite: false,
@@ -21,17 +22,17 @@ export class TicketComponent implements OnInit {
     slidesToScroll: 1,
   };
 
-  public flight$: Observable<FlightState> | undefined;
+  public flight$: Observable<FlightState>;
 
   public from: ICity | null;
 
   public destination: ICity | null;
 
-  public curFlight: IFlight[] | undefined;
+  public curFlights: IFlight[] | undefined;
 
   @Input() isForward: boolean;
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private flightInfoService: FlightInfoService) {}
 
   isCurrentDate(curDate: Date | null, date: Date | null): boolean {
     if (date !== null) {
@@ -40,30 +41,36 @@ export class TicketComponent implements OnInit {
     return false;
   }
 
+  slideClick(info: any) {
+    this.flightInfoService.setFlightInfo(info);
+  }
+
   ngOnInit(): void {
-    this.dates = this.initDateArray();
     this.flight$ = this.store.select(FlightSelect.selectFlight);
     this.flight$
       .subscribe((data) => {
         if (this.isForward) {
           this.from = data.from;
           this.destination = data.destination;
-          this.curFlight = data.from?.flights
+          this.curFlights = data.from?.flights
             .filter((el) => el.destination === data.destination?.id);
         } else {
           this.from = data.destination;
           this.destination = data.from;
-          this.curFlight = data.destination?.flights
+          this.curFlights = data.destination?.flights
             .filter((el) => el.destination === data.from?.id);
         }
       });
+    this.dates = this.initDateArray();
   }
 
-  private initDateArray(): Date[] {
+  private initDateArray(): { date: Date, flight: IFlight | undefined }[] {
     const dates = [];
     const curDate = new Date();
     for (let i = 0; i <= 10; i += 1) {
-      dates.push(new Date(curDate));
+      // eslint-disable-next-line max-len
+      const flight = this.curFlights?.filter((el) => new Date(el.startDate).getDate() === new Date(curDate).getDate())[0];
+      dates.push({ date: new Date(curDate), flight });
       curDate.setDate(curDate.getDate() + 1);
     }
     return dates;

@@ -17,19 +17,19 @@
           "destination": 2,
           "startDate": "2023-05-05T02:31:42",
           "endDate": "2023-05-05T23:29:42",
-          "price": 142.23,
-          "seats": 12
+          "price": 139.12,
+          "seats": 60
         },
         {
-          "number": 3547,
+          "number": 3574,
           "destination": 2,
           "startDate": "2023-05-06T02:31:42",
           "endDate": "2023-05-07T23:29:42",
-          "price": 142.23,
-          "seats": 12
+          "price": 141.23,
+          "seats": 18
         },
         {
-          "number": 3547,
+          "number": 3427,
           "destination": 2,
           "startDate": "2023-05-07T02:31:42",
           "endDate": "2023-05-07T23:29:42",
@@ -37,11 +37,11 @@
           "seats": 12
         },
         {
-          "number": 3547,
+          "number": 3232,
           "destination": 2,
           "startDate": "2023-05-08T02:31:42",
           "endDate": "2023-05-08T23:29:42",
-          "price": 142.23,
+          "price": 137.20,
           "seats": 12
         },
         {
@@ -50,31 +50,31 @@
           "startDate": "2023-05-05T05:25:42",
           "endDate": "2023-05-05T19:34:42",
           "price": 114.12,
-          "seats": 65
+          "seats": 10
         },
         {
-          "number": 1902,
+          "number": 1905,
           "destination": 3,
           "startDate": "2023-05-06T05:25:42",
           "endDate": "2023-05-06T19:34:42",
-          "price": 114.12,
+          "price": 105.12,
           "seats": 65
         },
         {
-          "number": 1902,
+          "number": 1910,
           "destination": 3,
           "startDate": "2023-05-07T05:25:42",
           "endDate": "2023-05-07T19:34:42",
-          "price": 114.12,
+          "price": 99.77,
           "seats": 65
         },
         {
-          "number": 1902,
+          "number": 1934,
           "destination": 3,
           "startDate": "2023-05-08T05:25:42",
           "endDate": "2023-05-08T19:34:42",
-          "price": 114.12,
-          "seats": 65
+          "price": 123.14,
+          "seats": 101
         }
       ]
     },
