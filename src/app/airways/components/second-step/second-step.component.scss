@@ -1,0 +1,37 @@
+.wrap {
+    padding: 0 135px;
+    padding-bottom: 30px;
+  }
+  .btns-block{
+    display: flex;
+    gap: 20px;
+    justify-content: right;
+  }
+  .header{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    &__title{
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 28px;
+        color: #11397E;
+        h2{
+            padding: 0;
+            margin: 0;
+        }
+    }
+    &__text{
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        color: #49454F;
+    }
+  }

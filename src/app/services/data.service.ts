@@ -8,7 +8,7 @@ import { IUser } from './user.model';
 import * as SettingsAction from '../redux/actions/settings.actions';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root', 
 })
 export class DataService {
 
