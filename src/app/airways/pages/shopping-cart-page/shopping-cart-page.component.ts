@@ -31,12 +31,16 @@ export class ShoppingCartPageComponent implements AfterViewInit {
     },
   ];
 
+  public totalPrice: number = 0;
+
   @ViewChild('tableContainer', { read: ViewContainerRef, static: true }) table: ViewContainerRef;
 
   ngAfterViewInit(): void {
     this.ticketsData.forEach((ticket: OneTiket) => {
       const record = this.table.createComponent(TableRecordComponent);
       record.instance.inputData = ticket;
+      const price = ticket.price.slice(1, ticket.price.length);
+      this.totalPrice += parseFloat(price);
     });
   }
 
