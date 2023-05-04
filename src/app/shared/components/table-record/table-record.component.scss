@@ -16,7 +16,7 @@
 .main__table-record {
   display: flex;
   width: 95%;
-  height: 155px;
+  min-height: 155px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
