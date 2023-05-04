@@ -1,5 +1,5 @@
-<div class="login">
-    <form [formGroup]="form" >
+<div class="wrapper-pas">
+    <form [formGroup]="form" novalidate (ngSubmit)="submitForm()">
         <div class="form-group">
             <mat-form-field>
               <mat-label>First name</mat-label>
@@ -82,8 +82,8 @@
                   Date is from future
                 </mat-error>
               </mat-form-field>
-         
+           
          </div>
-         <mat-slide-toggle color="primary"><mat-icon>accessible</mat-icon> Need special assistance?</mat-slide-toggle>
+         <mat-slide-toggle color="primary" (change)="needHelp = !needHelp" ><mat-icon>accessible</mat-icon> Need special assistance?</mat-slide-toggle>
     </form>
 </div>

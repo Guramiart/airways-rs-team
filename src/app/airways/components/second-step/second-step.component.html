@@ -10,15 +10,28 @@
       <div class="forms">
           <div *ngIf="passengers?.passengers?.adult?.count!==0">
                <p>1.Adults</p>
-               <app-passenger-form  *ngFor="let f of [].constructor(passengers?.passengers?.adult?.count)"/>
+               <app-passenger-form  *ngFor="let f of [].constructor(passengers?.passengers?.adult?.count), let id = index"
+                                    [typeOfPassenger]="'adult'"
+                                    [isSubmitted] = "isSubmitted"
+                                    [id] = "id"
+                                    (errorEmit)="getError($event)"
+                                    (passengerInfo)="getPassengerInfo($event)"/>
           </div>
           <div *ngIf="passengers?.passengers?.child?.count!==0">
             <p>2.Childs</p>
-            
+            <app-passenger-form  *ngFor="let f of [].constructor(passengers?.passengers?.adult?.count), let id = index"
+                                 [typeOfPassenger]="'child'"
+                                 [isSubmitted] = "isSubmitted"
+                                 [id] = "id"
+                                 (errorEmit)="getError($event)"/>
           </div>
           <div *ngIf="passengers?.passengers?.infant?.count!==0">
             <p>3.Infants<p>
-            
+                <app-passenger-form  *ngFor="let f of [].constructor(passengers?.passengers?.adult?.count), let id = index"
+                                     [typeOfPassenger]="'infant'"
+                                     [isSubmitted] = "isSubmitted"
+                                     [id] = "id"
+                                     (errorEmit)="getError($event)"/>
           </div>
       </div>
       <div class="btns-block">

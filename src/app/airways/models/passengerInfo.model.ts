@@ -1,7 +1,7 @@
 export interface IPassengerInfo {
-    firsName:string;
+    firstName:string;
     lastName:string;
-    birhDate:string;
+    birthDate:string;
     gender:string;
     needHelp:boolean;
 }
