@@ -6,6 +6,7 @@ import { FlightState } from 'src/app/redux/state.model';
 import { Passengers } from '../../models/passengers';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-second-step',
   templateUrl: './second-step.component.html',
@@ -13,8 +14,9 @@ import { Router } from '@angular/router';
 })
 export class SecondStepComponent implements OnInit, OnDestroy{
   public passengers:Passengers|null
+
   private subscription: Subscription
-  
+
 constructor( private store: Store,
             private router: Router){}
 
@@ -22,6 +24,7 @@ ngOnInit(): void {
   this.subscription = this.store.select(FlightSelect.selectFlight)
   .subscribe(data=> this.passengers = data.passengers)
   console.log( this.passengers);
+
 }
 
 ngOnDestroy(): void {
