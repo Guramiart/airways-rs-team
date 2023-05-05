@@ -15,6 +15,8 @@ import { ModalWindowComponent } from './components/modal-window/modal-window.com
 import { LogInComponent } from './components/modal-window/log-in/log-in.component';
 import { SignInComponent } from './components/modal-window/sign-in/sign-in.component';
 import { SummaryPageComponent } from './components/summary-page/summary-page.component';
+import { PassengerFormComponent } from './components/second-step/passenger-form/passenger-form.component';
+import { ContactsFormComponent } from './components/second-step/contacts-form/contacts-form.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { SummaryPageComponent } from './components/summary-page/summary-page.com
     LogInComponent,
     SignInComponent,
     SummaryPageComponent,
+    PassengerFormComponent,
+    ContactsFormComponent,
   ],
   imports: [
     CommonModule,
