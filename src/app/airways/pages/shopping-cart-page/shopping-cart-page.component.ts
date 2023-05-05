@@ -1,8 +1,10 @@
 import {
-  AfterViewInit,
-  Component, ViewChild, ViewContainerRef, ViewEncapsulation,
+  AfterViewInit, ChangeDetectorRef,
+  Component, OnDestroy, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation,
 } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { OneTiket, TableRecordComponent } from '../../../shared/components/table-record/table-record.component';
+import { CartSwitcherService, SelectionTicketEvent } from '../../services/cart-switcher.service';
 
 @Component({
   selector: 'app-shopping-cart-page',
@@ -10,7 +12,7 @@ import { OneTiket, TableRecordComponent } from '../../../shared/components/table
   styleUrls: ['./shopping-cart-page.component.scss'],
   encapsulation: ViewEncapsulation.ShadowDom,
 })
-export class ShoppingCartPageComponent implements AfterViewInit {
+export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestroy {
 
   public ticketsData = [
     {
@@ -35,7 +37,14 @@ export class ShoppingCartPageComponent implements AfterViewInit {
 
   public selected = 0;
 
+  private selectedData: string[] = [];
+
+  private selectedObserver: Subscription;
+
   @ViewChild('tableContainer', { read: ViewContainerRef, static: true }) table: ViewContainerRef;
+
+  constructor(private detect: ChangeDetectorRef, private switcher: CartSwitcherService) {
+  }
 
   ngAfterViewInit(): void {
     this.ticketsData.forEach((ticket: OneTiket) => {
@@ -43,7 +52,24 @@ export class ShoppingCartPageComponent implements AfterViewInit {
       record.instance.inputData = ticket;
       const price = ticket.price.slice(1, ticket.price.length);
       this.totalPrice += parseFloat(price);
+      this.detect.detectChanges();
     });
+  }
+
+  ngOnInit(): void {
+    this.selectedObserver = this.switcher.selection.subscribe((arg: SelectionTicketEvent): void => {
+      if (arg.checked) {
+        this.selected += 1;
+        this.selectedData.push(arg.flight);
+      } else {
+        this.selected = this.selected ? this.selected -= 1 : this.selected;
+        this.selectedData = this.selectedData.filter((flight: string) => flight !== arg.flight);
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.selectedObserver.unsubscribe();
   }
 
 }

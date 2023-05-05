@@ -1,7 +1,7 @@
 <div class="main__table-block">
   <div class="main__table-record">
     <div class="main__first-record">
-      <mat-checkbox class="main__record-checkbox" (ngModelChange)="onChecked()">{{numberFlight}}</mat-checkbox>
+      <mat-checkbox class="main__record-checkbox" [(ngModel)]="check" (ngModelChange)="onChecked()">{{numberFlight}}</mat-checkbox>
     </div>
     <div class="main__second-record">
       <span *ngFor="let direction of flight" class="main__record-text">{{direction}}</span>

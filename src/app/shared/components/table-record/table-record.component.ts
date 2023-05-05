@@ -1,5 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component } from '@angular/core';
-import { Event } from '@angular/router';
+import { AfterViewChecked, ChangeDetectorRef, Component } from '@angular/core';
 import { CartSwitcherService } from 'src/app/airways/services/cart-switcher.service';
 
 export interface OneTiket {
@@ -15,7 +14,7 @@ export interface OneTiket {
   templateUrl: './table-record.component.html',
   styleUrls: ['./table-record.component.scss'],
 })
-export class TableRecordComponent implements AfterViewInit {
+export class TableRecordComponent implements AfterViewChecked {
 
   public numberFlight: string;
 
@@ -31,6 +30,8 @@ export class TableRecordComponent implements AfterViewInit {
 
   public inputData: OneTiket;
 
+  public check: boolean = false;
+
   constructor(private detector: ChangeDetectorRef, private switcher: CartSwitcherService) {
     this.detector.detach();
   }
@@ -42,15 +43,15 @@ export class TableRecordComponent implements AfterViewInit {
     this.date = this.inputData.date;
     this.passengers = this.inputData.passengers;
     this.price = this.inputData.price;
-    this.detector.detectChanges();
   }
 
   public onChecked(): void {
-    console.log(this.numberFlight);
+    this.switcher.selectionEv({ checked: this.check, flight: this.numberFlight });
   }
 
-  ngAfterViewInit(): void {
-    this.showData();    
+  ngAfterViewChecked(): void {
+    this.showData();
+    this.detector.detectChanges();
   }
 
 }

@@ -1,17 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
+export interface SelectionTicketEvent {
+  checked: boolean,
+  flight: string
+}
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CartSwitcherService {
 
-  private observe: Subject<void> = new Subject<void>();
+  private observe: Subject<SelectionTicketEvent> = new Subject<SelectionTicketEvent>();
 
-  public selection: Observable<void> = this.observe.asObservable();
+  public selection: Observable<SelectionTicketEvent> = this.observe.asObservable();
 
-  public selectionEv(): void {
-    this.observe.next();
+  public selectionEv(ev: SelectionTicketEvent): void {
+    this.observe.next(ev);
   }
 
 }
