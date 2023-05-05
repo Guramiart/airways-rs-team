@@ -199,6 +199,7 @@ mat-icon {
 .main__cart-separator {
   align-self: center;
   width: 95%;
+  max-width: 1040px;
   height: 2px;
   background: #E1E5EB;
   transform: matrix(1, 0, 0, -1, 0, 0);
