@@ -33,6 +33,8 @@ export class ShoppingCartPageComponent implements AfterViewInit {
 
   public totalPrice: number = 0;
 
+  public selected = 0;
+
   @ViewChild('tableContainer', { read: ViewContainerRef, static: true }) table: ViewContainerRef;
 
   ngAfterViewInit(): void {

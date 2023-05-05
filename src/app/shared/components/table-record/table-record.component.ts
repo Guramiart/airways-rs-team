@@ -1,4 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Component } from '@angular/core';
+import { Event } from '@angular/router';
+import { CartSwitcherService } from 'src/app/airways/services/cart-switcher.service';
 
 export interface OneTiket {
   numberFlight: string,
@@ -29,7 +31,7 @@ export class TableRecordComponent implements AfterViewInit {
 
   public inputData: OneTiket;
 
-  constructor(private detector: ChangeDetectorRef) {
+  constructor(private detector: ChangeDetectorRef, private switcher: CartSwitcherService) {
     this.detector.detach();
   }
 
@@ -40,11 +42,15 @@ export class TableRecordComponent implements AfterViewInit {
     this.date = this.inputData.date;
     this.passengers = this.inputData.passengers;
     this.price = this.inputData.price;
+    this.detector.detectChanges();
+  }
+
+  public onChecked(): void {
+    console.log(this.numberFlight);
   }
 
   ngAfterViewInit(): void {
-    this.showData();
-    this.detector.detectChanges();
+    this.showData();    
   }
 
 }
