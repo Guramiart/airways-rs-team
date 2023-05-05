@@ -5,6 +5,10 @@ import * as FlightActions from '../actions/flight.actions';
 
 export const flightReducer = createReducer(
   initialFlightState,
+  on(FlightActions.updatePassengers, (state: FlightState, { passengers }):FlightState => ({
+    ...state,
+    passengers,
+  })),
   on(FlightActions.getFlights, (state: FlightState): FlightState => ({ ...state })),
   on(
     FlightActions.updateFlights,

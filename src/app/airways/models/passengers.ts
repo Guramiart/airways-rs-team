@@ -1,4 +1,5 @@
-import { IPassengerInfo } from "./passengerInfo.model"
+import { IPassengerInfo } from './passengerInfo.model';
+
 export interface Passengers {
   passengers: {
     adult: {

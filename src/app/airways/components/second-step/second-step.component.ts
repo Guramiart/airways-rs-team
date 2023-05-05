@@ -1,90 +1,131 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
-import * as FlightSelect from '../../../redux/selectors/flight.selector';
-import { FlightState } from 'src/app/redux/state.model';
-import { Passengers } from '../../models/passengers';
+import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { Passengers } from '../../models/passengers';
 import { IPassengerInfo } from '../../models/passengerInfo.model';
-
+import * as FlightSelect from '../../../redux/selectors/flight.selector';
+import * as FlightActions from '../../../redux/actions/flight.actions';
 
 @Component({
   selector: 'app-second-step',
   templateUrl: './second-step.component.html',
   styleUrls: ['./second-step.component.scss'],
 })
-export class SecondStepComponent implements OnInit, OnDestroy{
-  public passengers:Passengers|null
+export class SecondStepComponent implements OnInit, OnDestroy {
 
-  public isSubmitted = false
+  public passengers:Passengers | null;
 
-  private subscription: Subscription
+  public newPassenger:Passengers | null;
 
-  private adultInfo:IPassengerInfo[] = []
+  public isSubmitted = false;
 
-  private childInfo:IPassengerInfo[] = []
+  private subscription: Subscription;
 
-  private infantInfo:IPassengerInfo[] = []
+  private adultInfo:IPassengerInfo[] = [];
 
-  private errors:{[key:string]:boolean} = {}
+  private childInfo:IPassengerInfo[] = [];
 
-constructor( private store: Store,
-            private router: Router){}
+  private infantInfo:IPassengerInfo[] = [];
 
-ngOnInit(): void {
-  this.subscription = this.store.select(FlightSelect.selectFlight)
-  .subscribe(data=> this.passengers = data.passengers)
-}
+  private errors:{ [key:string]:boolean } = {};
 
-ngOnDestroy(): void {
-  this.subscription.unsubscribe()
-}
+  private allChecksPass = false;
 
-public back(isBack:boolean):void{
-  if(isBack){
-    this.router.navigateByUrl('/'); 
-  }else{
-    this.isSubmitted = !this.isSubmitted
-   
-    // this.router.navigateByUrl('step/3'); 
+  constructor(
+    private store: Store,
+    private router: Router,
+  ) {}
+
+  ngOnInit(): void {
+    this.subscription = this.store.select(FlightSelect.selectFlight)
+      .subscribe((data) => { this.passengers = data.passengers; });
   }
-}
 
-public getError(errorData:{id:number, type:string, error:boolean}){
-  this.errors[errorData.type+errorData.id] = errorData.error
-  if(this.checkErrors()){
-    console.log('da');
-  }
-}
+  public back(isBack:boolean):void {
+    if (isBack) {
+      this.router.navigateByUrl('/');
+    } else {
+      this.isSubmitted = !this.isSubmitted;
+      setTimeout(() => {
+        if (this.allChecksPass) {
+          this.addPassengerInfoToStore();
+          this.router.navigateByUrl('step/3');
+        }
+      }, 300);
 
-public getPassengerInfo(data:{id:number,type:string, info:IPassengerInfo}):void{
-  console.log(data);
-  switch (data.type ){
-    case "adult" :  this.adultInfo.push(data.info);
-                    break;
-    case "child" : this.childInfo.push(data.info);
-                    break;
-    case "infant" : this.infantInfo.push(data.info);
-                    break;
-  }
-  console.log(this.adultInfo);
-}
-
-private checkErrors():boolean{
- 
-    let check = true
-    for(let key in this.errors){
-      console.log("key"+key);
-      if(this.errors[key] === true){
-        check = false
-      }
     }
-    return check
+  }
 
-}
+  public getError(errorData:{ id:number, type:string, error:boolean }) {
+    this.errors[errorData.type + errorData.id] = errorData.error;
+    if (this.checkErrors()) {
+      this.allChecksPass = true;
+    }
+  }
 
-private addPassengerInfo(){
-   
-}
+  public getContactInfo(data:{ email:string, mobile:string }) {
+    if (this.passengers) {
+      this.newPassenger = {
+        ...this.passengers,
+        contactDetails: data,
+      };
+      // this.passengers.contactDetails = data
+    }
+  }
+
+  public getPassengerInfo(data:{ type:string, info:IPassengerInfo }):void {
+    switch (data.type) {
+      case 'adult': this.adultInfo = [];
+        this.adultInfo.push(data.info);
+        break;
+      case 'child': this.childInfo = [];
+        this.childInfo.push(data.info);
+        break;
+      case 'infant': this.infantInfo = [];
+        this.infantInfo.push(data.info);
+        break;
+      default: break;
+    }
+  }
+
+  private checkErrors():boolean {
+    let check = true;
+    const keysArr = Object.keys(this.errors);
+    keysArr.forEach((key) => {
+      if (this.errors[key] === true) {
+        check = false;
+      }
+    });
+    return check;
+  }
+
+  private addPassengerInfoToStore() {
+    if (this.newPassenger) {
+      const newObj = {
+        ...this.newPassenger,
+        passengers: {
+          ...this.newPassenger.passengers,
+          adult: {
+            ...this.newPassenger.passengers.adult,
+            info: this.adultInfo,
+          },
+          child: {
+            ...this.newPassenger.passengers.child,
+            info: this.childInfo,
+          },
+          infant: {
+            ...this.newPassenger.passengers.infant,
+            info: this.infantInfo,
+          },
+        },
+      };
+      this.store.dispatch(FlightActions.updatePassengers({ passengers: newObj }));
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
 }

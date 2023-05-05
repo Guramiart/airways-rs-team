@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { IUser } from 'src/app/services/user.model';
 import { DataService } from 'src/app/services/data.service';
+import { Subscription } from 'rxjs';
 import { HeaderChangerService } from '../../services/header-changer.service';
 
 import * as SettingsAction from '../../../redux/actions/settings.actions';
@@ -22,7 +23,7 @@ enum Icon {
   templateUrl: './account-button.component.html',
   styleUrls: ['./account-button.component.scss'],
 })
-export class AccountButtonComponent implements OnInit {
+export class AccountButtonComponent implements OnInit, OnDestroy {
 
   public authUser:IUser | undefined;
 
@@ -32,6 +33,8 @@ export class AccountButtonComponent implements OnInit {
 
   public textColor = Color.white;
 
+  private subscription: Subscription;
+
   constructor(
     private mainObserver: HeaderChangerService,
     private store: Store,
@@ -40,7 +43,7 @@ export class AccountButtonComponent implements OnInit {
 
   ngOnInit(): void {
     this.mainObserver.onChangePage().subscribe(() => this.onChange());
-    this.store.select(SettingsSelector.selectUser)
+    this.subscription = this.store.select(SettingsSelector.selectUser)
       .subscribe((data) => {
         this.authUser = data;
         this.authUser ? this.btnText = `${this.authUser.firstName}  ${this.authUser.lastName} `
@@ -65,6 +68,10 @@ export class AccountButtonComponent implements OnInit {
   private onChange(): void {
     this.accountLogo = this.accountLogo === Icon.white ? Icon.black : Icon.white;
     this.textColor = this.textColor === Color.white ? Color.black : Color.white;
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }

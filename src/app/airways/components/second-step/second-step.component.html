@@ -9,7 +9,7 @@
         </div>
       <div class="forms">
           <div *ngIf="passengers?.passengers?.adult?.count!==0">
-               <p>1.Adults</p>
+               <p class="forms__title">1.Adults</p>
                <app-passenger-form  *ngFor="let f of [].constructor(passengers?.passengers?.adult?.count), let id = index"
                                     [typeOfPassenger]="'adult'"
                                     [isSubmitted] = "isSubmitted"
@@ -18,22 +18,38 @@
                                     (passengerInfo)="getPassengerInfo($event)"/>
           </div>
           <div *ngIf="passengers?.passengers?.child?.count!==0">
-            <p>2.Childs</p>
-            <app-passenger-form  *ngFor="let f of [].constructor(passengers?.passengers?.adult?.count), let id = index"
+            <p class="forms__title">2.Childs</p>
+            <app-passenger-form  *ngFor="let f of [].constructor(passengers?.passengers?.child?.count), let id = index"
                                  [typeOfPassenger]="'child'"
                                  [isSubmitted] = "isSubmitted"
                                  [id] = "id"
-                                 (errorEmit)="getError($event)"/>
+                                 (errorEmit)="getError($event)"
+                                 (passengerInfo)="getPassengerInfo($event)"/>
           </div>
           <div *ngIf="passengers?.passengers?.infant?.count!==0">
-            <p>3.Infants<p>
-                <app-passenger-form  *ngFor="let f of [].constructor(passengers?.passengers?.adult?.count), let id = index"
+            <p class="forms__title">3.Infants<p>
+                <app-passenger-form  *ngFor="let f of [].constructor(passengers?.passengers?.infant?.count), let id = index"
                                      [typeOfPassenger]="'infant'"
                                      [isSubmitted] = "isSubmitted"
                                      [id] = "id"
-                                     (errorEmit)="getError($event)"/>
+                                     (errorEmit)="getError($event)"
+                                     (passengerInfo)="getPassengerInfo($event)"/>
           </div>
       </div>
+      <div class="header">
+        <div class="header__title">
+            <mat-icon class="header__title_icon">contact_page</mat-icon>
+            <h2>Contact details</h2>
+        </div>
+       <p class="header__text">We need contact details to be able to deliver the latest information regarding your flight. </p>
+      </div>
+
+      <div class="forms">
+        <app-contacts-form [isSubmitted] = "isSubmitted" 
+                           (errorEmit)="getError($event)" 
+                           (contactInfo)="getContactInfo($event)"/>
+      </div>
+
       <div class="btns-block">
         <button mat-raised-button (click)="back(true)">Back</button>
         <button mat-raised-button color="primary" (click)="back(false)">Continue</button>

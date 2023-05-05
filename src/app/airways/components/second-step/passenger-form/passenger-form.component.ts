@@ -1,33 +1,36 @@
-import { Component, OnInit, Input, Output, OnChanges, SimpleChanges, EventEmitter} from '@angular/core';
+import {
+  Component, OnInit, Input, Output, OnChanges, SimpleChanges, EventEmitter,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DateValidator } from '../../modal-window/sign-in/validator';
 import { IPassengerInfo } from 'src/app/airways/models/passengerInfo.model';
+import { DateValidator } from '../../modal-window/sign-in/validator';
 
 @Component({
   selector: 'app-passenger-form',
   templateUrl: './passenger-form.component.html',
-  styleUrls: ['./passenger-form.component.scss']
+  styleUrls: ['./passenger-form.component.scss'],
 })
-export class PassengerFormComponent implements OnInit, OnChanges{
-  @Input() isSubmitted : boolean
+export class PassengerFormComponent implements OnInit, OnChanges {
 
-  @Input() id : number
+  @Input() isSubmitted : boolean;
 
-  @Input() typeOfPassenger : string
+  @Input() id : number;
 
-  @Output() passengerInfo = new EventEmitter<{id:number,type:string,info:IPassengerInfo}>();
+  @Input() typeOfPassenger : string;
 
-  @Output() errorEmit = new EventEmitter<{id:number, type:string, error:boolean}>();
+  @Output() passengerInfo = new EventEmitter<{ type:string, info:IPassengerInfo }>();
+
+  @Output() errorEmit = new EventEmitter<{ id:number, type:string, error:boolean }>();
 
   public form: FormGroup;
 
   public gender = 'Male';
 
-  public showMsg = false
+  public showMsg = false;
 
-  public showMsg2 = false
+  public showMsg2 = false;
 
-  public needHelp = false
+  public needHelp = false;
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -41,15 +44,15 @@ export class PassengerFormComponent implements OnInit, OnChanges{
     });
   }
 
-  ngOnChanges(changes:SimpleChanges):void{
+  ngOnChanges(changes:SimpleChanges):void {
     const isSubmittedCurrent = changes['isSubmitted'].currentValue;
     const isSubmittedLast = changes['isSubmitted'].previousValue;
-    if(isSubmittedCurrent !== isSubmittedLast && isSubmittedLast!==undefined){
-      this.submitForm()
+    if (isSubmittedCurrent !== isSubmittedLast && isSubmittedLast !== undefined) {
+      this.submitForm();
     }
   }
 
-  public submitForm():void{
+  public submitForm():void {
     this.form.markAllAsTouched();
     if (!this.form.invalid) {
       const newPassengerInfo = {
@@ -57,17 +60,18 @@ export class PassengerFormComponent implements OnInit, OnChanges{
         lastName: this.replaceFirstLetterToUpperCase(this.form.controls['lastName'].value as string),
         birthDate: new Date(this.form.controls['birthDate'].value).toLocaleDateString(),
         gender: this.gender,
-        needHelp:this.needHelp
+        needHelp: this.needHelp,
       };
-      this.passengerInfo.emit({id:this.id,type:this.typeOfPassenger, info:newPassengerInfo})
-      this.errorEmit.emit({id:this.id, type:this.typeOfPassenger, error:false});
-    }else{
-      this.errorEmit.emit({id:this.id, type:this.typeOfPassenger, error:true});
+      this.passengerInfo.emit({ type: this.typeOfPassenger, info: newPassengerInfo });
+      this.errorEmit.emit({ id: this.id, type: this.typeOfPassenger, error: false });
+    } else {
+      this.errorEmit.emit({ id: this.id, type: this.typeOfPassenger, error: true });
     }
-  }  
+  }
 
   private replaceFirstLetterToUpperCase(str:string):string {
     const result = str[0].toUpperCase() + str.slice(1);
     return result;
   }
+
 }

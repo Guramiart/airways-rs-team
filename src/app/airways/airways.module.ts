@@ -16,6 +16,7 @@ import { LogInComponent } from './components/modal-window/log-in/log-in.componen
 import { SignInComponent } from './components/modal-window/sign-in/sign-in.component';
 import { SummaryPageComponent } from './components/summary-page/summary-page.component';
 import { PassengerFormComponent } from './components/second-step/passenger-form/passenger-form.component';
+import { ContactsFormComponent } from './components/second-step/contacts-form/contacts-form.component';
 
 @NgModule({
   declarations: [
@@ -31,8 +32,8 @@ import { PassengerFormComponent } from './components/second-step/passenger-form/
     LogInComponent,
     SignInComponent,
     SummaryPageComponent,
-    PassengerFormComponent
-
+    PassengerFormComponent,
+    ContactsFormComponent,
   ],
   imports: [
     CommonModule,
