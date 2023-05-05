@@ -147,3 +147,23 @@
   width: 100%;
   text-align: center;
 }
+
+.flight-not-block {
+  color: gray;
+  font-size: 35px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.flight-img {
+  width: 45px;
+  height: 45px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('../../../../assets/flight-blocked.svg');
+}

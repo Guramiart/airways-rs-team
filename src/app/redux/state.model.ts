@@ -11,8 +11,8 @@ export interface AppState {
 }
 
 export interface FlightState {
-  from: ICity | null,
-  destination: ICity | null,
+  from: ICity,
+  destination: ICity,
   startDate: Date | null,
   endDate: Date | null,
   passengers: Passengers | null,

@@ -6,7 +6,8 @@ const GET_FLIGHTS = '[Flight] Get flights';
 const UPDATE_STORE = '[Flight] Update flights';
 const CHANGE_FROM_FLIGHT = '[Flight] Change from';
 const CHANGE_DESTINATION_FLIGHT = '[Flight] Change destination';
-const CHANGE_DATE = '[Flight] Change date';
+const CHANGE_START_DATE = '[Flight] Change start date';
+const CHANGE_END_DATE = '[Flight] Change end date';
 
 export const getFlights = createAction(GET_FLIGHTS);
 
@@ -31,7 +32,12 @@ export const changeDestinationFlight = createAction(
   props<{ destination: ICity }>(),
 );
 
-export const changeDateFlight = createAction(
-  CHANGE_DATE,
-  props<{ startDate: Date, endDate: Date }>(),
+export const changeStartDateFlight = createAction(
+  CHANGE_START_DATE,
+  props<{ startDate: Date }>(),
+);
+
+export const changeEndDateFlight = createAction(
+  CHANGE_END_DATE,
+  props<{ endDate: Date }>(),
 );

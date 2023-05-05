@@ -34,10 +34,16 @@ export const flightReducer = createReducer(
     }),
   ),
   on(
-    FlightActions.changeDateFlight,
-    (state: FlightState, { startDate, endDate }): FlightState => ({
+    FlightActions.changeStartDateFlight,
+    (state: FlightState, { startDate }): FlightState => ({
       ...state,
       startDate,
+    }),
+  ),
+  on(
+    FlightActions.changeEndDateFlight,
+    (state: FlightState, { endDate }): FlightState => ({
+      ...state,
       endDate,
     }),
   ),
