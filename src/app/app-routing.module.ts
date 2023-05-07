@@ -15,6 +15,13 @@ const routes: Routes = [
     path: 'cart',
     pathMatch: 'full',
     component: ShoppingCartPageComponent,
+    data: { cart: true },
+  },
+  {
+    path: 'account',
+    pathMatch: 'full',
+    component: ShoppingCartPageComponent,
+    data: { cart: false },
   },
 ];
 

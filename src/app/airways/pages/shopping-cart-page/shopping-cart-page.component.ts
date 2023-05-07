@@ -3,6 +3,8 @@ import {
   Component, OnDestroy, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+
 import { TableRecordComponent } from '../../../shared/components/table-record/table-record.component';
 import { CartSwitcherService, SelectionTicketEvent } from '../../services/cart-switcher.service';
 import { SortingService } from '../../services/sorting-service.service';
@@ -16,6 +18,7 @@ import { OneTicket } from '../../../shared/enums/tickets-data';
 })
 export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestroy {
 
+  // TODO: this mok data
   public ticketsData: OneTicket[] = [
     {
       numberFlight: 'FR 1925',
@@ -32,6 +35,23 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
       date: ['28 May, 2023, 15:40 — 16:40'],
       passengers: ['1 x Adult'],
       price: '€20.96',
+    },
+  ];
+
+  // ---- replace it-----
+
+  private promocode = [
+    {
+      code: 'rsschool',
+      used: false,
+    },
+    {
+      code: 'RedNecksCode',
+      used: false,
+    },
+    {
+      code: 'TeamMaker',
+      used: false,
     },
   ];
 
@@ -85,6 +105,7 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
     private detect: ChangeDetectorRef,
     private switcher: CartSwitcherService,
     private sort: SortingService,
+    private routerParam: ActivatedRoute,
   ) { }
 
   ngAfterViewInit(): void {
@@ -92,6 +113,7 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
   }
 
   ngOnInit(): void {
+    this.isShoppingCart = this.routerParam.snapshot.data['cart'];
     this.selectedObserver = this.switcher.selection.subscribe((arg: SelectionTicketEvent): void => {
       this.showSelected(arg);
     });
