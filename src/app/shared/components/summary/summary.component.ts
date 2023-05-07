@@ -1,12 +1,6 @@
 import { AfterViewInit, Component } from '@angular/core';
-import { Passenger, Ticket } from '../ticket-info/ticket-info.component';
+import { Ticket, AgePassenger, Passenger } from '../../enums/tickets-data';
 
-interface AgePassanger {
-  count: number,
-  total: number,
-  fare: number,
-  tax: number,
-}
 @Component({
   selector: 'app-summary',
   templateUrl: './summary.component.html',
@@ -18,7 +12,7 @@ export class SummaryComponent implements AfterViewInit {
 
   public totalPrice = 0;
 
-  public resultArray: AgePassanger[] = [];
+  public resultArray: AgePassenger[] = [];
 
   public titlesArray: string[] = ['x Adult Fare ', 'x Child Fare', 'x Infant Fare '];
 
@@ -27,16 +21,16 @@ export class SummaryComponent implements AfterViewInit {
   }
 
   private initSummaryData(): void {
-    const initAgePassenger: AgePassanger = {
+    const initAgePassenger: AgePassenger = {
       count: 0,
       fare: 0,
       tax: 0,
       total: 0,
     };
 
-    const adult: AgePassanger = { ...initAgePassenger };
-    const child: AgePassanger = { ...initAgePassenger };
-    const infant: AgePassanger = { ...initAgePassenger };
+    const adult: AgePassenger = { ...initAgePassenger };
+    const child: AgePassenger = { ...initAgePassenger };
+    const infant: AgePassenger = { ...initAgePassenger };
 
     this.tickets.forEach((ticket) => {
       adult.count += ticket.prices.adult.length;

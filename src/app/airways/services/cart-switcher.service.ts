@@ -11,12 +11,28 @@ export interface SelectionTicketEvent {
 })
 export class CartSwitcherService {
 
-  private observe: Subject<SelectionTicketEvent> = new Subject<SelectionTicketEvent>();
+  private observeSelection: Subject<SelectionTicketEvent> = new Subject<SelectionTicketEvent>();
 
-  public selection: Observable<SelectionTicketEvent> = this.observe.asObservable();
+  public selection: Observable<SelectionTicketEvent> = this.observeSelection.asObservable();
+
+  private observerDelete: Subject<string> = new Subject<string>();
+
+  public delete: Observable<string> = this.observerDelete.asObservable();
+
+  private observerSelectAll: Subject<boolean> = new Subject<boolean>();
+
+  public selectAll: Observable<boolean> = this.observerSelectAll.asObservable();
 
   public selectionEv(ev: SelectionTicketEvent): void {
-    this.observe.next(ev);
+    this.observeSelection.next(ev);
+  }
+
+  public deleteEv(flight: string): void {
+    this.observerDelete.next(flight);
+  }
+
+  public selectAllEv(marker: boolean): void {
+    this.observerSelectAll.next(marker);
   }
 
 }

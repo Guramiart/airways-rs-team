@@ -62,7 +62,7 @@
 
 .main__table-header {
   display: flex;
-  width: 83%;
+  width: 89%;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -83,27 +83,33 @@ mat-icon {
 }
 
 .main__table-naming:nth-child(1) {
-  width: 11%;
+  //width: 11%;
+  flex-basis: 12%;
 }
 
 .main__table-naming:nth-child(2) {
-  width: 10%;
+  //width: 10%;
+  flex-basis: 14%;
 }
 
 .main__table-naming:nth-child(3) {
-  width: 13%;
+  //width: 13%;
+  flex-basis: 13%;
 }
 
 .main__table-naming:nth-child(4) {
-  width: 18%;
+  //width: 18%;
+  flex-basis: 20%;
 }
 
 .main__table-naming:nth-child(5) {
-  width: 10%;
+  //width: 10%;
+  flex-basis: auto;
 }
 
 .main__table-naming:nth-child(6) {
-  width: 7%;
+  //width: 7%;
+  flex-basis: 8%;
 }
 
 .main__table-text {
@@ -119,16 +125,24 @@ mat-icon {
   display: flex;
   width: 16px;
   height: 27px;
-  margin-top: -8px;
   align-self: baseline;
   flex-direction: column;
   justify-content: flex-start;
+}
+
+.main_first-text {
+  margin-top: 2px;
+}
+
+.main_next-text {
+  margin-top: -7px;
 }
 
 .main__arrow-up,
 .main__arrow-down {
   font-size: 12px;
   margin-top: 1px;
+  color: #11397E;
 }
 
 .main__cart-control {
@@ -304,7 +318,20 @@ mat-icon {
   cursor: pointer;
 }
 
-.main__payment-btn {
+.main__btn-return {
+  display: flex;
+  width: 226px;
+  height: 60px;
+  justify-content: center;
+  align-items: center;
+  background: #11397E;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.main__payment-btn,
+.main__return-text {
   font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -312,4 +339,12 @@ mat-icon {
   line-height: 20px;
   letter-spacing: 0.1px;
   color: #FFFFFF;
+}
+
+.main__account-return {
+  display: flex;
+  width: 100%;
+  height: 139px;
+  justify-content: center;
+  align-items: center;
 }

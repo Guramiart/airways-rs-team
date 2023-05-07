@@ -48,6 +48,36 @@
   align-items: center;
 }
 
+.main__first-record:nth-child(1) {
+  //width: 11%;
+  flex-basis: 15%;
+}
+
+.main__second-record:nth-child(2) {
+  //width: 10%;
+  flex-basis: 18%;
+}
+
+.main__third-record:nth-child(3) {
+  //width: 13%;
+  flex-basis: 13%;
+}
+
+.main__forth-record:nth-child(4) {
+  //width: 18%;
+  flex-basis: 26%;
+}
+
+.main__fifth-record:nth-child(5) {
+  //width: 10%;
+  flex-basis: 15%;
+}
+
+.main__sixth-record:nth-child(6) {
+  //width: 7%;
+  flex-basis: 13%;
+}
+
 .main__record-checkbox {
   font-family: 'Roboto', sans-serif;
   font-style: normal;

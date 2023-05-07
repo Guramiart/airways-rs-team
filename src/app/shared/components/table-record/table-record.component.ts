@@ -1,20 +1,18 @@
-import { AfterViewChecked, ChangeDetectorRef, Component } from '@angular/core';
+import {
+  AfterViewChecked, ChangeDetectorRef, Component, OnDestroy, OnInit,
+} from '@angular/core';
 import { CartSwitcherService } from 'src/app/airways/services/cart-switcher.service';
+import { Subscription } from 'rxjs';
+import { OneTicket } from '../../enums/tickets-data';
 
-export interface OneTiket {
-  numberFlight: string,
-  flight: string[],
-  type: string,
-  date: string[],
-  passengers: string[],
-  price: string,
-}
 @Component({
   selector: 'app-table-record',
   templateUrl: './table-record.component.html',
   styleUrls: ['./table-record.component.scss'],
 })
-export class TableRecordComponent implements AfterViewChecked {
+export class TableRecordComponent implements OnInit, AfterViewChecked, OnDestroy {
+
+  public isShoppingRecord: boolean;
 
   public numberFlight: string;
 
@@ -28,9 +26,11 @@ export class TableRecordComponent implements AfterViewChecked {
 
   public price: string;
 
-  public inputData: OneTiket;
+  public inputData: OneTicket;
 
   public check: boolean = false;
+
+  private selectAllObserver: Subscription;
 
   constructor(private detector: ChangeDetectorRef, private switcher: CartSwitcherService) {
     this.detector.detach();
@@ -49,9 +49,28 @@ export class TableRecordComponent implements AfterViewChecked {
     this.switcher.selectionEv({ checked: this.check, flight: this.numberFlight });
   }
 
+  public deleteItem(): void {
+    this.switcher.deleteEv(this.numberFlight);
+  }
+
+  public editItem(): void {
+    console.info('This need to paste routing for edit page!!!');
+  }
+
   ngAfterViewChecked(): void {
     this.showData();
     this.detector.detectChanges();
+  }
+
+  ngOnInit(): void {
+    this.selectAllObserver = this.switcher.selectAll.subscribe((marker) => {
+      this.check = marker;
+      this.detector.detectChanges();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.selectAllObserver.unsubscribe();
   }
 
 }
