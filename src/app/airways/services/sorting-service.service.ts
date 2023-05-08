@@ -6,8 +6,40 @@ import { OneTicket } from '../../shared/enums/tickets-data';
 })
 export class SortingService {
 
-  public sortByReverse(tickets: OneTicket[]): OneTicket[] {
-    return tickets.reverse();
+  public sortByNoAscendence(tickets: OneTicket[]): OneTicket[] {
+    return tickets.sort((prev: OneTicket, next: OneTicket) => {
+      const prevNo: string = prev.numberFlight.toLowerCase();
+      const nextNo: string = next.numberFlight.toLowerCase();
+
+      return prevNo.localeCompare(nextNo);
+    });
+  }
+
+  public sortByNoDescendence(tickets: OneTicket[]): OneTicket[] {
+    return tickets.sort((prev: OneTicket, next: OneTicket) => {
+      const prevNo: string = prev.numberFlight.toLowerCase();
+      const nextNo: string = next.numberFlight.toLowerCase();
+
+      return nextNo.localeCompare(prevNo);
+    });
+  }
+
+  public sortByFlightAscendence(tickets: OneTicket[]): OneTicket[] {
+    return tickets.sort((prev: OneTicket, next: OneTicket) => {
+      const prevNo: string = prev.numberFlight.toLowerCase();
+      const nextNo: string = next.numberFlight.toLowerCase();
+
+      return prevNo.localeCompare(nextNo);
+    });
+  }
+
+  public sortByFlightDescendence(tickets: OneTicket[]): OneTicket[] {
+    return tickets.sort((prev: OneTicket, next: OneTicket) => {
+      const prevNo: string = prev.numberFlight.toLowerCase();
+      const nextNo: string = next.numberFlight.toLowerCase();
+
+      return nextNo.localeCompare(prevNo);
+    });
   }
 
   public sortTripAscendence(tickets: OneTicket[]): OneTicket[] {

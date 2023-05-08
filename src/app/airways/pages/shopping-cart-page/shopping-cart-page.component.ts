@@ -206,11 +206,13 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
     if (this.numberStyle.up === 1) {
       this.numberStyle.up = 0.2;
       this.numberStyle.down = 1;
+      this.ticketsData = this.sort.sortByNoAscendence(this.ticketsData);
     } else {
       this.numberStyle.up = 1;
       this.numberStyle.down = 0.2;
+      this.ticketsData = this.sort.sortByNoDescendence(this.ticketsData);
     }
-    this.ticketsData = this.sort.sortByReverse(this.ticketsData);
+
     this.table.clear();
     this.totalPrice = 0;
     this.showTableRecords();
@@ -221,11 +223,13 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
     if (this.directionStyle.up === 1) {
       this.directionStyle.up = 0.2;
       this.directionStyle.down = 1;
+      this.ticketsData = this.sort.sortByFlightAscendence(this.ticketsData);
     } else {
       this.directionStyle.up = 1;
       this.directionStyle.down = 0.2;
+      this.ticketsData = this.sort.sortByFlightDescendence(this.ticketsData);
     }
-    this.ticketsData = this.sort.sortByReverse(this.ticketsData);
+
     this.table.clear();
     this.totalPrice = 0;
     this.showTableRecords();
