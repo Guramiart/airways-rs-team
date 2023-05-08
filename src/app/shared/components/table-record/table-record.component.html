@@ -1,7 +1,7 @@
 <div class="main__table-block">
   <div class="main__table-record">
     <div class="main__first-record">
-      <mat-checkbox *ngIf="isShoppingRecord"  [(ngModel)]="check" (ngModelChange)="onChecked()"></mat-checkbox>
+      <mat-checkbox *ngIf="isShoppingRecord"  [(ngModel)]="check" (ngModelChange)="onChecked()" class="main__checkbox-record"></mat-checkbox>
       <span class="main__record-checkbox">{{numberFlight}}</span>
     </div>
     <div class="main__second-record">
