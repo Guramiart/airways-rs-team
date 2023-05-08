@@ -5,10 +5,22 @@ import {
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
+import { FormControl } from '@angular/forms';
 import { TableRecordComponent } from '../../../shared/components/table-record/table-record.component';
 import { CartSwitcherService, SelectionTicketEvent } from '../../services/cart-switcher.service';
 import { SortingService } from '../../services/sorting-service.service';
 import { OneTicket } from '../../../shared/enums/tickets-data';
+
+type Discount = {
+  code: string,
+  used: boolean,
+  discount: number,
+};
+
+type StyleArrow = {
+  up: number,
+  down: number,
+};
 
 @Component({
   selector: 'app-shopping-cart-page',
@@ -38,66 +50,77 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
     },
   ];
 
-  // ---- replace it-----
+  // ---- replace it if need -----
 
-  private promocode = [
+  public promocode: Discount[] = [
     {
       code: 'rsschool',
       used: false,
+      discount: 0.9,
     },
     {
       code: 'RedNecksCode',
       used: false,
+      discount: 0.8,
     },
     {
       code: 'TeamMaker',
       used: false,
+      discount: 0.7,
     },
   ];
 
-  public isShoppingCart = true;
+  public isShoppingCart: boolean = true;
 
   public totalPrice: number = 0;
 
-  public selected = 0;
+  public selected: number = 0;
 
   private selectedData: string[] = [];
 
-  public checkAll = false;
+  public checkAll: boolean = false;
 
   private selectedObserver: Subscription;
 
   private deleteObserver: Subscription;
 
-  public numberStyle = {
+  public numberStyle: StyleArrow = {
     up: 0.2,
     down: 1,
   };
 
-  public directionStyle = {
+  public directionStyle: StyleArrow = {
     up: 1,
     down: 1,
   };
 
-  public tripStyle = {
+  public tripStyle: StyleArrow = {
     up: 1,
     down: 1,
   };
 
-  public dateStyle = {
+  public dateStyle: StyleArrow = {
     up: 1,
     down: 1,
   };
 
-  public passengerStyle = {
+  public passengerStyle: StyleArrow = {
     up: 1,
     down: 1,
   };
 
-  public priceStyle = {
+  public priceStyle: StyleArrow = {
     up: 1,
     down: 1,
   };
+
+  public discountInfo: string = 'Promo Code';
+
+  public discountFormControl: FormControl;
+
+  public discountBorderColor: string = '#74767A';
+
+  private isApplyButtonClick: boolean = false;
 
   @ViewChild('tableContainer', { read: ViewContainerRef, static: true }) table: ViewContainerRef;
 
@@ -121,6 +144,8 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
     this.deleteObserver = this.switcher.delete.subscribe((flightNumber: string) => {
       this.showDelete(flightNumber);
     });
+
+    this.discountFormControl = new FormControl('');
   }
 
   ngOnDestroy(): void {
@@ -148,7 +173,7 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
       record.instance.inputData = ticket;
       record.instance.isShoppingRecord = this.isShoppingCart;
       const price = ticket.price.slice(1, ticket.price.length);
-      this.totalPrice += parseFloat(price);
+      this.totalPrice += this.checkDiscount(parseFloat(price));
       this.detect.detectChanges();
     });
   }
@@ -306,6 +331,62 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
       this.priceStyle.down = 1;
     }
 
+  }
+
+  private checkDiscount(price: number): number {
+    let amount = price;
+    this.promocode.forEach((discount) => {
+      if (discount.used) {
+        amount *= discount.discount;
+      }
+    });
+
+    return amount;
+  }
+
+  public applyPromo(): void {
+    if (!this.isApplyButtonClick) {
+      this.isApplyButtonClick = true;
+
+      const isPromoYet: boolean = this.promocode.some((promoObj: Discount): boolean => {
+
+        if (promoObj.used) {
+          this.discountInfo = 'You already have discount!';
+          this.discountBorderColor = '#e0940a';
+          return true;
+        }
+
+        return false;
+      });
+
+      if (!isPromoYet) {
+        this.promocode.some((promoObj: Discount, index: number) => {
+          if (this.discountFormControl.value === promoObj.code) {
+            if (promoObj.used) {
+              this.discountInfo = 'Promocode have been used yet!';
+              this.discountBorderColor = '#e0940a';
+            } else {
+              this.promocode[index].used = true;
+              this.totalPrice = this.checkDiscount(this.totalPrice);
+              this.discountInfo = 'Promocode is valid';
+              this.discountBorderColor = '#23b705';
+            }
+          } else {
+            this.discountInfo = 'Promocode invalid!';
+            this.discountBorderColor = '#a90303';
+          }
+
+          return promoObj;
+        });
+      }
+
+      setTimeout(() => {
+        this.discountInfo = 'Promo Code';
+        this.discountBorderColor = '#74767A';
+        this.discountFormControl.reset();
+        this.isApplyButtonClick = false;
+      }, 3000);
+    }
   }
 
 }

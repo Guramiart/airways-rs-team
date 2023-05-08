@@ -58,17 +58,17 @@
     </button>
     <div class="main__amount-wrapper">
       <span class="main__amount-text">Total</span>
-      <span class="main__amount-count">€{{totalPrice}}</span>
+      <span class="main__amount-count">€{{totalPrice | number: '1.0-2'}}</span>
     </div>
   </div>
   <div class="main__cart-separator"></div>
   <ng-container *ngIf="isShoppingCart; then shoppingCart else userAccount"></ng-container>
   <ng-template #shoppingCart>
     <div class="main__cart-payment">
-      <mat-form-field class="main__promo-wrapper">
-        <mat-label>Promo Code</mat-label>
-        <input type="text" matInput>
-        <button matSuffix class="main__promo-button">
+      <mat-form-field class="main__promo-wrapper" [style.border-color]="discountBorderColor">
+        <mat-label>{{discountInfo}}</mat-label>
+        <input type="text" matInput [formControl]="discountFormControl">
+        <button matSuffix class="main__promo-button" (click)="applyPromo()">
           <span class="main__button-text">Apply</span>
         </button>
       </mat-form-field>
