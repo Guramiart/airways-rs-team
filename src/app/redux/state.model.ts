@@ -4,6 +4,7 @@ import { DateFormat } from '../shared/enums/date-format';
 import { ICity } from '../services/cities.model';
 import { Passengers } from '../airways/models/passengers';
 import { FlightTypes } from '../shared/enums/flight-types';
+import { IFlight } from '../services/flight.model';
 
 export interface AppState {
   flights: FlightState,
@@ -17,6 +18,8 @@ export interface FlightState {
   endDate: Date | null,
   passengers: Passengers | null,
   type: FlightTypes,
+  selectedDirectFlight: IFlight | null,
+  selectedReverseFlight: IFlight | null,
 }
 
 export interface SettingsState {
@@ -89,6 +92,8 @@ export const initialFlightState: FlightState = { // test state TODO: remove
   endDate: null,
   passengers: null,
   type: FlightTypes.ROUND,
+  selectedDirectFlight: null,
+  selectedReverseFlight: null,
 };
 
 export const initialSettingState: SettingsState = {

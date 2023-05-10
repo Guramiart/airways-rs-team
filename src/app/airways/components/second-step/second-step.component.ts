@@ -39,6 +39,7 @@ export class SecondStepComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription = this.store.select(FlightSelect.selectFlight)
+      // eslint-disable-next-line @ngrx/no-store-subscription
       .subscribe((data) => { this.passengers = data.passengers; });
   }
 

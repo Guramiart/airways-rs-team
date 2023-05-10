@@ -20,12 +20,6 @@ export class CalendarComponent implements OnInit {
 
   public dates: Calendar[];
 
-  public slideConfig = {
-    infinite: false,
-    slidesToShow: 5,
-    slidesToScroll: 1,
-  };
-
   public from: ICity;
 
   public destination: ICity;
@@ -37,6 +31,8 @@ export class CalendarComponent implements OnInit {
   @Input() isForward: boolean;
 
   public flightData: IFlight | undefined;
+
+  public isSelected: boolean = false;
 
   constructor(
     private readonly store: Store,
@@ -104,6 +100,25 @@ export class CalendarComponent implements OnInit {
       curDate.setDate(curDate.getDate() + 1);
     }
     return dates;
+  }
+
+  editFlight() {
+    this.isSelected = !this.isSelected;
+  }
+
+  selectFlight(flight: IFlight) {
+    if (flight !== undefined) {
+      if (this.isForward) {
+        this.store.dispatch(FlightAction.updateDirectFlight({ selectedDirectFlight: flight }));
+      } else {
+        this.store.dispatch(FlightAction.updateReverseFlight({ selectedReverseFlight: flight }));
+      }
+    } else if (this.isForward) {
+      this.store.dispatch(FlightAction.updateDirectFlight({ selectedDirectFlight: null }));
+    } else {
+      this.store.dispatch(FlightAction.updateReverseFlight({ selectedReverseFlight: null }));
+    }
+    this.isSelected = !this.isSelected;
   }
 
 }

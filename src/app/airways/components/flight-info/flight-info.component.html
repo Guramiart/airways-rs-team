@@ -19,26 +19,33 @@
     </div>
     <div class="number">Flight no. {{ flight.number }}</div>
   </div>
-  <div class="divider"></div>
+  <div class="divider" *ngIf="!isSelected"></div>
   <div class="flight-info__price">
     <div class="price-block">
-      <div class="seats">
+      <div class="seats" *ngIf="!isSelected">
         <div class="seats-number">{{ flight.seats }} seats</div>
         <span>available</span>
       </div>
-      <div class="price-title">Price</div>
+      <div class="price-title" *ngIf="!isSelected">Price</div>
       <div class="price">{{ flight.price }}</div>
     </div>
-    <div class="submit-block">
-      <button class="select-btn">Select</button>
+    <div class="submit-block" *ngIf="!isSelected; else editBtn">
+      <button class="select-btn" (click)="selectFlight(flight)">Select</button>
     </div>
   </div>
 </div>
+
 <ng-template #flightNotFound>
   <div class="flight-info">
     <div class="flight-not-block">
       <div class="flight-img"></div>
       <span>No flights available</span>
     </div>
+  </div>
+</ng-template>
+
+<ng-template #editBtn>
+  <div class="submit-block">
+    <button class="edit-btn" (click)="selectFlight(undefined)">Edit</button>
   </div>
 </ng-template>

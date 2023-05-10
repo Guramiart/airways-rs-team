@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component, EventEmitter, Input, OnInit, Output,
+} from '@angular/core';
 import { Observable } from 'rxjs';
 import { ICity } from 'src/app/services/cities.model';
 import { IFlight } from 'src/app/services/flight.model';
@@ -17,7 +19,11 @@ export class FlightInfoComponent implements OnInit {
 
   @Input() flightData: IFlight | undefined;
 
+  @Output() selectEvent = new EventEmitter<IFlight>();
+
   public flight$: Observable<IFlight | undefined>;
+
+  public isSelected: boolean = false;
 
   constructor(private flightService: FlightInfoService) {}
 
@@ -30,6 +36,11 @@ export class FlightInfoComponent implements OnInit {
     const hours = Math.floor(duration / (3600 * 1000));
     const minutes = (duration - (hours * 3600 * 1000)) / (60 * 1000);
     return `${hours}h ${minutes}min`;
+  }
+
+  selectFlight(flight: IFlight | undefined) {
+    this.selectEvent.emit(flight);
+    this.isSelected = !this.isSelected;
   }
 
 }

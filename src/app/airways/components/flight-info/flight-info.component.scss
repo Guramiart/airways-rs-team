@@ -30,6 +30,10 @@
 
 }
 
+.right-block {
+  width: 30%;
+}
+
 .end-time {
   text-align: right;
 }
@@ -111,8 +115,21 @@
   height: 36px;
   color: white;
   background: linear-gradient(108.75deg, #0090BD 59.91%, #073590 95.36%);
-  border: 1px solid #11397E;
   border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.edit-btn {
+  width: 44px;
+  height: 28px;
+  color: #11397E;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  background: #F4F6F9;
+  border-radius: 4px;
+  border: none;
   cursor: pointer;
 }
 

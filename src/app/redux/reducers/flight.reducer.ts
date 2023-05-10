@@ -51,4 +51,18 @@ export const flightReducer = createReducer(
       endDate,
     }),
   ),
+  on(
+    FlightActions.updateDirectFlight,
+    (state: FlightState, { selectedDirectFlight }): FlightState => ({
+      ...state,
+      selectedDirectFlight,
+    }),
+  ),
+  on(
+    FlightActions.updateReverseFlight,
+    (state: FlightState, { selectedReverseFlight }): FlightState => ({
+      ...state,
+      selectedReverseFlight,
+    }),
+  ),
 );
