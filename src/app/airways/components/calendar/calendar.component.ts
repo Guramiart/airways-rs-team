@@ -82,7 +82,6 @@ export class CalendarComponent implements OnInit {
             startDate: new Date(info.startDate),
           }));
       } else {
-        console.log(true);
         this.store
           .dispatch(FlightAction.changeEndDateFlight({
             endDate: new Date(info.startDate),

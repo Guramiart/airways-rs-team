@@ -1,3 +1,8 @@
+.wrap {
+  padding: 0 135px;
+  padding-bottom: 30px;
+}
+
 .title {
   display: flex;
   flex-direction: row;
@@ -22,4 +27,9 @@
 
 .return {
   rotate: -90deg;
+}
+.btns-block{
+  display: flex;
+  gap: 20px;
+  justify-content: right;
 }

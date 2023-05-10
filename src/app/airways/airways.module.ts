@@ -17,6 +17,8 @@ import { SignInComponent } from './components/modal-window/sign-in/sign-in.compo
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { SummaryPageComponent } from './components/summary-page/summary-page.component';
 import { FlightInfoComponent } from './components/flight-info/flight-info.component';
+import { PassengerFormComponent } from './components/second-step/passenger-form/passenger-form.component';
+import { ContactsFormComponent } from './components/second-step/contacts-form/contacts-form.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { FlightInfoComponent } from './components/flight-info/flight-info.compon
     CalendarComponent,
     SummaryPageComponent,
     FlightInfoComponent,
+    PassengerFormComponent,
+    ContactsFormComponent,
   ],
   imports: [
     CommonModule,

@@ -23,4 +23,12 @@ export class FirstStepComponent implements OnInit {
     this.flights$ = this.store.select(FlightSelect.selectFlight);
   }
 
+  public back(isBack:boolean):void {
+    if (isBack) {
+      this.router.navigateByUrl('/');
+    } else {
+      this.router.navigateByUrl('step/2');
+    }
+  }
+
 }
