@@ -1,6 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
   --app-root-blue: #11397E;
+  --mdc-checkbox-selected-icon-color: #11397E;
+  --mdc-checkbox-selected-hover-icon-color: #11397E;
+  --mdc-checkbox-unselected-hover-icon-color: #11397E;
 }
 
 .mat-mdc-button.mat-unthemed {
@@ -68,4 +71,21 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .mat-calendar-period-button.mdc-button.mat-mdc-button.mat-unthemed.mat-mdc-button-base {
   color: #1C1B1F;
+}
+
+
+.mat-mdc-menu-panel.mdc-menu-surface.mdc-menu-surface--open.mat-mdc-elevation-specific {
+  opacity: 1 !important;
+}
+
+.mat-mdc-menu-item.mat-mdc-focus-indicator.mdc-list-item.main__item-menu {
+  .mdc-list-item__primary-text {
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    color: #1C1B1F;
+  }
 }

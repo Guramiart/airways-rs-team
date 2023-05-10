@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTableModule } from '@angular/material/table';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { BookingPageComponent } from './pages/booking-page/booking-page.component';
 import { ShoppingCartPageComponent } from './pages/shopping-cart-page/shopping-cart-page.component';
@@ -40,6 +42,8 @@ import { ContactsFormComponent } from './components/second-step/contacts-form/co
     MaterialModule,
     RouterOutlet,
     NgOptimizedImage,
+    MatTableModule,
+    MatMenuModule,
   ],
   exports: [
     MainPageComponent,
