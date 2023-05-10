@@ -1,17 +1,21 @@
 import {
   AfterViewInit,
-  Component, ComponentRef, ViewChild, ViewContainerRef,
+  Component, ComponentRef, OnInit, ViewChild, ViewContainerRef,
 } from '@angular/core';
 
+import { Store } from '@ngrx/store';
 import { TicketInfoComponent } from '../../../shared/components/ticket-info/ticket-info.component';
 import { SummaryComponent } from '../../../shared/components/summary/summary.component';
+import * as FlightSelect from '../../../redux/selectors/flight.selector';
 
 @Component({
   selector: 'app-summary-page',
   templateUrl: './summary-page.component.html',
   styleUrls: ['./summary-page.component.scss'],
 })
-export class SummaryPageComponent implements AfterViewInit {
+export class SummaryPageComponent implements AfterViewInit, OnInit {
+
+  constructor(private store: Store) {}
 
   // TODO: replace the mok data after!!!
   private mokPassengerData = {
@@ -74,6 +78,11 @@ export class SummaryPageComponent implements AfterViewInit {
   @ViewChild('container', { read: ViewContainerRef, static: true }) container: ViewContainerRef;
 
   @ViewChild('summary', { read: ViewContainerRef, static: true }) summary: ViewContainerRef;
+
+  ngOnInit(): void {
+    this.store.select(FlightSelect.selectFlight)
+      .subscribe((data) => console.log(data));
+  }
 
   ngAfterViewInit(): void {
     this.mokPassengerData.tickets.forEach((ticket, index) => {

@@ -7,6 +7,14 @@ const UPDATE_STORE = '[Flight] Update flights';
 const CHANGE_FROM_FLIGHT = '[Flight] Change from';
 const CHANGE_DESTINATION_FLIGHT = '[Flight] Change destination';
 const CHANGE_DATE = '[Flight] Change date';
+const UPDATE_PASSENGERS = '[fliht] Update passengers';
+
+export const updatePassengers = createAction(
+  UPDATE_PASSENGERS,
+  props<{
+    passengers: Passengers,
+  }>(),
+);
 
 export const getFlights = createAction(GET_FLIGHTS);
 
