@@ -1,5 +1,5 @@
 import { AfterViewInit, Component } from '@angular/core';
-import { Passenger } from '../ticket-info/ticket-info.component';
+import { Passenger } from '../../enums/tickets-data';
 
 @Component({
   selector: 'app-passenger-info',

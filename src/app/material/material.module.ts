@@ -8,7 +8,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MatDividerModule } from '@angular/material/divider';
 import { MAT_CHECKBOX_DEFAULT_OPTIONS, MatCheckboxDefaultOptions, MatCheckboxModule } from '@angular/material/checkbox';
 import { MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule } from '@angular/material/radio';
 import {
@@ -16,6 +15,7 @@ import {
 } from '@angular/material/core';
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { DATE_FORMATS } from '../shared/enums/date-format';
 
@@ -34,7 +34,7 @@ import { DATE_FORMATS } from '../shared/enums/date-format';
     MatRadioModule,
     MatTabsModule,
     MatCheckboxModule,
-    MatDividerModule,
+    MatMenuModule,
     MatSlideToggleModule,
   ],
   exports: [
@@ -52,7 +52,7 @@ import { DATE_FORMATS } from '../shared/enums/date-format';
     MatRadioModule,
     MatTabsModule,
     MatCheckboxModule,
-    MatDividerModule,
+    MatMenuModule,
     MatSlideToggleModule,
   ],
   providers: [

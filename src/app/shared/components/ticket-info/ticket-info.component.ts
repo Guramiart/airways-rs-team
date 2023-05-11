@@ -1,28 +1,8 @@
 import {
   AfterViewInit, Component, ViewChild, ViewContainerRef,
 } from '@angular/core';
-
+import { Passenger, Ticket } from '../../enums/tickets-data';
 import { PassengerInfoComponent } from '../passenger-info/passenger-info.component';
-
-// TODO: Remove or move to a separate file after
-export interface Ticket {
-  flight: string,
-  direction: string,
-  date: string,
-  time: string,
-  prices: {
-    adult: Passenger[],
-    child: Passenger[],
-    infant: Passenger[],
-  }
-}
-
-export interface Passenger {
-  name: string,
-  fare: number,
-  tax: number,
-  place: string | null,
-}
 
 @Component({
   selector: 'app-ticket-info',
