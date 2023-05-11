@@ -25,6 +25,7 @@ p {
   margin: 0 auto;
   max-width: 1440px;
   width: 100%;
+  height: auto;
 }
 
 .wrapper {
@@ -64,21 +65,46 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   display: none;
 }
 
-// .mat-mdc-form-field-subscript-wrapper {
-//   display: none;
-// }
-// Все формы рушаться если отключить это
-
 .mat-calendar-period-button.mdc-button.mat-mdc-button.mat-unthemed.mat-mdc-button-base {
   color: #1C1B1F;
 }
 
+.carousel .slick-next {
+  right: 0;
+}
+
+.carousel .slick-prev {
+  left: 0;
+}
+
+.carousel .slick-next,
+.carousel .slick-prev {
+  z-index: 1000;
+  top: 60%;
+  width: 24px;
+  height: 24px;
+  border-radius: 10px;
+
+  &::before {
+    opacity: 1;
+    color: gray;
+  }
+
+}
+
+.carousel .slick-list .slick-track {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+  align-items: flex-end;
+}
 
 .mat-mdc-menu-panel.mdc-menu-surface.mdc-menu-surface--open.mat-mdc-elevation-specific {
   opacity: 1 !important;
 }
 
 .mat-mdc-menu-item.mat-mdc-focus-indicator.mdc-list-item.main__item-menu {
+
   .mdc-list-item__primary-text {
     font-family: 'Roboto', sans-serif;
     font-style: normal;
@@ -88,4 +114,5 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     letter-spacing: 0.5px;
     color: #1C1B1F;
   }
+
 }

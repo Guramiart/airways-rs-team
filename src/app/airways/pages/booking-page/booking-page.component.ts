@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import {
   animate, style, transition, trigger,
 } from '@angular/animations';
+import { Router } from '@angular/router';
 import { ShowEditorService } from '../../services/show-editor.service';
 
 @Component({
@@ -27,7 +28,10 @@ export class BookingPageComponent implements OnInit, OnDestroy {
 
   private observeForEditBtn: Subscription | undefined;
 
-  constructor(private observe: ShowEditorService) {}
+  constructor(
+    private router: Router,
+    private observe: ShowEditorService,
+  ) {}
 
   ngOnInit(): void {
     this.observeForEditBtn = this.observe.emit.subscribe((): void => {
@@ -37,6 +41,14 @@ export class BookingPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.observeForEditBtn) this.observeForEditBtn.unsubscribe();
+  }
+
+  next(): void {
+    this.router.navigateByUrl('/step/2');
+  }
+
+  back(): void {
+    this.router.navigateByUrl('');
   }
 
 }

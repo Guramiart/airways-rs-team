@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MainPageComponent } from './pages/main-page/main-page.component';
@@ -16,7 +16,9 @@ import { BookingEditorComponent } from './components/booking-editor/booking-edit
 import { ModalWindowComponent } from './components/modal-window/modal-window.component';
 import { LogInComponent } from './components/modal-window/log-in/log-in.component';
 import { SignInComponent } from './components/modal-window/sign-in/sign-in.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
 import { SummaryPageComponent } from './components/summary-page/summary-page.component';
+import { FlightInfoComponent } from './components/flight-info/flight-info.component';
 import { PassengerFormComponent } from './components/second-step/passenger-form/passenger-form.component';
 import { ContactsFormComponent } from './components/second-step/contacts-form/contacts-form.component';
 
@@ -33,7 +35,9 @@ import { ContactsFormComponent } from './components/second-step/contacts-form/co
     ModalWindowComponent,
     LogInComponent,
     SignInComponent,
+    CalendarComponent,
     SummaryPageComponent,
+    FlightInfoComponent,
     PassengerFormComponent,
     ContactsFormComponent,
   ],
@@ -42,6 +46,7 @@ import { ContactsFormComponent } from './components/second-step/contacts-form/co
     MaterialModule,
     RouterOutlet,
     NgOptimizedImage,
+    SlickCarouselModule,
     MatTableModule,
     MatMenuModule,
   ],

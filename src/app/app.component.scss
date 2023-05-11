@@ -1,17 +1,21 @@
 .content {
   box-sizing: border-box;
+  padding-bottom: 92px;
   min-height: 100vh;
-  padding-bottom: 87px;
+  height: 100%;
 }
 
 .page-wrap {
-  display: flex;
-  flex-direction: column;
+  min-height: 100%;
+  position: relative;
 }
 
 .footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
   background-color: #D0D9DF;
   border-top: 2px solid #E3E4E4;
-  height: 92px;
-  margin-top: -92px;
+  height: 94px;
 }

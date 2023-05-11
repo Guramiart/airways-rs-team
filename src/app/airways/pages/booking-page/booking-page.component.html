@@ -3,6 +3,12 @@
   <div class="main__booking-editor">
     <app-booking-editor *ngIf="isEditor" @showEditor></app-booking-editor>
   </div>
-  <router-outlet name="booking"></router-outlet>
+  <div class="step">
+    <router-outlet name="booking"></router-outlet>
+    <div class="btn-block">
+      <button class="back-btn" mat-flat-button (click)="back()">Back</button>
+      <button mat-button (click)="next()" type="button">Continue</button>
+    </div>
+  </div>
 </div>
 

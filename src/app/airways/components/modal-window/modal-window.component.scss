@@ -8,13 +8,15 @@
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.226);
     z-index: 9000;
+    overflow: auto;
 }
 .content{
-    width: 50%;
+    width: 31%;
     background-color: white;
     padding: 20px;
     position: relative;
     margin-top: 60px;
+    margin-bottom: 40px;
     height: fit-content;
     border-radius: 4px;
 }

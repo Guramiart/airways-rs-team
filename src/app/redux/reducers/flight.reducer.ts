@@ -38,11 +38,31 @@ export const flightReducer = createReducer(
     }),
   ),
   on(
-    FlightActions.changeDateFlight,
-    (state: FlightState, { startDate, endDate }): FlightState => ({
+    FlightActions.changeStartDateFlight,
+    (state: FlightState, { startDate }): FlightState => ({
       ...state,
       startDate,
+    }),
+  ),
+  on(
+    FlightActions.changeEndDateFlight,
+    (state: FlightState, { endDate }): FlightState => ({
+      ...state,
       endDate,
+    }),
+  ),
+  on(
+    FlightActions.updateDirectFlight,
+    (state: FlightState, { selectedDirectFlight }): FlightState => ({
+      ...state,
+      selectedDirectFlight,
+    }),
+  ),
+  on(
+    FlightActions.updateReverseFlight,
+    (state: FlightState, { selectedReverseFlight }): FlightState => ({
+      ...state,
+      selectedReverseFlight,
     }),
   ),
 );

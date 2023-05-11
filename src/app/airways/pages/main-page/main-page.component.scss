@@ -1,5 +1,5 @@
 .main__page {
-  height: calc(100vh - 92px);
+  height: 100%;
 }
 
 .bg {
@@ -15,6 +15,9 @@
   background-size: cover;
 }
 
+.container {
+  height: 100%;
+}
 
 .main__wrapper {
   padding-top: 88px;

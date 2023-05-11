@@ -1,0 +1,51 @@
+<div class="flight-info" *ngIf="flightData as flight; else flightNotFound">
+  <div class="flight-info__time">
+    <div class="start-time">
+      <div class="date">{{ flight.startDate | date:'EE, d MMM yyyy' }}</div>
+      <div class="time">{{ flight.startDate | date: 'HH:mm' }}</div>
+      <div class="location">{{ from.nameEn }}</div>
+    </div>
+    <div class="direction">
+      <div>{{ getDuration(flight.startDate, flight.endDate) }}</div>
+      <div class="icon-block">
+        <div class="airplane"></div>
+      </div>
+      <div>Direct</div>
+    </div>
+    <div class="end-time">
+      <div class="date">{{ flight.endDate | date:'EE, d MMM yyyy' }}</div>
+      <div class="time">{{ flight.endDate | date:'HH:mm' }}</div>
+      <div class="location">{{ destination.nameEn }}</div>
+    </div>
+    <div class="number">Flight no. {{ flight.number }}</div>
+  </div>
+  <div class="divider" *ngIf="!isSelected"></div>
+  <div class="flight-info__price">
+    <div class="price-block">
+      <div class="seats" *ngIf="!isSelected">
+        <div class="seats-number">{{ flight.seats }} seats</div>
+        <span>available</span>
+      </div>
+      <div class="price-title" *ngIf="!isSelected">Price</div>
+      <div class="price">{{ flight.price }}</div>
+    </div>
+    <div class="submit-block" *ngIf="!isSelected; else editBtn">
+      <button class="select-btn" (click)="selectFlight(flight)">Select</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #flightNotFound>
+  <div class="flight-info">
+    <div class="flight-not-block">
+      <div class="flight-img"></div>
+      <span>No flights available</span>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #editBtn>
+  <div class="submit-block">
+    <button class="edit-btn" (click)="selectFlight(undefined)">Edit</button>
+  </div>
+</ng-template>
