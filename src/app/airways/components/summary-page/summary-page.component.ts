@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { TicketInfoComponent } from '../../../shared/components/ticket-info/ticket-info.component';
 import { SummaryComponent } from '../../../shared/components/summary/summary.component';
 import * as FlightSelect from '../../../redux/selectors/flight.selector';
+import { StepperService } from '../../../core/services/stepper-service.service';
 
 @Component({
   selector: 'app-summary-page',
@@ -14,8 +15,6 @@ import * as FlightSelect from '../../../redux/selectors/flight.selector';
   styleUrls: ['./summary-page.component.scss'],
 })
 export class SummaryPageComponent implements AfterViewInit, OnInit {
-
-  constructor(private store: Store) {}
 
   // TODO: replace the mok data after!!!
   private mokPassengerData = {
@@ -79,7 +78,11 @@ export class SummaryPageComponent implements AfterViewInit, OnInit {
 
   @ViewChild('summary', { read: ViewContainerRef, static: true }) summary: ViewContainerRef;
 
+  constructor(private store: Store, private stepperSwitcher: StepperService) {
+  }
+
   ngOnInit(): void {
+    this.stepperSwitcher.switchStepper('third');
     this.store.select(FlightSelect.selectFlight)
       .subscribe((data) => console.log(data));
   }

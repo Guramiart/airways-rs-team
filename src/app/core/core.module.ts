@@ -1,5 +1,5 @@
 import { NgModule, isDevMode } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 
 import { StoreModule } from '@ngrx/store';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
@@ -40,6 +40,7 @@ import { flightReducer } from '../redux/reducers/flight.reducer';
     StoreModule.forRoot({ flights: flightReducer, settings: settingReducer }, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     RouterLink,
+    NgOptimizedImage,
   ],
   exports: [
     HeaderComponent,

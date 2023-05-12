@@ -6,6 +6,7 @@ import { Passengers } from '../../models/passengers';
 import { IPassengerInfo } from '../../models/passengerInfo.model';
 import * as FlightSelect from '../../../redux/selectors/flight.selector';
 import * as FlightActions from '../../../redux/actions/flight.actions';
+import { StepperService } from '../../../core/services/stepper-service.service';
 
 @Component({
   selector: 'app-second-step',
@@ -35,9 +36,11 @@ export class SecondStepComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store,
     private router: Router,
+    private stepperSwitcher: StepperService,
   ) {}
 
   ngOnInit(): void {
+    this.stepperSwitcher.switchStepper('second');
     this.subscription = this.store.select(FlightSelect.selectFlight)
       // eslint-disable-next-line @ngrx/no-store-subscription
       .subscribe((data) => { this.passengers = data.passengers; });

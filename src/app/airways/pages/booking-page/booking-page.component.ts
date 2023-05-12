@@ -39,7 +39,7 @@ export class BookingPageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.routeInfo.data.subscribe((data) => {
       this.headerChange.changePage(data['headerView']);
-    });
+    }).unsubscribe();
     this.observeForEditBtn = this.observe.emit.subscribe((): void => {
       this.isEditor = !this.isEditor;
     });
