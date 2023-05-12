@@ -10,6 +10,7 @@ import { TableRecordComponent } from '../../../shared/components/table-record/ta
 import { CartSwitcherService, SelectionTicketEvent } from '../../services/cart-switcher.service';
 import { SortingService } from '../../services/sorting-service.service';
 import { OneTicket } from '../../../shared/enums/tickets-data';
+import { HeaderChangerService } from '../../../core/services/header-changer.service';
 
 type Discount = {
   code: string,
@@ -129,6 +130,7 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
     private switcher: CartSwitcherService,
     private sort: SortingService,
     private routerParam: ActivatedRoute,
+    private headerChange: HeaderChangerService,
   ) { }
 
   ngAfterViewInit(): void {
@@ -137,6 +139,10 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
 
   ngOnInit(): void {
     this.isShoppingCart = this.routerParam.snapshot.data['cart'];
+    this.routerParam.data.subscribe((data) => {
+      const { headerView } = data;
+      this.headerChange.changePage(headerView);
+    });
     this.selectedObserver = this.switcher.selection.subscribe((arg: SelectionTicketEvent): void => {
       this.showSelected(arg);
     });

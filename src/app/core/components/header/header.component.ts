@@ -13,20 +13,25 @@ enum BgColor {
 })
 export class HeaderComponent implements OnInit {
 
-  public isSteps = false;
+  public isSteps: boolean | null;
 
-  public backgroundColor: BgColor = BgColor.grey;
+  public backgroundColor: BgColor;
 
-  constructor(private mainObserver: HeaderChangerService) {
+  constructor(
+    private mainObserver: HeaderChangerService,
+  ) {
   }
 
-  public checkPage(): void {
-    this.isSteps = !this.isSteps;
-    this.backgroundColor = this.backgroundColor === BgColor.grey ? BgColor.white : BgColor.grey;
+  public checkPage(steps: boolean | null, bgColor: boolean): void {
+    this.isSteps = steps;
+    this.backgroundColor = bgColor ? BgColor.white : BgColor.grey;
   }
 
   ngOnInit(): void {
-    this.mainObserver.onChangePage().subscribe(() => this.checkPage());
+    this.mainObserver.onChangePage().subscribe((eventHeader) => {
+      const { bgColor, showStepper } = eventHeader;
+      this.checkPage(showStepper, bgColor);
+    });
   }
 
 }

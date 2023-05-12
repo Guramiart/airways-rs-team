@@ -9,6 +9,12 @@ const routes: Routes = [
   {
     path: '1',
     component: BookingPageComponent,
+    data: {
+      headerView: {
+        bgColor: true,
+        showStepper: true,
+      },
+    },
     children: [
       {
         path: '',
@@ -20,6 +26,12 @@ const routes: Routes = [
   {
     path: '2',
     component: BookingPageComponent,
+    data: {
+      headerView: {
+        bgColor: true,
+        showStepper: true,
+      },
+    },
     children: [
       {
         path: '',
@@ -31,6 +43,12 @@ const routes: Routes = [
   {
     path: '3',
     component: BookingPageComponent,
+    data: {
+      headerView: {
+        bgColor: true,
+        showStepper: true,
+      },
+    },
     children: [
       {
         path: '',

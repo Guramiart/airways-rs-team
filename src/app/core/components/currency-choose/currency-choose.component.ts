@@ -34,11 +34,14 @@ export class CurrencyChooseComponent implements OnInit {
 
   ngOnInit(): void {
     this.currency$ = this.store.select(SettingsSelector.selectCurrency);
-    this.mainObserver.onChangePage().subscribe(() => this.onChange());
+    this.mainObserver.onChangePage().subscribe((data) => {
+      const { bgColor } = data;
+      this.onChange(bgColor);
+    });
   }
 
-  private onChange(): void {
-    this.textColor = this.textColor === Color.white ? Color.black : Color.white;
+  private onChange(bgColor: boolean): void {
+    this.textColor = bgColor ? Color.black : Color.white;
   }
 
   public updateStore(value: MatSelectChange) {

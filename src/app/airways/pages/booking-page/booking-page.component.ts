@@ -3,8 +3,9 @@ import { Subscription } from 'rxjs';
 import {
   animate, style, transition, trigger,
 } from '@angular/animations';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ShowEditorService } from '../../services/show-editor.service';
+import { HeaderChangerService } from '../../../core/services/header-changer.service';
 
 @Component({
   selector: 'app-booking-page',
@@ -31,9 +32,14 @@ export class BookingPageComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private observe: ShowEditorService,
+    private headerChange: HeaderChangerService,
+    private routeInfo: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
+    this.routeInfo.data.subscribe((data) => {
+      this.headerChange.changePage(data['headerView']);
+    });
     this.observeForEditBtn = this.observe.emit.subscribe((): void => {
       this.isEditor = !this.isEditor;
     });
