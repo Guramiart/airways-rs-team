@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { FlightState } from 'src/app/redux/state.model';
@@ -24,13 +24,17 @@ export class BookingEditComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store,
     private emit: ShowEditorService,
-  ) {}
+    private detectorChange: ChangeDetectorRef,
+  ) {
+    this.detectorChange.detach();
+  }
 
   ngOnInit(): void {
     this.flights$ = this.store.select(FlightSelect.selectFlight);
 
     this.buttonObserver = this.emit.button.subscribe((isShow: boolean) => {
       this.isButton = isShow;
+      this.detectorChange.detectChanges();
     });
   }
 

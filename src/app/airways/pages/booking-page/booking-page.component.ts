@@ -46,7 +46,7 @@ export class BookingPageComponent implements OnInit, OnDestroy, AfterViewInit {
     }).unsubscribe();
     this.observeForEditBtn = this.observe.emit.subscribe((): void => {
       this.isEditor = !this.isEditor;
-    });
+    });    
   }
 
   ngOnDestroy(): void {
