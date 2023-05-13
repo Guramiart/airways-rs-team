@@ -15,7 +15,7 @@
         <img class="main__passenger-icon" src="./assets/people.svg" alt="">
       </div>
     </div>
-    <button class="main__open-edit" (click)="showBookingEditor()">
+    <button *ngIf="isButton" class="main__open-edit" (click)="showBookingEditor()">
       <span class="main__open-text">Edit</span>
     </button>
   </div>

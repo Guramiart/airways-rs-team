@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, AfterViewInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import {
   animate, style, transition, trigger,
@@ -23,7 +23,7 @@ import { HeaderChangerService } from '../../../core/services/header-changer.serv
     ]),
   ],
 })
-export class BookingPageComponent implements OnInit, OnDestroy {
+export class BookingPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public isEditor = false;
 
@@ -35,6 +35,10 @@ export class BookingPageComponent implements OnInit, OnDestroy {
     private headerChange: HeaderChangerService,
     private routeInfo: ActivatedRoute,
   ) {}
+
+  ngAfterViewInit(): void {
+    this.observe.showButtonEditor(this.routeInfo.snapshot.data['btnEditor']);
+  }
 
   ngOnInit(): void {
     this.routeInfo.data.subscribe((data) => {

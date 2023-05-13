@@ -14,6 +14,7 @@ const routes: Routes = [
         bgColor: true,
         showStepper: true,
       },
+      btnEditor: true,
     },
     children: [
       {
@@ -31,6 +32,7 @@ const routes: Routes = [
         bgColor: true,
         showStepper: true,
       },
+      btnEditor: false,
     },
     children: [
       {
@@ -48,6 +50,7 @@ const routes: Routes = [
         bgColor: true,
         showStepper: true,
       },
+      btnEditor: false,
     },
     children: [
       {
