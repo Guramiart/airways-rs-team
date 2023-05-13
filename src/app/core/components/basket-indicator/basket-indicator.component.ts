@@ -22,11 +22,14 @@ export class BasketIndicatorComponent implements OnInit {
   constructor(private mainObserver: HeaderChangerService) { }
 
   ngOnInit(): void {
-    this.mainObserver.onChangePage().subscribe(() => this.onChange());
+    this.mainObserver.onChangePage().subscribe((data) => {
+      const { bgColor, showStepper } = data;
+      this.onChange(bgColor);
+    });
   }
 
-  private onChange(): void {
-    this.basketIcon = this.basketIcon === IconLinks.white ? IconLinks.black : IconLinks.white;
+  private onChange(bgColor: boolean): void {
+    this.basketIcon = bgColor ? IconLinks.black : IconLinks.white;
   }
 
 }
