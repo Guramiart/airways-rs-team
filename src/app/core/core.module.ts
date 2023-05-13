@@ -19,6 +19,8 @@ import { StepsIndicatorComponent } from './components/steps-indicator/steps-indi
 
 import { settingReducer } from '../redux/reducers/settings.reducer';
 import { flightReducer } from '../redux/reducers/flight.reducer';
+import { HeaderChangerService } from './services/header-changer.service';
+import { StepperService } from './services/stepper-service.service';
 
 @NgModule({
   declarations: [
@@ -46,5 +48,6 @@ import { flightReducer } from '../redux/reducers/flight.reducer';
     HeaderComponent,
     FooterComponent,
   ],
+  providers: [HeaderChangerService, StepperService]
 })
 export class CoreModule { }
