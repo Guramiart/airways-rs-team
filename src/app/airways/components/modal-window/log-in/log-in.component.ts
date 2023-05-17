@@ -37,25 +37,32 @@ export class LogInComponent implements OnInit {
   public submit() {
     this.isSubmitted = true;
     if (!this.logInForm.invalid) {
-      this.data.getUserByName(this.logInForm.controls['email'].value)
-        .subscribe((user) => {
-          if (user.length > 0) {
-            this.isCorrectEmail = false;
-            if (user[0].password === this.logInForm.controls['password'].value) {
-              this.isCorrectPassword = false;
-
-              this.store.dispatch(SettingsAction.setAuthUser({ authUser: user[0] }));
-
-              this.data.changeLS(user[0].id);
-
-              this.closeModal();
-            } else {
-              this.isCorrectPassword = true;
-            }
-          } else {
+      const respObj = {
+        email: this.logInForm.controls['email'].value,
+        password: this.logInForm.controls['password'].value,
+      };
+      this.data.loginUser(respObj).subscribe({
+        error: (err) => {
+          console.log(err);
+          if (err === 'Not Found') {
             this.isCorrectEmail = true;
+          } else {
+            this.isCorrectEmail = false;
           }
-        });
+          if (err === 'Forbidden') {
+            this.isCorrectPassword = true;
+          } else {
+            this.isCorrectPassword = false;
+          }
+        },
+        next: (resp) => {
+          this.data.getUserToken(resp.token).subscribe((user) => {
+            this.store.dispatch(SettingsAction.setAuthUser({ authUser: user }));
+            this.data.changeLS(resp.token);
+            this.closeModal();
+          });
+        },
+      });
     }
   }
 

@@ -54,24 +54,27 @@ export class SignInComponent implements OnInit {
     if (!this.signInForm.invalid) {
 
       const newUser = {
-        id: Date.now(),
         firstName: this.replaceFirstLetterToUpperCase(this.signInForm.controls['firstName'].value as string),
         lastName: this.replaceFirstLetterToUpperCase(this.signInForm.controls['lastName'].value as string),
         email: this.signInForm.controls['email'].value,
         password: this.signInForm.controls['password'].value,
-        birthDate: new Date(this.signInForm.controls['birthDate'].value).toLocaleDateString(),
+        dateOfBirth: new Date(this.signInForm.controls['birthDate'].value).toLocaleDateString(),
         gender: this.gender,
-        mobile: this.signInForm.controls['countryCode'].value + this.signInForm.controls['mobile'].value,
-        citizen: this.signInForm.controls['citizen'].value,
+        countryCode: this.signInForm.controls['countryCode'].value || '',
+        phone: this.signInForm.controls['mobile'].value,
+        citizenship: this.signInForm.controls['citizen'].value,
       };
 
-      this.store.dispatch(SettingsAction.setAuthUser({ authUser: newUser }));
-
-      this.data.setNewUser(newUser);
-
-      this.data.changeLS(newUser.id);
-
-      this.closeModal();
+      this.data.setNewUser(newUser).subscribe({
+        next: (resp) => {
+          this.data.getUserToken(resp.token).subscribe((user) => {
+            this.store.dispatch(SettingsAction.setAuthUser({ authUser: user }));
+            this.data.changeLS(resp.token);
+            this.closeModal();
+          });
+        },
+        error: (err) => console.log(err),
+      });
     }
   }
 

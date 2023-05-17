@@ -1,49 +1,49 @@
 :host {
   display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 68px;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  background: #FAFAFA;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  background: #fafafa;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 20%);
 }
 
 .booking-wrap {
-  max-width: 1128px;
   width: 100%;
+  max-width: 1128px;
 }
 
 .main__booking-edit {
   display: flex;
-  width: 100%;
   flex-direction: row;
   gap: 63px;
+  width: 100%;
 }
 
 .main__booking-information {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
   gap: 40px;
+  justify-content: flex-start;
 }
 
 .main__direction-wrapper {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
   gap: 16px;
+  justify-content: flex-start;
 }
 
 .main__from-direction,
 .main__to-direction {
-  font-family: 'Roboto', sans-serif;
-  font-style: normal;
-  font-weight: 500;
+  font-family: Roboto, sans-serif;
   font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
   line-height: 24px;
+  color: #000;
   letter-spacing: 0.15px;
-  color: #000000;
 }
 
 .main__direction-icon {
@@ -54,28 +54,28 @@
 .main__info-wrapper {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
   gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .main__info-text,
 .main__dates-flight,
 .main__passenger-count {
-  font-family: 'Roboto', sans-serif;
-  font-style: normal;
-  font-weight: 500;
+  font-family: Roboto, sans-serif;
   font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
   line-height: 20px;
+  color: #74767a;
   letter-spacing: 0.1px;
-  color: #74767A;
 }
 
 .main__point-separator {
   flex: 0 0 auto;
   width: 4px;
   height: 4px;
-  background: #0090BD;
+  background: #0090bd;
   border-radius: 2px;
 }
 
@@ -88,20 +88,20 @@
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  padding: 4px 8px;
   width: 44px;
   height: 28px;
-  background: #F4F6F9;
+  padding: 4px 8px;
+  background: #f4f6f9;
   border: none;
   border-radius: 4px;
 }
 
 .main__open-text {
-  font-family: 'Roboto', sans-serif;
-  font-style: normal;
-  font-weight: 500;
+  font-family: Roboto, sans-serif;
   font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
   line-height: 20px;
+  color: #11397e;
   letter-spacing: 0.1px;
-  color: #11397E;
 }

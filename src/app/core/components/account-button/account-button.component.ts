@@ -43,7 +43,7 @@ export class AccountButtonComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.mainObserver.onChangePage().subscribe((data) => {
-      const { bgColor, showStepper} = data;
+      const { bgColor } = data;
       this.onChange(bgColor);
     });
     this.subscription = this.store.select(SettingsSelector.selectUser)
@@ -65,7 +65,7 @@ export class AccountButtonComponent implements OnInit, OnDestroy {
 
   public signOut():void {
     this.store.dispatch(SettingsAction.setAuthUser({ authUser: undefined }));
-    this.data.changeLS(0, true);
+    this.data.changeLS('', true);
   }
 
   private onChange(bgColor: boolean): void {

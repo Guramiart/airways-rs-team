@@ -9,7 +9,8 @@ export class FlightInfoService {
 
   private flight: IFlight;
 
-  private flightInfo$: BehaviorSubject<IFlight | undefined> = new BehaviorSubject<IFlight | undefined>(undefined);
+  private flightInfo$: BehaviorSubject<IFlight | undefined> 
+  = new BehaviorSubject<IFlight | undefined>(undefined);
 
   public getFlightInfo$(): Observable<IFlight | undefined> {
     return this.flightInfo$.asObservable();

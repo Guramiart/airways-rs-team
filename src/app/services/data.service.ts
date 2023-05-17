@@ -21,29 +21,34 @@ export class DataService {
     return this.http.get<ICity[]>('cities');
   }
 
-  public getUser(id:number | string | null): Observable<IUser> {
-    return this.http.get<IUser>(`users/${id}`);
+  public loginUser(resp:{ email:string, password:string }) {
+    return this.http.post<{ token:string }>('auth/login', resp);
   }
 
-  public getUserByName(email:string): Observable<IUser[]> {
-    return this.http.get<IUser[]>(`users?email=${email}`);
+  public getUserToken(token:string | null) {
+    return this.http.get<IUser>('auth/me', {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
   }
 
   public setNewUser(newUser:IUser) {
-    this.http.post<IUser[]>('users', newUser).subscribe();
+    return this.http.post<{ token:string }>('auth/registration', newUser);
   }
 
-  public changeLS(id:number, isSignOut?:boolean):void {
+  public changeLS(token:string, isSignOut?:boolean):void {
     if (isSignOut) {
       localStorage.removeItem('authUserAirways');
     } else {
-      localStorage.setItem('authUserAirways', id.toString());
+      localStorage.setItem('authUserAirways', token);
     }
   }
 
   public setAuthUserFromLS():void {
     if (localStorage.getItem('authUserAirways') !== null) {
-      this.getUser(localStorage.getItem('authUserAirways'))
+      this.getUserToken(localStorage.getItem('authUserAirways'))
         .subscribe((data) => this.store.dispatch(SettingsAction.setAuthUser({ authUser: data })));
     }
   }

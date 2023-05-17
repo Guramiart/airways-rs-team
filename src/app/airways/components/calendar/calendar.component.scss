@@ -4,10 +4,10 @@
 
   .date,
   .date-blocked {
-    color: #0090BD;
-    font-weight: 500;
     font-size: 14px;
+    font-weight: 500;
     line-height: 20px;
+    color: #0090bd;
   }
 
   .day-blocked,
@@ -18,19 +18,18 @@
   .price-blocked {
     width: 18px;
     height: 18px;
-    background-position: center;
+    background-image: url("../../../../assets/flight-blocked.svg");
     background-repeat: no-repeat;
+    background-position: center;
     background-size: cover;
-    background-image: url('../../../../assets/flight-blocked.svg');
   }
 
   .price {
-    color: #11397E;
-    font-weight: 700;
     font-size: 20px;
+    font-weight: 700;
     line-height: 20px;
+    color: #11397e;
   }
-
 }
 
 .carousel {
@@ -44,41 +43,38 @@
   background: transparent;
 
   .slide {
+    cursor: pointer;
+    height: 70px;
     margin: 0 1px;
     padding: 2px;
-    height: 70px;
-    border-radius: 4px;
     background-color: white;
-    cursor: pointer;
-    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    box-shadow: 0 0 1px rgb(0 0 0 / 20%);
 
     .date-slide {
-      height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      height: 100%;
     }
-
   }
 
   .active {
     height: 83px;
 
     .date {
-      color: var(--app-root-blue);
-      font-weight: 700;
       font-size: 20px;
+      font-weight: 700;
       line-height: 20px;
+      color: var(--app-root-blue);
     }
 
     .price {
-      color: #11397E;
-      font-weight: 700;
       font-size: 30px;
+      font-weight: 700;
       line-height: 25px;
+      color: #11397e;
     }
-
   }
-
 }
