@@ -1,20 +1,20 @@
 import { createReducer, on } from '@ngrx/store';
-import { FlightState, initialFlightState } from '../state.model';
+import { IFlightState, initialFlightState } from '../state.model';
 
 import * as FlightActions from '../actions/flight.actions';
 
 export const flightReducer = createReducer(
   initialFlightState,
-  on(FlightActions.updatePassengers, (state: FlightState, { passengers }):FlightState => ({
+  on(FlightActions.updatePassengers, (state: IFlightState, { passengers }):IFlightState => ({
     ...state,
     passengers,
   })),
-  on(FlightActions.getFlights, (state: FlightState): FlightState => ({ ...state })),
+  on(FlightActions.getFlights, (state: IFlightState): IFlightState => ({ ...state })),
   on(
     FlightActions.updateFlights,
-    (state: FlightState, {
+    (state: IFlightState, {
       from, destination, startDate, endDate, passengers,
-    }): FlightState => ({
+    }): IFlightState => ({
       ...state,
       from,
       destination,
@@ -25,42 +25,42 @@ export const flightReducer = createReducer(
   ),
   on(
     FlightActions.changeFromFlight,
-    (state: FlightState, { from }): FlightState => ({
+    (state: IFlightState, { from }): IFlightState => ({
       ...state,
       from,
     }),
   ),
   on(
     FlightActions.changeDestinationFlight,
-    (state: FlightState, { destination }): FlightState => ({
+    (state: IFlightState, { destination }): IFlightState => ({
       ...state,
       destination,
     }),
   ),
   on(
     FlightActions.changeStartDateFlight,
-    (state: FlightState, { startDate }): FlightState => ({
+    (state: IFlightState, { startDate }): IFlightState => ({
       ...state,
       startDate,
     }),
   ),
   on(
     FlightActions.changeEndDateFlight,
-    (state: FlightState, { endDate }): FlightState => ({
+    (state: IFlightState, { endDate }): IFlightState => ({
       ...state,
       endDate,
     }),
   ),
   on(
     FlightActions.updateDirectFlight,
-    (state: FlightState, { selectedDirectFlight }): FlightState => ({
+    (state: IFlightState, { selectedDirectFlight }): IFlightState => ({
       ...state,
       selectedDirectFlight,
     }),
   ),
   on(
     FlightActions.updateReverseFlight,
-    (state: FlightState, { selectedReverseFlight }): FlightState => ({
+    (state: IFlightState, { selectedReverseFlight }): IFlightState => ({
       ...state,
       selectedReverseFlight,
     }),

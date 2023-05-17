@@ -5,7 +5,7 @@ import { FlightState } from 'src/app/redux/state.model';
 import { IFlight } from 'src/app/services/flight.model';
 import { ICity } from 'src/app/services/cities.model';
 import { Calendar } from 'src/app/services/calendar.model';
-import * as FlightSelect from '../../../redux/selectors/flight.selector';
+// import * as FlightSelect from '../../../redux/selectors/flight.selector';
 import * as FlightAction from '../../../redux/actions/flight.actions';
 import { FlightInfoService } from '../../services/flight-info.service';
 
@@ -50,7 +50,7 @@ export class CalendarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.flight$ = this.store.select(FlightSelect.selectFlight);
+    // this.flight$ = this.store.select(FlightSelect.selectFlight);
     this.flight$
       .subscribe((data) => {
         if (this.isForward) {
@@ -109,9 +109,9 @@ export class CalendarComponent implements OnInit {
   selectFlight(flight: IFlight) {
     if (flight !== undefined) {
       if (this.isForward) {
-        this.store.dispatch(FlightAction.updateDirectFlight({ selectedDirectFlight: flight }));
+        // this.store.dispatch(FlightAction.updateDirectFlight({ selectedDirectFlight: flight }));
       } else {
-        this.store.dispatch(FlightAction.updateReverseFlight({ selectedReverseFlight: flight }));
+        // this.store.dispatch(FlightAction.updateReverseFlight({ selectedReverseFlight: flight }));
       }
     } else if (this.isForward) {
       this.store.dispatch(FlightAction.updateDirectFlight({ selectedDirectFlight: null }));

@@ -13,7 +13,7 @@
         <mat-label>From</mat-label>
         <mat-select [formControlName]="'from'" placeholder="Choose your from">
           <mat-option *ngFor="let item of countries" [value]="item">
-            {{item.nameEn}} ({{ item.abbreviation }})
+            {{item.country}} ({{ item.key }})
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -21,7 +21,7 @@
         <mat-label>Destination</mat-label>
         <mat-select [formControlName]="'destination'" placeholder="Choose your destination">
           <mat-option *ngFor="let item of countries" [value]="item">
-            {{item.nameEn}} ({{ item.abbreviation }})
+            {{ item.country }} ({{ item.key }})
           </mat-option>
         </mat-select>
       </mat-form-field>

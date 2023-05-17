@@ -7,11 +7,11 @@ import { Observable } from 'rxjs';
 import { DATE_FORMATS } from 'src/app/shared/enums/date-format';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
-import { ICity } from 'src/app/services/cities.model';
 import { FlightTypes } from 'src/app/shared/enums/flight-types';
+import { Airport, Flight } from 'src/app/services/flight.model';
 import { Passengers } from '../../models/passengers';
 import * as SettingSelect from '../../../redux/selectors/settings.selector';
-import * as FlightActions from '../../../redux/actions/flight.actions';
+// import * as FlightActions from '../../../redux/actions/flight.actions';
 
 @Component({
   selector: 'app-flight-search',
@@ -49,7 +49,7 @@ export class FlightSearchComponent implements OnInit {
     { value: FlightTypes.ONE_WAY, checked: false },
   ];
 
-  public countries: ICity[] = [];
+  public countries: Airport[] = [];
 
   public isFocused: boolean = false;
 
@@ -134,21 +134,22 @@ export class FlightSearchComponent implements OnInit {
   }
 
   search(): void {
-    const from: ICity = this.flightSearchForm.get('from')?.value;
-    const destination: ICity = this.flightSearchForm.get('destination')?.value;
-    const startDate = this.flightSearchForm.get('startDate')?.value;
-    const endDate = this.flightSearchForm.get('endDate')?.value;
-    const total: number = Object
+    this.dataService.searchFlights({
+      fromKey: this.flightSearchForm.get('from')?.value.key,
+      toKey: this.flightSearchForm.get('destination')?.value.key,
+      forwardDate: this.flightSearchForm.get('startDate')?.value,
+      backDate: this.flightSearchForm.get('endDate')?.value,
+    }).subscribe((resp) => {
+      console.log(resp);
+    });
+
+    this.passengers.total = Object
       .values(this.passengers.passengers).reduce((acc, curr) => acc + curr.count, 0);
-    this.passengers.total = total;
-    this.store.dispatch(FlightActions.updateFlights({
-      from,
-      destination,
-      startDate,
-      endDate,
-      passengers: this.passengers,
-    }));
-    this.router.navigateByUrl('step/1');
+
+    /* this.store.dispatch(FlightActions.updateFlights({
+      flights
+    })); */
+    // this.router.navigateByUrl('step/1');
   }
 
 }

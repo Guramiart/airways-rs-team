@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { FlightState } from 'src/app/redux/state.model';
-import * as FlightSelect from '../../../redux/selectors/flight.selector';
+// import * as FlightSelect from '../../../redux/selectors/flight.selector';
 import { StepperService } from '../../../core/services/stepper-service.service';
 
 @Component({
@@ -23,7 +23,7 @@ export class FirstStepComponent implements OnInit {
 
   ngOnInit(): void {
     this.stepperSwitcher.switchStepper('first');
-    this.flights$ = this.store.select(FlightSelect.selectFlight);
+    // this.flights$ = this.store.select(FlightSelect.selectFlight);
   }
 
   public back(isBack:boolean):void {

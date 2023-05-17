@@ -4,10 +4,10 @@ import { DateFormat } from '../shared/enums/date-format';
 import { ICity } from '../services/cities.model';
 import { Passengers } from '../airways/models/passengers';
 import { FlightTypes } from '../shared/enums/flight-types';
-import { IFlight } from '../services/flight.model';
+import { Flight, IFlight } from '../services/flight.model';
 
 export interface AppState {
-  flights: FlightState,
+  flights: Flight,
   settings: SettingsState,
 }
 
@@ -22,6 +22,17 @@ export interface FlightState {
   selectedReverseFlight: IFlight | null,
 }
 
+export interface IFlightState {
+  from: Flight | null,
+  destination: Flight | null,
+  startDate: Date | null,
+  endDate: Date | null,
+  passengers: Passengers | null,
+  type: FlightTypes,
+  selectedDirectFlight: Flight | null,
+  selectedReverseFlight: Flight | null,
+}
+
 export interface SettingsState {
   dateFormat: DateFormat,
   currency: Currency,
@@ -29,6 +40,7 @@ export interface SettingsState {
   authUser:IUser | undefined
 }
 
+/*
 export const initialFlightState: FlightState = { // test state TODO: remove
   from: {
     id: 1,
@@ -88,6 +100,18 @@ export const initialFlightState: FlightState = { // test state TODO: remove
         seats: 120,
       }],
   },
+  startDate: null,
+  endDate: null,
+  passengers: null,
+  type: FlightTypes.ROUND,
+  selectedDirectFlight: null,
+  selectedReverseFlight: null,
+};
+*/
+
+export const initialFlightState: IFlightState = { // test state TODO: remove
+  from: null,
+  destination: null,
   startDate: null,
   endDate: null,
   passengers: null,

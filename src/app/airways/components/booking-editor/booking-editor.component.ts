@@ -31,6 +31,7 @@ export class BookingEditorComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit(): void {
+    /*
     this.flights$ = this.store.select(FlightSelect.selectFlight);
     this.flights$.subscribe((flight) => {
       this.formDate = new FormGroup({
@@ -42,6 +43,7 @@ export class BookingEditorComponent implements OnInit {
       this.child = flight.passengers?.passengers.child.count;
       this.infant = flight.passengers?.passengers.infant.count;
     });
+    */
     this.generatePassengerList();
   }
 

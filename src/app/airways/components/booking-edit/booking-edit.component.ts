@@ -30,7 +30,7 @@ export class BookingEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.flights$ = this.store.select(FlightSelect.selectFlight);
+    // this.flights$ = this.store.select(FlightSelect.selectFlight);
 
     this.buttonObserver = this.emit.button.subscribe((isShow: boolean) => {
       this.isButton = isShow;
