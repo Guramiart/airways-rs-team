@@ -175,6 +175,10 @@
   column-gap: 20px;
   align-items: center;
   justify-content: center;
+
+  @media screen and (max-width: 410px) {
+    font-size: 25px;
+  }
 }
 
 .flight-img {

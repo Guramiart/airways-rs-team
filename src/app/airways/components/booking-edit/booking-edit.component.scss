@@ -24,6 +24,11 @@
   flex-direction: row;
   gap: 63px;
 
+  @media screen and (max-width: 579px) {
+    justify-content: space-between;
+    gap: unset;
+  }
+
   @media screen and (max-width: 430px) {
     gap: 5px;
   }
