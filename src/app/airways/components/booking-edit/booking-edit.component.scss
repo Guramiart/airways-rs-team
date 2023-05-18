@@ -12,6 +12,10 @@
 .booking-wrap {
   max-width: 1128px;
   width: 100%;
+
+  @media screen and (max-width: 1150px) {
+    padding: 0 10px;
+  }
 }
 
 .main__booking-edit {
@@ -19,6 +23,15 @@
   width: 100%;
   flex-direction: row;
   gap: 63px;
+
+  @media screen and (max-width: 430px) {
+    gap: 5px;
+  }
+
+  @media screen and (max-width: 385px) {
+    justify-content: space-around;
+    align-items: center;
+  }
 }
 
 .main__booking-information {
@@ -26,6 +39,14 @@
   flex-direction: row;
   justify-content: flex-start;
   gap: 40px;
+
+  @media screen and (max-width: 420px) {
+    gap: 10px;
+  }
+  @media screen and (max-width: 385px) {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .main__direction-wrapper {

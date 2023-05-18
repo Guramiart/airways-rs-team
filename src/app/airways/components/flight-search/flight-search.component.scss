@@ -8,6 +8,15 @@
   background-color: rgba(255, 255, 255, 0.85);
   border-radius: 8px;
 
+  @media screen and (max-width: 812px) {
+    margin: 62px auto;
+    height: auto;
+  }
+
+  @media screen and (max-width: 586px) {
+    width: 90%;
+  }
+
   .radio {
     padding-top: 10px;
   }
@@ -48,8 +57,17 @@
     flex-direction: row;
     column-gap: 20px;
 
+    @media screen and (max-width: 812px) {
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
     .date {
       flex: 1 1 auto;
+      @media screen and (max-width: 580px) {
+        width: 100%;
+      }
     }
 
     .passengers {
@@ -76,7 +94,7 @@
         z-index: 100;
         background-color: white;
         border-radius: 4px;
-        box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 
         .option-title{
           color: var(--app-root-blue);
