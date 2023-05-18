@@ -43,7 +43,7 @@ export class AccountButtonComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.mainObserver.onChangePage().subscribe((data) => {
-      const { bgColor, showStepper} = data;
+      const { bgColor } = data;
       this.onChange(bgColor);
     });
     this.subscription = this.store.select(SettingsSelector.selectUser)

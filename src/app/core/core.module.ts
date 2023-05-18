@@ -48,6 +48,6 @@ import { StepperService } from './services/stepper-service.service';
     HeaderComponent,
     FooterComponent,
   ],
-  providers: [HeaderChangerService, StepperService]
+  providers: [HeaderChangerService, StepperService],
 })
 export class CoreModule { }

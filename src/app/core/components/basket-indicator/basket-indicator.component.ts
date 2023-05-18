@@ -23,7 +23,7 @@ export class BasketIndicatorComponent implements OnInit {
 
   ngOnInit(): void {
     this.mainObserver.onChangePage().subscribe((data) => {
-      const { bgColor, showStepper } = data;
+      const { bgColor } = data;
       this.onChange(bgColor);
     });
   }
