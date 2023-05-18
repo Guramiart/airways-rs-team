@@ -1,11 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { FlightState } from 'src/app/redux/state.model';
-import { IFlight } from 'src/app/services/flight.model';
-import { ICity } from 'src/app/services/cities.model';
-import { Calendar } from 'src/app/services/calendar.model';
-// import * as FlightSelect from '../../../redux/selectors/flight.selector';
+import { IFlightState } from 'src/app/redux/state.model';
+import {
+  Airport, Flight, Flights, IFlight,
+} from 'src/app/services/flight.model';
+import { Calendar, ICalendar } from 'src/app/services/calendar.model';
+import * as FlightSelect from '../../../redux/selectors/flight.selector';
 import * as FlightAction from '../../../redux/actions/flight.actions';
 import { FlightInfoService } from '../../services/flight-info.service';
 
@@ -16,21 +17,23 @@ import { FlightInfoService } from '../../services/flight-info.service';
 })
 export class CalendarComponent implements OnInit {
 
-  private flight$: Observable<FlightState>;
+  public flight$: Observable<IFlightState>;
 
-  public dates: Calendar[];
+  public dates: ICalendar[];
 
-  public from: ICity;
+  public flights: Flights | undefined;
 
-  public destination: ICity;
+  public from: Airport | undefined;
 
-  public curFlights: IFlight[] | undefined;
+  public destination: Airport | undefined;
+
+  public curFlights: Flights | undefined;
 
   public startDate: Date | null;
 
   @Input() isForward: boolean;
 
-  public flightData: IFlight | undefined;
+  public flightData: Flight | undefined;
 
   public isSelected: boolean = false;
 
@@ -39,37 +42,46 @@ export class CalendarComponent implements OnInit {
     private readonly flightInfoService: FlightInfoService,
   ) {}
 
-  isCurrentDate(item: Calendar): boolean {
+  isCurrentDate(item: ICalendar): boolean {
+    /*
     if (item !== null && this.startDate !== null) {
       if (new Date(item.date).getDate() === new Date(this.startDate).getDate()) {
-        this.flightData = item.flight;
+        // this.flightData = item.flight;
         return true;
       }
     }
+    */
     return false;
   }
 
   ngOnInit(): void {
-    // this.flight$ = this.store.select(FlightSelect.selectFlight);
+    this.flight$ = this.store.select(FlightSelect.selectFlight);
+
     this.flight$
       .subscribe((data) => {
         if (this.isForward) {
-          this.from = data.from;
-          this.destination = data.destination;
+          this.from = data.from?.form;
+          this.destination = data.from?.to;
           this.startDate = data.startDate;
-          this.curFlights = data.from?.flights
-            .filter((el) => el.destination === data.destination?.id);
+          // this.curFlights = data.from?
+          //  .filter((el) => el.destination === data.destination?.id);
+          this.flights = data.from?.otherFlights;
+          this.dates = this.initDateArray(data);
+          console.log(this.dates);
         } else {
-          this.from = data.destination;
-          this.destination = data.from;
+          this.from = data.destination?.form;
+          this.destination = data.destination?.to;
           this.startDate = data.endDate;
-          this.curFlights = data.destination?.flights
-            .filter((el) => el.destination === data.from?.id);
+          // this.curFlights = data.destination?.flights
+          //  .filter((el) => el.destination === data.from?.id);
+          this.flights = data.destination?.otherFlights;
+          this.dates = this.initDateArray(data);
         }
       });
-    this.dates = this.initDateArray();
+
   }
 
+  /*
   slideClick(info: IFlight | undefined) {
     if (info) {
       if (this.isForward) {
@@ -83,21 +95,27 @@ export class CalendarComponent implements OnInit {
             endDate: new Date(info.startDate),
           }));
       }
-      this.flightData = info;
+      // this.flightData = info;
     } else {
       this.flightData = undefined;
     }
   }
-
-  private initDateArray(): Calendar[] {
-    const dates = [];
-    const curDate = new Date();
-    for (let i = 0; i <= 10; i += 1) {
+  */
+  private initDateArray(flightData: IFlightState): ICalendar[] {
+    const dates: ICalendar[] = [];
+    for (let i = -5; i <= 5; i += 1) {
+      if (this.flights !== undefined && i !== 0) {
+        dates.push({ date: this.flights[i].takeoffDate, flight: flightData.from });
+      } else {
+        dates.push({ date: flightData.from?.takeoffDate, flight: flightData.from });
+      }
+      /*
       const flight = this.curFlights?.filter(
         (el) => new Date(el.startDate).getDate() === new Date(curDate).getDate(),
       )[0];
       dates.push({ date: new Date(curDate), flight });
       curDate.setDate(curDate.getDate() + 1);
+      */
     }
     return dates;
   }
@@ -106,12 +124,12 @@ export class CalendarComponent implements OnInit {
     this.isSelected = !this.isSelected;
   }
 
-  selectFlight(flight: IFlight) {
+  selectFlight(flight: Flight) {
     if (flight !== undefined) {
       if (this.isForward) {
-        // this.store.dispatch(FlightAction.updateDirectFlight({ selectedDirectFlight: flight }));
+        this.store.dispatch(FlightAction.updateDirectFlight({ selectedDirectFlight: flight }));
       } else {
-        // this.store.dispatch(FlightAction.updateReverseFlight({ selectedReverseFlight: flight }));
+        this.store.dispatch(FlightAction.updateReverseFlight({ selectedReverseFlight: flight }));
       }
     } else if (this.isForward) {
       this.store.dispatch(FlightAction.updateDirectFlight({ selectedDirectFlight: null }));

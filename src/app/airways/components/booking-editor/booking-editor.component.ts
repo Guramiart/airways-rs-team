@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { FlightState } from 'src/app/redux/state.model';
+import { IFlightState } from 'src/app/redux/state.model';
 import * as FlightSelect from '../../../redux/selectors/flight.selector';
 import { Passengers } from '../../models/passengers';
 
@@ -14,7 +14,7 @@ import { Passengers } from '../../models/passengers';
 })
 export class BookingEditorComponent implements OnInit {
 
-  public flights$: Observable<FlightState> | undefined;
+  public flights$: Observable<IFlightState> | undefined;
 
   public passengers: Passengers | null = null;
 
@@ -31,7 +31,6 @@ export class BookingEditorComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    /*
     this.flights$ = this.store.select(FlightSelect.selectFlight);
     this.flights$.subscribe((flight) => {
       this.formDate = new FormGroup({
@@ -43,7 +42,6 @@ export class BookingEditorComponent implements OnInit {
       this.child = flight.passengers?.passengers.child.count;
       this.infant = flight.passengers?.passengers.infant.count;
     });
-    */
     this.generatePassengerList();
   }
 

@@ -21,8 +21,8 @@ export class DataService {
     return this.http.get<Airport[]>('search/airport');
   }
 
-  public searchFlights(flight: FlightRequest): Observable<Flight> {
-    return this.http.post<Flight>('search/flight', flight);
+  public searchFlights(flight: FlightRequest): Observable<Flight[]> {
+    return this.http.post<Flight[]>('search/flight', flight);
   }
 
   public getUser(id:number | string | null): Observable<IUser> {

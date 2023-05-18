@@ -3,7 +3,7 @@ import {
 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ICity } from 'src/app/services/cities.model';
-import { IFlight } from 'src/app/services/flight.model';
+import { Flight, IFlight } from 'src/app/services/flight.model';
 import { FlightInfoService } from '../../services/flight-info.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class FlightInfoComponent implements OnInit {
 
   @Input() flightData: IFlight | undefined;
 
-  @Output() selectEvent = new EventEmitter<IFlight>();
+  @Output() selectEvent = new EventEmitter<Flight>();
 
   public flight$: Observable<IFlight | undefined>;
 
@@ -39,7 +39,7 @@ export class FlightInfoComponent implements OnInit {
   }
 
   selectFlight(flight: IFlight | undefined) {
-    this.selectEvent.emit(flight);
+    // this.selectEvent.emit(flight);
     this.isSelected = !this.isSelected;
   }
 

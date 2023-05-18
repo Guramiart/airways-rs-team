@@ -5,8 +5,9 @@
     <div ngxSlickItem
       *ngFor="let date of dates"
       class="slide"
-      [ngClass]="isCurrentDate(date) ? 'active' : ''"
-      (click)="slideClick(date.flight)">
+      >  <!-- (click)="slideClick(date.flight)"
+        [ngClass]="isCurrentDate(date) ? 'active' : ''"
+      -->
         <div class="date-slide" *ngIf="date.flight; else flightNotFound">
           <div class="date">{{ date.date | date: 'd MMM' }}</div>
           <div class="day">{{ date.date | date: 'EEEE' }}</div>
@@ -22,4 +23,4 @@
     </div>
   </ngx-slick-carousel>
 </div>
-<app-flight-info (selectEvent)="selectFlight($event)" [flightData]="flightData" [from]="from" [destination]="destination"></app-flight-info>
+<!--<app-flight-info (selectEvent)="selectFlight($event)" [flightData]="flightData" [from]="from" [destination]="destination"></app-flight-info>-->

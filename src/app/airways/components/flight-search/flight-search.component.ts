@@ -1,28 +1,30 @@
 import {
-  Component, ElementRef, OnInit, ViewChild,
+  Component, ElementRef, OnDestroy, OnInit, ViewChild,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { DATE_FORMATS } from 'src/app/shared/enums/date-format';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
 import { FlightTypes } from 'src/app/shared/enums/flight-types';
-import { Airport, Flight } from 'src/app/services/flight.model';
+import { Airport } from 'src/app/services/flight.model';
 import { Passengers } from '../../models/passengers';
 import * as SettingSelect from '../../../redux/selectors/settings.selector';
-// import * as FlightActions from '../../../redux/actions/flight.actions';
+import * as FlightActions from '../../../redux/actions/flight.actions';
 
 @Component({
   selector: 'app-flight-search',
   templateUrl: './flight-search.component.html',
   styleUrls: ['./flight-search.component.scss'],
 })
-export class FlightSearchComponent implements OnInit {
+export class FlightSearchComponent implements OnInit, OnDestroy {
 
   @ViewChild('passengersInput', { read: ElementRef }) input: ElementRef | undefined;
 
   private format$: Observable<string> | undefined;
+
+  private searchData: Subscription;
 
   public passengers: Passengers = {
     passengers: {
@@ -77,6 +79,10 @@ export class FlightSearchComponent implements OnInit {
       this.updateDate();
     });
     this.dataService.setAuthUserFromLS();
+  }
+
+  ngOnDestroy(): void {
+    this.searchData.unsubscribe();
   }
 
   private updateDate(): void {
@@ -134,22 +140,25 @@ export class FlightSearchComponent implements OnInit {
   }
 
   search(): void {
-    this.dataService.searchFlights({
+    const forwardDate = this.flightSearchForm.get('startDate')?.value;
+    const backDate = this.flightSearchForm.get('endDate')?.value;
+    this.searchData = this.dataService.searchFlights({
       fromKey: this.flightSearchForm.get('from')?.value.key,
       toKey: this.flightSearchForm.get('destination')?.value.key,
-      forwardDate: this.flightSearchForm.get('startDate')?.value,
-      backDate: this.flightSearchForm.get('endDate')?.value,
+      forwardDate,
+      backDate,
     }).subscribe((resp) => {
-      console.log(resp);
+      this.passengers.total = Object
+        .values(this.passengers.passengers).reduce((acc, curr) => acc + curr.count, 0);
+      this.store.dispatch(FlightActions.updateFlights({
+        from: resp[0],
+        destination: resp[1],
+        startDate: forwardDate,
+        endDate: backDate,
+        passengers: this.passengers,
+      }));
+      this.router.navigateByUrl('step/1');
     });
-
-    this.passengers.total = Object
-      .values(this.passengers.passengers).reduce((acc, curr) => acc + curr.count, 0);
-
-    /* this.store.dispatch(FlightActions.updateFlights({
-      flights
-    })); */
-    // this.router.navigateByUrl('step/1');
   }
 
 }
