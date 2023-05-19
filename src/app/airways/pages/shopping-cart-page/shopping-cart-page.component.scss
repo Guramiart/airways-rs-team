@@ -214,6 +214,10 @@ mat-icon {
   justify-content: flex-start;
   align-items: center;
   gap: 20px;
+
+  @media screen and (max-width: 389px) {
+    justify-content: space-around;
+  }
 }
 
 .main__amount-text {
@@ -223,6 +227,10 @@ mat-icon {
   font-size: 20px;
   line-height: 20px;
   color: #000000;
+
+  @media screen and (max-width: 499px) {
+    font-size: 16px;
+  }
 }
 
 .main__amount-count {
@@ -236,6 +244,10 @@ mat-icon {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   text-fill-color: transparent;
+
+  @media screen and (max-width: 499px) {
+    font-size: 18px;
+  }
 }
 
 .main__cart-separator {
