@@ -1,28 +1,38 @@
-.main{
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0.226);
-    z-index: 9000;
-    overflow: auto;
+.main {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.226);
+  z-index: 9000;
+  overflow: auto;
 }
-.content{
-    width: 31%;
-    background-color: white;
-    padding: 20px;
-    position: relative;
-    margin-top: 60px;
-    margin-bottom: 40px;
-    height: fit-content;
-    border-radius: 4px;
+
+.content {
+  width: 31%;
+  background-color: white;
+  padding: 20px;
+  position: relative;
+  margin-top: 60px;
+  margin-bottom: 40px;
+  height: fit-content;
+  border-radius: 4px;
+
+  @media screen and (max-width: 889px) {
+    width: 50%;
+  }
+
+  @media screen and (max-width: 559px) {
+    width: 80%;
+  }
 }
-.close_btn{
-    position: absolute;
-    right: -35px;
-    top: -35px;
+
+.close_btn {
+  position: absolute;
+  right: -35px;
+  top: -35px;
 }
 
