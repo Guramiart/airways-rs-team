@@ -3,6 +3,10 @@
   width: 100%;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width: 889px) {
+    width: 825px;
+  }
 }
 
 .main__table-block {
@@ -21,6 +25,10 @@
   justify-content: space-between;
   align-items: center;
   border-bottom: 2px solid rgba(116, 118, 122, 0.2);
+
+  @media screen and (max-width: 889px) {
+    min-width: 825px;
+  }
 }
 
 
@@ -86,6 +94,10 @@
   line-height: 24px;
   letter-spacing: 0.5px;
   color: #0090BD;
+
+  @media screen and (max-width: 989px) {
+    font-size: 16px;
+  }
 }
 
 .main__record-text {
@@ -96,6 +108,10 @@
   line-height: 32px;
   letter-spacing: 0.5px;
   color: #74767A;
+
+  @media screen and (max-width: 989px) {
+    font-size: 16px;
+  }
 }
 
 .main__record-price {
@@ -106,4 +122,8 @@
   line-height: 32px;
   letter-spacing: 0.5px;
   color: #7F8906;
+
+  @media screen and (max-width: 989px) {
+    font-size: 16px;
+  }
 }
