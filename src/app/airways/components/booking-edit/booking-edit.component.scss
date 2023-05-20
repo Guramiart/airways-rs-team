@@ -14,7 +14,13 @@
   width: 100%;
 
   @media screen and (max-width: 1150px) {
+    box-sizing: content-box;
     padding: 0 10px;
+  }
+
+  @media screen and (max-width: 469px) {
+    width: 92%;
+    padding: 0;
   }
 }
 
@@ -23,6 +29,11 @@
   width: 100%;
   flex-direction: row;
   gap: 63px;
+
+  @media screen and (max-width: 579px) {
+    justify-content: space-between;
+    gap: unset;
+  }
 
   @media screen and (max-width: 430px) {
     gap: 5px;
@@ -40,10 +51,10 @@
   justify-content: flex-start;
   gap: 40px;
 
-  @media screen and (max-width: 420px) {
+  @media screen and (max-width: 519px) {
     gap: 10px;
   }
-  @media screen and (max-width: 385px) {
+  @media screen and (max-width: 445px) {
     flex-direction: column;
     align-items: center;
   }
@@ -78,6 +89,11 @@
   justify-content: flex-start;
   align-items: center;
   gap: 8px;
+}
+
+.main__dates-flight {
+  display: block;
+  min-width: 57px;
 }
 
 .main__info-text,
