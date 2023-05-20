@@ -19,8 +19,8 @@ export const updateFlights = createAction(
   props<{
     from: Flight,
     destination: Flight,
-    startDate: Date,
-    endDate: Date,
+    startDate: string,
+    endDate: string,
     passengers: Passengers,
   }>(),
 );
@@ -37,12 +37,12 @@ export const changeDestinationFlight = createAction(
 
 export const changeStartDateFlight = createAction(
   CHANGE_START_DATE,
-  props<{ startDate: Date }>(),
+  props<{ startDate: string }>(),
 );
 
 export const changeEndDateFlight = createAction(
   CHANGE_END_DATE,
-  props<{ endDate: Date }>(),
+  props<{ endDate: string }>(),
 );
 
 export const updatePassengers = createAction(

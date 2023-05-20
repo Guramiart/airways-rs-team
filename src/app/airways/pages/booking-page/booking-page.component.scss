@@ -23,25 +23,3 @@
     padding: 88px 10px;
   }
 }
-
-.btn-block {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  column-gap: 40px;
-  margin-bottom: 40px;
-}
-
-.mdc-button {
-  width: 126px;
-  height: 60px;
-  color: white;
-  background-color: var(--app-root-blue);
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.mat-mdc-unelevated-button:not(:disabled) {
-  color: var(--app-root-blue);
-  background-color: transparent;
-}

@@ -1,11 +1,6 @@
-import { Flight, IFlight } from './flight.model';
-
-export interface Calendar {
-  date: Date,
-  flight: IFlight | undefined,
-}
+import { Flight } from './flight.model';
 
 export interface ICalendar {
-  date: string | undefined,
+  date: string,
   flight: Flight | null,
 }

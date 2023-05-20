@@ -1,12 +1,3 @@
-export interface IFlight {
-  number: number,
-  destination: number,
-  startDate: string,
-  endDate: string,
-  price: number,
-  seats: number,
-}
-
 export interface FlightRequest {
   fromKey: string,
   toKey: string,
@@ -23,10 +14,7 @@ export interface Airport {
 }
 
 export interface Flight {
-  seats: {
-    total: number,
-    avaible: number,
-  },
+  seats: Seats,
   flightNumber: string,
   timeMins: number,
   form: Airport,
@@ -43,17 +31,10 @@ export interface Flight {
 }
 
 export interface Flights {
-  [key: string]: Flight,
-  /*
-  [-5]: Flight,
-  [-4]: Flight,
-  [-3]: Flight,
-  [-2]: Flight,
-  [-1]: Flight,
-  [1]: Flight,
-  [2]: Flight,
-  [3]: Flight,
-  [4]: Flight,
-  [5]: Flight,
-  */
+  [key: string]: Flight
+}
+
+export interface Seats {
+  total: number;
+  avaible: number;
 }

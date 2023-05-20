@@ -1,17 +1,17 @@
 <div class="calendar" *ngIf="!isSelected">
   <ngx-slick-carousel class="carousel"
                         #slickModal="slick-carousel"
-                        [config]="{ infinite: false, slidesToShow: 5, slidesToScroll: 1 }">
+                        [config]="{ infinite: false, slidesToShow: 5, slidesToScroll: 1, initialSlide: 3 }">
     <div ngxSlickItem
       *ngFor="let date of dates"
       class="slide"
-      >  <!-- (click)="slideClick(date.flight)"
-        [ngClass]="isCurrentDate(date) ? 'active' : ''"
-      -->
+      [ngClass]="isCurrentDate(date) ? 'active' : ''"
+      (click)="slideClick(date)">
         <div class="date-slide" *ngIf="date.flight; else flightNotFound">
           <div class="date">{{ date.date | date: 'd MMM' }}</div>
           <div class="day">{{ date.date | date: 'EEEE' }}</div>
-          <div class="price">{{ date.flight.price }}</div>
+          <div class="price">{{ date.flight.price.eur }}</div>
+          <div class="slide-footer" [appSeats]="date.flight.seats"></div>
         </div>
         <ng-template #flightNotFound>
           <div class="date-slide">
@@ -23,4 +23,4 @@
     </div>
   </ngx-slick-carousel>
 </div>
-<!--<app-flight-info (selectEvent)="selectFlight($event)" [flightData]="flightData" [from]="from" [destination]="destination"></app-flight-info>-->
+<app-flight-info (selectEvent)="selectFlight($event)" [flightData]="flightData" [from]="from" [destination]="destination"></app-flight-info>

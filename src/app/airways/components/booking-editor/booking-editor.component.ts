@@ -34,8 +34,8 @@ export class BookingEditorComponent implements OnInit {
     this.flights$ = this.store.select(FlightSelect.selectFlight);
     this.flights$.subscribe((flight) => {
       this.formDate = new FormGroup({
-        start: new FormControl<Date | null>(flight.startDate),
-        end: new FormControl<Date | null>(flight.endDate),
+        start: new FormControl<string>(flight.startDate),
+        end: new FormControl<string>(flight.endDate),
       });
       this.passengers = flight.passengers;
       this.adult = flight.passengers?.passengers.adult.count;

@@ -5,17 +5,24 @@ import { PassengerInfoComponent } from './components/passenger-info/passenger-in
 import { SummaryComponent } from './components/summary/summary.component';
 import { TableRecordComponent } from './components/table-record/table-record.component';
 import { MaterialModule } from '../material/material.module';
+import { SeatsDirective } from './directives/seats.directive';
 
 @NgModule({
   declarations: [
     TicketInfoComponent,
     PassengerInfoComponent,
     SummaryComponent,
-    TableRecordComponent],
+    TableRecordComponent,
+    SeatsDirective,
+  ],
   imports: [
     CommonModule,
     MaterialModule,
   ],
-  exports: [TicketInfoComponent, PassengerInfoComponent],
+  exports: [
+    TicketInfoComponent,
+    PassengerInfoComponent,
+    SeatsDirective,
+  ],
 })
 export class SharedModule { }

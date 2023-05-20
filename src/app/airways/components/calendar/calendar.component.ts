@@ -3,12 +3,11 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { IFlightState } from 'src/app/redux/state.model';
 import {
-  Airport, Flight, Flights, IFlight,
+  Airport, Flight, Flights,
 } from 'src/app/services/flight.model';
-import { Calendar, ICalendar } from 'src/app/services/calendar.model';
+import { ICalendar } from 'src/app/services/calendar.model';
 import * as FlightSelect from '../../../redux/selectors/flight.selector';
 import * as FlightAction from '../../../redux/actions/flight.actions';
-import { FlightInfoService } from '../../services/flight-info.service';
 
 @Component({
   selector: 'app-calendar',
@@ -19,7 +18,7 @@ export class CalendarComponent implements OnInit {
 
   public flight$: Observable<IFlightState>;
 
-  public dates: ICalendar[];
+  public dates: ICalendar[] = [];
 
   public flights: Flights | undefined;
 
@@ -29,93 +28,70 @@ export class CalendarComponent implements OnInit {
 
   public curFlights: Flights | undefined;
 
-  public startDate: Date | null;
+  public startDate: string;
 
   @Input() isForward: boolean;
 
-  public flightData: Flight | undefined;
+  public flightData: Flight | null;
 
   public isSelected: boolean = false;
 
   constructor(
     private readonly store: Store,
-    private readonly flightInfoService: FlightInfoService,
   ) {}
 
   isCurrentDate(item: ICalendar): boolean {
-    /*
-    if (item !== null && this.startDate !== null) {
-      if (new Date(item.date).getDate() === new Date(this.startDate).getDate()) {
-        // this.flightData = item.flight;
-        return true;
-      }
+    if (new Date(item.date).getDate() === new Date(this.startDate).getDate()) {
+      this.flightData = item.flight;
+      return true;
     }
-    */
     return false;
   }
 
   ngOnInit(): void {
     this.flight$ = this.store.select(FlightSelect.selectFlight);
-
     this.flight$
       .subscribe((data) => {
         if (this.isForward) {
-          this.from = data.from?.form;
-          this.destination = data.from?.to;
+          this.flightData = data.from;
+          this.from = this.flightData?.form;
+          this.destination = this.flightData?.to;
           this.startDate = data.startDate;
-          // this.curFlights = data.from?
-          //  .filter((el) => el.destination === data.destination?.id);
-          this.flights = data.from?.otherFlights;
-          this.dates = this.initDateArray(data);
-          console.log(this.dates);
+          this.flights = this.flightData?.otherFlights;
         } else {
-          this.from = data.destination?.form;
-          this.destination = data.destination?.to;
+          this.flightData = data.destination;
+          this.from = this.flightData?.form;
+          this.destination = this.flightData?.to;
           this.startDate = data.endDate;
-          // this.curFlights = data.destination?.flights
-          //  .filter((el) => el.destination === data.from?.id);
-          this.flights = data.destination?.otherFlights;
-          this.dates = this.initDateArray(data);
+          this.flights = this.flightData?.otherFlights;
         }
+        this.dates = this.initDateArray(data, this.startDate);
       });
-
   }
 
-  /*
-  slideClick(info: IFlight | undefined) {
-    if (info) {
-      if (this.isForward) {
-        this.store
-          .dispatch(FlightAction.changeStartDateFlight({
-            startDate: new Date(info.startDate),
-          }));
-      } else {
-        this.store
-          .dispatch(FlightAction.changeEndDateFlight({
-            endDate: new Date(info.startDate),
-          }));
-      }
-      // this.flightData = info;
-    } else {
-      this.flightData = undefined;
-    }
+  slideClick(info: ICalendar) {
+    this.startDate = new Date(info.date).toISOString();
+    this.flightData = info.flight;
   }
-  */
-  private initDateArray(flightData: IFlightState): ICalendar[] {
-    const dates: ICalendar[] = [];
-    for (let i = -5; i <= 5; i += 1) {
-      if (this.flights !== undefined && i !== 0) {
-        dates.push({ date: this.flights[i].takeoffDate, flight: flightData.from });
-      } else {
-        dates.push({ date: flightData.from?.takeoffDate, flight: flightData.from });
+
+  private initDateArray(flightData: IFlightState, startDate: string): ICalendar[] {
+    const dates = [];
+    if (startDate !== null) {
+      const start = new Date(startDate);
+      let curDate = new Date(start);
+      if (this.flights !== undefined) {
+        for (let i = -5; i <= 5; i += 1) {
+          curDate = new Date(curDate.setDate(start.getDate() + i));
+          let flight;
+          if (i !== 0) {
+            flight = { date: curDate.toISOString(), flight: this.flights[i] };
+          } else {
+            const curFlight = this.isForward ? flightData.from : flightData.destination;
+            flight = { date: curDate.toISOString(), flight: curFlight };
+          }
+          dates.push(flight);
+        }
       }
-      /*
-      const flight = this.curFlights?.filter(
-        (el) => new Date(el.startDate).getDate() === new Date(curDate).getDate(),
-      )[0];
-      dates.push({ date: new Date(curDate), flight });
-      curDate.setDate(curDate.getDate() + 1);
-      */
     }
     return dates;
   }

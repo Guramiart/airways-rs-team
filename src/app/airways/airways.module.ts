@@ -21,6 +21,7 @@ import { SummaryPageComponent } from './components/summary-page/summary-page.com
 import { FlightInfoComponent } from './components/flight-info/flight-info.component';
 import { PassengerFormComponent } from './components/second-step/passenger-form/passenger-form.component';
 import { ContactsFormComponent } from './components/second-step/contacts-form/contacts-form.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { ContactsFormComponent } from './components/second-step/contacts-form/co
     SlickCarouselModule,
     MatTableModule,
     MatMenuModule,
+    SharedModule,
   ],
   exports: [
     MainPageComponent,

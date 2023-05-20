@@ -3,8 +3,8 @@ import {
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
+import { Airport } from 'src/app/services/flight.model';
 import { IFlightState } from 'src/app/redux/state.model';
-import { ICity } from 'src/app/services/cities.model';
 import { ShowEditorService } from '../../services/show-editor.service';
 import * as FlightSelect from '../../../redux/selectors/flight.selector';
 
@@ -19,7 +19,7 @@ export class BookingEditComponent implements OnInit, OnDestroy {
 
   public flights$: Observable<IFlightState> | undefined;
 
-  public destination$: Observable<ICity | null> | undefined;
+  public destination$: Observable<Airport | null> | undefined;
 
   private buttonObserver: Subscription;
 

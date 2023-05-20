@@ -2,8 +2,7 @@ import {
   Component, EventEmitter, Input, OnInit, Output,
 } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ICity } from 'src/app/services/cities.model';
-import { Flight, IFlight } from 'src/app/services/flight.model';
+import { Airport, Flight } from 'src/app/services/flight.model';
 import { FlightInfoService } from '../../services/flight-info.service';
 
 @Component({
@@ -13,15 +12,15 @@ import { FlightInfoService } from '../../services/flight-info.service';
 })
 export class FlightInfoComponent implements OnInit {
 
-  @Input() from: ICity;
+  @Input() from: Airport | undefined;
 
-  @Input() destination: ICity;
+  @Input() destination: Airport | undefined;
 
-  @Input() flightData: IFlight | undefined;
+  @Input() flightData: Flight | null;
 
   @Output() selectEvent = new EventEmitter<Flight>();
 
-  public flight$: Observable<IFlight | undefined>;
+  public flight$: Observable<Flight | undefined>;
 
   public isSelected: boolean = false;
 
@@ -38,8 +37,8 @@ export class FlightInfoComponent implements OnInit {
     return `${hours}h ${minutes}min`;
   }
 
-  selectFlight(flight: IFlight | undefined) {
-    // this.selectEvent.emit(flight);
+  selectFlight(flight: Flight | undefined) {
+    this.selectEvent.emit(flight);
     this.isSelected = !this.isSelected;
   }
 

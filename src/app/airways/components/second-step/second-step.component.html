@@ -45,14 +45,14 @@
       </div>
 
       <div class="forms">
-        <app-contacts-form [isSubmitted] = "isSubmitted" 
-                           (errorEmit)="getError($event)" 
+        <app-contacts-form [isSubmitted] = "isSubmitted"
+                           (errorEmit)="getError($event)"
                            (contactInfo)="getContactInfo($event)"/>
       </div>
 
-      <div class="btns-block">
-        <button mat-raised-button (click)="back(true)">Back</button>
-        <button mat-raised-button color="primary" (click)="back(false)">Continue</button>
+      <div class="btn-block">
+        <button class="back-btn" mat-flat-button (click)="back(true)">Back</button>
+        <button mat-button type="button" (click)="back(false)">Continue</button>
       </div>
     </div>
   </div>
