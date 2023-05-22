@@ -21,6 +21,7 @@ export class SummaryPageComponent implements AfterViewInit, OnInit {
   private flight$: Observable<IFlightState>;
 
   // TODO: replace the mok data after!!!
+  /*
   private mokPassengerData = {
     tickets: [
       {
@@ -77,6 +78,7 @@ export class SummaryPageComponent implements AfterViewInit, OnInit {
       },
     ],
   };
+  */
 
   @ViewChild('container', { read: ViewContainerRef, static: true }) container: ViewContainerRef;
 
@@ -88,8 +90,6 @@ export class SummaryPageComponent implements AfterViewInit, OnInit {
   ngOnInit(): void {
     this.stepperSwitcher.switchStepper('third');
     this.flight$ = this.store.select(FlightSelect.selectFlight);
-    // this.store.select(FlightSelect.selectFlight)
-    //  .subscribe((data) => console.log(data));
   }
 
   ngAfterViewInit(): void {
@@ -97,22 +97,18 @@ export class SummaryPageComponent implements AfterViewInit, OnInit {
       const directView: ComponentRef<TicketInfoComponent> = this.container.createComponent(
         TicketInfoComponent,
       );
-      directView.instance.flight = flight;
+      directView.instance.flight = flight.selectedDirectFlight;
+      directView.instance.passengers = flight.passengers;
       const reverseView: ComponentRef<TicketInfoComponent> = this.container.createComponent(
         TicketInfoComponent,
       );
-      reverseView.instance.flight = flight;
+      reverseView.instance.flight = flight.selectedReverseFlight;
+      reverseView.instance.passengers = flight.passengers;
+
+      const passengerInfo = this.summary.createComponent(SummaryComponent);
+      passengerInfo.instance.passengers = flight.passengers;
     });
-    const totalInfo = this.summary.createComponent(SummaryComponent);
-    totalInfo.instance.tickets = this.mokPassengerData.tickets;
-    /*
-    const directView: ComponentRef<TicketInfoComponent> = this.container.createComponent(
-      TicketInfoComponent,
-    );
-    directView.instance.flight$ = this.flight$;
-    const totalInfo = this.summary.createComponent(SummaryComponent);
-    totalInfo.instance.tickets = this.mokPassengerData.tickets;
-    */
+
   }
 
 }

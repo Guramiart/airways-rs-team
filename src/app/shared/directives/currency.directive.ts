@@ -30,16 +30,16 @@ export class CurrencyDirective implements DoCheck {
     let currency: string = '';
     this.currency$.subscribe((data) => {
       if (data === Currency.EUR) {
-        currency = `${this.appCurrency?.eur.toFixed(2)} €`;
+        currency = `€${this.appCurrency?.eur.toFixed(2)}`;
       }
       if (data === Currency.USD) {
-        currency = `${this.appCurrency?.usd.toFixed(2)} $`;
+        currency = `$${this.appCurrency?.usd.toFixed(2)}`;
       }
       if (data === Currency.RUB) {
-        currency = `${this.appCurrency?.rub.toFixed(2)} ₽`;
+        currency = `₽${this.appCurrency?.rub.toFixed(2)}`;
       }
       if (data === Currency.PLN) {
-        currency = `${this.appCurrency?.pln.toFixed(2)} zł`;
+        currency = `zł${this.appCurrency?.pln.toFixed(2)}`;
       }
     });
     return currency;

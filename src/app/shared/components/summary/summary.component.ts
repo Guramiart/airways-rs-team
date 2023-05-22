@@ -1,5 +1,6 @@
 import { AfterViewInit, Component } from '@angular/core';
-import { Ticket, AgePassenger, Passenger } from '../../enums/tickets-data';
+import { Passengers } from 'src/app/airways/models/passengers';
+import { AgePassenger } from '../../enums/tickets-data';
 
 @Component({
   selector: 'app-summary',
@@ -8,7 +9,7 @@ import { Ticket, AgePassenger, Passenger } from '../../enums/tickets-data';
 })
 export class SummaryComponent implements AfterViewInit {
 
-  public tickets: Ticket[];
+  public passengers: Passengers | null;
 
   public totalPrice = 0;
 
@@ -21,6 +22,7 @@ export class SummaryComponent implements AfterViewInit {
   }
 
   private initSummaryData(): void {
+    /*
     const initAgePassenger: AgePassenger = {
       count: 0,
       fare: 0,
@@ -65,6 +67,7 @@ export class SummaryComponent implements AfterViewInit {
     this.resultArray.push(child);
     this.resultArray.push(infant);
     this.totalPrice = adult.total + child.total + infant.total;
+    */
   }
 
 }

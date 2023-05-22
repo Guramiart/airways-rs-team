@@ -8,7 +8,7 @@ import { IPassengerInfo } from 'src/app/airways/models/passengerInfo.model';
 })
 export class PassengerInfoComponent implements AfterViewInit {
 
-  public passengerName = '';
+  public passengerName: string;
 
   public seatPlace: string | null = '';
 
