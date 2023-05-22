@@ -1,5 +1,5 @@
 import { AfterViewInit, Component } from '@angular/core';
-import { Passenger } from '../../enums/tickets-data';
+import { IPassengerInfo } from 'src/app/airways/models/passengerInfo.model';
 
 @Component({
   selector: 'app-passenger-info',
@@ -14,12 +14,12 @@ export class PassengerInfoComponent implements AfterViewInit {
 
   public isSeat: boolean = true;
 
-  public passengerData: Passenger;
+  public passengerData: IPassengerInfo;
 
   private addPassengerData(): void {
-    this.passengerName = this.passengerData.name;
-    this.seatPlace = this.passengerData.place;
-    this.isSeat = !!this.passengerData.place;
+    this.passengerName = this.passengerData.firstName;
+    // this.seatPlace = this.passengerData.place;
+    // this.isSeat = !!this.passengerData.place;
   }
 
   ngAfterViewInit(): void {

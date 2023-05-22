@@ -1,11 +1,14 @@
-<div class="main__ticket-flight">
+<div class="main__ticket-flight" *ngIf="(flight$ | async)?.selectedDirectFlight as flight">
   <div class="main__flight">
-    <span class="main__flight-number">{{flightNumber}}</span>
-    <span class="main__flight-info">{{flightDirection}}</span>
+    <span class="main__flight-number">{{ flight.flightNumber }}</span>
+    <span class="main__flight-info">
+      {{ flight.form!.name }} - {{ flight.to!.name }}
+    </span>
   </div>
   <div class="main__flight-data">
-    <span class="main__flight-date">{{date}}</span>
-    <span class="main__flight-time">{{time}}</span>
+    <span class="main__flight-date">{{ flight.takeoffDate | date:'EE, d MMM yyyy' }}</span>
+    <span class="main__flight-time">{{ flight.takeoffDate | date:'HH:mm' }}</span>
   </div>
 </div>
 <ng-container #passengersContainer></ng-container>
+

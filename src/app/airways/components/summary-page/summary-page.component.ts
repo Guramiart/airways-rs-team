@@ -4,6 +4,8 @@ import {
 } from '@angular/core';
 
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { IFlightState } from 'src/app/redux/state.model';
 import { TicketInfoComponent } from '../../../shared/components/ticket-info/ticket-info.component';
 import { SummaryComponent } from '../../../shared/components/summary/summary.component';
 import * as FlightSelect from '../../../redux/selectors/flight.selector';
@@ -15,6 +17,8 @@ import { StepperService } from '../../../core/services/stepper-service.service';
   styleUrls: ['./summary-page.component.scss'],
 })
 export class SummaryPageComponent implements AfterViewInit, OnInit {
+
+  private flight$: Observable<IFlightState>;
 
   // TODO: replace the mok data after!!!
   private mokPassengerData = {
@@ -83,22 +87,32 @@ export class SummaryPageComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
     this.stepperSwitcher.switchStepper('third');
-    this.store.select(FlightSelect.selectFlight)
-      .subscribe((data) => console.log(data));
+    this.flight$ = this.store.select(FlightSelect.selectFlight);
+    // this.store.select(FlightSelect.selectFlight)
+    //  .subscribe((data) => console.log(data));
   }
 
   ngAfterViewInit(): void {
-    this.mokPassengerData.tickets.forEach((ticket, index) => {
-      const ticketView: ComponentRef<TicketInfoComponent> = this.container.createComponent(
+    this.flight$.subscribe((flight) => {
+      const directView: ComponentRef<TicketInfoComponent> = this.container.createComponent(
         TicketInfoComponent,
-        { index },
       );
-
-      ticketView.instance.ticket = ticket;
+      directView.instance.flight = flight;
+      const reverseView: ComponentRef<TicketInfoComponent> = this.container.createComponent(
+        TicketInfoComponent,
+      );
+      reverseView.instance.flight = flight;
     });
-
     const totalInfo = this.summary.createComponent(SummaryComponent);
     totalInfo.instance.tickets = this.mokPassengerData.tickets;
+    /*
+    const directView: ComponentRef<TicketInfoComponent> = this.container.createComponent(
+      TicketInfoComponent,
+    );
+    directView.instance.flight$ = this.flight$;
+    const totalInfo = this.summary.createComponent(SummaryComponent);
+    totalInfo.instance.tickets = this.mokPassengerData.tickets;
+    */
   }
 
 }
