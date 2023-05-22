@@ -6,6 +6,7 @@ import { SummaryComponent } from './components/summary/summary.component';
 import { TableRecordComponent } from './components/table-record/table-record.component';
 import { MaterialModule } from '../material/material.module';
 import { SeatsDirective } from './directives/seats.directive';
+import { CurrencyDirective } from './directives/currency.directive';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { SeatsDirective } from './directives/seats.directive';
     SummaryComponent,
     TableRecordComponent,
     SeatsDirective,
+    CurrencyDirective,
   ],
   imports: [
     CommonModule,
@@ -23,6 +25,7 @@ import { SeatsDirective } from './directives/seats.directive';
     TicketInfoComponent,
     PassengerInfoComponent,
     SeatsDirective,
+    CurrencyDirective,
   ],
 })
 export class SharedModule { }
