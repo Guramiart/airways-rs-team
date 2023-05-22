@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { IFlight } from 'src/app/services/flight.model';
+import { Flight } from 'src/app/services/flight.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FlightInfoService {
 
-  private flight: IFlight;
+  private flight: Flight;
 
-  private flightInfo$: BehaviorSubject<IFlight | undefined> = new BehaviorSubject<IFlight | undefined>(undefined);
+  // eslint-disable-next-line max-len
+  private flightInfo$: BehaviorSubject<Flight | undefined> = new BehaviorSubject<Flight | undefined>(undefined);
 
-  public getFlightInfo$(): Observable<IFlight | undefined> {
+  public getFlightInfo$(): Observable<Flight | undefined> {
     return this.flightInfo$.asObservable();
   }
 
-  public setFlightInfo(value: IFlight): void {
+  public setFlightInfo(value: Flight): void {
     this.flight = value;
     this.flightInfo$.next(this.flight);
   }

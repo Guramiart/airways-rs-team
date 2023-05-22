@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { FlightState } from 'src/app/redux/state.model';
+import { IFlightState } from 'src/app/redux/state.model';
 import * as FlightSelect from '../../../redux/selectors/flight.selector';
 import { StepperService } from '../../../core/services/stepper-service.service';
 
@@ -13,7 +13,7 @@ import { StepperService } from '../../../core/services/stepper-service.service';
 })
 export class FirstStepComponent implements OnInit {
 
-  public flights$: Observable<FlightState> | undefined;
+  public flights$: Observable<IFlightState> | undefined;
 
   constructor(
     private store: Store,

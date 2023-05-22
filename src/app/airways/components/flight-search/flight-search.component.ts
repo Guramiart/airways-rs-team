@@ -1,14 +1,14 @@
 import {
-  Component, ElementRef, OnInit, ViewChild,
+  Component, ElementRef, OnDestroy, OnInit, ViewChild,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { DATE_FORMATS } from 'src/app/shared/enums/date-format';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
-import { ICity } from 'src/app/services/cities.model';
 import { FlightTypes } from 'src/app/shared/enums/flight-types';
+import { Airport } from 'src/app/services/flight.model';
 import { Passengers } from '../../models/passengers';
 import * as SettingSelect from '../../../redux/selectors/settings.selector';
 import * as FlightActions from '../../../redux/actions/flight.actions';
@@ -18,11 +18,13 @@ import * as FlightActions from '../../../redux/actions/flight.actions';
   templateUrl: './flight-search.component.html',
   styleUrls: ['./flight-search.component.scss'],
 })
-export class FlightSearchComponent implements OnInit {
+export class FlightSearchComponent implements OnInit, OnDestroy {
 
   @ViewChild('passengersInput', { read: ElementRef }) input: ElementRef | undefined;
 
   private format$: Observable<string> | undefined;
+
+  private searchData: Subscription;
 
   public passengers: Passengers = {
     passengers: {
@@ -49,7 +51,7 @@ export class FlightSearchComponent implements OnInit {
     { value: FlightTypes.ONE_WAY, checked: false },
   ];
 
-  public countries: ICity[] = [];
+  public countries: Airport[] = [];
 
   public isFocused: boolean = false;
 
@@ -77,6 +79,10 @@ export class FlightSearchComponent implements OnInit {
       this.updateDate();
     });
     this.dataService.setAuthUserFromLS();
+  }
+
+  ngOnDestroy(): void {
+    this.searchData.unsubscribe();
   }
 
   private updateDate(): void {
@@ -134,21 +140,25 @@ export class FlightSearchComponent implements OnInit {
   }
 
   search(): void {
-    const from: ICity = this.flightSearchForm.get('from')?.value;
-    const destination: ICity = this.flightSearchForm.get('destination')?.value;
-    const startDate = this.flightSearchForm.get('startDate')?.value;
-    const endDate = this.flightSearchForm.get('endDate')?.value;
-    const total: number = Object
-      .values(this.passengers.passengers).reduce((acc, curr) => acc + curr.count, 0);
-    this.passengers.total = total;
-    this.store.dispatch(FlightActions.updateFlights({
-      from,
-      destination,
-      startDate,
-      endDate,
-      passengers: this.passengers,
-    }));
-    this.router.navigateByUrl('step/1');
+    const forwardDate = this.flightSearchForm.get('startDate')?.value;
+    const backDate = this.flightSearchForm.get('endDate')?.value;
+    this.searchData = this.dataService.searchFlights({
+      fromKey: this.flightSearchForm.get('from')?.value.key,
+      toKey: this.flightSearchForm.get('destination')?.value.key,
+      forwardDate,
+      backDate,
+    }).subscribe((resp) => {
+      this.passengers.total = Object
+        .values(this.passengers.passengers).reduce((acc, curr) => acc + curr.count, 0);
+      this.store.dispatch(FlightActions.updateFlights({
+        from: resp[0],
+        destination: resp[1],
+        startDate: forwardDate,
+        endDate: backDate,
+        passengers: this.passengers,
+      }));
+      this.router.navigateByUrl('step/1');
+    });
   }
 
 }
