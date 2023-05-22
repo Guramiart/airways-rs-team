@@ -6,12 +6,14 @@
   <div class="ticket-block">
     <app-calendar [isForward]="true"></app-calendar>
   </div>
-  <div class="title">
-    <mat-icon class="return">airplanemode_active</mat-icon>
-    {{ flight.destination!.form.name }} to {{ flight.destination!.to.name }}
-  </div>
-  <div class="ticket-block">
-    <app-calendar [isForward]="false"></app-calendar>
+  <div *ngIf="isRoundTrip()">
+    <div class="title">
+      <mat-icon class="return">airplanemode_active</mat-icon>
+      {{ flight.destination!.form.name }} to {{ flight.destination!.to.name }}
+    </div>
+    <div class="ticket-block">
+      <app-calendar [isForward]="false"></app-calendar>
+    </div>
   </div>
 </div>
 <div class="btn-block">

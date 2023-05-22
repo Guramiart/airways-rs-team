@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { Passengers } from 'src/app/airways/models/passengers';
 import { Flight } from 'src/app/services/flight.model';
+import { FlightTypes } from 'src/app/shared/enums/flight-types';
 
 const GET_FLIGHTS = '[Flight] Get flights';
 const UPDATE_STORE = '[Flight] Update flights';
@@ -17,6 +18,7 @@ export const getFlights = createAction(GET_FLIGHTS);
 export const updateFlights = createAction(
   UPDATE_STORE,
   props<{
+    flightType: FlightTypes,
     from: Flight,
     destination: Flight,
     startDate: string,
