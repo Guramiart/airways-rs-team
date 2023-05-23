@@ -8,11 +8,11 @@
   flex-direction: row;
   column-gap: 10px;
   align-items: center;
-  color: var(--app-root-blue);
+  margin-bottom: 8px;
   font-size: 24px;
   font-weight: 700;
   line-height: 28px;
-  margin-bottom: 8px;
+  color: var(--app-root-blue);
 }
 
 .ticket-block {
@@ -28,7 +28,8 @@
 .return {
   rotate: -90deg;
 }
-.btns-block{
+
+.btns-block {
   display: flex;
   gap: 20px;
   justify-content: right;
@@ -37,18 +38,18 @@
 .btn-block {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
   column-gap: 40px;
+  justify-content: flex-end;
   margin-bottom: 40px;
 }
 
 .mdc-button {
   width: 126px;
   height: 60px;
-  color: white;
-  background-color: var(--app-root-blue);
   font-size: 16px;
   font-weight: 500;
+  color: white;
+  background-color: var(--app-root-blue);
 }
 
 .mat-mdc-unelevated-button:not(:disabled) {

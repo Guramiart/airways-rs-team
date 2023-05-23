@@ -18,25 +18,25 @@
 
 .header__basket-counter {
   position: absolute;
+  top: 0;
+  right: 0;
   display: flex;
+  justify-content: center;
   box-sizing: border-box;
   width: 16px;
   height: 16px;
-  top: 0;
-  right: 0;
   padding: 1px 0 0 2px;
-  justify-content: center;
-  border-radius: 50%;
   background-color: red;
+  border-radius: 50%;
 }
 
 .header__basket-count {
-  text-align: center;
-  font-family: 'Roboto', sans-serif;
-  font-style: normal;
-  font-weight: 500;
+  font-family: Roboto, sans-serif;
   font-size: 11px;
+  font-weight: 500;
+  font-style: normal;
   line-height: 16px;
+  color: #fff;
+  text-align: center;
   letter-spacing: 0.5px;
-  color: #FFFFFF;
 }

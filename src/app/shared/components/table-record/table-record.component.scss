@@ -1,43 +1,41 @@
 :host {
   display: flex;
-  width: 100%;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 
-  @media screen and (max-width: 889px) {
+  @media screen and (width <= 889px) {
     width: 825px;
   }
 }
 
 .main__table-block {
   display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   max-width: 1096px;
-  justify-content: center;
-  align-items: center;
 }
 
 .main__table-record {
   display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   width: 95%;
   min-height: 155px;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 2px solid rgba(116, 118, 122, 0.2);
+  border-bottom: 2px solid rgb(116 118 122 / 20%);
 
-  @media screen and (max-width: 889px) {
+  @media screen and (width <= 889px) {
     min-width: 825px;
   }
 }
 
-
 .main__sixth-record {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
   gap: 8px;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .main__second-record,
@@ -45,15 +43,15 @@
 .main__fifth-record {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   align-items: center;
+  justify-content: space-around;
 }
 
 .main__first-record,
 .main__third-record {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
 .main__first-record:nth-child(1) {
@@ -87,43 +85,43 @@
 }
 
 .main__record-checkbox {
-  font-family: 'Roboto', sans-serif;
-  font-style: normal;
-  font-weight: 700;
+  font-family: Roboto, sans-serif;
   font-size: 20px;
+  font-weight: 700;
+  font-style: normal;
   line-height: 24px;
+  color: #0090bd;
   letter-spacing: 0.5px;
-  color: #0090BD;
 
-  @media screen and (max-width: 989px) {
+  @media screen and (width <= 989px) {
     font-size: 16px;
   }
 }
 
 .main__record-text {
-  font-family: 'Roboto', sans-serif;
-  font-style: normal;
-  font-weight: 500;
+  font-family: Roboto, sans-serif;
   font-size: 20px;
+  font-weight: 500;
+  font-style: normal;
   line-height: 32px;
+  color: #74767a;
   letter-spacing: 0.5px;
-  color: #74767A;
 
-  @media screen and (max-width: 989px) {
+  @media screen and (width <= 989px) {
     font-size: 16px;
   }
 }
 
 .main__record-price {
-  font-family: 'Roboto', sans-serif;
-  font-style: normal;
-  font-weight: 500;
+  font-family: Roboto, sans-serif;
   font-size: 20px;
+  font-weight: 500;
+  font-style: normal;
   line-height: 32px;
+  color: #7f8906;
   letter-spacing: 0.5px;
-  color: #7F8906;
 
-  @media screen and (max-width: 989px) {
+  @media screen and (width <= 989px) {
     font-size: 16px;
   }
 }
