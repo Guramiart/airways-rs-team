@@ -1,20 +1,37 @@
 .form-group {
   display: flex;
-  gap: 20px;
   width: 100%;
+  gap: 20px;
   padding: 5px;
+
+  @media screen and (max-width: 910px) {
+    flex-wrap: wrap;
+  }
 
   &__mobile {
     display: flex;
     gap: 20px;
-    justify-content: space-between;
     width: 50%;
+    min-width: 430px;
+    justify-content: space-between;
+
+    @media screen and (max-width: 534px) {
+      flex-direction: column;
+      @media screen and (max-width: 480px) {
+        width: 90%;
+        min-width: unset;
+      }
+    }
 
     &_cont {
+      width: 49%;
       display: flex;
       flex-direction: column;
       box-sizing: border-box;
-      width: 49%;
+
+      @media screen and (max-width: 480px) {
+        width: 100%;
+      }
     }
   }
 }

@@ -1,5 +1,6 @@
 :host {
   display: flex;
+  min-height: 96px;
   flex-direction: row;
   justify-content: center;
   height: 96px;
@@ -21,7 +22,14 @@
   box-sizing: content-box;
   padding: 20px;
   border-radius: 2px;
-  box-shadow: 0 1px 4px rgb(0 0 0 / 20%);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+
+  @media screen and (max-width: 1079px) {
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
 }
 
 .main__input-wrapper {
@@ -169,10 +177,9 @@ mat-date-range-input {
       white-space: nowrap;
     }
 
-    .mat-expansion-panel-content {
-      .mat-expansion-panel-body {
-        background-color: #fff;
-      }
+    .mat-expansion-panel-body {
+      z-index: auto;
+      background-color: #FFFFFF;
     }
   }
 }

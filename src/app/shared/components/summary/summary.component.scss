@@ -4,11 +4,17 @@
   gap: 16px;
   width: 50%;
   max-width: 552px;
-  max-height: 376px;
-  background: #fff;
-  border: 1px solid #e1e5eb;
+  min-height: 376px;
+  flex-direction: column;
+  gap: 16px;
+  background: #FFFFFF;
+  border: 1px solid #E1E5EB;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
-  box-shadow: 0 1px 4px rgb(0 0 0 / 20%);
+
+  @media screen and (max-width: 674px) {
+    width: 90%;
+  }
 }
 
 .main__summary-list {

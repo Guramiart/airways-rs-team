@@ -55,12 +55,4 @@ export class BookingPageComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.observeForEditBtn) this.observeForEditBtn.unsubscribe();
   }
 
-  next(): void {
-    this.router.navigateByUrl('/step/2');
-  }
-
-  back(): void {
-    this.router.navigateByUrl('');
-  }
-
 }

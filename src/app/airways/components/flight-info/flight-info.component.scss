@@ -5,6 +5,7 @@
   height: auto;
   min-height: 130px;
   background-color: white;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   box-shadow: 0 1px 4px rgb(0 0 0 / 20%);
 
@@ -15,6 +16,14 @@
     justify-content: space-between;
     width: 70%;
     padding: 27px;
+
+    @media screen and (max-width: 999px) {
+      width: 50%;
+    }
+
+    @media screen and (max-width: 380px) {
+      padding: 7px;
+    }
   }
 
   &__price {
@@ -23,9 +32,16 @@
     column-gap: 30px;
     align-items: center;
     justify-content: center;
-    width: 30%;
-    padding: 15px 0 15px 27px;
-    text-align: end;
+    column-gap: 30px;
+
+    @media screen and (max-width: 999px) {
+      width: 50%;
+    }
+
+    @media screen and (max-width: 799px) {
+      flex-direction: column;
+      padding: 0;
+    }
   }
 }
 
@@ -47,16 +63,20 @@
     font-size: 16px;
     font-weight: 400;
     line-height: 16px;
-    color: gray;
-    letter-spacing: 0.5;
+    letter-spacing: 0.5px;
+    font-weight: 400;
+
+    @media screen and (max-width: 448px) {
+      font-size: 12px;
+    }
   }
 
   .location {
     font-size: 12px;
     font-weight: 400;
     line-height: 12px;
-    color: gray;
-    letter-spacing: 0.4;
+    letter-spacing: 0.4px;
+    font-weight: 400;
   }
 
   .time {
@@ -64,13 +84,24 @@
     font-size: 30px;
     font-weight: 700;
     line-height: 36px;
+
+    @media screen and (max-width: 554px) {
+      font-size: 20px;
+    }
   }
 }
 
 .number {
   display: flex;
   align-items: center;
-  width: 70%;
+
+  @media screen and (max-width: 799px) {
+    width: auto;
+  }
+
+  @media screen and (max-width: 449px) {
+    display: none;
+  }
 }
 
 .direction {
@@ -79,12 +110,34 @@
   max-width: 280px;
   font-size: 12px;
   font-weight: 400;
-  text-align: center;
+
+  @media screen and (max-width: 999px) {
+    width: auto;
+    max-width: unset;
+  }
+
+  @media screen and (max-width: 799px) {
+    max-width: unset;
+    width: auto;
+  }
+
+  :nth-child(1) {
+    @media screen and (max-width: 409px) {
+      display: none;
+    }
+  }
+
+  :nth-child(3) {
+    @media screen and (max-width: 409px) {
+      display: none;
+    }
+  }
 }
 
 .icon-block {
   position: relative;
   width: 100%;
+  min-width: 5px;
   height: 2px;
   margin: 20px 0 15px;
   background-color: gray;
@@ -100,6 +153,10 @@
     background-image: url("../../../../assets/airplane_takeoff.svg");
     background-repeat: no-repeat;
     background-position: center;
+
+    @media screen and (max-width: 409px) {
+      display: none;
+    }
   }
 }
 
@@ -135,12 +192,15 @@
   display: flex;
   flex-direction: column;
   row-gap: 1px;
-  width: 100%;
+
+  @media screen and (max-width: 799px) {
+    align-items: center;
+  }
 
   .seats {
     padding: 5px;
     color: gray;
-    background-color: #fafafa;
+    border-radius: 2px;
   }
 
   .price-title {
@@ -155,7 +215,10 @@
     font-size: 30px;
     font-weight: 700;
     line-height: 36px;
-    color: var(--app-root-blue);
+
+    @media screen and (max-width: 448px) {
+      font-size: 20px;
+    }
   }
 }
 
@@ -170,9 +233,10 @@
   column-gap: 20px;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  font-size: 35px;
-  color: gray;
+
+  @media screen and (max-width: 410px) {
+    font-size: 25px;
+  }
 }
 
 .flight-img {

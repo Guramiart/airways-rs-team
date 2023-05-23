@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { ICity } from './cities.model';
 import { IUser } from './user.model';
 
 import * as SettingsAction from '../redux/actions/settings.actions';
+import { Airport, Flight, FlightRequest } from './flight.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,8 +17,12 @@ export class DataService {
     private store:Store,
   ) { }
 
-  public getAllCities(): Observable<ICity[]> {
-    return this.http.get<ICity[]>('cities');
+  public getAllCities(): Observable<Airport[]> {
+    return this.http.get<Airport[]>('search/airport');
+  }
+
+  public searchFlights(flight: FlightRequest): Observable<Flight[]> {
+    return this.http.post<Flight[]>('search/flight', flight);
   }
 
   public loginUser(resp:{ email:string, password:string }) {

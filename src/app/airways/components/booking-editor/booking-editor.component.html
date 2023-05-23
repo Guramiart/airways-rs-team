@@ -3,15 +3,15 @@
     <div class="main__input-wrapper">
       <label class="main__input-label" for="from">From</label>
       <div class="main__input-container">
-        <input id="from" class="main__editor-input" type="text" [value]="flight.from!.nameEn">
-        <span class="main__input-code">{{ flight.from!.abbreviation }}</span>
+        <input id="from" class="main__editor-input" type="text" [value]="flight.from!.form.name">
+        <span class="main__input-code">{{ flight.from!.form.key }}</span>
       </div>
     </div>
     <div class="main__input-wrapper">
       <label class="main__input-label" for="to">Destination</label>
       <div class="main__input-container">
-        <input id="to" class="main__editor-input" type="text" [value]="flight.destination!.nameEn">
-        <span class="main__input-code">{{ flight.destination!.abbreviation }}</span>
+        <input id="to" class="main__editor-input" type="text" [value]="flight.from!.to.name">
+        <span class="main__input-code">{{ flight.from!.to.key }}</span>
       </div>
     </div>
     <div class="main__daypicker-wrapper">

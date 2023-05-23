@@ -3,50 +3,62 @@
   padding-bottom: 30px;
 }
 
-.btns-block {
-  display: flex;
-  gap: 20px;
-  justify-content: right;
-}
-
-.header {
-  display: flex;
-  flex-direction: column;
-  justify-content: left;
-
-  &__title {
+  .header{
     display: flex;
-    gap: 8px;
-    align-items: center;
-
-    h2 {
-      margin: 0;
-      padding: 0;
-      font-family: Roboto;
-      font-size: 24px;
-      font-weight: 700;
-      line-height: 28px;
-      color: #11397e;
+    flex-direction: column;
+    justify-content: left;
+    &__title{
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        h2{
+            padding: 0;
+            margin: 0;
+            font-family: 'Roboto';
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 28px;
+            color: #11397E;
+        }
+    }
+    &__text{
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        color: #49454F;
+    }
+  }
+  .forms{
+    &__title{
+        font-family: 'Roboto';
+        font-style: normal;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 28px;
+        color: #11397E;
     }
   }
 
-  &__text {
-    font-family: Roboto;
-    font-size: 16px;
-    font-weight: 400;
-    font-style: normal;
-    line-height: 24px;
-    color: #49454f;
+  .btn-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    column-gap: 40px;
+    margin-bottom: 40px;
   }
-}
 
-.forms {
-  &__title {
-    font-family: Roboto;
-    font-size: 24px;
-    font-weight: 700;
-    font-style: normal;
-    line-height: 28px;
-    color: #11397e;
+  .mdc-button {
+    width: 126px;
+    height: 60px;
+    color: white;
+    background-color: var(--app-root-blue);
+    font-size: 16px;
+    font-weight: 500;
   }
-}
+
+  .mat-mdc-unelevated-button:not(:disabled) {
+    color: var(--app-root-blue);
+    background-color: transparent;
+  }

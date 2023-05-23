@@ -12,13 +12,37 @@
 .booking-wrap {
   width: 100%;
   max-width: 1128px;
+  width: 100%;
+
+  @media screen and (max-width: 1150px) {
+    box-sizing: content-box;
+    padding: 0 10px;
+  }
+
+  @media screen and (max-width: 469px) {
+    width: 92%;
+    padding: 0;
+  }
 }
 
 .main__booking-edit {
   display: flex;
   flex-direction: row;
   gap: 63px;
-  width: 100%;
+
+  @media screen and (max-width: 579px) {
+    justify-content: space-between;
+    gap: unset;
+  }
+
+  @media screen and (max-width: 430px) {
+    gap: 5px;
+  }
+
+  @media screen and (max-width: 385px) {
+    justify-content: space-around;
+    align-items: center;
+  }
 }
 
 .main__booking-information {
@@ -26,6 +50,15 @@
   flex-direction: row;
   gap: 40px;
   justify-content: flex-start;
+  gap: 40px;
+
+  @media screen and (max-width: 519px) {
+    gap: 10px;
+  }
+  @media screen and (max-width: 445px) {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .main__direction-wrapper {
@@ -57,6 +90,13 @@
   gap: 8px;
   align-items: center;
   justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+}
+
+.main__dates-flight {
+  display: block;
+  min-width: 57px;
 }
 
 .main__info-text,

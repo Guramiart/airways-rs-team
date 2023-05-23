@@ -1,8 +1,40 @@
-export interface IFlight {
-  number: number,
-  destination: number,
-  startDate: string,
-  endDate: string,
-  price: number,
-  seats: number,
+export interface FlightRequest {
+  fromKey: string,
+  toKey: string,
+  forwardDate: string,
+  backDate: string,
+}
+
+export interface Airport {
+  key: string,
+  name: string,
+  city: string,
+  gmt: string,
+  country: string,
+}
+
+export interface Flight {
+  seats: Seats,
+  flightNumber: string,
+  timeMins: number,
+  form: Airport,
+  to: Airport,
+  takeoffDate: string,
+  landingDate: string,
+  price: {
+    eur: number,
+    usd: number,
+    rub: number,
+    pln: number,
+  }
+  otherFlights: Flights,
+}
+
+export interface Flights {
+  [key: string]: Flight
+}
+
+export interface Seats {
+  total: number;
+  avaible: number;
 }

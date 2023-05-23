@@ -79,7 +79,9 @@
   justify-content: space-between;
   min-width: 450px;
 
-  @media screen and (width <= 459px) {
+  @media screen and (max-width: 459px) {
+    width: 100%;
+    min-width: unset;
     flex-direction: column;
     gap: 2px;
     justify-content: center;

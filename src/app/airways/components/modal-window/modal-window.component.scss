@@ -1,26 +1,37 @@
 .main {
   position: absolute;
-  z-index: 1000;
-  inset: 0;
-  overflow: auto;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
   display: flex;
   justify-content: center;
-  background-color: rgb(0 0 0 / 22.6%);
+  background-color: rgba(0, 0, 0, 0.226);
+  z-index: 9000;
+  overflow: auto;
 }
 
 .content {
-  position: relative;
   width: 31%;
-  height: fit-content;
+  background-color: white;
+  padding: 20px;
+  position: relative;
   margin-top: 60px;
   margin-bottom: 40px;
-  padding: 20px;
-  background-color: white;
+  height: fit-content;
   border-radius: 4px;
+
+  @media screen and (max-width: 889px) {
+    width: 50%;
+  }
+
+  @media screen and (max-width: 559px) {
+    width: 80%;
+  }
 }
 
 .close_btn {
   position: absolute;
-  top: -35px;
   right: -35px;
+  top: -35px;
 }
