@@ -11,14 +11,14 @@ export interface AppState {
 }
 
 export interface IFlightState {
-  from: Flight | null,
-  destination: Flight | null,
+  from: Flight,
+  destination: Flight,
   startDate: string,
   endDate: string,
-  passengers: Passengers | null,
-  flightType: FlightTypes | null,
-  selectedDirectFlight: Flight | null,
-  selectedReverseFlight: Flight | null,
+  passengers: Passengers,
+  flightType: FlightTypes,
+  selectedDirectFlight: Flight,
+  selectedReverseFlight: Flight,
 }
 
 export interface SettingsState {
@@ -34,7 +34,7 @@ export const initialFlightState: IFlightState = {
   startDate: '',
   endDate: '',
   passengers: null,
-  flightType: null,
+  flightType: FlightTypes.ROUND,
   selectedDirectFlight: null,
   selectedReverseFlight: null,
 };

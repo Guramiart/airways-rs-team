@@ -1,4 +1,5 @@
 import { AfterViewInit, Component } from '@angular/core';
+import { Price } from 'src/app/services/flight.model';
 import { Passengers } from 'src/app/airways/models/passengers';
 import { AgePassenger } from '../../enums/tickets-data';
 
@@ -9,9 +10,15 @@ import { AgePassenger } from '../../enums/tickets-data';
 })
 export class SummaryComponent implements AfterViewInit {
 
-  public passengers: Passengers | null;
+  private CHILD_DISCOUNT: number = 25;
 
-  public totalPrice = 0;
+  private INFANT_DISCOUNT: number = 75;
+
+  private TAX: number = 35;
+
+  public passengers: Passengers;
+
+  public cost: Price;
 
   public resultArray: AgePassenger[] = [];
 
@@ -22,7 +29,7 @@ export class SummaryComponent implements AfterViewInit {
   }
 
   private initSummaryData(): void {
-    /*
+
     const initAgePassenger: AgePassenger = {
       count: 0,
       fare: 0,
@@ -34,40 +41,32 @@ export class SummaryComponent implements AfterViewInit {
     const child: AgePassenger = { ...initAgePassenger };
     const infant: AgePassenger = { ...initAgePassenger };
 
-    this.tickets.forEach((ticket) => {
-      adult.count += ticket.prices.adult.length;
-      child.count += ticket.prices.child.length;
-      infant.count += ticket.prices.child.length;
+    if (this.passengers?.passengers.adult.count) {
+      adult.count = this.passengers?.passengers.adult.count;
+      adult.total = this.cost.eur;
+      adult.tax = (adult.total / 100) * this.TAX;
+      adult.fare = adult.total - adult.tax;
+      this.resultArray.push(adult);
+    }
 
-      if (adult.count) {
-        ticket.prices.adult.forEach((oneData: Passenger) => {
-          adult.fare += oneData.fare;
-          adult.tax += oneData.tax;
-          adult.total = adult.total + oneData.fare + oneData.tax;
-        });
-      }
+    if (this.passengers?.passengers.child.count) {
+      child.count = this.passengers?.passengers.child.count;
+      const childTotal = this.cost.eur * (this.CHILD_DISCOUNT / 100);
+      child.total = childTotal;
+      child.tax = (childTotal / 100) * this.TAX;
+      child.fare = childTotal - child.tax;
+      this.resultArray.push(child);
+    }
 
-      if (child.count) {
-        ticket.prices.child.forEach((oneData: Passenger) => {
-          child.fare += oneData.fare;
-          child.tax += oneData.tax;
-          child.total = child.total + oneData.fare + oneData.tax;
-        });
-      }
+    if (this.passengers?.passengers.infant.count) {
+      infant.count = this.passengers?.passengers.infant.count;
+      const infantTotal = this.cost.eur * (this.INFANT_DISCOUNT / 100);
+      infant.total = infantTotal;
+      infant.tax = (infantTotal / 100) * this.TAX;
+      infant.fare = infantTotal - infant.tax;
+      this.resultArray.push(infant);
+    }
 
-      if (infant.count) {
-        ticket.prices.infant.forEach((oneData: Passenger) => {
-          infant.fare += oneData.fare;
-          infant.tax += oneData.tax;
-          infant.total = infant.total + oneData.fare + oneData.tax;
-        });
-      }
-    });
-    this.resultArray.push(adult);
-    this.resultArray.push(child);
-    this.resultArray.push(infant);
-    this.totalPrice = adult.total + child.total + infant.total;
-    */
   }
 
 }

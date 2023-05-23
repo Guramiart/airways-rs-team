@@ -35,6 +35,7 @@ export interface Seats {
 }
 
 export interface Price {
+  [key: string]: number,
   eur: number,
   usd: number,
   rub: number,
