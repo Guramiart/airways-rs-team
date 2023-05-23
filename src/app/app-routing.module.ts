@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { MainPageComponent } from './airways/pages/main-page/main-page.component';
 import { ShoppingCartPageComponent } from './airways/pages/shopping-cart-page/shopping-cart-page.component';
+import { AuthGuardService } from './services/auth-guard.service';
+import { StoreGuardService } from './services/store-guard.service';
 
 const routes: Routes = [
   {
@@ -24,6 +26,7 @@ const routes: Routes = [
     path: 'cart',
     pathMatch: 'full',
     component: ShoppingCartPageComponent,
+    canActivate: [AuthGuardService, StoreGuardService],
     data: {
       cart: true,
       headerView: {
@@ -36,6 +39,7 @@ const routes: Routes = [
     path: 'account',
     pathMatch: 'full',
     component: ShoppingCartPageComponent,
+    canActivate: [AuthGuardService, StoreGuardService],
     data: {
       cart: false,
       headerView: {

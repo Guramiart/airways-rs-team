@@ -65,7 +65,7 @@ export class AccountButtonComponent implements OnInit, OnDestroy {
 
   public signOut():void {
     this.store.dispatch(SettingsAction.setAuthUser({ authUser: undefined }));
-    this.data.changeLS(0, true);
+    this.data.changeLS('', true);
   }
 
   private onChange(bgColor: boolean): void {

@@ -1,74 +1,76 @@
 :host {
   display: flex;
-  height: 92px;
-  justify-content: center;
   align-items: center;
-  background-color: #FAFAFA;
+  justify-content: center;
+  height: 92px;
+  background-color: #fafafa;
 }
 
-.footer{
+.footer {
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   box-sizing: border-box;
   width: 100%;
   max-width: 1120px;
   height: 20px;
   margin: 0 auto;
-  padding: 0 40px 0 40px;
-  flex-direction: row;
-  justify-content: space-between;
-  @media  screen and (max-width: 710px) {
-    height: 40px;
+  padding: 0 40px;
+
+  @media screen and (width <= 710px) {
     flex-direction: column;
     align-items: center;
-    @media screen and (max-width: 399px) {
+    height: 40px;
+
+    @media screen and (width <= 399px) {
       height: 60px;
-      padding: 0 10px 0 10px;
+      padding: 0 10px;
     }
   }
 }
 
 .footer-info {
-  font-family: 'Roboto', sans-serif;
-  font-style: normal;
-  font-weight: 400;
+  font-family: Roboto, sans-serif;
   font-size: 14px;
+  font-weight: 400;
+  font-style: normal;
   line-height: 20px;
+  color: #11397e;
   letter-spacing: 0.25px;
-  color: #11397E;
 }
 
 .footer__payment-info {
   display: flex;
-  width: 40%;
-  min-width: 387px;
   flex-direction: row;
   justify-content: space-between;
-  @media screen and (max-width: 399px) {
-    width: 100%;
-    min-width: unset;
+  width: 40%;
+  min-width: 387px;
+
+  @media screen and (width <= 399px) {
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    min-width: unset;
   }
 }
 
 .footer__payment-text {
-  font-family: 'Roboto', sans-serif;
-  font-style: normal;
-  font-weight: 400;
+  font-family: Roboto, sans-serif;
   font-size: 14px;
+  font-weight: 400;
+  font-style: normal;
   line-height: 20px;
+  color: #000;
   letter-spacing: 0.25px;
-  color: #000000;
 }
 
 .footer__payment-cards {
   display: flex;
-  width: 152px;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  align-items: center;
+  flex-flow: row nowrap;
   gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+  width: 152px;
 }
 
 .footer__card-image {

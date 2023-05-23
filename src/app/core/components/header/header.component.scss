@@ -1,51 +1,51 @@
 :host {
-  display: block;
   position: absolute;
   z-index: 1000;
+  display: block;
   width: 100%;
 }
 
 .header {
-  background-color: rgba(116, 118, 122, 0.2);
   display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 88px;
-  justify-content: center;
-  align-items: center;
+  background-color: rgb(116 118 122 / 20%);
 }
 
 .header__wrapper {
   display: flex;
+  flex-direction: row;
+  gap: 17px;
+  justify-content: space-between;
   width: 100%;
   max-width: 1128px;
   height: 40px;
   margin: 0 auto;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 17px;
 
-  @media screen and (max-width: 1188px) {
+  @media screen and (width <= 1188px) {
     box-sizing: border-box;
-    padding: 0 15px 0 15px;
+    padding: 0 15px;
 
-    @media screen and (max-width: 709px) {
+    @media screen and (width <= 709px) {
       flex-direction: column;
-      height: 80px;
       gap: unset;
       align-items: center;
+      height: 80px;
     }
   }
 }
 
 .header__info-wrapper {
   display: flex;
-  width: 60%;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
   gap: 14px;
+  align-items: center;
+  justify-content: space-between;
+  width: 60%;
 
-  @media screen and (max-width: 459px) {
+  @media screen and (width <= 459px) {
     display: none;
   }
 }
@@ -56,62 +56,61 @@
 }
 
 .header__logo-image {
+  cursor: pointer;
   width: 100%;
   height: 100%;
-  cursor: pointer;
 }
 
 .header__steps-container {
   display: flex;
-  max-width: 532px;
-  width: 82%;
-  height: 40px;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: flex-end;
+  flex-flow: row nowrap;
   align-items: center;
+  justify-content: flex-end;
+  width: 82%;
+  max-width: 532px;
+  height: 40px;
 }
 
 .header__menu-wrapper {
   display: flex;
-  min-width: 450px;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
   gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 450px;
 
-  @media screen and (max-width: 459px) {
+  @media screen and (width <= 459px) {
+    flex-direction: column;
+    gap: 2px;
+    justify-content: center;
     width: 100%;
     min-width: unset;
-    flex-direction: column;
-    justify-content: center;
-    gap: 2px;
   }
 }
 
 .header__menu-service {
   display: flex;
-  min-width: 242px;
   flex-direction: row;
-  justify-content: space-between;
   gap: 16px;
+  justify-content: space-between;
+  min-width: 242px;
 }
 
 .header__account-block {
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   box-sizing: border-box;
   min-width: 174px;
   padding-right: 16px;
-  flex-direction: row;
-  justify-content: space-between;
 }
 
 .header__steps-info {
-  font-family: 'Roboto', sans-serif;
-  font-style: normal;
-  font-weight: 400;
+  font-family: Roboto, sans-serif;
   font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
   line-height: 24px;
+  color: #fff;
   letter-spacing: 0.5px;
-  color: #FFFFFF;
 }

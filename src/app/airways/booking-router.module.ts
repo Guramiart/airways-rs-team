@@ -4,11 +4,14 @@ import { FirstStepComponent } from './components/first-step/first-step.component
 import { BookingPageComponent } from './pages/booking-page/booking-page.component';
 import { SecondStepComponent } from './components/second-step/second-step.component';
 import { SummaryPageComponent } from './components/summary-page/summary-page.component';
+import { AuthGuardService } from '../services/auth-guard.service';
+import { StoreGuardService } from '../services/store-guard.service';
 
 const routes: Routes = [
   {
     path: '1',
     component: BookingPageComponent,
+    canActivate: [StoreGuardService],
     data: {
       headerView: {
         bgColor: true,
@@ -20,6 +23,7 @@ const routes: Routes = [
       {
         path: '',
         component: FirstStepComponent,
+        canActivate: [StoreGuardService],
         outlet: 'booking',
       },
     ],
@@ -38,6 +42,7 @@ const routes: Routes = [
       {
         path: '',
         component: SecondStepComponent,
+        canActivate: [AuthGuardService, StoreGuardService],
         outlet: 'booking',
       },
     ],
@@ -45,6 +50,7 @@ const routes: Routes = [
   {
     path: '3',
     component: BookingPageComponent,
+    canActivate: [AuthGuardService, StoreGuardService],
     data: {
       headerView: {
         bgColor: true,
@@ -56,6 +62,7 @@ const routes: Routes = [
       {
         path: '',
         component: SummaryPageComponent,
+        canActivate: [AuthGuardService, StoreGuardService],
         outlet: 'booking',
       },
     ],

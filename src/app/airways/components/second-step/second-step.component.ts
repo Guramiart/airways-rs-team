@@ -74,19 +74,18 @@ export class SecondStepComponent implements OnInit, OnDestroy {
         ...this.passengers,
         contactDetails: data,
       };
-      // this.passengers.contactDetails = data
     }
   }
 
   public getPassengerInfo(data:{ type:string, info:IPassengerInfo }):void {
     switch (data.type) {
-      case 'adult': this.adultInfo = [];
+      case 'adult':
         this.adultInfo.push(data.info);
         break;
-      case 'child': this.childInfo = [];
+      case 'child':
         this.childInfo.push(data.info);
         break;
-      case 'infant': this.infantInfo = [];
+      case 'infant':
         this.infantInfo.push(data.info);
         break;
       default: break;
