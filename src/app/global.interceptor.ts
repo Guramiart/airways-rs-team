@@ -12,10 +12,6 @@ export class GlobalInterceptor implements HttpInterceptor {
 
   private hostName = 'https://api2.air-ways.online/';
 
-  // private hostName = 'https://api.air-ways.online/';
-
-  private hostName = 'https://api2.air-ways.online/';
-
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
     const newURL = this.hostName + request.url;

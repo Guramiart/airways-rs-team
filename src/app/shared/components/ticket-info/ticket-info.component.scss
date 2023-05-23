@@ -7,7 +7,7 @@
   background: #fff;
   border-radius: 8px;
 
-  @media screen and (max-width: 674px) {
+  @media screen and (width <= 674px) {
     width: 90%;
   }
 }
@@ -20,7 +20,6 @@
   box-sizing: border-box;
   max-width: 100%;
   min-height: 100px;
-  box-sizing: border-box;
   padding: 22px 24px;
   background: #f1f3f6;
   border-top: 3px solid #11397e;

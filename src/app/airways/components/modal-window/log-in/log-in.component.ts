@@ -43,7 +43,6 @@ export class LogInComponent implements OnInit {
       };
       this.data.loginUser(respObj).subscribe({
         error: (err) => {
-          console.log(err);
           if (err === 'Not Found') {
             this.isCorrectEmail = true;
           } else {

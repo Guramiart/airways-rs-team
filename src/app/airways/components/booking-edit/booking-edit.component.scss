@@ -12,14 +12,13 @@
 .booking-wrap {
   width: 100%;
   max-width: 1128px;
-  width: 100%;
 
-  @media screen and (max-width: 1150px) {
+  @media screen and (width <= 1150px) {
     box-sizing: content-box;
     padding: 0 10px;
   }
 
-  @media screen and (max-width: 469px) {
+  @media screen and (width <= 469px) {
     width: 92%;
     padding: 0;
   }
@@ -30,18 +29,18 @@
   flex-direction: row;
   gap: 63px;
 
-  @media screen and (max-width: 579px) {
-    justify-content: space-between;
+  @media screen and (width <= 579px) {
     gap: unset;
+    justify-content: space-between;
   }
 
-  @media screen and (max-width: 430px) {
+  @media screen and (width <= 430px) {
     gap: 5px;
   }
 
-  @media screen and (max-width: 385px) {
-    justify-content: space-around;
+  @media screen and (width <= 385px) {
     align-items: center;
+    justify-content: space-around;
   }
 }
 
@@ -50,12 +49,12 @@
   flex-direction: row;
   gap: 40px;
   justify-content: flex-start;
-  gap: 40px;
 
-  @media screen and (max-width: 519px) {
+  @media screen and (width <= 519px) {
     gap: 10px;
   }
-  @media screen and (max-width: 445px) {
+
+  @media screen and (width <= 445px) {
     flex-direction: column;
     align-items: center;
   }
@@ -90,8 +89,6 @@
   gap: 8px;
   align-items: center;
   justify-content: flex-start;
-  align-items: center;
-  gap: 8px;
 }
 
 .main__dates-flight {
