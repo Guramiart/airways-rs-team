@@ -13,9 +13,9 @@ import { PassengerInfoComponent } from '../passenger-info/passenger-info.compone
 })
 export class TicketInfoComponent implements OnInit {
 
-  public flight: Flight | null;
+  public flight: Flight;
 
-  public passengers: Passengers | null;
+  public passengers: Passengers;
 
   @ViewChild('passengersContainer', { read: ViewContainerRef, static: true }) container: ViewContainerRef;
 

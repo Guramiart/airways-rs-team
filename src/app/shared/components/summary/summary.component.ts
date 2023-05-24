@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Price } from 'src/app/services/flight.model';
-import { Passengers } from 'src/app/airways/models/passengers';
+import { PassengerDetail, Passengers } from 'src/app/airways/models/passengers';
 import { AgePassenger } from '../../enums/tickets-data';
 
 @Component({
@@ -34,38 +34,26 @@ export class SummaryComponent implements OnInit {
   private initSummaryData(): void {
 
     if (this.passengers.passengers.adult.count) {
-      const adult: AgePassenger = this.getInitObj();
-      adult.count = this.passengers.passengers.adult.count;
-      Object.keys(this.cost).forEach((key) => {
-        adult.total[key] = this.cost[key] * adult.count;
-        adult.tax[key] = (adult.total[key] / 100) * this.TAX;
-        adult.fare[key] = adult.total[key] - adult.tax[key];
-      });
-      this.resultArray.push(adult);
+      this.initPassengerPrice(this.passengers.passengers.adult, 100);
     }
-
     if (this.passengers.passengers.child.count) {
-      const child: AgePassenger = this.getInitObj();
-      child.count = this.passengers.passengers.child.count;
-      Object.keys(this.cost).forEach((key) => {
-        child.total[key] = (this.cost[key] * (this.CHILD_DISCOUNT / 100)) * child.count;
-        child.tax[key] = (child.total[key] / 100) * this.TAX;
-        child.fare[key] = child.total[key] - child.tax[key];
-      });
-      this.resultArray.push(child);
+      this.initPassengerPrice(this.passengers.passengers.child, this.CHILD_DISCOUNT);
     }
-
     if (this.passengers.passengers.infant.count) {
-      const infant: AgePassenger = this.getInitObj();
-      infant.count = this.passengers.passengers.infant.count;
-      Object.keys(this.cost).forEach((key) => {
-        infant.total[key] = (this.cost[key] * (this.INFANT_DISCOUNT / 100)) * infant.count;
-        infant.tax[key] = (infant.total[key] / 100) * this.TAX;
-        infant.fare[key] = infant.total[key] - infant.tax[key];
-      });
-      this.resultArray.push(infant);
+      this.initPassengerPrice(this.passengers.passengers.infant, this.INFANT_DISCOUNT);
     }
 
+  }
+
+  private initPassengerPrice(detail: PassengerDetail, discount: number) {
+    const passanger: AgePassenger = this.getInitObj();
+    passanger.count = detail.count;
+    Object.keys(this.cost).forEach((key) => {
+      passanger.total[key] = (this.cost[key] * (discount / 100)) * passanger.count;
+      passanger.tax[key] = (passanger.total[key] / 100) * this.TAX;
+      passanger.fare[key] = passanger.total[key] - passanger.tax[key];
+    });
+    this.resultArray.push(passanger);
   }
 
   private getTotalCost(): Price {

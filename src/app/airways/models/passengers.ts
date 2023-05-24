@@ -2,21 +2,9 @@ import { IPassengerInfo } from './passengerInfo.model';
 
 export interface Passengers {
   passengers: {
-    adult: {
-      name: string,
-      count: number,
-      info?:IPassengerInfo[]
-    },
-    child: {
-      name: string,
-      count: number,
-      info?:IPassengerInfo[]
-    },
-    infant: {
-      name: string,
-      count: number,
-      info?:IPassengerInfo[]
-    },
+    adult: PassengerDetail,
+    child: PassengerDetail,
+    infant: PassengerDetail,
   },
   total: number,
   contactDetails?:{
@@ -30,6 +18,12 @@ export interface PassengersCost {
   child: Cost,
   infant: Cost,
   total: number
+}
+
+export interface PassengerDetail {
+  name: string,
+  count: number,
+  info?:IPassengerInfo[]
 }
 
 export interface Cost {
