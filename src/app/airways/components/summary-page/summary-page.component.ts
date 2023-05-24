@@ -11,6 +11,7 @@ import { SummaryComponent } from '../../../shared/components/summary/summary.com
 import * as FlightSelect from '../../../redux/selectors/flight.selector';
 import { StepperService } from '../../../core/services/stepper-service.service';
 import { IPassengerInfo } from '../../models/passengerInfo.model';
+import * as FlightActions from '../../../redux/actions/flight.actions';
 
 @Component({
   selector: 'app-summary-page',
@@ -24,6 +25,8 @@ export class SummaryPageComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   public passengers: IPassengerInfo;
+
+  private summaryInstance: SummaryComponent;
 
   @ViewChild('container', { read: ViewContainerRef, static: true }) container: ViewContainerRef;
 
@@ -64,6 +67,7 @@ export class SummaryPageComponent implements OnInit, OnDestroy {
       const directCost = flight.selectedDirectFlight?.price;
       const reverseCost = flight.selectedReverseFlight?.price;
       flightCost.instance.cost = this.getFlightCost(directCost, reverseCost);
+      this.summaryInstance = flightCost.instance;
     });
 
   }
@@ -81,6 +85,8 @@ export class SummaryPageComponent implements OnInit, OnDestroy {
   }
 
   public buy(): void {
+    this.store
+      .dispatch(FlightActions.updateTotalCost({ totalCost: this.summaryInstance.totalCost }));
     this.router.navigateByUrl('/cart');
   }
 
