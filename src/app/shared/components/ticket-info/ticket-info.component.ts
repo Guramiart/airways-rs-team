@@ -1,5 +1,5 @@
 import {
-  AfterViewInit, Component, ViewChild, ViewContainerRef,
+  Component, OnInit, ViewChild, ViewContainerRef,
 } from '@angular/core';
 import { Flight } from 'src/app/services/flight.model';
 import { IPassengerInfo } from 'src/app/airways/models/passengerInfo.model';
@@ -11,7 +11,7 @@ import { PassengerInfoComponent } from '../passenger-info/passenger-info.compone
   templateUrl: './ticket-info.component.html',
   styleUrls: ['./ticket-info.component.scss'],
 })
-export class TicketInfoComponent implements AfterViewInit {
+export class TicketInfoComponent implements OnInit {
 
   public flight: Flight | null;
 
@@ -19,7 +19,7 @@ export class TicketInfoComponent implements AfterViewInit {
 
   @ViewChild('passengersContainer', { read: ViewContainerRef, static: true }) container: ViewContainerRef;
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     this.addPassengerData();
   }
 

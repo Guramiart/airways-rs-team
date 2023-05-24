@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { Passengers } from 'src/app/airways/models/passengers';
-import { Flight } from 'src/app/services/flight.model';
+import { Flight, Price } from 'src/app/services/flight.model';
 import { FlightTypes } from 'src/app/shared/enums/flight-types';
 
 const GET_FLIGHTS = '[Flight] Get flights';
@@ -12,6 +12,7 @@ const CHANGE_END_DATE = '[Flight] Change end date';
 const UPDATE_PASSENGERS = '[Flight] Update passengers';
 const UPDATE_DIRECT_FLIGHT = '[Flight] Update direct flight';
 const UPDATE_REVERSE_FLIGHT = '[Flight] Update reverse flight';
+const UPDATE_TOTAL_COST = '[Flight] Total cost';
 
 export const getFlights = createAction(GET_FLIGHTS);
 
@@ -57,13 +58,20 @@ export const updatePassengers = createAction(
 export const updateDirectFlight = createAction(
   UPDATE_DIRECT_FLIGHT,
   props<{
-    selectedDirectFlight: Flight | null,
+    selectedDirectFlight: Flight,
   }>(),
 );
 
 export const updateReverseFlight = createAction(
   UPDATE_REVERSE_FLIGHT,
   props<{
-    selectedReverseFlight: Flight | null,
+    selectedReverseFlight: Flight,
+  }>(),
+);
+
+export const updateTotalCost = createAction(
+  UPDATE_TOTAL_COST,
+  props<{
+    totalCost: Price,
   }>(),
 );

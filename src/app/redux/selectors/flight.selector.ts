@@ -27,3 +27,8 @@ export const selectEndDateFlight = createSelector(
   selectFlights,
   (state: IFlightState) => state.endDate,
 );
+
+export const selectTotalCost = createSelector(
+  selectFlights,
+  (state: IFlightState) => state.totalCost,
+);

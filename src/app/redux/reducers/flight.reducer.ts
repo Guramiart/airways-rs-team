@@ -66,4 +66,11 @@ export const flightReducer = createReducer(
       selectedReverseFlight,
     }),
   ),
+  on(
+    FlightActions.updateTotalCost,
+    (state: IFlightState, { totalCost }): IFlightState => ({
+      ...state,
+      totalCost,
+    }),
+  ),
 );

@@ -1,7 +1,7 @@
 <div class="main__summary-list">
   <div class="main__summary-item" *ngFor="let data of resultArray; let i = index">
     <div class="main__summary-string">
-      <span class="main__summary-text">{{data.count}} {{titlesArray[i]}}</span>
+      <span class="main__summary-text">{{data.count}} x {{titlesArray[i]}}</span>
       <span class="main__summary-count">€{{data.total | number: '1.0-2'}}</span>
     </div>
     <div class="main__summary-string">
@@ -16,5 +16,5 @@
 </div>
 <div class="main__summary-total">
   <span class="main__total-text">TOTAL:</span>
-  <span class="main__total-price">€{{ cost.eur | number: '1.0-2'}}</span>
+  <span class="main__total-price">€{{ totalCost | number: '1.0-2'}}</span>
 </div>

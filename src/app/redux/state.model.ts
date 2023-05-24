@@ -3,7 +3,7 @@ import { Currency } from '../shared/enums/currency';
 import { DateFormat } from '../shared/enums/date-format';
 import { Passengers } from '../airways/models/passengers';
 import { FlightTypes } from '../shared/enums/flight-types';
-import { Flight } from '../services/flight.model';
+import { Flight, Price } from '../services/flight.model';
 
 export interface AppState {
   flights: Flight,
@@ -19,6 +19,7 @@ export interface IFlightState {
   flightType: FlightTypes,
   selectedDirectFlight: Flight,
   selectedReverseFlight: Flight,
+  totalCost: Price,
 }
 
 export interface SettingsState {
@@ -37,6 +38,7 @@ export const initialFlightState: IFlightState = {
   flightType: FlightTypes.ROUND,
   selectedDirectFlight: null,
   selectedReverseFlight: null,
+  totalCost: null,
 };
 
 export const initialSettingState: SettingsState = {
