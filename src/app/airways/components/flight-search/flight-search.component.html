@@ -1,7 +1,7 @@
 <div class="form__wrap">
   <form [formGroup]="flightSearchForm" (submit)="search()">
     <div class="radio">
-      <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
+      <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [formControlName]="'flightType'">
         <mat-radio-button class="example-radio-button" *ngFor="let type of flightTypes" [value]="type.value" [checked]="type.checked">
           <span class="radio__title">{{type.value | titlecase}}</span>
         </mat-radio-button>

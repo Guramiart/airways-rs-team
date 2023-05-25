@@ -21,12 +21,7 @@ export interface Flight {
   to: Airport,
   takeoffDate: string,
   landingDate: string,
-  price: {
-    eur: number,
-    usd: number,
-    rub: number,
-    pln: number,
-  }
+  price: Price,
   otherFlights: Flights,
 }
 
@@ -37,4 +32,12 @@ export interface Flights {
 export interface Seats {
   total: number;
   avaible: number;
+}
+
+export interface Price {
+  [key: string]: number,
+  eur: number,
+  usd: number,
+  rub: number,
+  pln: number,
 }

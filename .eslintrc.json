@@ -31,6 +31,7 @@
             "classes": "always"
           }
         ],
+        "no-param-reassign": "off",
         "linebreak-style": 0,
         "@angular-eslint/directive-selector": [
           "error",

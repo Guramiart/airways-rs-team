@@ -1,70 +1,86 @@
-import { AfterViewInit, Component } from '@angular/core';
-import { Ticket, AgePassenger, Passenger } from '../../enums/tickets-data';
+import { Component, OnInit } from '@angular/core';
+import { Price } from 'src/app/services/flight.model';
+import { PassengerDetail, Passengers } from 'src/app/airways/models/passengers';
+import { AgePassenger } from '../../enums/tickets-data';
 
 @Component({
   selector: 'app-summary',
   templateUrl: './summary.component.html',
   styleUrls: ['./summary.component.scss'],
 })
-export class SummaryComponent implements AfterViewInit {
+export class SummaryComponent implements OnInit {
 
-  public tickets: Ticket[];
+  private CHILD_DISCOUNT: number = 25;
 
-  public totalPrice = 0;
+  private INFANT_DISCOUNT: number = 75;
+
+  private TAX: number = 35;
+
+  public passengers: Passengers;
+
+  public cost: Price;
+
+  public totalCost: Price;
 
   public resultArray: AgePassenger[] = [];
 
-  public titlesArray: string[] = ['x Adult Fare ', 'x Child Fare', 'x Infant Fare '];
+  public titlesArray: string[] = ['Adult Fare', 'Child Fare', 'Infant Fare'];
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     this.initSummaryData();
+    this.totalCost = this.getTotalCost();
   }
 
   private initSummaryData(): void {
-    const initAgePassenger: AgePassenger = {
-      count: 0,
-      fare: 0,
-      tax: 0,
-      total: 0,
-    };
 
-    const adult: AgePassenger = { ...initAgePassenger };
-    const child: AgePassenger = { ...initAgePassenger };
-    const infant: AgePassenger = { ...initAgePassenger };
+    if (this.passengers.passengers.adult.count) {
+      this.initPassengerPrice(this.passengers.passengers.adult, 100);
+    }
+    if (this.passengers.passengers.child.count) {
+      this.initPassengerPrice(this.passengers.passengers.child, this.CHILD_DISCOUNT);
+    }
+    if (this.passengers.passengers.infant.count) {
+      this.initPassengerPrice(this.passengers.passengers.infant, this.INFANT_DISCOUNT);
+    }
 
-    this.tickets.forEach((ticket) => {
-      adult.count += ticket.prices.adult.length;
-      child.count += ticket.prices.child.length;
-      infant.count += ticket.prices.child.length;
+  }
 
-      if (adult.count) {
-        ticket.prices.adult.forEach((oneData: Passenger) => {
-          adult.fare += oneData.fare;
-          adult.tax += oneData.tax;
-          adult.total = adult.total + oneData.fare + oneData.tax;
-        });
-      }
-
-      if (child.count) {
-        ticket.prices.child.forEach((oneData: Passenger) => {
-          child.fare += oneData.fare;
-          child.tax += oneData.tax;
-          child.total = child.total + oneData.fare + oneData.tax;
-        });
-      }
-
-      if (infant.count) {
-        ticket.prices.infant.forEach((oneData: Passenger) => {
-          infant.fare += oneData.fare;
-          infant.tax += oneData.tax;
-          infant.total = infant.total + oneData.fare + oneData.tax;
-        });
-      }
+  private initPassengerPrice(detail: PassengerDetail, discount: number) {
+    const passanger: AgePassenger = this.getInitObj();
+    passanger.count = detail.count;
+    Object.keys(this.cost).forEach((key) => {
+      passanger.total[key] = (this.cost[key] * (discount / 100)) * passanger.count;
+      passanger.tax[key] = (passanger.total[key] / 100) * this.TAX;
+      passanger.fare[key] = passanger.total[key] - passanger.tax[key];
     });
-    this.resultArray.push(adult);
-    this.resultArray.push(child);
-    this.resultArray.push(infant);
-    this.totalPrice = adult.total + child.total + infant.total;
+    this.resultArray.push(passanger);
+  }
+
+  private getTotalCost(): Price {
+    const totalCost: Price = {
+      eur: 0, usd: 0, rub: 0, pln: 0,
+    };
+    this.resultArray.forEach((el) => {
+      Object.keys(el.total).forEach((key) => {
+        totalCost[key] += el.total[key];
+      });
+    });
+    return totalCost;
+  }
+
+  private getInitObj(): AgePassenger {
+    return {
+      count: 0,
+      fare: {
+        eur: 0, usd: 0, rub: 0, pln: 0,
+      },
+      tax: {
+        eur: 0, usd: 0, rub: 0, pln: 0,
+      },
+      total: {
+        eur: 0, usd: 0, rub: 0, pln: 0,
+      },
+    };
   }
 
 }

@@ -63,6 +63,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.flightSearchForm = new FormGroup({
+      flightType: new FormControl(FlightTypes.ROUND),
       from: new FormControl('', Validators.required),
       destination: new FormControl('', Validators.required),
       startDate: new FormControl(null, Validators.required),
@@ -140,6 +141,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   }
 
   search(): void {
+    const type = this.flightSearchForm.get('flightType')?.value;
     const forwardDate = this.flightSearchForm.get('startDate')?.value;
     const backDate = this.flightSearchForm.get('endDate')?.value;
     this.searchData = this.dataService.searchFlights({
@@ -151,6 +153,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
       this.passengers.total = Object
         .values(this.passengers.passengers).reduce((acc, curr) => acc + curr.count, 0);
       this.store.dispatch(FlightActions.updateFlights({
+        flightType: type,
         from: resp[0],
         destination: resp[1],
         startDate: forwardDate,

@@ -3,35 +3,23 @@ import { Currency } from '../shared/enums/currency';
 import { DateFormat } from '../shared/enums/date-format';
 import { Passengers } from '../airways/models/passengers';
 import { FlightTypes } from '../shared/enums/flight-types';
-import { Flight } from '../services/flight.model';
+import { Flight, Price } from '../services/flight.model';
 
 export interface AppState {
   flights: Flight,
   settings: SettingsState,
 }
 
-/*
-export interface FlightState {
-  from: ICity,
-  destination: ICity,
-  startDate: Date | null,
-  endDate: Date | null,
-  passengers: Passengers | null,
-  type: FlightTypes,
-  selectedDirectFlight: IFlight | null,
-  selectedReverseFlight: IFlight | null,
-}
-*/
-
 export interface IFlightState {
-  from: Flight | null,
-  destination: Flight | null,
+  from: Flight,
+  destination: Flight,
   startDate: string,
   endDate: string,
-  passengers: Passengers | null,
-  type: FlightTypes,
-  selectedDirectFlight: Flight | null,
-  selectedReverseFlight: Flight | null,
+  passengers: Passengers,
+  flightType: FlightTypes,
+  selectedDirectFlight: Flight,
+  selectedReverseFlight: Flight,
+  totalCost: Price,
 }
 
 export interface SettingsState {
@@ -47,9 +35,10 @@ export const initialFlightState: IFlightState = {
   startDate: '',
   endDate: '',
   passengers: null,
-  type: FlightTypes.ROUND,
+  flightType: FlightTypes.ROUND,
   selectedDirectFlight: null,
   selectedReverseFlight: null,
+  totalCost: null,
 };
 
 export const initialSettingState: SettingsState = {

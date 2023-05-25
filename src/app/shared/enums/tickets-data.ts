@@ -1,3 +1,5 @@
+import { Price } from 'src/app/services/flight.model';
+
 export interface OneTicket {
   numberFlight: string,
   flight: string[],
@@ -9,21 +11,9 @@ export interface OneTicket {
 
 export interface AgePassenger {
   count: number,
-  total: number,
-  fare: number,
-  tax: number,
-}
-
-export interface Ticket {
-  flight: string,
-  direction: string,
-  date: string,
-  time: string,
-  prices: {
-    adult: Passenger[],
-    child: Passenger[],
-    infant: Passenger[],
-  }
+  total: Price,
+  fare: Price,
+  tax: Price,
 }
 
 export interface Passenger {

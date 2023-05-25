@@ -43,7 +43,7 @@
         <div class="date-slide" *ngIf="date.flight; else flightNotFound">
           <div class="date">{{ date.date | date: 'd MMM' }}</div>
           <div class="day">{{ date.date | date: 'EEEE' }}</div>
-          <div class="price">{{ date.flight.price.eur }}</div>
+          <div class="price" [appCurrency]="date.flight.price"></div>
           <div class="slide-footer" [appSeats]="date.flight.seats"></div>
         </div>
       <ng-template #flightNotFound>

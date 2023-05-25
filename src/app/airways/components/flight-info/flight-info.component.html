@@ -27,7 +27,7 @@
         <span>available</span>
       </div>
       <div class="price-title" *ngIf="!isSelected">Price</div>
-      <div class="price">{{ flight.price.eur }}</div>
+      <div class="price" [appCurrency]="flight.price"></div>
     </div>
     <div class="submit-block" *ngIf="!isSelected; else editBtn">
       <button class="select-btn" (click)="selectFlight(flight)">Select</button>

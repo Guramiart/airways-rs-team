@@ -13,9 +13,10 @@ export const flightReducer = createReducer(
   on(
     FlightActions.updateFlights,
     (state: IFlightState, {
-      from, destination, startDate, endDate, passengers,
+      flightType, from, destination, startDate, endDate, passengers,
     }): IFlightState => ({
       ...state,
+      flightType,
       from,
       destination,
       startDate,
@@ -63,6 +64,13 @@ export const flightReducer = createReducer(
     (state: IFlightState, { selectedReverseFlight }): IFlightState => ({
       ...state,
       selectedReverseFlight,
+    }),
+  ),
+  on(
+    FlightActions.updateTotalCost,
+    (state: IFlightState, { totalCost }): IFlightState => ({
+      ...state,
+      totalCost,
     }),
   ),
 );

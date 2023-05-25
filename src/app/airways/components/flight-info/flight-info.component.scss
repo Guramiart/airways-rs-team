@@ -31,6 +31,9 @@
     column-gap: 30px;
     align-items: center;
     justify-content: center;
+    width: 30%;
+    padding: 15px 0 15px 27px;
+    text-align: end;
 
     @media screen and (width <= 999px) {
       width: 50%;
@@ -58,6 +61,7 @@
   width: 100%;
 
   .date {
+    color: gray;
     font-size: 16px;
     font-weight: 400;
     line-height: 16px;
@@ -69,6 +73,7 @@
   }
 
   .location {
+    color: gray;
     font-size: 12px;
     font-weight: 400;
     line-height: 12px;
@@ -88,6 +93,7 @@
 }
 
 .number {
+  width: 70%;
   display: flex;
   align-items: center;
 
@@ -106,6 +112,7 @@
   max-width: 280px;
   font-size: 12px;
   font-weight: 400;
+  text-align: center;
 
   :nth-child(1) {
     @media screen and (width <= 409px) {
@@ -185,9 +192,14 @@
 }
 
 .price-block {
+  width: 100%;
   display: flex;
   flex-direction: column;
   row-gap: 1px;
+
+  @media screen and (max-width: 799px) {
+    align-items: center;
+  }
 
   .seats {
     padding: 5px;
@@ -204,6 +216,7 @@
   }
 
   .price {
+    color: var(--app-root-blue);
     font-size: 30px;
     font-weight: 700;
     line-height: 36px;
