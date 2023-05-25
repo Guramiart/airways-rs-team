@@ -73,6 +73,7 @@ export class SignInComponent implements OnInit {
             this.closeModal();
           });
         },
+        // eslint-disable-next-line no-console
         error: (err) => console.log(err),
       });
     }

@@ -83,7 +83,9 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.searchData.unsubscribe();
+    if (this.searchData) {
+      this.searchData.unsubscribe();
+    }
   }
 
   private updateDate(): void {

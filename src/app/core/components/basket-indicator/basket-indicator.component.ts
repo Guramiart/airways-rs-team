@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { HeaderChangerService } from '../../services/header-changer.service';
 
 enum IconLinks {
@@ -19,7 +20,10 @@ export class BasketIndicatorComponent implements OnInit {
 
   public basketIcon: IconLinks = IconLinks.white;
 
-  constructor(private mainObserver: HeaderChangerService) { }
+  constructor(
+    private mainObserver: HeaderChangerService,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
     this.mainObserver.onChangePage().subscribe((data) => {
@@ -30,6 +34,10 @@ export class BasketIndicatorComponent implements OnInit {
 
   private onChange(bgColor: boolean): void {
     this.basketIcon = bgColor ? IconLinks.black : IconLinks.white;
+  }
+
+  public cartRoute(): void {
+    this.router.navigateByUrl('/cart');
   }
 
 }

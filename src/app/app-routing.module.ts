@@ -26,7 +26,7 @@ const routes: Routes = [
     path: 'cart',
     pathMatch: 'full',
     component: ShoppingCartPageComponent,
-    canActivate: [AuthGuardService, StoreGuardService],
+    canActivate: [AuthGuardService],
     data: {
       cart: true,
       headerView: {

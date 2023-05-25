@@ -54,7 +54,7 @@ export class TableRecordComponent implements OnInit, AfterViewChecked, OnDestroy
   }
 
   public editItem(): void {
-    console.info('This need to paste routing for edit page!!!');
+    // TODO: This need to paste routing for edit page
   }
 
   ngAfterViewChecked(): void {
