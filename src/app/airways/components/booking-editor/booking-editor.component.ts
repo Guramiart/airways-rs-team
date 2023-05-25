@@ -1,9 +1,12 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  Component, OnDestroy, OnInit, ViewEncapsulation,
+} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { IFlightState } from 'src/app/redux/state.model';
 import * as FlightSelect from '../../../redux/selectors/flight.selector';
+import * as PassengerSelect from '../../../redux/selectors/passenger.selector';
 import { Passengers } from '../../models/passengers';
 
 @Component({
@@ -12,19 +15,25 @@ import { Passengers } from '../../models/passengers';
   styleUrls: ['./booking-editor.component.scss'],
   encapsulation: ViewEncapsulation.ShadowDom,
 })
-export class BookingEditorComponent implements OnInit {
+export class BookingEditorComponent implements OnInit, OnDestroy {
 
-  public flights$: Observable<IFlightState> | undefined;
+  public flights$: Observable<IFlightState>;
 
-  public passengers: Passengers | null = null;
+  public passengers$: Observable<Passengers>;
 
-  public adult: number | undefined;
+  private flightSubscription: Subscription;
 
-  public child: number | undefined;
+  private passengerSubscription: Subscription;
 
-  public infant: number | undefined;
+  public passengers: Passengers;
 
-  public passengerList: string | undefined;
+  public adult: number;
+
+  public child: number;
+
+  public infant: number;
+
+  public passengerList: string;
 
   public formDate!: FormGroup;
 
@@ -32,17 +41,26 @@ export class BookingEditorComponent implements OnInit {
 
   ngOnInit(): void {
     this.flights$ = this.store.select(FlightSelect.selectFlight);
-    this.flights$.subscribe((flight) => {
+    this.passengers$ = this.store.select(PassengerSelect.selectPassengers);
+    this.flightSubscription = this.flights$.subscribe((flight) => {
       this.formDate = new FormGroup({
         start: new FormControl<string>(flight.startDate),
         end: new FormControl<string>(flight.endDate),
       });
-      this.passengers = flight.passengers;
-      this.adult = flight.passengers?.passengers.adult.count;
-      this.child = flight.passengers?.passengers.child.count;
-      this.infant = flight.passengers?.passengers.infant.count;
     });
+    this.passengerSubscription = this.passengers$.subscribe((passenger) => {
+      this.passengers = passenger;
+      this.adult = passenger.passengers.adult.count;
+      this.child = passenger.passengers.child.count;
+      this.infant = passenger.passengers.infant.count;
+    });
+
     this.generatePassengerList();
+  }
+
+  ngOnDestroy(): void {
+    this.flightSubscription.unsubscribe();
+    this.passengerSubscription.unsubscribe();
   }
 
   public adultCounter(marker: boolean): void {

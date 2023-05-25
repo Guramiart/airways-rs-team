@@ -13,6 +13,7 @@ import { Passengers } from '../../models/passengers';
 import * as SettingSelect from '../../../redux/selectors/settings.selector';
 import * as FlightActions from '../../../redux/actions/flight.actions';
 import * as PassengersActions from '../../../redux/actions/passengers.action';
+import * as SelectedActions from '../../../redux/actions/selected-flight.action';
 
 @Component({
   selector: 'app-flight-search',
@@ -124,6 +125,12 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     }));
   }
 
+  private updateFlightType(type: FlightTypes): void {
+    this.store.dispatch(SelectedActions.updateType({
+      flightType: type,
+    }));
+  }
+
   public switchFlights(): void {
     const tmp = this.flightSearchForm.get('from')?.value;
     this.flightSearchForm.get('from')?.setValue(this.flightSearchForm.get('destination')?.value, { emitEvent: true });
@@ -168,6 +175,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         startDate: forwardDate,
         endDate: backDate,
       }));
+      this.updateFlightType(type);
       this.updatePassengers();
       this.router.navigateByUrl('step/1');
     });

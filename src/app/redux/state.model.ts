@@ -18,7 +18,6 @@ export interface IFlightState {
   destination: Flight,
   startDate: string,
   endDate: string,
-  passengers: Passengers,
   flightType: FlightTypes,
   totalCost: Price,
 }
@@ -54,7 +53,6 @@ export const initialFlightState: IFlightState = {
   destination: null,
   startDate: '',
   endDate: '',
-  passengers: null,
   flightType: FlightTypes.ROUND,
   totalCost: null,
 };

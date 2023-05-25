@@ -4,15 +4,15 @@ import {
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { PassengersState, SelectedFlight } from 'src/app/redux/state.model';
+import { SelectedFlight } from 'src/app/redux/state.model';
 import { Flight, Price } from 'src/app/services/flight.model';
 import { TicketInfoComponent } from '../../../shared/components/ticket-info/ticket-info.component';
 import { SummaryComponent } from '../../../shared/components/summary/summary.component';
-import * as FlightSelect from '../../../redux/selectors/flight.selector';
 import { StepperService } from '../../../core/services/stepper-service.service';
-import { IPassengerInfo } from '../../models/passengerInfo.model';
+import { Passengers } from '../../models/passengers';
+import * as FlightSelect from '../../../redux/selectors/selected-flight.selector';
 import * as FlightActions from '../../../redux/actions/flight.actions';
-import * as PassengerSelect from '../../../redux/actions/passengers.action';
+import * as PassengerSelect from '../../../redux/selectors/passenger.selector';
 import * as CartActions from '../../../redux/actions/cart.actions';
 
 @Component({
@@ -22,17 +22,19 @@ import * as CartActions from '../../../redux/actions/cart.actions';
 })
 export class SummaryPageComponent implements OnInit, OnDestroy {
 
-  public flight$: Observable<SelectedFlight>;
+  public flights$: Observable<SelectedFlight>;
 
-  private passengers$: Observable<PassengersState>;
+  private passengers$: Observable<Passengers>;
 
   private subscription: Subscription;
+
+  private passengerSubscription: Subscription;
 
   private directFlight: Flight;
 
   private reverseFlight: Flight;
 
-  public passengers: IPassengerInfo;
+  public passengers: Passengers;
 
   private summaryInstance: SummaryComponent;
 
@@ -48,35 +50,44 @@ export class SummaryPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.stepperSwitcher.switchStepper('third');
-    this.flight$ = this.store.select(FlightSelect.selectSelectedFlight);
+    this.flights$ = this.store.select(FlightSelect.selectFlights);
+    this.passengers$ = this.store.select(PassengerSelect.selectPassengers);
+    this.passengerSubscription = this.passengers$
+      .subscribe((data) => {
+        this.passengers = data;
+      });
     this.initFlight();
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.passengerSubscription.unsubscribe();
   }
 
   private initFlight(): void {
-    this.subscription = this.flight$.subscribe((flight) => {
+    this.subscription = this.flights$.subscribe((flight) => {
       const directView: ComponentRef<TicketInfoComponent> = this.container.createComponent(
         TicketInfoComponent,
       );
       this.directFlight = flight.direct;
       directView.instance.flight = this.directFlight;
-      // directView.instance.passengers = flight.passengers;
+      directView.instance.passengers = this.passengers;
 
-      const reverseView: ComponentRef<TicketInfoComponent> = this.container.createComponent(
-        TicketInfoComponent,
-      );
       this.reverseFlight = flight.reverse;
-      reverseView.instance.flight = this.reverseFlight;
-      // reverseView.instance.passengers = flight.passengers;
+      if (this.reverseFlight) {
+        const reverseView: ComponentRef<TicketInfoComponent> = this.container.createComponent(
+          TicketInfoComponent,
+        );
+        reverseView.instance.flight = this.reverseFlight;
+        reverseView.instance.passengers = this.passengers;
+      }
 
       const flightCost = this.summary.createComponent(SummaryComponent);
-      // flightCost.instance.passengers = flight.passengers;
-      const directCost = flight.direct?.price;
-      const reverseCost = flight.reverse?.price;
-      flightCost.instance.cost = this.getFlightCost(directCost, reverseCost);
+      flightCost.instance.passengers = this.passengers;
+      const directCost = flight.direct.price;
+      flightCost.instance.cost = (flight.reverse !== null)
+        ? this.getFlightCost(directCost, flight.reverse.price)
+        : this.getFlightCost(directCost);
       this.summaryInstance = flightCost.instance;
     });
 
@@ -114,6 +125,7 @@ export class SummaryPageComponent implements OnInit, OnDestroy {
   }
 
   public buy(): void {
+    this.addFlightToCart();
     this.store
       .dispatch(FlightActions.updateTotalCost({ totalCost: this.summaryInstance.totalCost }));
     this.router.navigateByUrl('/cart');

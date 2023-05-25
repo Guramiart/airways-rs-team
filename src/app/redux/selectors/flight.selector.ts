@@ -1,9 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { IFlightState, SelectedFlight } from '../state.model';
+import { IFlightState } from '../state.model';
 
 const selectFlights = createFeatureSelector<IFlightState>('flights');
-
-const selectSFlights = createFeatureSelector<SelectedFlight>('selectedFlight');
 
 export const selectFlight = createSelector(
   selectFlights,
@@ -33,9 +31,4 @@ export const selectEndDateFlight = createSelector(
 export const selectTotalCost = createSelector(
   selectFlights,
   (state: IFlightState) => state.totalCost,
-);
-
-export const selectSelectedFlight = createSelector(
-  selectSFlights,
-  (state: SelectedFlight) => state,
 );

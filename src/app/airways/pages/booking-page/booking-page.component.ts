@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import {
   animate, style, transition, trigger,
 } from '@angular/animations';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ShowEditorService } from '../../services/show-editor.service';
 import { HeaderChangerService } from '../../../core/services/header-changer.service';
 
@@ -32,7 +32,6 @@ export class BookingPageComponent implements OnInit, OnDestroy, AfterViewInit {
   private observeForEditBtn: Subscription | undefined;
 
   constructor(
-    private router: Router,
     private observe: ShowEditorService,
     private headerChange: HeaderChangerService,
     private routeInfo: ActivatedRoute,

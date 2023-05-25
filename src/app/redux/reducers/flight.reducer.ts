@@ -62,7 +62,6 @@ export const flightReducer = createReducer(
       from: initialFlightState.from,
       startDate: initialFlightState.startDate,
       endDate: initialFlightState.endDate,
-      passengers: initialFlightState.passengers,
       flightType: initialFlightState.flightType,
     }),
   ),

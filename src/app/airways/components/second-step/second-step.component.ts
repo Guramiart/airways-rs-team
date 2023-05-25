@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { Passengers } from '../../models/passengers';
 import { IPassengerInfo } from '../../models/passengerInfo.model';
-import * as FlightSelect from '../../../redux/selectors/flight.selector';
+import * as PassengerSelect from '../../../redux/selectors/passenger.selector';
 import * as PassengersActions from '../../../redux/actions/passengers.action';
 import { StepperService } from '../../../core/services/stepper-service.service';
 
@@ -15,11 +15,13 @@ import { StepperService } from '../../../core/services/stepper-service.service';
 })
 export class SecondStepComponent implements OnInit, OnDestroy {
 
-  public passengers:Passengers | null;
+  public passengers: Passengers;
 
-  public newPassenger:Passengers | null;
+  public newPassenger: Passengers;
 
   public isSubmitted = false;
+
+  private passengers$: Observable<Passengers>;
 
   private subscription: Subscription;
 
@@ -41,8 +43,9 @@ export class SecondStepComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.stepperSwitcher.switchStepper('second');
-    this.subscription = this.store.select(FlightSelect.selectFlight)
-      .subscribe((data) => { this.passengers = data.passengers; });
+    this.passengers$ = this.store.select(PassengerSelect.selectPassengers);
+    this.subscription = this.passengers$
+      .subscribe((data) => { this.passengers = data; });
   }
 
   public back(isBack:boolean):void {
