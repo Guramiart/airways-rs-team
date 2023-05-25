@@ -73,4 +73,18 @@ export const flightReducer = createReducer(
       totalCost,
     }),
   ),
+  on(
+    FlightActions.clearStore,
+    (state: IFlightState): IFlightState => ({
+      ...state,
+      destination: initialFlightState.destination,
+      from: initialFlightState.from,
+      startDate: initialFlightState.startDate,
+      endDate: initialFlightState.endDate,
+      passengers: initialFlightState.passengers,
+      flightType: initialFlightState.flightType,
+      selectedDirectFlight: initialFlightState.selectedDirectFlight,
+      selectedReverseFlight: initialFlightState.selectedReverseFlight,
+    }),
+  ),
 );

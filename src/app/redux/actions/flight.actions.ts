@@ -13,6 +13,7 @@ const UPDATE_PASSENGERS = '[Flight] Update passengers';
 const UPDATE_DIRECT_FLIGHT = '[Flight] Update direct flight';
 const UPDATE_REVERSE_FLIGHT = '[Flight] Update reverse flight';
 const UPDATE_TOTAL_COST = '[Flight] Total cost';
+const CLEAR_STORE = '[Flight] Clear store';
 
 export const getFlights = createAction(GET_FLIGHTS);
 
@@ -75,3 +76,5 @@ export const updateTotalCost = createAction(
     totalCost: Price,
   }>(),
 );
+
+export const clearStore = createAction(CLEAR_STORE);

@@ -5,13 +5,14 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { IFlightState } from 'src/app/redux/state.model';
-import { Price } from 'src/app/services/flight.model';
+import { Flight, Price } from 'src/app/services/flight.model';
 import { TicketInfoComponent } from '../../../shared/components/ticket-info/ticket-info.component';
 import { SummaryComponent } from '../../../shared/components/summary/summary.component';
 import * as FlightSelect from '../../../redux/selectors/flight.selector';
 import { StepperService } from '../../../core/services/stepper-service.service';
 import { IPassengerInfo } from '../../models/passengerInfo.model';
 import * as FlightActions from '../../../redux/actions/flight.actions';
+import * as CartActions from '../../../redux/actions/cart.actions';
 
 @Component({
   selector: 'app-summary-page',
@@ -23,6 +24,10 @@ export class SummaryPageComponent implements OnInit, OnDestroy {
   public flight$: Observable<IFlightState>;
 
   private subscription: Subscription;
+
+  private directFlight: Flight;
+
+  private reverseFlight: Flight;
 
   public passengers: IPassengerInfo;
 
@@ -53,13 +58,15 @@ export class SummaryPageComponent implements OnInit, OnDestroy {
       const directView: ComponentRef<TicketInfoComponent> = this.container.createComponent(
         TicketInfoComponent,
       );
-      directView.instance.flight = flight.selectedDirectFlight;
+      this.directFlight = flight.selectedDirectFlight;
+      directView.instance.flight = this.directFlight;
       directView.instance.passengers = flight.passengers;
 
       const reverseView: ComponentRef<TicketInfoComponent> = this.container.createComponent(
         TicketInfoComponent,
       );
-      reverseView.instance.flight = flight.selectedReverseFlight;
+      this.reverseFlight = flight.selectedReverseFlight;
+      reverseView.instance.flight = this.reverseFlight;
       reverseView.instance.passengers = flight.passengers;
 
       const flightCost = this.summary.createComponent(SummaryComponent);
@@ -82,6 +89,25 @@ export class SummaryPageComponent implements OnInit, OnDestroy {
       eur: 0, usd: 0, rub: 0, pln: 0,
     });
 
+  }
+
+  private addFlightToCart(): void {
+    this.store
+      .dispatch(CartActions.addFlights(
+        {
+          flights:
+            {
+              forward: this.directFlight,
+              reverse: this.reverseFlight,
+            },
+        },
+      ));
+  }
+
+  public addToCart(): void {
+    this.addFlightToCart();
+    this.store.dispatch(FlightActions.clearStore());
+    this.router.navigateByUrl('/');
   }
 
   public buy(): void {

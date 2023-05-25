@@ -7,6 +7,7 @@ import { Flight, Price } from '../services/flight.model';
 
 export interface AppState {
   flights: Flight,
+  cart: CartState,
   settings: SettingsState,
 }
 
@@ -29,6 +30,15 @@ export interface SettingsState {
   authUser:IUser | undefined
 }
 
+export interface CartState {
+  flights: CartFlight[];
+}
+
+export interface CartFlight {
+  forward: Flight,
+  reverse: Flight,
+}
+
 export const initialFlightState: IFlightState = {
   from: null,
   destination: null,
@@ -46,4 +56,8 @@ export const initialSettingState: SettingsState = {
   currency: Currency.EUR,
   isModalOpen: false,
   authUser: undefined,
+};
+
+export const initialCartState: CartState = {
+  flights: [],
 };
