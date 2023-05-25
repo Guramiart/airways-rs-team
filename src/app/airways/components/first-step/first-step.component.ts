@@ -14,7 +14,7 @@ import { StepperService } from '../../../core/services/stepper-service.service';
 })
 export class FirstStepComponent implements OnInit, OnDestroy {
 
-  public flights$: Observable<IFlightState> | undefined;
+  public flights$: Observable<IFlightState>;
 
   private isRound: boolean = true;
 

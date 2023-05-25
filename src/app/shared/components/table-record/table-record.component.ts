@@ -1,6 +1,7 @@
 import {
   AfterViewChecked, ChangeDetectorRef, Component, OnDestroy, OnInit,
 } from '@angular/core';
+import { CartFlight } from 'src/app/redux/state.model';
 import { CartSwitcherService } from 'src/app/airways/services/cart-switcher.service';
 import { Subscription } from 'rxjs';
 import { OneTicket } from '../../enums/tickets-data';
@@ -11,6 +12,8 @@ import { OneTicket } from '../../enums/tickets-data';
   styleUrls: ['./table-record.component.scss'],
 })
 export class TableRecordComponent implements OnInit, AfterViewChecked, OnDestroy {
+
+  public cartFlight: CartFlight;
 
   public isShoppingRecord: boolean;
 
@@ -58,7 +61,7 @@ export class TableRecordComponent implements OnInit, AfterViewChecked, OnDestroy
   }
 
   ngAfterViewChecked(): void {
-    this.showData();
+    // this.showData();
     this.detector.detectChanges();
   }
 

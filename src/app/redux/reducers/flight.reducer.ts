@@ -5,15 +5,11 @@ import * as FlightActions from '../actions/flight.actions';
 
 export const flightReducer = createReducer(
   initialFlightState,
-  on(FlightActions.updatePassengers, (state: IFlightState, { passengers }):IFlightState => ({
-    ...state,
-    passengers,
-  })),
   on(FlightActions.getFlights, (state: IFlightState): IFlightState => ({ ...state })),
   on(
     FlightActions.updateFlights,
     (state: IFlightState, {
-      flightType, from, destination, startDate, endDate, passengers,
+      flightType, from, destination, startDate, endDate,
     }): IFlightState => ({
       ...state,
       flightType,
@@ -21,7 +17,6 @@ export const flightReducer = createReducer(
       destination,
       startDate,
       endDate,
-      passengers,
     }),
   ),
   on(
@@ -53,20 +48,6 @@ export const flightReducer = createReducer(
     }),
   ),
   on(
-    FlightActions.updateDirectFlight,
-    (state: IFlightState, { selectedDirectFlight }): IFlightState => ({
-      ...state,
-      selectedDirectFlight,
-    }),
-  ),
-  on(
-    FlightActions.updateReverseFlight,
-    (state: IFlightState, { selectedReverseFlight }): IFlightState => ({
-      ...state,
-      selectedReverseFlight,
-    }),
-  ),
-  on(
     FlightActions.updateTotalCost,
     (state: IFlightState, { totalCost }): IFlightState => ({
       ...state,
@@ -83,8 +64,6 @@ export const flightReducer = createReducer(
       endDate: initialFlightState.endDate,
       passengers: initialFlightState.passengers,
       flightType: initialFlightState.flightType,
-      selectedDirectFlight: initialFlightState.selectedDirectFlight,
-      selectedReverseFlight: initialFlightState.selectedReverseFlight,
     }),
   ),
 );

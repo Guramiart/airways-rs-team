@@ -12,6 +12,7 @@ import { Airport } from 'src/app/services/flight.model';
 import { Passengers } from '../../models/passengers';
 import * as SettingSelect from '../../../redux/selectors/settings.selector';
 import * as FlightActions from '../../../redux/actions/flight.actions';
+import * as PassengersActions from '../../../redux/actions/passengers.action';
 
 @Component({
   selector: 'app-flight-search',
@@ -117,6 +118,12 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     this.flightSearchForm.get('passengers')?.setValue(this.getPassengers());
   }
 
+  private updatePassengers(): void {
+    this.store.dispatch(PassengersActions.updatePassengers({
+      passengers: this.passengers,
+    }));
+  }
+
   public switchFlights(): void {
     const tmp = this.flightSearchForm.get('from')?.value;
     this.flightSearchForm.get('from')?.setValue(this.flightSearchForm.get('destination')?.value, { emitEvent: true });
@@ -160,8 +167,8 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         destination: resp[1],
         startDate: forwardDate,
         endDate: backDate,
-        passengers: this.passengers,
       }));
+      this.updatePassengers();
       this.router.navigateByUrl('step/1');
     });
   }
