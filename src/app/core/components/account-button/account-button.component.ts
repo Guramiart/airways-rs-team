@@ -25,7 +25,7 @@ enum Icon {
 })
 export class AccountButtonComponent implements OnInit, OnDestroy {
 
-  public authUser:IUser | undefined;
+  public authUser:IUser;
 
   public btnText = 'Sign In';
 
