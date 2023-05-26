@@ -6,6 +6,7 @@ const GET_FLIGHTS = '[Selected-Flights] Get flights';
 const UPDATE_DIRECT_FLIGHT = '[Selected-Flights] Update direct flights';
 const UPDATE_REVERSE_FLIGHT = '[Selected-Flights] Update reverse flights';
 const UPDATE_FLIGHT_TYPE = '[Selected-Flights] Update flight type';
+const CLEAR_STORE = '[Selected-Flight] Clear store';
 
 export const getFlights = createAction(GET_FLIGHTS);
 
@@ -29,3 +30,5 @@ export const updateType = createAction(
     flightType: FlightTypes,
   }>(),
 );
+
+export const clearStore = createAction(CLEAR_STORE);

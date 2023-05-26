@@ -11,7 +11,7 @@ import { SummaryComponent } from '../../../shared/components/summary/summary.com
 import { StepperService } from '../../../core/services/stepper-service.service';
 import { Passengers } from '../../models/passengers';
 import * as FlightSelect from '../../../redux/selectors/selected-flight.selector';
-import * as FlightActions from '../../../redux/actions/flight.actions';
+import * as SelectedActions from '../../../redux/actions/selected-flight.action';
 import * as PassengerSelect from '../../../redux/selectors/passenger.selector';
 import * as CartActions from '../../../redux/actions/cart.actions';
 
@@ -109,25 +109,25 @@ export class SummaryPageComponent implements OnInit, OnDestroy {
     this.store
       .dispatch(CartActions.addFlights(
         {
-          flights:
-            {
+          flights: {
+            flight: {
               forward: this.directFlight,
               reverse: this.reverseFlight,
             },
+            totalCost: this.summaryInstance.totalCost,
+          },
         },
       ));
   }
 
   public addToCart(): void {
     this.addFlightToCart();
-    this.store.dispatch(FlightActions.clearStore());
+    this.store.dispatch(SelectedActions.clearStore());
     this.router.navigateByUrl('/');
   }
 
   public buy(): void {
     this.addFlightToCart();
-    this.store
-      .dispatch(FlightActions.updateTotalCost({ totalCost: this.summaryInstance.totalCost }));
     this.router.navigateByUrl('/cart');
   }
 

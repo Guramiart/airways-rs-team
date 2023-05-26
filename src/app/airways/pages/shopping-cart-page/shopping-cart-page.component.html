@@ -58,7 +58,7 @@
     </button>
     <div class="main__amount-wrapper">
       <span class="main__amount-text">Total</span>
-      <span class="main__amount-count">€{{totalPrice | number: '1.0-2'}}</span>
+      <span class="main__amount-count"[appCurrency]="getTotalCost()"></span>
     </div>
   </div>
   <div class="main__cart-separator"></div>

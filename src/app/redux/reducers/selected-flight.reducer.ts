@@ -26,4 +26,13 @@ export const selectedFlightReducer = createReducer(
       flightType,
     }),
   ),
+  on(
+    SelectedActions.clearStore,
+    (state: SelectedFlight): SelectedFlight => ({
+      ...state,
+      direct: initialSelectedFlightState.direct,
+      reverse: initialSelectedFlightState.reverse,
+      flightType: initialSelectedFlightState.flightType,
+    }),
+  ),
 );

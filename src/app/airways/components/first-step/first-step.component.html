@@ -1,7 +1,7 @@
 <div *ngIf="flights$ | async as flight">
   <div class="title">
     <mat-icon class="forward">airplanemode_active</mat-icon>
-    {{ flight.from!.form.name }} to {{ flight.from!.to.name }}
+    {{ flight.from.form.city }} to {{ flight.from.to.city }}
   </div>
   <div class="ticket-block">
     <app-calendar [isForward]="true"></app-calendar>
@@ -9,7 +9,7 @@
   <div *ngIf="isRoundTrip()">
     <div class="title">
       <mat-icon class="return">airplanemode_active</mat-icon>
-      {{ flight.destination!.form.name }} to {{ flight.destination!.to.name }}
+      {{ flight.destination.form.city }} to {{ flight.destination.to.city }}
     </div>
     <div class="ticket-block">
       <app-calendar [isForward]="false"></app-calendar>

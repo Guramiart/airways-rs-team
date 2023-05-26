@@ -2,9 +2,9 @@
   <div class="main__booking-edit">
     <div class="main__booking-information" *ngIf="(flights$ | async) as flight">
       <div class="main__direction-wrapper">
-        <span class="main__from-direction">{{ flight.from.form.name }}</span>
+        <span class="main__from-direction">{{ flight.from.form.city }}</span>
         <img class="main__direction-icon" src="./assets/airplanes.svg" alt="">
-        <span class="main__to-direction">{{ flight.from.to.name }}</span>
+        <span class="main__to-direction">{{ flight.from.to.city }}</span>
       </div>
       <div class="main__info-wrapper">
         <span class="main__info-text">Return</span>

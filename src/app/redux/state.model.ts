@@ -44,8 +44,24 @@ export interface CartState {
 }
 
 export interface CartFlight {
-  forward: Flight,
-  reverse: Flight,
+  flight: {
+    forward: Flight,
+    reverse: Flight,
+  },
+  totalCost: Price,
+}
+
+export interface FlightTableRow {
+  flightNumber: string[],
+  direction: string[],
+  flightType: string,
+  date: FlightDate[],
+  total: Price,
+}
+
+export interface FlightDate {
+  start: string,
+  end: string,
 }
 
 export const initialFlightState: IFlightState = {

@@ -5,6 +5,7 @@ import {
 import { Observable, Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Price } from 'src/app/services/flight.model';
 import { CartFlight, CartState } from 'src/app/redux/state.model';
 import { FormControl } from '@angular/forms';
 import { TableRecordComponent } from '../../../shared/components/table-record/table-record.component';
@@ -13,6 +14,8 @@ import { SortingService } from '../../services/sorting-service.service';
 import { OneTicket } from '../../../shared/enums/tickets-data';
 import { HeaderChangerService } from '../../../core/services/header-changer.service';
 import * as CartSelect from '../../../redux/selectors/cart.selector';
+import * as PassengerSelect from '../../../redux/selectors/passenger.selector';
+import { Passengers } from '../../models/passengers';
 
 type Discount = {
   code: string,
@@ -33,11 +36,17 @@ type StyleArrow = {
 })
 export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestroy {
 
-  public flights$: Observable<CartState>;
+  private flights$: Observable<CartState>;
 
   private flights: CartFlight[];
 
-  private storeSubscription: Subscription;
+  private passengers$: Observable<Passengers>;
+
+  private passengers: Passengers;
+
+  private flightSubscription: Subscription;
+
+  private passengerSubscription: Subscription;
 
   // TODO: this mock data
   public ticketsData: OneTicket[] = [
@@ -161,14 +170,19 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
     this.discountFormControl = new FormControl('');
 
     this.flights$ = this.store.select(CartSelect.selectFlights);
-    this.storeSubscription = this.flights$.subscribe((data) => {
+    this.flightSubscription = this.flights$.subscribe((data) => {
       this.flights = data.flights;
+    });
+    this.passengers$ = this.store.select(PassengerSelect.selectPassengers);
+    this.passengerSubscription = this.passengers$.subscribe((data) => {
+      this.passengers = data;
     });
 
   }
 
   ngOnDestroy(): void {
-    this.storeSubscription.unsubscribe();
+    this.flightSubscription.unsubscribe();
+    this.passengerSubscription.unsubscribe();
     this.selectedObserver.unsubscribe();
     this.deleteObserver.unsubscribe();
   }
@@ -187,23 +201,29 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
     this.switcher.selectAllEv(this.checkAll);
   }
 
+  public getTotalCost(): Price {
+    const totalCost: Price = {
+      eur: 0,
+      usd: 0,
+      rub: 0,
+      pln: 0,
+    } as Price;
+    this.flights.forEach((flight) => {
+      Object.keys(flight.totalCost).forEach((key) => {
+        totalCost[key] += flight.totalCost[key];
+      });
+    });
+    return totalCost;
+  }
+
   private showTableRecords(): void {
     this.flights.forEach((flight: CartFlight) => {
       const record = this.table.createComponent(TableRecordComponent);
       record.instance.cartFlight = flight;
+      record.instance.cartPassengers = this.passengers;
       record.instance.isShoppingRecord = this.isShoppingCart;
       this.detect.detectChanges();
     });
-    /*
-    this.ticketsData.forEach((ticket: OneTicket) => {
-      const record = this.table.createComponent(TableRecordComponent);
-      record.instance.inputData = ticket;
-      record.instance.isShoppingRecord = this.isShoppingCart;
-      const price = ticket.price.slice(1, ticket.price.length);
-      this.totalPrice += this.checkDiscount(parseFloat(price));
-      this.detect.detectChanges();
-    });
-    */
   }
 
   private showSelected(arg: SelectionTicketEvent): void {

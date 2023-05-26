@@ -3,7 +3,7 @@
     <div class="start-time">
       <div class="date">{{ flight.takeoffDate| date:'EE, d MMM yyyy' }}</div>
       <div class="time">{{ flight.takeoffDate | date: 'HH:mm' }}</div>
-      <div class="location">{{ from?.name }}</div>
+      <div class="location">{{ from.city }}</div>
     </div>
     <div class="direction">
       <div>{{ getDuration(flight.takeoffDate, flight.landingDate) }}</div>
@@ -15,7 +15,7 @@
     <div class="end-time">
       <div class="date">{{ flight.landingDate | date:'EE, d MMM yyyy' }}</div>
       <div class="time">{{ flight.landingDate | date:'HH:mm' }}</div>
-      <div class="location">{{ destination?.name }}</div>
+      <div class="location">{{ destination.city }}</div>
     </div>
     <div class="number">Flight no. {{ flight.flightNumber }}</div>
   </div>
