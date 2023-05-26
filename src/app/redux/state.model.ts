@@ -48,6 +48,7 @@ export interface CartFlight {
     forward: Flight,
     reverse: Flight,
   },
+  passengers: Passengers,
   totalCost: Price,
 }
 

@@ -8,14 +8,12 @@ import { Store } from '@ngrx/store';
 import { Price } from 'src/app/services/flight.model';
 import { CartFlight, CartState } from 'src/app/redux/state.model';
 import { FormControl } from '@angular/forms';
+import { SortOrder } from 'src/app/shared/enums/order';
 import { TableRecordComponent } from '../../../shared/components/table-record/table-record.component';
 import { CartSwitcherService, SelectionTicketEvent } from '../../services/cart-switcher.service';
 import { SortingService } from '../../services/sorting-service.service';
-import { OneTicket } from '../../../shared/enums/tickets-data';
 import { HeaderChangerService } from '../../../core/services/header-changer.service';
 import * as CartSelect from '../../../redux/selectors/cart.selector';
-import * as PassengerSelect from '../../../redux/selectors/passenger.selector';
-import { Passengers } from '../../models/passengers';
 
 type Discount = {
   code: string,
@@ -40,33 +38,7 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
 
   private flights: CartFlight[];
 
-  private passengers$: Observable<Passengers>;
-
-  private passengers: Passengers;
-
   private flightSubscription: Subscription;
-
-  private passengerSubscription: Subscription;
-
-  // TODO: this mock data
-  public ticketsData: OneTicket[] = [
-    {
-      numberFlight: 'FR 1925',
-      flight: ['Dublin — Warsaw', 'Modlin — Dublin'],
-      type: 'Round Trip',
-      date: ['1 Mar, 2023, 8:40 — 12:00', '18 Mar, 2023, 7:40 — 11:00'],
-      passengers: ['1 x Adult', '1 x Child', '1 x Infant'],
-      price: '€551.38',
-    },
-    {
-      numberFlight: 'FR 1936',
-      flight: ['Gdansk — Warsaw'],
-      type: 'One way',
-      date: ['28 May, 2023, 15:40 — 16:40'],
-      passengers: ['1 x Adult'],
-      price: '€20.96',
-    },
-  ];
 
   public promocode: Discount[] = [
     {
@@ -130,7 +102,7 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
     down: 1,
   };
 
-  public discountInfo: string = 'Promo Code';
+  public discountInfo: string = 'Promo Code: rsschool';
 
   public discountFormControl: FormControl;
 
@@ -173,16 +145,11 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
     this.flightSubscription = this.flights$.subscribe((data) => {
       this.flights = data.flights;
     });
-    this.passengers$ = this.store.select(PassengerSelect.selectPassengers);
-    this.passengerSubscription = this.passengers$.subscribe((data) => {
-      this.passengers = data;
-    });
 
   }
 
   ngOnDestroy(): void {
     this.flightSubscription.unsubscribe();
-    this.passengerSubscription.unsubscribe();
     this.selectedObserver.unsubscribe();
     this.deleteObserver.unsubscribe();
   }
@@ -190,8 +157,8 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
   public selectAll(): void {
     if (this.checkAll) {
       this.selectedData = [];
-      this.ticketsData.forEach((ticket) => {
-        this.selectedData.push(ticket.numberFlight);
+      this.flights.forEach((flight) => {
+        this.selectedData.push(flight.flight.forward.flightNumber);
       });
       this.selected = this.selectedData.length;
     } else {
@@ -220,7 +187,6 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
     this.flights.forEach((flight: CartFlight) => {
       const record = this.table.createComponent(TableRecordComponent);
       record.instance.cartFlight = flight;
-      record.instance.cartPassengers = this.passengers;
       record.instance.isShoppingRecord = this.isShoppingCart;
       this.detect.detectChanges();
     });
@@ -235,7 +201,7 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
       this.selectedData = this.selectedData.filter((flight: string) => flight !== arg.flight);
     }
 
-    if (this.selectedData.length === this.ticketsData.length) {
+    if (this.selectedData.length === this.flights.length) {
       this.checkAll = true;
     } else {
       this.checkAll = false;
@@ -243,7 +209,8 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
   }
 
   private showDelete(flightNumber: string): void {
-    this.ticketsData = this.ticketsData.filter((ticket) => ticket.numberFlight !== flightNumber);
+    this.flights = this.flights
+      .filter((flight) => flight.flight.forward.flightNumber !== flightNumber);
     this.table.clear();
     this.totalPrice = 0;
     this.showTableRecords();
@@ -254,11 +221,11 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
     if (this.numberStyle.up === 1) {
       this.numberStyle.up = 0.2;
       this.numberStyle.down = 1;
-      this.ticketsData = this.sort.sortByNoAscendence(this.ticketsData);
+      this.flights = this.sort.sortByNum(this.flights, SortOrder.ASC);
     } else {
       this.numberStyle.up = 1;
       this.numberStyle.down = 0.2;
-      this.ticketsData = this.sort.sortByNoDescendence(this.ticketsData);
+      this.flights = this.sort.sortByNum(this.flights, SortOrder.DESC);
     }
 
     this.table.clear();
@@ -271,11 +238,11 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
     if (this.directionStyle.up === 1) {
       this.directionStyle.up = 0.2;
       this.directionStyle.down = 1;
-      this.ticketsData = this.sort.sortByFlightAscendence(this.ticketsData);
+      this.flights = this.sort.sortByNum(this.flights, SortOrder.ASC);
     } else {
       this.directionStyle.up = 1;
       this.directionStyle.down = 0.2;
-      this.ticketsData = this.sort.sortByFlightDescendence(this.ticketsData);
+      this.flights = this.sort.sortByNum(this.flights, SortOrder.DESC);
     }
 
     this.table.clear();
@@ -288,11 +255,11 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
     if (this.tripStyle.up === 1) {
       this.tripStyle.up = 0.2;
       this.tripStyle.down = 1;
-      this.ticketsData = this.sort.sortTripAscendence(this.ticketsData);
+      this.flights = this.sort.sortTrip(this.flights, SortOrder.ASC);
     } else {
       this.tripStyle.up = 1;
       this.tripStyle.down = 0.2;
-      this.ticketsData = this.sort.sortTripDescendence(this.ticketsData);
+      this.flights = this.sort.sortTrip(this.flights, SortOrder.DESC);
     }
 
     this.table.clear();
@@ -305,11 +272,11 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
     if (this.dateStyle.up === 1) {
       this.dateStyle.up = 0.2;
       this.dateStyle.down = 1;
-      this.ticketsData = this.sort.sortingDateAscendence(this.ticketsData);
+      this.flights = this.sort.sortDate(this.flights, SortOrder.ASC);
     } else {
       this.dateStyle.up = 1;
       this.dateStyle.down = 0.2;
-      this.ticketsData = this.sort.sortingDateDescendence(this.ticketsData);
+      this.flights = this.sort.sortDate(this.flights, SortOrder.DESC);
     }
 
     this.table.clear();
@@ -322,11 +289,11 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
     if (this.passengerStyle.up === 1) {
       this.passengerStyle.up = 0.2;
       this.passengerStyle.down = 1;
-      this.ticketsData = this.sort.sortingPassengerAscendence(this.ticketsData);
+      this.flights = this.sort.sortPassengers(this.flights, SortOrder.ASC);
     } else {
       this.passengerStyle.up = 1;
       this.passengerStyle.down = 0.2;
-      this.ticketsData = this.sort.sortingPassengerDescendence(this.ticketsData);
+      this.flights = this.sort.sortPassengers(this.flights, SortOrder.DESC);
     }
 
     this.table.clear();
@@ -339,11 +306,11 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
     if (this.priceStyle.up === 1) {
       this.priceStyle.up = 0.2;
       this.priceStyle.down = 1;
-      this.ticketsData = this.sort.sortingPriceAscendence(this.ticketsData);
+      this.flights = this.sort.sortPrice(this.flights, SortOrder.ASC);
     } else {
       this.priceStyle.up = 1;
       this.priceStyle.down = 0.2;
-      this.ticketsData = this.sort.sortingPriceDescendence(this.ticketsData);
+      this.flights = this.sort.sortPrice(this.flights, SortOrder.DESC);
     }
 
     this.table.clear();

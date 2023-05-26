@@ -1,148 +1,63 @@
 import { Injectable } from '@angular/core';
-import { OneTicket } from '../../shared/enums/tickets-data';
+import { SortOrder } from 'src/app/shared/enums/order';
+import { CartFlight } from 'src/app/redux/state.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SortingService {
 
-  public sortByNoAscendence(tickets: OneTicket[]): OneTicket[] {
-    return tickets.sort((prev: OneTicket, next: OneTicket) => {
-      const prevNo: string = prev.numberFlight.toLowerCase();
-      const nextNo: string = next.numberFlight.toLowerCase();
-
-      return prevNo.localeCompare(nextNo);
+  public sortByNum(flights: CartFlight[], sortOrder: SortOrder): CartFlight[] {
+    const arr = [...flights];
+    return arr.sort((prev: CartFlight, next: CartFlight) => {
+      const prevNum: string = prev.flight.forward.flightNumber.toLowerCase();
+      const nextNum: string = next.flight.forward.flightNumber.toLowerCase();
+      return (sortOrder === SortOrder.ASC)
+        ? prevNum.localeCompare(nextNum)
+        : nextNum.localeCompare(prevNum);
     });
   }
 
-  public sortByNoDescendence(tickets: OneTicket[]): OneTicket[] {
-    return tickets.sort((prev: OneTicket, next: OneTicket) => {
-      const prevNo: string = prev.numberFlight.toLowerCase();
-      const nextNo: string = next.numberFlight.toLowerCase();
-
-      return nextNo.localeCompare(prevNo);
-    });
-  }
-
-  public sortByFlightAscendence(tickets: OneTicket[]): OneTicket[] {
-    return tickets.sort((prev: OneTicket, next: OneTicket) => {
-      const prevNo: string = prev.numberFlight.toLowerCase();
-      const nextNo: string = next.numberFlight.toLowerCase();
-
-      return prevNo.localeCompare(nextNo);
-    });
-  }
-
-  public sortByFlightDescendence(tickets: OneTicket[]): OneTicket[] {
-    return tickets.sort((prev: OneTicket, next: OneTicket) => {
-      const prevNo: string = prev.numberFlight.toLowerCase();
-      const nextNo: string = next.numberFlight.toLowerCase();
-
-      return nextNo.localeCompare(prevNo);
-    });
-  }
-
-  public sortTripAscendence(tickets: OneTicket[]): OneTicket[] {
-    return tickets.sort((prev: OneTicket, next: OneTicket) => {
-      if (prev.type === 'One way' && next.type === 'Round Trip') {
-        return -1;
+  public sortTrip(flights: CartFlight[], sortOrder: SortOrder): CartFlight[] {
+    const arr = [...flights];
+    return arr.sort((prev: CartFlight, next: CartFlight) => {
+      let index;
+      if ((!prev.flight.reverse && next.flight.reverse)) {
+        index = sortOrder === SortOrder.ASC ? -1 : 1;
+        return index;
       }
-      if (prev.type === 'Round Trip' && next.type === 'One way') {
-        return 1;
+      if (prev.flight.reverse && !next.flight.reverse) {
+        index = sortOrder === SortOrder.ASC ? 1 : -1;
+        return index;
       }
       return 0;
     });
   }
 
-  public sortTripDescendence(tickets: OneTicket[]): OneTicket[] {
-    return tickets.sort((prev: OneTicket, next: OneTicket) => {
-      if (prev.type === 'Round Trip' && next.type === 'One way') {
-        return -1;
-      }
-      if (prev.type === 'One way' && next.type === 'Round Trip') {
-        return 1;
-      }
-      return 0;
+  public sortDate(flights: CartFlight[], sortOrder: SortOrder): CartFlight[] {
+    const arr = [...flights];
+    return arr.sort((prev: CartFlight, next: CartFlight) => {
+      const datePrev = Date.parse(prev.flight.forward.takeoffDate);
+      const dateNext = Date.parse(next.flight.forward.takeoffDate);
+      return (sortOrder === SortOrder.ASC) ? datePrev - dateNext : dateNext - datePrev;
     });
   }
 
-  public sortingDateAscendence(tickets: OneTicket[]): OneTicket[] {
-    return tickets.sort((prev: OneTicket, next: OneTicket) => {
-      const indexPrev = prev.date[0].indexOf('—');
-      const indexNext = next.date[0].indexOf('—');
-      const datePrev = Date.parse(prev.date[0].slice(0, indexPrev));
-      const dateNext = Date.parse(next.date[0].slice(0, indexNext));
-      return datePrev - dateNext;
+  public sortPassengers(flights: CartFlight[], sortOrder: SortOrder): CartFlight[] {
+    const arr = [...flights];
+    return arr.sort((prev: CartFlight, next: CartFlight) => {
+      const prevCount = prev.passengers.total;
+      const nextCount = next.passengers.total;
+      return (sortOrder === SortOrder.ASC) ? prevCount - nextCount : nextCount - prevCount;
     });
   }
 
-  public sortingDateDescendence(tickets: OneTicket[]): OneTicket[] {
-    return tickets.sort((prev: OneTicket, next: OneTicket) => {
-      const indexPrev = prev.date[0].indexOf('—');
-      const indexNext = next.date[0].indexOf('—');
-      const datePrev = Date.parse(prev.date[0].slice(0, indexPrev));
-      const dateNext = Date.parse(next.date[0].slice(0, indexNext));
-      return dateNext - datePrev;
-    });
-  }
-
-  public sortingPassengerAscendence(tickets: OneTicket[]): OneTicket[] {
-    return tickets.sort((prev: OneTicket, next: OneTicket) => {
-      let prevPassengerCount = 0;
-      let nextPassengerCount = 0;
-
-      prev.passengers.forEach((passenger: string) => {
-        const index = passenger.indexOf(' ');
-        const count = Number(passenger.slice(0, index));
-        prevPassengerCount += count;
-      });
-
-      next.passengers.forEach((passenger: string) => {
-        const index = passenger.indexOf(' ');
-        const count = Number(passenger.slice(0, index));
-        nextPassengerCount += count;
-      });
-
-      return prevPassengerCount - nextPassengerCount;
-    });
-  }
-
-  public sortingPassengerDescendence(tickets: OneTicket[]): OneTicket[] {
-    return tickets.sort((prev: OneTicket, next: OneTicket) => {
-      let prevPassengerCount = 0;
-      let nextPassengerCount = 0;
-
-      prev.passengers.forEach((passenger: string) => {
-        const index = passenger.indexOf(' ');
-        const count = Number(passenger.slice(0, index));
-        prevPassengerCount += count;
-      });
-
-      next.passengers.forEach((passenger: string) => {
-        const index = passenger.indexOf(' ');
-        const count = Number(passenger.slice(0, index));
-        nextPassengerCount += count;
-      });
-
-      return nextPassengerCount - prevPassengerCount;
-    });
-  }
-
-  public sortingPriceAscendence(tickets: OneTicket[]): OneTicket[] {
-    return tickets.sort((prev: OneTicket, next: OneTicket) => {
-      const prevPrice = prev.price.slice(1, prev.price.length);
-      const nextPrice = next.price.slice(1, next.price.length);
-
-      return parseFloat(prevPrice) - parseFloat(nextPrice);
-    });
-  }
-
-  public sortingPriceDescendence(tickets: OneTicket[]): OneTicket[] {
-    return tickets.sort((prev: OneTicket, next: OneTicket) => {
-      const prevPrice = prev.price.slice(1, prev.price.length);
-      const nextPrice = next.price.slice(1, next.price.length);
-
-      return parseFloat(nextPrice) - parseFloat(prevPrice);
+  public sortPrice(flights: CartFlight[], sortOrder: SortOrder): CartFlight[] {
+    const arr = [...flights];
+    return arr.sort((prev: CartFlight, next: CartFlight) => {
+      const prevPrice = prev.totalCost.eur;
+      const nextPrice = next.totalCost.eur;
+      return (sortOrder === SortOrder.ASC) ? prevPrice - nextPrice : nextPrice - prevPrice;
     });
   }
 

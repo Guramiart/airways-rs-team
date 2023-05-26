@@ -12,4 +12,11 @@ export const passengerReducer = createReducer(
       passengers,
     }),
   ),
+  on(
+    PassengersActions.clearStore,
+    (state: PassengersState): PassengersState => ({
+      ...state,
+      passengers: initialPassengerState.passengers,
+    }),
+  ),
 );

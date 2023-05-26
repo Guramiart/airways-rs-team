@@ -12,6 +12,8 @@ import { StepperService } from '../../../core/services/stepper-service.service';
 import { Passengers } from '../../models/passengers';
 import * as FlightSelect from '../../../redux/selectors/selected-flight.selector';
 import * as SelectedActions from '../../../redux/actions/selected-flight.action';
+import * as PassengerAction from '../../../redux/actions/passengers.action';
+import * as FlightActions from '../../../redux/actions/flight.actions';
 import * as PassengerSelect from '../../../redux/selectors/passenger.selector';
 import * as CartActions from '../../../redux/actions/cart.actions';
 
@@ -115,14 +117,31 @@ export class SummaryPageComponent implements OnInit, OnDestroy {
               reverse: this.reverseFlight,
             },
             totalCost: this.summaryInstance.totalCost,
+            passengers: this.passengers,
           },
         },
       ));
   }
 
+  private clearSelected() {
+    this.store.dispatch(SelectedActions.clearStore());
+  }
+
+  private clearPassengers() {
+    this.store.dispatch(PassengerAction.clearStore());
+  }
+
+  private clearFlights() {
+    this.store.dispatch(FlightActions.clearStore());
+  }
+
   public addToCart(): void {
     this.addFlightToCart();
-    this.store.dispatch(SelectedActions.clearStore());
+    setTimeout(() => {
+      this.clearPassengers();
+      this.clearSelected();
+      this.clearFlights();
+    }, 300);
     this.router.navigateByUrl('/');
   }
 

@@ -3,7 +3,7 @@ import {
 } from '@angular/core';
 import { CartFlight, FlightTableRow } from 'src/app/redux/state.model';
 import { Flight } from 'src/app/services/flight.model';
-import { Passengers, PassengerDetail } from 'src/app/airways/models/passengers';
+import { PassengerDetail } from 'src/app/airways/models/passengers';
 import { CartSwitcherService } from 'src/app/airways/services/cart-switcher.service';
 import { Subscription } from 'rxjs';
 import { FlightTypes } from '../../enums/flight-types';
@@ -18,8 +18,6 @@ export class TableRecordComponent implements OnInit, AfterViewChecked, OnDestroy
   public tableData: FlightTableRow;
 
   public cartFlight: CartFlight;
-
-  public cartPassengers: Passengers;
 
   public isShoppingRecord: boolean;
 
@@ -85,7 +83,7 @@ export class TableRecordComponent implements OnInit, AfterViewChecked, OnDestroy
 
   public getPassengers(): string[] {
     const passenger: string[] = [];
-    Object.values(this.cartPassengers.passengers).forEach((value: PassengerDetail) => {
+    Object.values(this.cartFlight.passengers.passengers).forEach((value: PassengerDetail) => {
       if (value.count !== 0) {
         passenger.push(`${value.count} x ${value.name}`);
       }
