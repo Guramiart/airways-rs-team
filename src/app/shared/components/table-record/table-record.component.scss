@@ -62,7 +62,7 @@
 
 .main__second-record:nth-child(2) {
   //width: 10%;
-  flex-basis: 18%;
+  flex-basis: 25%;
 }
 
 .main__third-record:nth-child(3) {
@@ -99,13 +99,19 @@
   }
 }
 
+.number-block {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
 .main__record-text {
   font-family: Roboto, sans-serif;
   font-size: 20px;
   font-weight: 500;
   font-style: normal;
   line-height: 32px;
-  color: #74767a;
+  color: #000;
   letter-spacing: 0.5px;
 
   @media screen and (width <= 989px) {

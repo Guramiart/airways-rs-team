@@ -2,22 +2,24 @@
   <div class="main__table-record">
     <div class="main__first-record">
       <mat-checkbox *ngIf="isShoppingRecord"  [(ngModel)]="check" (ngModelChange)="onChecked()"></mat-checkbox>
-      <span class="main__record-checkbox">{{numberFlight}}</span>
+      <div class="number-block">
+        <span *ngFor="let number of tableData.flightNumber" class="main__record-checkbox">{{ number }}</span>
+      </div>
     </div>
     <div class="main__second-record">
-      <span *ngFor="let direction of flight" class="main__record-text">{{direction}}</span>
+      <span *ngFor="let direction of tableData.direction" class="main__record-text">{{ direction }}</span>
     </div>
     <div class="main__third-record">
-      <span class="main__record-text">{{type}}</span>
+      <span class="main__record-text">{{ tableData.flightType }}</span>
     </div>
     <div class="main__forth-record">
-      <span *ngFor="let date of date" class="main__record-text">{{date}}</span>
+      <span *ngFor="let date of tableData.date" class="main__record-text">{{ date.start | date: 'dd MMM, YYYY, HH:mm' }}-{{ date.end | date: 'HH:mm' }}</span>
     </div>
     <div class="main__fifth-record">
-      <span *ngFor="let passenger of passengers" class="main__record-text">{{passenger}}</span>
+      <span *ngFor="let passenger of getPassengers()" class="main__record-text">{{ passenger }}</span>
     </div>
     <div class="main__sixth-record">
-      <span class="main__record-price">{{price}}</span>
+      <span class="main__record-price" [appCurrency]="tableData.total"></span>
       <button mat-icon-button *ngIf="isShoppingRecord" [matMenuTriggerFor]="recordEdit">
         <mat-icon class="main__menu-icon">more_vert</mat-icon>
       </button>

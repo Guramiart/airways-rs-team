@@ -50,6 +50,13 @@
   font-weight: 500;
   color: white;
   background-color: var(--app-root-blue);
+
+  &:disabled {
+    color: gray;
+    background-color: #e5e5e5;
+    filter: drop-shadow(2px 0 4px #e5e5e5);
+  }
+
 }
 
 .mat-mdc-unelevated-button:not(:disabled) {

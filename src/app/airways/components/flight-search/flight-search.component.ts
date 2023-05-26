@@ -12,6 +12,8 @@ import { Airport } from 'src/app/services/flight.model';
 import { Passengers } from '../../models/passengers';
 import * as SettingSelect from '../../../redux/selectors/settings.selector';
 import * as FlightActions from '../../../redux/actions/flight.actions';
+import * as PassengersActions from '../../../redux/actions/passengers.action';
+import * as SelectedActions from '../../../redux/actions/selected-flight.action';
 
 @Component({
   selector: 'app-flight-search',
@@ -83,7 +85,9 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.searchData.unsubscribe();
+    if (this.searchData) {
+      this.searchData.unsubscribe();
+    }
   }
 
   private updateDate(): void {
@@ -113,6 +117,18 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
   private setPassengers(): void {
     this.flightSearchForm.get('passengers')?.setValue(this.getPassengers());
+  }
+
+  private updatePassengers(): void {
+    this.store.dispatch(PassengersActions.updatePassengers({
+      passengers: this.passengers,
+    }));
+  }
+
+  private updateFlightType(type: FlightTypes): void {
+    this.store.dispatch(SelectedActions.updateType({
+      flightType: type,
+    }));
   }
 
   public switchFlights(): void {
@@ -158,8 +174,9 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         destination: resp[1],
         startDate: forwardDate,
         endDate: backDate,
-        passengers: this.passengers,
       }));
+      this.updateFlightType(type);
+      this.updatePassengers();
       this.router.navigateByUrl('step/1');
     });
   }

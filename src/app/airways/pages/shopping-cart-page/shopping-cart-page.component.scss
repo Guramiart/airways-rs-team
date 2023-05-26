@@ -109,7 +109,7 @@ mat-icon {
 
 .main__table-naming:nth-child(2) {
   //width: 10%;
-  flex-basis: 14%;
+  flex-basis: 25%;
 }
 
 .main__table-naming:nth-child(3) {
@@ -243,7 +243,6 @@ mat-icon {
   background: linear-gradient(90deg, #11397e 0%, #005abc 100%);
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-fill-color: transparent;
 
   @media screen and (width <= 499px) {
     font-size: 18px;
@@ -346,6 +345,7 @@ mat-icon {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  column-gap: 20px;
 
   @media screen and (width <= 889px) {
     width: 220px;

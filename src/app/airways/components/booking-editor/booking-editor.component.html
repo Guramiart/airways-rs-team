@@ -3,14 +3,14 @@
     <div class="main__input-wrapper">
       <label class="main__input-label" for="from">From</label>
       <div class="main__input-container">
-        <input id="from" class="main__editor-input" type="text" [value]="flight.from!.form.name">
+        <input id="from" class="main__editor-input" type="text" [value]="flight.from.form.country">
         <span class="main__input-code">{{ flight.from!.form.key }}</span>
       </div>
     </div>
     <div class="main__input-wrapper">
       <label class="main__input-label" for="to">Destination</label>
       <div class="main__input-container">
-        <input id="to" class="main__editor-input" type="text" [value]="flight.from!.to.name">
+        <input id="to" class="main__editor-input" type="text" [value]="flight.from.to.country">
         <span class="main__input-code">{{ flight.from!.to.key }}</span>
       </div>
     </div>

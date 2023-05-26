@@ -7,6 +7,8 @@ import { Airport } from 'src/app/services/flight.model';
 import { IFlightState } from 'src/app/redux/state.model';
 import { ShowEditorService } from '../../services/show-editor.service';
 import * as FlightSelect from '../../../redux/selectors/flight.selector';
+import * as PassengersSelect from '../../../redux/selectors/passenger.selector';
+import { Passengers } from '../../models/passengers';
 
 @Component({
   selector: 'app-booking-edit',
@@ -17,9 +19,11 @@ export class BookingEditComponent implements OnInit, OnDestroy {
 
   public isButton: boolean;
 
-  public flights$: Observable<IFlightState> | undefined;
+  public flights$: Observable<IFlightState>;
 
-  public destination$: Observable<Airport | null> | undefined;
+  public passengers$: Observable<Passengers>;
+
+  public destination$: Observable<Airport>;
 
   private buttonObserver: Subscription;
 
@@ -33,6 +37,7 @@ export class BookingEditComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.flights$ = this.store.select(FlightSelect.selectFlight);
+    this.passengers$ = this.store.select(PassengersSelect.selectPassengers);
 
     this.buttonObserver = this.emit.button.subscribe((isShow: boolean) => {
       this.isButton = isShow;

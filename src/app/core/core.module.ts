@@ -21,6 +21,9 @@ import { settingReducer } from '../redux/reducers/settings.reducer';
 import { flightReducer } from '../redux/reducers/flight.reducer';
 import { HeaderChangerService } from './services/header-changer.service';
 import { StepperService } from './services/stepper-service.service';
+import { cartReducer } from '../redux/reducers/cart.reducer';
+import { passengerReducer } from '../redux/reducers/passenger.reducer';
+import { selectedFlightReducer } from '../redux/reducers/selected-flight.reducer';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,13 @@ import { StepperService } from './services/stepper-service.service';
     CdkConnectedOverlay,
     CdkOverlayOrigin,
     StoreRouterConnectingModule.forRoot(),
-    StoreModule.forRoot({ flights: flightReducer, settings: settingReducer }, {}),
+    StoreModule.forRoot({
+      flights: flightReducer,
+      passengers: passengerReducer,
+      selectedFlight: selectedFlightReducer,
+      settings: settingReducer,
+      cart: cartReducer,
+    }, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     RouterLink,
     NgOptimizedImage,

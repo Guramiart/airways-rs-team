@@ -4,7 +4,7 @@
     <span class="header__account-text" [style.color]="textColor">{{btnText}}</span>
   </button>
   <button *ngIf="authUser" class="header__account-button" (click)="signOut()">
-    <mat-icon class="header__mat-icon">logout</mat-icon>
+    <mat-icon class="header__mat-icon" [style.color]="textColor">logout</mat-icon>
   </button>
 </div>
 

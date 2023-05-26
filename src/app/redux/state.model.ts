@@ -7,6 +7,9 @@ import { Flight, Price } from '../services/flight.model';
 
 export interface AppState {
   flights: Flight,
+  selectedFlights: SelectedFlight,
+  passengers: PassengersState,
+  cart: CartState,
   settings: SettingsState,
 }
 
@@ -15,11 +18,18 @@ export interface IFlightState {
   destination: Flight,
   startDate: string,
   endDate: string,
-  passengers: Passengers,
   flightType: FlightTypes,
-  selectedDirectFlight: Flight,
-  selectedReverseFlight: Flight,
   totalCost: Price,
+}
+
+export interface PassengersState {
+  passengers: Passengers,
+}
+
+export interface SelectedFlight {
+  direct: Flight,
+  reverse: Flight,
+  flightType: FlightTypes,
 }
 
 export interface SettingsState {
@@ -29,15 +39,38 @@ export interface SettingsState {
   authUser:IUser | undefined
 }
 
+export interface CartState {
+  flights: CartFlight[];
+}
+
+export interface CartFlight {
+  flight: {
+    forward: Flight,
+    reverse: Flight,
+  },
+  passengers: Passengers,
+  totalCost: Price,
+}
+
+export interface FlightTableRow {
+  flightNumber: string[],
+  direction: string[],
+  flightType: string,
+  date: FlightDate[],
+  total: Price,
+}
+
+export interface FlightDate {
+  start: string,
+  end: string,
+}
+
 export const initialFlightState: IFlightState = {
   from: null,
   destination: null,
   startDate: '',
   endDate: '',
-  passengers: null,
   flightType: FlightTypes.ROUND,
-  selectedDirectFlight: null,
-  selectedReverseFlight: null,
   totalCost: null,
 };
 
@@ -46,4 +79,18 @@ export const initialSettingState: SettingsState = {
   currency: Currency.EUR,
   isModalOpen: false,
   authUser: undefined,
+};
+
+export const initialSelectedFlightState: SelectedFlight = {
+  direct: null,
+  reverse: null,
+  flightType: null,
+};
+
+export const initialPassengerState: PassengersState = {
+  passengers: null,
+};
+
+export const initialCartState: CartState = {
+  flights: [],
 };

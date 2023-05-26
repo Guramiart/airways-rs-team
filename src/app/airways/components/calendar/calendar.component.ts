@@ -7,7 +7,7 @@ import {
 } from 'src/app/services/flight.model';
 import { ICalendar } from 'src/app/services/calendar.model';
 import * as FlightSelect from '../../../redux/selectors/flight.selector';
-import * as FlightAction from '../../../redux/actions/flight.actions';
+import * as SelectFlightAction from '../../../redux/actions/selected-flight.action';
 
 @Component({
   selector: 'app-calendar',
@@ -20,19 +20,19 @@ export class CalendarComponent implements OnInit {
 
   public dates: ICalendar[] = [];
 
-  public flights: Flights | undefined;
+  public flights: Flights;
 
-  public from: Airport | undefined;
+  public from: Airport;
 
-  public destination: Airport | undefined;
+  public destination: Airport;
 
-  public curFlights: Flights | undefined;
+  public curFlights: Flights;
 
   public startDate: string;
 
   @Input() isForward: boolean;
 
-  public flightData: Flight | null;
+  public flightData: Flight;
 
   public isSelected: boolean = false;
 
@@ -103,14 +103,14 @@ export class CalendarComponent implements OnInit {
   selectFlight(flight: Flight) {
     if (flight !== undefined) {
       if (this.isForward) {
-        this.store.dispatch(FlightAction.updateDirectFlight({ selectedDirectFlight: flight }));
+        this.store.dispatch(SelectFlightAction.updateDirect({ flight }));
       } else {
-        this.store.dispatch(FlightAction.updateReverseFlight({ selectedReverseFlight: flight }));
+        this.store.dispatch(SelectFlightAction.updateReverse({ flight }));
       }
     } else if (this.isForward) {
-      this.store.dispatch(FlightAction.updateDirectFlight({ selectedDirectFlight: null }));
+      this.store.dispatch(SelectFlightAction.updateDirect({ flight: null }));
     } else {
-      this.store.dispatch(FlightAction.updateReverseFlight({ selectedReverseFlight: null }));
+      this.store.dispatch(SelectFlightAction.updateReverse({ flight: null }));
     }
     this.isSelected = !this.isSelected;
   }
