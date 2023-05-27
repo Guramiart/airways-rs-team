@@ -4,6 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { BookingPageComponent } from './pages/booking-page/booking-page.component';
 import { ShoppingCartPageComponent } from './pages/shopping-cart-page/shopping-cart-page.component';
@@ -51,6 +52,7 @@ import { SharedModule } from '../shared/shared.module';
     MatTableModule,
     MatMenuModule,
     SharedModule,
+    MatSnackBarModule,
   ],
   exports: [
     MainPageComponent,

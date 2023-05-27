@@ -12,4 +12,11 @@ export const cartReducer = createReducer(
       flights: [...state.flights, flights],
     }),
   ),
+  on(
+    CartActions.addNewPrice,
+    (state: CartState, { price }): CartState => ({
+      ...state,
+      flights: [price],
+    }),
+  ),
 );

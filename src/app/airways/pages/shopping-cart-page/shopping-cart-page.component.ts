@@ -3,17 +3,19 @@ import {
   Component, OnDestroy, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation,
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Price } from 'src/app/services/flight.model';
 import { CartFlight, CartState } from 'src/app/redux/state.model';
 import { FormControl } from '@angular/forms';
 import { SortOrder } from 'src/app/shared/enums/order';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { TableRecordComponent } from '../../../shared/components/table-record/table-record.component';
 import { CartSwitcherService, SelectionTicketEvent } from '../../services/cart-switcher.service';
 import { SortingService } from '../../services/sorting-service.service';
 import { HeaderChangerService } from '../../../core/services/header-changer.service';
 import * as CartSelect from '../../../redux/selectors/cart.selector';
+import { addNewPrice } from '../../../redux/actions/cart.actions';
 
 type Discount = {
   code: string,
@@ -66,7 +68,7 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
 
   private selectedData: string[] = [];
 
-  public checkAll: boolean = false;
+  public checkAll: boolean = true;
 
   private selectedObserver: Subscription;
 
@@ -119,6 +121,8 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
     private sort: SortingService,
     private routerParam: ActivatedRoute,
     private headerChange: HeaderChangerService,
+    private router: Router,
+    private snackBar: MatSnackBar,
   ) { }
 
   ngAfterViewInit(): void {
@@ -144,8 +148,8 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
     this.flights$ = this.store.select(CartSelect.selectFlights);
     this.flightSubscription = this.flights$.subscribe((data) => {
       this.flights = data.flights;
+      this.selected = data.flights.length;
     });
-
   }
 
   ngOnDestroy(): void {
@@ -352,15 +356,23 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
 
   }
 
-  private checkDiscount(price: number): number {
-    let amount = price;
-    this.promocode.forEach((discount) => {
+  private checkDiscount(): void {
+    this.promocode.forEach((discount: Discount) => {
       if (discount.used) {
-        amount *= discount.discount;
+        const price: Price = this.getTotalCost();
+
+        const newJSONFlight: string = JSON.stringify(this.flights[0]);
+
+        const newFlight: CartFlight = JSON.parse(newJSONFlight);
+
+        newFlight.totalCost.eur = Number(price.eur * discount.discount);
+        newFlight.totalCost.usd = Number(price.usd * discount.discount);
+        newFlight.totalCost.pln = Number(price.pln * discount.discount);
+        newFlight.totalCost.rub = Number(price.rub * discount.discount);
+
+        this.store.dispatch(addNewPrice({ price: newFlight }));
       }
     });
-
-    return amount;
   }
 
   public applyPromo(): void {
@@ -386,7 +398,7 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
               this.discountBorderColor = '#e0940a';
             } else {
               this.promocode[index].used = true;
-              this.totalPrice = this.checkDiscount(this.totalPrice);
+              this.checkDiscount();
               this.discountInfo = 'Promocode is valid';
               this.discountBorderColor = '#23b705';
             }
@@ -406,6 +418,15 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
         this.isApplyButtonClick = false;
       }, 3000);
     }
+  }
+
+  public toNewItem(): void {
+    this.router.navigate(['']);
+  }
+
+  public paymentBtn(): void {
+    this.snackBar.open('You just bought tickets!', 'Congratulation!', { duration: 3000 });
+    this.router.navigate(['/account']);
   }
 
 }
