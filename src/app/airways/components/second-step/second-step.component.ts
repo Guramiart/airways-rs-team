@@ -50,7 +50,7 @@ export class SecondStepComponent implements OnInit, OnDestroy {
 
   public back(isBack:boolean):void {
     if (isBack) {
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('step/1');
     } else {
       this.isSubmitted = !this.isSubmitted;
       setTimeout(() => {

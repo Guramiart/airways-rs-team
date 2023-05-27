@@ -151,7 +151,7 @@ export class SummaryPageComponent implements OnInit, OnDestroy {
   }
 
   public back(): void {
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('step/2');
   }
 
 }
