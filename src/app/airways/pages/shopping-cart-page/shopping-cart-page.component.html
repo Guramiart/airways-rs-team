@@ -54,7 +54,7 @@
   </div>
   <div class="main__cart-control">
     <button class="main__new-trip">
-      <span class="main__new-text">+ Add new trip</span>
+      <span class="main__new-text" (click)="toNewItem()">+ Add new trip</span>
     </button>
     <div class="main__amount-wrapper">
       <span class="main__amount-text">Total</span>
@@ -75,7 +75,7 @@
       <div class="main__payment-control">
         <span class="main__payment-text">{{selected}} selected</span>
         <button class="main__payment-button">
-          <span class="main__payment-btn">Payment</span>
+          <span matSnackBarAction class="main__payment-btn" (click)="paymentBtn()">Payment</span>
         </button>
       </div>
     </div>

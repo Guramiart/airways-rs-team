@@ -3,12 +3,13 @@ import {
   Component, OnDestroy, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation,
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Price } from 'src/app/services/flight.model';
 import { CartFlight, CartState } from 'src/app/redux/state.model';
 import { FormControl } from '@angular/forms';
 import { SortOrder } from 'src/app/shared/enums/order';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { TableRecordComponent } from '../../../shared/components/table-record/table-record.component';
 import { CartSwitcherService, SelectionTicketEvent } from '../../services/cart-switcher.service';
 import { SortingService } from '../../services/sorting-service.service';
@@ -120,6 +121,8 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
     private sort: SortingService,
     private routerParam: ActivatedRoute,
     private headerChange: HeaderChangerService,
+    private router: Router,
+    private snackBar: MatSnackBar,
   ) { }
 
   ngAfterViewInit(): void {
@@ -415,6 +418,15 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
         this.isApplyButtonClick = false;
       }, 3000);
     }
+  }
+
+  public toNewItem(): void {
+    this.router.navigate(['']);
+  }
+
+  public paymentBtn(): void {
+    this.snackBar.open('You just bought tickets!', 'Congratulation!', { duration: 3000 });
+    this.router.navigate(['/account']);
   }
 
 }

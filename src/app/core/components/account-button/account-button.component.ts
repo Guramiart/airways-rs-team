@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { IUser } from 'src/app/services/user.model';
 import { DataService } from 'src/app/services/data.service';
 import { Observable, Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 import { HeaderChangerService } from '../../services/header-changer.service';
 
 import * as SettingsAction from '../../../redux/actions/settings.actions';
@@ -41,6 +42,7 @@ export class AccountButtonComponent implements OnInit, OnDestroy {
     private mainObserver: HeaderChangerService,
     private store: Store,
     private data:DataService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -59,7 +61,7 @@ export class AccountButtonComponent implements OnInit, OnDestroy {
 
   public openModal():void {
     if (this.authUser) {
-      // TODO go to userPage
+      this.router.navigate(['/account']);
     } else {
       this.store.dispatch(SettingsAction.openModal());
     }
