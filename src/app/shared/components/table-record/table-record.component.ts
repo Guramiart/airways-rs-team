@@ -21,9 +21,7 @@ export class TableRecordComponent implements OnInit, AfterViewChecked, OnDestroy
 
   public isShoppingRecord: boolean;
 
-  public numberFlight: string;
-
-  public check: boolean = false;
+  public check: boolean = true;
 
   private selectAllObserver: Subscription;
 
@@ -32,11 +30,11 @@ export class TableRecordComponent implements OnInit, AfterViewChecked, OnDestroy
   }
 
   public onChecked(): void {
-    this.switcher.selectionEv({ checked: this.check, flight: this.numberFlight });
+    this.switcher.selectionEv({ checked: this.check, flight: this.tableData.flightNumber[0] });
   }
 
   public deleteItem(): void {
-    this.switcher.deleteEv(this.numberFlight);
+    this.switcher.deleteEv(this.tableData.flightNumber[0]);
   }
 
   public editItem(): void {

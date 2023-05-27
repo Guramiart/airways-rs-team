@@ -66,7 +66,7 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
 
   private selectedData: string[] = [];
 
-  public checkAll: boolean = false;
+  public checkAll: boolean = true;
 
   private selectedObserver: Subscription;
 

@@ -55,7 +55,6 @@ export class AccountButtonComponent implements OnInit, OnDestroy {
         this.authUser ? this.btnText = `${this.authUser.firstName}  ${this.authUser.lastName} `
           : this.btnText = 'Sign In';
       });
-
   }
 
   public openModal():void {
