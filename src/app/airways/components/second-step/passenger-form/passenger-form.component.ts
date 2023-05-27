@@ -3,12 +3,14 @@ import {
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
+import { DATE_FORMATS } from 'src/app/shared/enums/date-format';
 import { Passengers } from 'src/app/airways/models/passengers';
 import { PassengersType } from 'src/app/shared/enums/passengers-type';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IPassengerInfo } from 'src/app/airways/models/passengerInfo.model';
 import { DateValidator } from '../../modal-window/sign-in/validator';
 import * as PassengerSelect from '../../../../redux/selectors/passenger.selector';
+import * as SettingSelect from '../../../../redux/selectors/settings.selector';
 
 @Component({
   selector: 'app-passenger-form',
@@ -41,6 +43,10 @@ export class PassengerFormComponent implements OnInit, OnChanges, OnDestroy {
 
   private subsription: Subscription;
 
+  private format$: Observable<string>;
+
+  private subscription: Subscription;
+
   constructor(private store: Store) {}
 
   ngOnInit(): void {
@@ -54,6 +60,11 @@ export class PassengerFormComponent implements OnInit, OnChanges, OnDestroy {
       birthDate: new FormControl<string>('', [Validators.required, DateValidator()]),
     });
     this.checkStore();
+    this.format$ = this.store.select(SettingSelect.selectDateFormat);
+    this.subscription = this.format$.subscribe((value) => {
+      DATE_FORMATS.display.dateInput = value;
+      this.updateDate();
+    });
   }
 
   ngOnChanges(changes:SimpleChanges):void {
@@ -66,6 +77,14 @@ export class PassengerFormComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnDestroy() {
     this.subsription.unsubscribe();
+    this.subscription.unsubscribe();
+  }
+
+  private updateDate(): void {
+    const date = this.form.get('birthDate').value;
+    if (date !== null) {
+      this.form.get('birthDate').setValue(new Date(date));
+    }
   }
 
   private checkStore(): void {
