@@ -73,7 +73,7 @@ export class SecondStepComponent implements OnInit, OnDestroy {
     }
   }
 
-  public getContactInfo(data:{ email:string, mobile:string }) {
+  public getContactInfo(data:{ email:string, mobile:string, code:string }) {
     if (this.passengers) {
       this.newPassenger = {
         ...this.passengers,
