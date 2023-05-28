@@ -146,9 +146,15 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
     this.discountFormControl = new FormControl('');
 
     this.flights$ = this.store.select(CartSelect.selectFlights);
-    this.flightSubscription = this.flights$.subscribe((data) => {
-      this.flights = data.flights;
+    this.flightSubscription = this.flights$.subscribe((data: CartState) => {
+      this.flights = [];
+      data.flights.forEach((item: CartFlight) => {
+        const oldItem = JSON.stringify(item);
+        const newItem: CartFlight = JSON.parse(oldItem);
+        this.flights.push(newItem);
+      });
       this.selected = data.flights.length;
+      this.detect.detectChanges();
     });
   }
 
@@ -179,10 +185,18 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
       rub: 0,
       pln: 0,
     } as Price;
-    this.flights.forEach((flight) => {
-      Object.keys(flight.totalCost).forEach((key) => {
-        totalCost[key] += flight.totalCost[key];
-      });
+    this.flights.forEach((flight: CartFlight) => {
+      if (Object.hasOwn(flight, 'checked')) {
+        if (flight.checked) {
+          Object.keys(flight.totalCost).forEach((key) => {
+            totalCost[key] += flight.totalCost[key];
+          });
+        }
+      } else {
+        Object.keys(flight.totalCost).forEach((key) => {
+          totalCost[key] += flight.totalCost[key];
+        });
+      }
     });
     return totalCost;
   }
@@ -197,6 +211,9 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
   }
 
   private showSelected(arg: SelectionTicketEvent): void {
+    const oldFlights = JSON.stringify(this.flights);
+    const newFlights: CartFlight[] = JSON.parse(oldFlights);
+
     if (arg.checked) {
       this.selected += 1;
       this.selectedData.push(arg.flight);
@@ -205,11 +222,19 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
       this.selectedData = this.selectedData.filter((flight: string) => flight !== arg.flight);
     }
 
-    if (this.selectedData.length === this.flights.length) {
+    newFlights.forEach((item: CartFlight) => {
+      if (item.flight.forward.flightNumber === arg.flight) {
+        item.checked = arg.checked;
+      }
+    });
+
+    if (this.selectedData.length === newFlights.length) {
       this.checkAll = true;
     } else {
       this.checkAll = false;
     }
+
+    this.store.dispatch(addNewPrice({ flights: newFlights }));
   }
 
   private showDelete(flightNumber: string): void {

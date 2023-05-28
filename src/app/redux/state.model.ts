@@ -50,6 +50,7 @@ export interface CartFlight {
   },
   passengers: Passengers,
   totalCost: Price,
+  checked?: boolean,
 }
 
 export interface FlightTableRow {

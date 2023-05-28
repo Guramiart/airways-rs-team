@@ -12,7 +12,7 @@ import * as SelectSetting from '../../redux/selectors/settings.selector';
 })
 export class CurrencyDirective implements DoCheck {
 
-  currency$: Observable<Currency> = this.store.select(SelectSetting.selectCurrency);
+  public currency$: Observable<Currency> = this.store.select(SelectSetting.selectCurrency);
 
   @Input() appCurrency: Price | undefined;
 
