@@ -8,8 +8,9 @@ export interface Passengers {
   },
   total: number,
   contactDetails?:{
-    email:string;
-    mobile:string;
+    email:string,
+    code:string,
+    mobile:string,
   }
 }
 

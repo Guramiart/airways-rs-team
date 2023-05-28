@@ -1,9 +1,11 @@
 import {
+  AfterContentInit,
   Component, ElementRef, OnDestroy, OnInit, ViewChild,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
+import { IFlightState } from 'src/app/redux/state.model';
 import { DATE_FORMATS } from 'src/app/shared/enums/date-format';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
@@ -11,8 +13,10 @@ import { FlightTypes } from 'src/app/shared/enums/flight-types';
 import { Airport } from 'src/app/services/flight.model';
 import { Passengers } from '../../models/passengers';
 import * as SettingSelect from '../../../redux/selectors/settings.selector';
+import * as FlightSelect from '../../../redux/selectors/flight.selector';
 import * as FlightActions from '../../../redux/actions/flight.actions';
 import * as PassengersActions from '../../../redux/actions/passengers.action';
+import * as PassengersSelect from '../../../redux/selectors/passenger.selector';
 import * as SelectedActions from '../../../redux/actions/selected-flight.action';
 
 @Component({
@@ -20,13 +24,21 @@ import * as SelectedActions from '../../../redux/actions/selected-flight.action'
   templateUrl: './flight-search.component.html',
   styleUrls: ['./flight-search.component.scss'],
 })
-export class FlightSearchComponent implements OnInit, OnDestroy {
+export class FlightSearchComponent implements OnInit, AfterContentInit, OnDestroy {
 
-  @ViewChild('passengersInput', { read: ElementRef }) input: ElementRef | undefined;
+  @ViewChild('passengersInput', { read: ElementRef }) input: ElementRef;
 
-  private format$: Observable<string> | undefined;
+  private flights$: Observable<IFlightState>;
+
+  private format$: Observable<string>;
+
+  private passengers$: Observable<Passengers>;
 
   private searchData: Subscription;
+
+  private flightSubscription: Subscription;
+
+  private passengerSubscription: Subscription;
 
   public passengers: Passengers = {
     passengers: {
@@ -72,10 +84,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
       endDate: new FormControl(null, Validators.required),
       passengers: new FormControl(this.getPassengers(), Validators.required),
     });
-    this.dataService.getAllCities().subscribe((data) => {
-      this.countries = data;
-      return this.countries;
-    });
     this.format$ = this.store.select(SettingSelect.selectDateFormat);
     this.format$.subscribe((value) => {
       DATE_FORMATS.display.dateInput = value;
@@ -84,20 +92,28 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     this.dataService.setAuthUserFromLS();
   }
 
+  ngAfterContentInit(): void {
+    this.dataService.getAllCities().subscribe((data) => {
+      this.countries = data;
+      this.checkStore();
+    });
+  }
+
   ngOnDestroy(): void {
     if (this.searchData) {
       this.searchData.unsubscribe();
     }
+    this.flightSubscription.unsubscribe();
   }
 
   private updateDate(): void {
     const start = this.flightSearchForm.get('startDate')?.value;
     const end = this.flightSearchForm.get('endDate')?.value;
     if (start !== null) {
-      this.flightSearchForm.get('startDate')?.setValue(new Date(start));
+      this.flightSearchForm.get('startDate').setValue(new Date(start));
     }
     if (end !== null) {
-      this.flightSearchForm.get('endDate')?.setValue(new Date(end));
+      this.flightSearchForm.get('endDate').setValue(new Date(end));
     }
   }
 
@@ -115,14 +131,41 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     return title.join(', ');
   }
 
-  private setPassengers(): void {
-    this.flightSearchForm.get('passengers')?.setValue(this.getPassengers());
+  private checkStore(): void {
+    this.flights$ = this.store.select(FlightSelect.selectFlight);
+    this.flightSubscription = this.flights$.subscribe((data) => {
+      if (data.from) {
+        const from = this.countries.find((el) => el.key === data.from.form.key);
+        this.flightSearchForm.get('from').setValue(from, { emitEvent: true });
+      }
+      if (data.destination) {
+        const item = this.countries.find((el) => el.key === data.destination.form.key);
+        this.flightSearchForm.get('destination').setValue(item, { emitEvent: true });
+      }
+      this.flightSearchForm.get('flightType').setValue(data.flightType);
+      if (data.startDate && data.endDate) {
+        this.flightSearchForm.get('startDate').setValue(new Date(data.startDate));
+        this.flightSearchForm.get('endDate').setValue(new Date(data.endDate));
+      }
+    });
+    this.passengers$ = this.store.select(PassengersSelect.selectPassengers);
+    this.passengerSubscription = this.passengers$.subscribe((data) => {
+      if (data) {
+        this.passengers.passengers.adult.count = data.passengers.adult.count;
+        this.passengers.passengers.child.count = data.passengers.child.count;
+        this.passengers.passengers.infant.count = data.passengers.infant.count;
+        this.passengers.total = data.total;
+        this.setPassengers();
+      }
+    });
   }
 
-  private updatePassengers(): void {
-    this.store.dispatch(PassengersActions.updatePassengers({
-      passengers: this.passengers,
-    }));
+  private setPassengers(): void {
+    this.flightSearchForm.get('passengers').setValue(this.getPassengers());
+  }
+
+  private updatePassengers(passengers: Passengers): void {
+    this.store.dispatch(PassengersActions.updatePassengers({ passengers }));
   }
 
   private updateFlightType(type: FlightTypes): void {
@@ -132,9 +175,9 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   }
 
   public switchFlights(): void {
-    const tmp = this.flightSearchForm.get('from')?.value;
-    this.flightSearchForm.get('from')?.setValue(this.flightSearchForm.get('destination')?.value, { emitEvent: true });
-    this.flightSearchForm.get('destination')?.setValue(tmp, { emitEvent: true });
+    const tmp = this.flightSearchForm.get('from').value;
+    this.flightSearchForm.get('from').setValue(this.flightSearchForm.get('destination').value, { emitEvent: true });
+    this.flightSearchForm.get('destination').setValue(tmp, { emitEvent: true });
   }
 
   public toggleFocus(): void {
@@ -151,23 +194,26 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     this.setPassengers();
   }
 
-  increment(value: 'adult' | 'child' | 'infant'): void {
+  public increment(value: 'adult' | 'child' | 'infant'): void {
     this.passengers.passengers[value].count += 1;
     this.setPassengers();
   }
 
   search(): void {
+    this.passengerSubscription.unsubscribe();
     const type = this.flightSearchForm.get('flightType')?.value;
     const forwardDate = this.flightSearchForm.get('startDate')?.value;
     const backDate = this.flightSearchForm.get('endDate')?.value;
     this.searchData = this.dataService.searchFlights({
-      fromKey: this.flightSearchForm.get('from')?.value.key,
+      fromKey: this.flightSearchForm.get('from').value.key,
       toKey: this.flightSearchForm.get('destination')?.value.key,
       forwardDate,
       backDate,
     }).subscribe((resp) => {
-      this.passengers.total = Object
-        .values(this.passengers.passengers).reduce((acc, curr) => acc + curr.count, 0);
+      const { passengers } = this;
+      passengers.total = Object
+        .values(passengers.passengers)
+        .reduce((acc, curr) => acc + curr.count, 0);
       this.store.dispatch(FlightActions.updateFlights({
         flightType: type,
         from: resp[0],
@@ -175,8 +221,8 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         startDate: forwardDate,
         endDate: backDate,
       }));
+      this.updatePassengers(passengers);
       this.updateFlightType(type);
-      this.updatePassengers();
       this.router.navigateByUrl('step/1');
     });
   }

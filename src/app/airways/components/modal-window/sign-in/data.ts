@@ -4,10 +4,6 @@ export const COUNTRIES = [
     code: '+93',
   },
   {
-    name: 'Kazakhstan',
-    code: '+7',
-  },
-  {
     name: 'Russia',
     code: '+7',
   },

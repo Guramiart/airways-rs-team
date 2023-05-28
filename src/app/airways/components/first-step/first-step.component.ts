@@ -6,6 +6,7 @@ import { FlightTypes } from 'src/app/shared/enums/flight-types';
 import { IFlightState, SelectedFlight } from 'src/app/redux/state.model';
 import * as FlightSelect from '../../../redux/selectors/flight.selector';
 import * as SelectedSelect from '../../../redux/selectors/selected-flight.selector';
+import * as SelectedActions from '../../../redux/actions/selected-flight.action';
 import { StepperService } from '../../../core/services/stepper-service.service';
 
 @Component({
@@ -19,7 +20,7 @@ export class FirstStepComponent implements OnInit, OnDestroy {
 
   public selected$: Observable<SelectedFlight>;
 
-  private selected: SelectedFlight;
+  public selected: SelectedFlight;
 
   private isRound: boolean = true;
 
@@ -65,6 +66,7 @@ export class FirstStepComponent implements OnInit, OnDestroy {
   public back(isBack:boolean):void {
     if (isBack) {
       this.router.navigateByUrl('/');
+      this.store.dispatch(SelectedActions.clearStore());
     } else {
       this.router.navigateByUrl('step/2');
     }

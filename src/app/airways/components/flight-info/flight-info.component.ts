@@ -12,6 +12,8 @@ import { FlightInfoService } from '../../services/flight-info.service';
 })
 export class FlightInfoComponent implements OnInit {
 
+  @Input() isForward: boolean;
+
   @Input() from: Airport | undefined;
 
   @Input() destination: Airport | undefined;
@@ -20,7 +22,7 @@ export class FlightInfoComponent implements OnInit {
 
   @Output() selectEvent = new EventEmitter<Flight>();
 
-  public flight$: Observable<Flight | undefined>;
+  public flight$: Observable<Flight>;
 
   public isSelected: boolean = false;
 
@@ -37,7 +39,7 @@ export class FlightInfoComponent implements OnInit {
     return `${hours}h ${minutes}min`;
   }
 
-  selectFlight(flight: Flight | undefined) {
+  selectFlight(flight: Flight) {
     this.selectEvent.emit(flight);
     this.isSelected = !this.isSelected;
   }

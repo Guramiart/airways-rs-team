@@ -9,8 +9,7 @@ export class FlightInfoService {
 
   private flight: Flight;
 
-  // eslint-disable-next-line max-len
-  private flightInfo$: BehaviorSubject<Flight | undefined> = new BehaviorSubject<Flight | undefined>(undefined);
+  private flightInfo$: BehaviorSubject<Flight> = new BehaviorSubject<Flight>(undefined);
 
   public getFlightInfo$(): Observable<Flight | undefined> {
     return this.flightInfo$.asObservable();
