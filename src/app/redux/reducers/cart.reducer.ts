@@ -14,9 +14,9 @@ export const cartReducer = createReducer(
   ),
   on(
     CartActions.addNewPrice,
-    (state: CartState, { price }): CartState => ({
+    (state: CartState, { flights }): CartState => ({
       ...state,
-      flights: [price],
+      flights: [...flights],
     }),
   ),
 );

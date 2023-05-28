@@ -213,8 +213,10 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
   }
 
   private showDelete(flightNumber: string): void {
+    console.log(this.flights);
     this.flights = this.flights
       .filter((flight) => flight.flight.forward.flightNumber !== flightNumber);
+    console.log(this.flights);
     this.table.clear();
     this.totalPrice = 0;
     this.showTableRecords();
@@ -359,18 +361,19 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
   private checkDiscount(): void {
     this.promocode.forEach((discount: Discount) => {
       if (discount.used) {
-        const price: Price = this.getTotalCost();
 
-        const newJSONFlight: string = JSON.stringify(this.flights[0]);
+        const newJSONFlight: string = JSON.stringify(this.flights);
 
-        const newFlight: CartFlight = JSON.parse(newJSONFlight);
+        const newFlight: CartFlight[] = JSON.parse(newJSONFlight);
 
-        newFlight.totalCost.eur = Number(price.eur * discount.discount);
-        newFlight.totalCost.usd = Number(price.usd * discount.discount);
-        newFlight.totalCost.pln = Number(price.pln * discount.discount);
-        newFlight.totalCost.rub = Number(price.rub * discount.discount);
+        newFlight.forEach((flight: CartFlight) => {
+          flight.totalCost.eur = Number(flight.totalCost.eur * discount.discount);
+          flight.totalCost.usd = Number(flight.totalCost.usd * discount.discount);
+          flight.totalCost.pln = Number(flight.totalCost.pln * discount.discount);
+          flight.totalCost.rub = Number(flight.totalCost.rub * discount.discount);
+        });
 
-        this.store.dispatch(addNewPrice({ price: newFlight }));
+        this.store.dispatch(addNewPrice({ flights: newFlight }));
       }
     });
   }

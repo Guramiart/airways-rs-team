@@ -20,5 +20,5 @@ export const removeFlight = createAction(
 
 export const addNewPrice = createAction(
   ADD_NEW_PRICE,
-  props<{ price: CartFlight }>(),
+  props<{ flights: CartFlight[] }>(),
 );
