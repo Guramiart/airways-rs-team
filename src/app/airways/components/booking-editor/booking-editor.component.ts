@@ -3,11 +3,13 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { DATE_FORMATS } from 'src/app/shared/enums/date-format';
 import { Observable, Subscription } from 'rxjs';
 import { IFlightState } from 'src/app/redux/state.model';
 import * as FlightSelect from '../../../redux/selectors/flight.selector';
 import * as PassengerSelect from '../../../redux/selectors/passenger.selector';
 import { Passengers } from '../../models/passengers';
+import * as SettingSelect from '../../../redux/selectors/settings.selector';
 
 @Component({
   selector: 'app-booking-editor',
@@ -37,6 +39,10 @@ export class BookingEditorComponent implements OnInit, OnDestroy {
 
   public formDate!: FormGroup;
 
+  private format$: Observable<string>;
+
+  private subscription: Subscription;
+
   constructor(private store: Store) {}
 
   ngOnInit(): void {
@@ -56,11 +62,29 @@ export class BookingEditorComponent implements OnInit, OnDestroy {
     });
 
     this.generatePassengerList();
+
+    this.format$ = this.store.select(SettingSelect.selectDateFormat);
+    this.subscription = this.format$.subscribe((value) => {
+      DATE_FORMATS.display.dateInput = value;
+      this.updateDate();
+    });
   }
 
   ngOnDestroy(): void {
     this.flightSubscription.unsubscribe();
     this.passengerSubscription.unsubscribe();
+    this.subscription.unsubscribe();
+  }
+
+  private updateDate(): void {
+    const start = this.formDate.get('start')?.value;
+    const end = this.formDate.get('end')?.value;
+    if (start !== null) {
+      this.formDate.get('start').setValue(new Date(start));
+    }
+    if (end !== null) {
+      this.formDate.get('end').setValue(new Date(end));
+    }
   }
 
   public adultCounter(marker: boolean): void {

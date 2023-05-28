@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { PassengersType } from 'src/app/shared/enums/passengers-type';
 import { Passengers } from '../../models/passengers';
 import { IPassengerInfo } from '../../models/passengerInfo.model';
 import * as PassengerSelect from '../../../redux/selectors/passenger.selector';
@@ -14,6 +15,8 @@ import { StepperService } from '../../../core/services/stepper-service.service';
   styleUrls: ['./second-step.component.scss'],
 })
 export class SecondStepComponent implements OnInit, OnDestroy {
+
+  public type = PassengersType;
 
   public passengers: Passengers;
 
@@ -50,7 +53,7 @@ export class SecondStepComponent implements OnInit, OnDestroy {
 
   public back(isBack:boolean):void {
     if (isBack) {
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('step/1');
     } else {
       this.isSubmitted = !this.isSubmitted;
       setTimeout(() => {
@@ -70,7 +73,7 @@ export class SecondStepComponent implements OnInit, OnDestroy {
     }
   }
 
-  public getContactInfo(data:{ email:string, mobile:string }) {
+  public getContactInfo(data:{ email:string, mobile:string, code:string }) {
     if (this.passengers) {
       this.newPassenger = {
         ...this.passengers,
@@ -81,13 +84,13 @@ export class SecondStepComponent implements OnInit, OnDestroy {
 
   public getPassengerInfo(data:{ type:string, info:IPassengerInfo }):void {
     switch (data.type) {
-      case 'adult':
+      case PassengersType.ADULT:
         this.adultInfo.push(data.info);
         break;
-      case 'child':
+      case PassengersType.CHILD:
         this.childInfo.push(data.info);
         break;
-      case 'infant':
+      case PassengersType.INFANT:
         this.infantInfo.push(data.info);
         break;
       default: break;
