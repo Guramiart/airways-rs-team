@@ -1,0 +1,174 @@
+.form__wrap {
+  width: 100%;
+  max-width: 580px;
+  height: 390px;
+  margin-top: 62px;
+  padding: 24px;
+  padding-top: 14px;
+  background-color: rgb(255 255 255 / 85%);
+  border-radius: 8px;
+
+  .radio {
+    padding-top: 10px;
+  }
+
+  .select {
+    position: relative;
+    margin-top: 14px;
+
+    .switch-btn {
+      cursor: pointer;
+      position: absolute;
+      z-index: 100;
+      top: 0;
+      right: 20px;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      margin: auto 0;
+      background-color: white;
+      border: 0.5px solid rgb(116 118 122 / 60%);
+      border-radius: 100px;
+
+      .mat-icon {
+        margin: 0 auto;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  .date-passengers {
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+
+    .date {
+      flex: 1 1 auto;
+
+      @media screen and (width <= 580px) {
+        width: 100%;
+      }
+    }
+
+    .passengers {
+      position: relative;
+      flex: 0 0 auto;
+      width: 100%;
+      max-width: 211px;
+
+      .focus-btn {
+        position: absolute;
+        z-index: 100;
+        top: 10%;
+        right: 0;
+        padding: 10px;
+        background-color: transparent;
+        border: none;
+      }
+
+      .passengers-options {
+        position: absolute;
+        z-index: 100;
+        width: 100%;
+        max-width: 211px;
+        padding: 8px;
+        background-color: white;
+        border-radius: 4px;
+        box-shadow: 0 1px 4px rgb(0 0 0 / 20%);
+
+        .option-title {
+          font-size: 16px;
+          line-height: 24px;
+          color: var(--app-root-blue);
+        }
+      }
+    }
+
+    @media screen and (width <= 812px) {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+    }
+  }
+
+  .search__btn {
+    margin-top: 32px;
+    text-align: right;
+  }
+
+  @media screen and (width <= 812px) {
+    height: auto;
+    margin: 62px auto;
+  }
+
+  @media screen and (width <= 586px) {
+    width: 90%;
+  }
+}
+
+.option {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 6px;
+}
+
+.option__control {
+  display: flex;
+  flex-direction: row;
+  column-gap: 5px;
+  align-items: center;
+}
+
+.option__btn {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  font-size: 20px;
+  background-color: white;
+  border: none;
+}
+
+.option__count {
+  font-size: 14px;
+  color: var(--app-root-blue);
+}
+
+.radio__title {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #11397e;
+}
+
+.mat-mdc-form-field {
+  width: 100%;
+  margin-bottom: -14px;
+}
+
+.passengers .mat-mdc-form-field:focus {
+  width: 50%;
+}
+
+.mdc-button {
+  width: 126px;
+  height: 60px;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  background-color: var(--app-root-blue);
+
+  &:disabled {
+    color: gray;
+    background-color: #e5e5e5;
+    filter: drop-shadow(2px 0 4px #e5e5e5);
+  }
+}

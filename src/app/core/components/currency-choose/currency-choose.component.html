@@ -1,0 +1,4 @@
+<mat-select [value]="currency$ | async" [style.color]="textColor" (selectionChange)="updateStore($event)">
+  <mat-option *ngFor="let currency of currencyArray" [value]="currency"
+              disableRipple>{{currency}}</mat-option>
+</mat-select>

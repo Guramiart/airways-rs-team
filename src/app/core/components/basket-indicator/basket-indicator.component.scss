@@ -1,0 +1,45 @@
+:host {
+  align-self: center;
+  width: 30px;
+  height: 28px;
+}
+
+.header__basket-indicator {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.header__basket-logo {
+  width: 24px;
+  height: 24px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.header__basket-counter {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 16px;
+  height: 16px;
+  padding: 1px 0 0 2px;
+  background-color: red;
+  border-radius: 50%;
+}
+
+.header__basket-count {
+  font-family: Roboto, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 16px;
+  color: #fff;
+  text-align: center;
+  letter-spacing: 0.5px;
+}

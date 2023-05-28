@@ -1,0 +1,24 @@
+.main__page {
+  height: 100%;
+}
+
+.bg {
+  position: absolute;
+  z-index: -1000;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0.2;
+  background: url("../../../../assets/bg.jpg") rgb(0 0 0 / 25%);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.container {
+  height: 100%;
+}
+
+.main__wrapper {
+  padding-top: 88px;
+}

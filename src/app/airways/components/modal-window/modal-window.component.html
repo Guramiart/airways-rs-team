@@ -1,0 +1,15 @@
+<div class="main" *ngIf="isModalOpen" (click)="closeModal()">
+   <div class="content" (click)="$event.stopPropagation()">
+     <mat-tab-group dynamicHeight>
+        <mat-tab label="Log in" >
+           <app-log-in></app-log-in>
+        </mat-tab>
+        <mat-tab label="Sign up">
+           <app-sign-in></app-sign-in>
+        </mat-tab>
+     </mat-tab-group>
+     <button mat-icon-button class="close_btn" (click)="closeModal()">
+        <mat-icon>clear</mat-icon>
+     </button>
+   </div>
+</div>

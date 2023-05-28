@@ -1,0 +1,93 @@
+<div class="main__cart-block">
+  <div class="main__cart-title">
+    <span class="main__cart-text">Cart</span>
+  </div>
+  <div class="main__cart-table">
+    <div class="main__table-wrapper">
+      <div class="main__table-header">
+        <div class="main__table-naming">
+          <mat-checkbox *ngIf="isShoppingCart" [(ngModel)]="checkAll" (ngModelChange)="selectAll()"></mat-checkbox>
+          <span class="main__table-text">No.</span>
+          <div class="main__table-arrows main_first-text" (click)="sortNo()">
+            <mat-icon class="main__arrow-up" [ngStyle]="{opacity: numberStyle.up}">arrow_drop_up</mat-icon>
+            <mat-icon class="main__arrow-down" [ngStyle]="{opacity: numberStyle.down}">arrow_drop_down</mat-icon>
+          </div>
+        </div>
+        <div class="main__table-naming">
+          <span class="main__table-text">Flight</span>
+          <div class="main__table-arrows main_next-text" (click)="sortFlight()">
+            <mat-icon class="main__arrow-up" [ngStyle]="{opacity: directionStyle.up}">arrow_drop_up</mat-icon>
+            <mat-icon class="main__arrow-down" [ngStyle]="{opacity: directionStyle.down}">arrow_drop_down</mat-icon>
+          </div>
+        </div>
+        <div class="main__table-naming">
+          <span class="main__table-text">Type trip</span>
+          <div class="main__table-arrows main_next-text" (click)="sortTrip()">
+            <mat-icon class="main__arrow-up" [ngStyle]="{opacity: tripStyle.up}">arrow_drop_up</mat-icon>
+            <mat-icon class="main__arrow-down" [ngStyle]="{opacity: tripStyle.down}">arrow_drop_down</mat-icon>
+          </div>
+        </div>
+        <div class="main__table-naming">
+          <span class="main__table-text">Date & Time</span>
+          <div class="main__table-arrows main_next-text" (click)="sortDate()">
+            <mat-icon class="main__arrow-up" [ngStyle]="{opacity: dateStyle.up}">arrow_drop_up</mat-icon>
+            <mat-icon class="main__arrow-down" [ngStyle]="{opacity: dateStyle.down}">arrow_drop_down</mat-icon>
+          </div>
+        </div>
+        <div class="main__table-naming">
+          <span class="main__table-text">Passenger</span>
+          <div class="main__table-arrows main_next-text" (click)="sortPassnger()">
+            <mat-icon class="main__arrow-up" [ngStyle]="{opacity: passengerStyle.up}">arrow_drop_up</mat-icon>
+            <mat-icon class="main__arrow-down" [ngStyle]="{opacity: passengerStyle.down}">arrow_drop_down</mat-icon>
+          </div>
+        </div>
+        <div class="main__table-naming">
+          <span class="main__table-text">Price</span>
+          <div class="main__table-arrows main_next-text" (click)="sortPrice()">
+            <mat-icon class="main__arrow-up" [ngStyle]="{opacity: priceStyle.up}">arrow_drop_up</mat-icon>
+            <mat-icon class="main__arrow-down" [ngStyle]="{opacity: priceStyle.down}">arrow_drop_down</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-container #tableContainer></ng-container>
+  </div>
+  <div class="main__cart-control">
+    <button class="main__new-trip">
+      <span class="main__new-text" (click)="toNewItem()">+ Add new trip</span>
+    </button>
+    <div class="main__amount-wrapper">
+      <span class="main__amount-text">Total</span>
+      <span class="main__amount-count" [appCurrency]="getTotalCost()"></span>
+    </div>
+  </div>
+  <div class="main__cart-separator"></div>
+  <ng-container *ngIf="isShoppingCart; then shoppingCart else userAccount"></ng-container>
+  <ng-template #shoppingCart>
+    <div class="main__cart-payment">
+      <mat-form-field class="main__promo-wrapper" [style.border-color]="discountBorderColor">
+        <mat-label>{{ discountInfo }}</mat-label>
+        <input type="text" matInput [formControl]="discountFormControl">
+        <button matSuffix class="main__promo-button" (click)="applyPromo()">
+          <span class="main__button-text">Apply</span>
+        </button>
+      </mat-form-field>
+      <div class="main__payment-control">
+        <span class="main__payment-text">{{selected}} selected</span>
+        <button class="main__payment-button">
+          <span matSnackBarAction class="main__payment-btn" (click)="paymentBtn()">Payment</span>
+        </button>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #userAccount>
+    <div class="main__account-return">
+      <button class="main__btn-return">
+        <span class="main__return-text" (click)="toNewItem()">Return to Main</span>
+      </button>
+    </div>
+  </ng-template>
+</div>
+
+
+

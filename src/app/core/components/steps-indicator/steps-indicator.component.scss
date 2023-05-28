@@ -1,0 +1,47 @@
+:host {
+  display: flex;
+  gap: 7.93px;
+  align-content: stretch;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.header__step {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.header__step-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+}
+
+.header__step-text {
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 20px;
+  color: #74767a;
+  letter-spacing: 0.1px;
+
+  @media screen and (width <= 979px) {
+    display: none;
+  }
+}
+
+.header__step-separator {
+  transform: matrix(1, 0, 0, -1, 0, 0);
+  flex: 1 1 auto;
+  align-self: center;
+  max-width: 88px;
+
+  //min-width: 35px;
+  //width: 15.04%;
+  height: 1px;
+  background: #74767a;
+}

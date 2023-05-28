@@ -1,0 +1,38 @@
+.form-group {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  padding: 5px;
+
+  &__mobile {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    width: 50%;
+    min-width: 430px;
+
+    &_cont {
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      width: 49%;
+
+      @media screen and (width <= 480px) {
+        width: 100%;
+      }
+    }
+
+    @media screen and (width <= 534px) {
+      flex-direction: column;
+
+      @media screen and (width <= 480px) {
+        width: 90%;
+        min-width: unset;
+      }
+    }
+  }
+
+  @media screen and (width <= 910px) {
+    flex-wrap: wrap;
+  }
+}

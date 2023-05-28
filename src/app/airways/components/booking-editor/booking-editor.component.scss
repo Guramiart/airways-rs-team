@@ -1,0 +1,255 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 96px;
+  min-height: 96px;
+}
+
+.editor {
+  position: absolute;
+  z-index: 1000;
+  width: 100%;
+  max-width: 1128px;
+  margin-top: 5px;
+  background-color: white;
+}
+
+.main__booking-editor {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  box-sizing: content-box;
+  padding: 20px;
+  border-radius: 2px;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 20%);
+
+  @media screen and (width <= 1079px) {
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.main__input-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  max-width: 255px;
+  height: 56px;
+  padding: 8px 16px;
+  background: #f4f6f9;
+  border: 1px solid gainsboro;
+  border-radius: 4px;
+}
+
+.main__input-label {
+  font-family: Roboto, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 16px;
+  color: #49454f;
+  letter-spacing: 0.4px;
+}
+
+.main__input-container {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  justify-content: flex-start;
+  min-width: 70px;
+}
+
+.main__editor-input {
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 24px;
+  color: #1c1b1f;
+  letter-spacing: 0.5px;
+  background: #f4f6f9;
+  border: none;
+  border-radius: 4px;
+  outline: unset;
+}
+
+.main__editor-input:focus {
+  background: rgb(173 173 180 / 62%);
+}
+
+.main__input-code {
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 24px;
+  color: #74767a;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.main__daypicker-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 311px;
+  background: #f4f6f9;
+  border: 1px solid gainsboro;
+  border-radius: 4px;
+}
+
+.mat-mdc-form-field {
+  height: 56px;
+}
+
+.mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
+.mdc-line-ripple::before {
+  display: none;
+}
+
+.mat-mdc-form-field-infix {
+  margin-top: 10px;
+}
+
+mat-date-range-input {
+  margin-top: 14px;
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 24px;
+  color: #1c1b1f;
+  letter-spacing: 0.5px;
+}
+
+.mdc-floating-label {
+  font-family: Roboto, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 16px;
+  color: #49454f;
+  letter-spacing: 0.4px;
+}
+
+.mat-accordion.main__passenger-editor {
+  box-sizing: border-box;
+  width: 201px;
+  height: 56px;
+  padding: 8px 0;
+  background: #f4f6f9;
+  border: 1px solid gainsboro;
+  border-radius: 4px;
+
+  .mat-content {
+    display: flex;
+    flex-direction: column;
+    height: 48px;
+
+    .mat-expansion-panel-header-title {
+      font-family: Roboto, sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      font-style: normal;
+      line-height: 16px;
+      color: #49454f;
+      letter-spacing: 0.4px;
+    }
+
+    .mat-expansion-panel-header-description {
+      overflow: hidden;
+      display: block;
+      height: 24px;
+      font-family: Roboto, sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      font-style: normal;
+      line-height: 24px;
+      color: #1c1b1f;
+      text-overflow: ellipsis;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+
+    .mat-expansion-panel-body {
+      z-index: auto;
+      background-color: #fff;
+    }
+  }
+}
+
+.main__passenger-edit {
+  // width: 201px;
+  width: 156px;
+  height: 56px;
+  background: #fff;
+  border-radius: 4px;
+}
+
+.main__passenger-option {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+}
+
+.main__passenger-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.main__passenger-counter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 40px;
+  height: 24px;
+}
+
+.main__passenger-kind {
+  display: flex;
+  align-items: center;
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+}
+
+.main__passenger-clue {
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 20px;
+  color: #74767a;
+  letter-spacing: 0.25px;
+}
+
+.main__passenger-minus,
+.main__passenger-count,
+.main__passenger-plus {
+  cursor: pointer;
+  user-select: none;
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 16px;
+  color: #11397e;
+}
+
+.main__passenger-minus:active,
+.main__passenger-plus:active {
+  font-size: 12px;
+  color: #2d86a8;
+}

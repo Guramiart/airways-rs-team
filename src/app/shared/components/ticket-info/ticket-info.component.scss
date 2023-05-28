@@ -1,0 +1,71 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 50%;
+  max-width: 552px;
+  background: #fff;
+  border-radius: 8px;
+
+  @media screen and (width <= 674px) {
+    width: 90%;
+  }
+}
+
+.main__ticket-flight {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  max-width: 100%;
+  min-height: 100px;
+  padding: 22px 24px;
+  background: #f1f3f6;
+  border-top: 3px solid #11397e;
+  border-radius: 8px 8px 0 0;
+}
+
+.main__flight,
+.main__flight-data {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.main__flight {
+  gap: 20px;
+}
+
+.main__flight-data {
+  gap: 36px;
+}
+
+.main__flight-number,
+.main__flight-info {
+  font-family: Roboto, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+}
+
+.main__flight-number {
+  color: #11397e;
+}
+
+.main__flight-info {
+  color: #000;
+}
+
+.main__flight-date,
+.main__flight-time {
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 24px;
+  color: #000;
+  letter-spacing: 0.5px;
+}

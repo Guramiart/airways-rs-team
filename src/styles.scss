@@ -1,1 +1,126 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --app-root-blue: #11397e;
+  --mdc-checkbox-selected-icon-color: #11397e;
+  --mdc-checkbox-selected-hover-icon-color: #11397e;
+  --mdc-checkbox-unselected-hover-icon-color: #11397e;
+}
+
+.mat-mdc-button.mat-unthemed {
+  --mdc-text-button-label-text-color: white;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0 auto;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: 1440px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.wrapper {
+  height: 100%;
+  margin: 0 156px;
+
+  @media screen and (width <= 812px) {
+    padding: 0;
+  }
+
+  @media screen and (width <= 585px) {
+    margin: 0 25px;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.select .mat-mdc-select-arrow {
+  visibility: hidden;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: white;
+}
+
+.mat-mdc-form-field .mdc-text-field {
+  border: 1px solid gray;
+  border-radius: 4px;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled)
+  .mdc-line-ripple::before {
+  border: 0;
+}
+
+.mdc-line-ripple::before {
+  border-top-width: 1px;
+}
+
+.mat-pseudo-checkbox-minimal.mat-pseudo-checkbox-checked::after {
+  color: #11397e;
+}
+
+.mdc-line-ripple {
+  display: none;
+}
+
+.mat-calendar-period-button.mdc-button.mat-mdc-button.mat-unthemed.mat-mdc-button-base {
+  color: #1c1b1f;
+}
+
+.carousel .slick-next {
+  right: 0;
+}
+
+.carousel .slick-prev {
+  left: 0;
+}
+
+.carousel .slick-next,
+.carousel .slick-prev {
+  z-index: 1000;
+  top: 60%;
+  width: 24px;
+  height: 24px;
+  border-radius: 10px;
+
+  &::before {
+    color: gray;
+    opacity: 1;
+  }
+}
+
+.carousel .slick-list .slick-track {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.mat-mdc-menu-panel.mdc-menu-surface.mdc-menu-surface--open.mat-mdc-elevation-specific {
+  opacity: 1 !important;
+}
+
+.mat-mdc-menu-item.mat-mdc-focus-indicator.mdc-list-item.main__item-menu {
+  .mdc-list-item__primary-text {
+    font-family: Roboto, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 24px;
+    color: #1c1b1f;
+    letter-spacing: 0.5px;
+  }
+}

@@ -22,8 +22,16 @@
       "rules": {
         "import/prefer-default-export": "off",
         "import/no-extraneous-dependencies": "off",
+        "@typescript-eslint/no-inferrable-types": "off",
+        "@typescript-eslint/no-unused-expressions": "off",
         "class-methods-use-this": "off",
-        "padded-blocks": ["error", { "classes": "always" }],
+        "padded-blocks": [
+          "error",
+          {
+            "classes": "always"
+          }
+        ],
+        "no-param-reassign": "off",
         "linebreak-style": 0,
         "@angular-eslint/directive-selector": [
           "error",
@@ -51,6 +59,14 @@
         "plugin:@angular-eslint/template/recommended"
       ],
       "rules": {}
+    },
+    {
+      "files": [
+        "*.ts"
+      ],
+      "extends": [
+        "plugin:@ngrx/recommended-requiring-type-checking"
+      ]
     }
   ]
 }

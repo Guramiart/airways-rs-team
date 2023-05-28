@@ -1,0 +1,38 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 62px;
+  height: 38px;
+  background: rgb(241 243 246 / 15%);
+  border: 0.5px solid #cecece;
+  border-radius: 4px;
+}
+
+.mat-mdc-select-value-text {
+  margin-left: 16px;
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+}
+
+.mat-mdc-select-trigger {
+  height: 40px;
+}
+
+.mat-mdc-select-arrow {
+  display: none;
+}
+
+.cdk-overlay-pane:not(
+    .mat-mdc-select-panel-above
+  ).mdc-menu-surface.mat-mdc-select-panel {
+  border-radius: 4px;
+}
+
+.cdk-overlay-container {
+  margin-top: 66px;
+}

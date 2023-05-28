@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="wrap">
+        <div class="header">
+            <div class="header__title">
+                <mat-icon class="header__title_icon">perm_identity</mat-icon>
+                <h2>Passengers</h2>
+            </div>
+           <p class="header__text">Enter the passenger's names as they appear on document (passport or ID). </p>
+        </div>
+      <div class="forms">
+          <div *ngIf="passengers?.passengers?.adult?.count!==0" class="forms__passenger">
+               <p class="forms__title">1.Adults</p>
+               <app-passenger-form  *ngFor="let f of [].constructor(passengers?.passengers?.adult?.count), let id = index"
+                                    [typeOfPassenger]="type.ADULT"
+                                    [isSubmitted] = "isSubmitted"
+                                    [id] = "id"
+                                    (errorEmit)="getError($event)"
+                                    (passengerInfo)="getPassengerInfo($event)"/>
+          </div>
+          <div *ngIf="passengers?.passengers?.child?.count!==0" class="forms__passenger">
+            <p class="forms__title">2.Childs</p>
+            <app-passenger-form  *ngFor="let f of [].constructor(passengers?.passengers?.child?.count), let id = index"
+                                 [typeOfPassenger]="type.CHILD"
+                                 [isSubmitted] = "isSubmitted"
+                                 [id] = "id"
+                                 (errorEmit)="getError($event)"
+                                 (passengerInfo)="getPassengerInfo($event)"/>
+          </div>
+          <div *ngIf="passengers?.passengers?.infant?.count!==0" class="forms__passenger">
+            <p class="forms__title">3.Infants<p>
+                <app-passenger-form  *ngFor="let f of [].constructor(passengers?.passengers?.infant?.count), let id = index"
+                                     [typeOfPassenger]="type.INFANT"
+                                     [isSubmitted] = "isSubmitted"
+                                     [id] = "id"
+                                     (errorEmit)="getError($event)"
+                                     (passengerInfo)="getPassengerInfo($event)"/>
+          </div>
+      </div>
+      <div class="header">
+        <div class="header__title">
+            <mat-icon class="header__title_icon">contact_page</mat-icon>
+            <h2>Contact details</h2>
+        </div>
+       <p class="header__text">We need contact details to be able to deliver the latest information regarding your flight. </p>
+      </div>
+
+      <div class="forms">
+        <div class="forms__contact">
+          <app-contacts-form [isSubmitted] = "isSubmitted"
+                           (errorEmit)="getError($event)"
+                           (contactInfo)="getContactInfo($event)"/>
+        </div>
+      </div>
+
+      <div class="btn-block">
+        <button class="back-btn" mat-flat-button (click)="back(true)">Back</button>
+        <button mat-button type="button" (click)="back(false)">Continue</button>
+      </div>
+    </div>
+  </div>

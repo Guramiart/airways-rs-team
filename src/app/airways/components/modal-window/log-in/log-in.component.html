@@ -1,0 +1,48 @@
+<div class="login">
+    <button mat-raised-button >
+      <div class="login__btn">
+        <img src="assets/google_24.png" alt="google">
+        <p>Continue with Google</p>
+      </div>
+    </button>
+    <button mat-raised-button >
+      <div class="login__btn">
+        <img src="assets/facebbok_24px.png" alt="fb">
+        <p>Continue with Facebook</p>
+      </div>
+     </button>
+    <div class="login_text">
+        <span>or log in with your email</span>
+    </div>
+    <form [formGroup]="logInForm" (submit)="submit()">
+        <div class="form-group">
+            <mat-form-field>
+              <mat-label>Email</mat-label>
+              <input type="email" matInput  formControlName="email"
+                     placeholder="Your email..." (keyup)="isCorrectEmail=false">
+              <mat-error *ngIf="logInForm.controls['email'].errors?.['required'] ">
+                Please enter email
+              </mat-error>
+            </mat-form-field>
+            <div *ngIf="isCorrectEmail" class="error">
+                User not exist
+               </div>
+              <mat-form-field>
+              <mat-label>Password</mat-label>
+              <input [type]="hide ? 'password' : 'text'" matInput  formControlName="password" 
+              placeholder="Your password..." (keyup)="isCorrectPassword=false">
+              <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              <mat-error *ngIf="logInForm.controls['password'].errors?.['required']">
+                Please enter a password
+              </mat-error>
+            </mat-form-field>
+            <div *ngIf="isCorrectPassword" class="error">
+                Wrong password
+              </div>
+          <div class="form-group__forgot">
+            <button mat-button color="primary" type="button" *ngIf="!isCorrectEmail">Forgot password?</button>
+          </div>
+          <button mat-raised-button color="primary" type="submit" >Log In</button>
+         </div>
+    </form>
+</div>

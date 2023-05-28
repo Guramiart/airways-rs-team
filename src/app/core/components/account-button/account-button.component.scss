@@ -1,0 +1,52 @@
+:host {
+  min-width: 170px;
+}
+
+.header__account-button {
+  cursor: pointer;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  height: 40px;
+  padding: 0 16px;
+  background: rgb(241 243 246 / 15%);
+  border: 0.5px solid #cecece;
+  border-radius: 4px;
+
+  &:hover {
+    background: rgb(163 167 173 / 24%);
+  }
+
+  &:active {
+    background: rgb(238 238 246 / 40%);
+  }
+}
+
+.header__account-logo {
+  display: block;
+  width: 14px;
+  height: 15.5px;
+}
+
+.header__account-text {
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 20px;
+  color: #fff;
+  letter-spacing: 0.1px;
+}
+
+.conteiner {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.header__mat-icon {
+  color: #fff;
+}

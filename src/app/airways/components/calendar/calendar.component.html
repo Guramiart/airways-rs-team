@@ -1,0 +1,60 @@
+<div class="calendar" *ngIf="!isSelected">
+  <ngx-slick-carousel class="carousel"
+                       #slickModal="slick-carousel"
+                      [config]="{ infinite: false, slidesToShow: 5, slidesToScroll: 1, initialSlide: 3, responsive: [
+                      {
+                       breakpoint: 1080,
+                       settings: {
+                        slidesToShow: 4,
+                        slidesToScroll: 1,
+                        infinite: false,
+                       }
+                      },
+                      {
+                       breakpoint: 921,
+                       settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        infinite: false,
+                       }
+                      },
+                      {
+                       breakpoint: 621,
+                       settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                        infinite: false,
+                       }
+                      },
+                      {
+                       breakpoint: 431,
+                       settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        infinite: false,
+                       }
+                      },
+                      ]}">
+    <div ngxSlickItem
+      *ngFor="let date of dates"
+      class="slide"
+      [ngClass]="isCurrentDate(date) ? 'active' : ''"
+      (click)="slideClick(date)">
+        <div class="date-slide" *ngIf="date.flight; else flightNotFound">
+          <div class="date">{{ date.date | date: 'd MMM' }}</div>
+          <div class="day">{{ date.date | date: 'EEEE' }}</div>
+          <div class="price" [appCurrency]="date.flight.price"></div>
+          <div class="slide-footer" [appSeats]="date.flight.seats"></div>
+        </div>
+      <ng-template #flightNotFound>
+        <div class="date-slide">
+          <div class="date-blocked">{{ date.date | date: 'd MMM' }}</div>
+          <div class="day-blocked">{{ date.date | date: 'EEEE' }}</div>
+          <div class="price-blocked"></div>
+        </div>
+      </ng-template>
+    </div>
+  </ngx-slick-carousel>
+</div>
+<app-flight-info (selectEvent)="selectFlight($event)" [flightData]="flightData" [from]="from"
+                 [destination]="destination"></app-flight-info>
