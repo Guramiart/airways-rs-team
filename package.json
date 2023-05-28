@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "lint:fix": "ng lint --fix",
     "lint:style": "npx stylelint \"**/*.scss\" --fix",
-    "deploy": "ng deploy --base-href=https://Guramiart.github.io/airways-rs-team/"
+    "deploy": "ng deploy --base-href=https://guramiart.github.io/airways-rs-team/"
   },
   "private": true,
   "dependencies": {
