@@ -213,10 +213,13 @@ export class ShoppingCartPageComponent implements AfterViewInit, OnInit, OnDestr
   }
 
   private showDelete(flightNumber: string): void {
-    console.log(this.flights);
     this.flights = this.flights
-      .filter((flight) => flight.flight.forward.flightNumber !== flightNumber);
-    console.log(this.flights);
+      .filter((flight: CartFlight): boolean => flight.flight.forward.flightNumber !== flightNumber);
+
+    const oldFlights: string = JSON.stringify(this.flights);
+    const newFlights: CartFlight[] = JSON.parse(oldFlights);
+    this.store.dispatch(addNewPrice({ flights: newFlights }));
+
     this.table.clear();
     this.totalPrice = 0;
     this.showTableRecords();
